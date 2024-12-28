@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from '../Header/Header'
 import SubscribeSection from './Home/subscribe-section'
-
+import Footer from '../Footer/footer'
 const Meetings = () => {
   return (
     <>
@@ -10,7 +10,7 @@ const Meetings = () => {
       <section className="sub-banner-main-section event-banner-section w-100 float-left">
         <div className="container">
             <div className="sub-banner-inner-con">
-                <h1>CONFX EVENTS</h1>
+                <h1>Meetings21</h1>
                 <p>Inspiring Talks, Meet the Best Product People Around the World, <br /> and Party Together After the Event!</p>
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb d-inline-block mb-0">
@@ -22,15 +22,59 @@ const Meetings = () => {
         </div>
       </section>
       
-      <div className='container'>
-        <div className='row mb-5'>
+      <div className='container padding-bottom padding-top'>
+        <div className='row'>
             <div className='col-lg-12 text-center mt-5'>
                 <h3>Upcoming Meetings</h3>
             </div>
         </div>
-        <div className='row'>
+
+
+      <div className="row">
+        <div className='col-lg-5 offset-lg-1'>
+            <a href="/events" target="_blank" className="url-box">
+              <div className='events-box'>
+                  <div className="row">
+                    <div className="col-lg-3 col-md-5">
+                        <div className='layout-img-wrap'>
+                            <img src="https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg" alt="" />
+                        </div>
+                    </div>
+                    <div className='col-lg-9 col-md-7 mt-3'>
+                        <div className=''>
+                        <div class="newsCaption px-5"><div class="d-flex align-items-center justify-content-between cnt-title"><h5 class="newsCaption-title m-0">International Congress of Materials Science and Engineering</h5> <i class="fas fa-arrow-alt-circle-right "></i></div><div class="newsCaption-content d-flex "><p class="col-10 py-3 px-0"><i class="fa fa-calendar"></i> October 21-23, 2025 <i class="fa fa-map-marker"></i> Dubai, UAE </p></div></div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </a>   
+        </div>
+        <div className='col-lg-5 offset-lg-1'>
+            <a href="/events" target="_blank" className="url-box">
+              <div className='events-box'>
+                  <div className="row">
+                    <div className="col-lg-3 col-md-5">
+                        <div className='layout-img-wrap'>
+                            <img src="https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg" alt="" />
+                        </div>
+                    </div>
+                    <div className='col-lg-9 col-md-7 mt-3'>
+                        <div className=''>
+                        <div class="newsCaption px-5"><div class="d-flex align-items-center justify-content-between cnt-title"><h5 class="newsCaption-title m-0">International Congress of Materials Science and Engineering</h5> <i class="fas fa-arrow-alt-circle-right "></i></div><div class="newsCaption-content d-flex "><p class="col-10 py-3 px-0"><i class="fa fa-calendar"></i> October 21-23, 2025 <i class="fa fa-map-marker"></i> Dubai, UAE </p></div></div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </a>   
+        </div>
+      </div>
+
+
+
+
+        {/* <div className='row'>
         <div className="col-lg-6">
-            <a href="https://meetings21.com/2025/material-science" target="_blank" className="url-box">
+            <a href="/events" target="_blank" className="url-box">
               <figure className="newsCard news-Slide-up ">
                 <img src="https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg" />
                 <div className="newsCaption px-4">
@@ -63,7 +107,7 @@ const Meetings = () => {
               </figure>
             </a>
             </div>
-        </div>
+        </div> */}
       </div>
       
         
@@ -163,9 +207,9 @@ const Meetings = () => {
                 </div>
             </div>
         </div>
-    </section>
+      </section>
       </div>
-      
+      <Footer />
     </>
   )
 }

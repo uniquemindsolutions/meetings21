@@ -14,7 +14,7 @@ const AboutSection = () => {
                     <p data-aos="fade-up" data-aos-duration="700">We understand the importance of academic conferences in 21st century to foster collaboration, sharing knowledge, and advancing innovation. As part of our commitment to providing a platform for meaningful dialogue and the exchange of cutting-edge research, we curate conferences with a deep appreciation for the scholarly community.</p>
                     <p data-aos="fade-up" data-aos-duration="700">Each conference we organize is designed to surpass expectations by our team of experienced professionals. We handle every detail with precision, from meticulously planning the program to coordinating logistics, so you can focus on what really matters – the content and connections that make academic conferences so meaningful.</p>
                     <div className="generic-btn" data-aos="fade-up" data-aos-duration="700">
-                        <a href="event.html">VIEW SCHEDULE <i className="fas fa-arrow-right"></i></a>
+                        <a href="/about">VIEW More <i className="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
                 <div className="about-right-con">
@@ -25,11 +25,11 @@ const AboutSection = () => {
                         </div>
                         <div className="co-image-box">
                             <figure className="mb-0">
-                                <img src="/images/co-image.jpg" alt="co-image" />
+                                <img src="/images/co-image-abt.jpg" alt="co-image" />
                             </figure>
-                            <div className="status">
+                            {/* <div className="status">
                                 EVE OWENS - <span className="d-inline-block">CO</span>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div className="ceo-box" data-aos="fade-up" data-aos-duration="700">
@@ -37,9 +37,9 @@ const AboutSection = () => {
                             <figure className="mb-0">
                                 <img src="/images/ceo-img1.jpg" alt="ceo-image" />
                             </figure>
-                            <div className="status">
-                                JHON SMITH - <span className="d-inline-block">CEO</span>
-                            </div>
+                            {/* <div className="status">
+                            Global Networking - <br /><span className="d-inline-block">Great place to network<br /> with your peers.</span>
+                            </div> */}
                         </div>
                         
                     </div>

@@ -31,8 +31,9 @@ const Home = () => {
       <Services />
       {/* <EventSection /> */}
       {/* <SpeakerSection /> */}
-      <PricingSection />
+     
       <SubscribeSection />
+      <PricingSection />
       <Footer />
     </div>
   )

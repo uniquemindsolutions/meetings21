@@ -46,22 +46,22 @@ const Footer = () => {
                     <h6>Navigation</h6>
                     <ul className="list-unstyled mb-0">
                         <li className="position-relative">
-                            <a href="index.html">Home</a>
+                            <a href="/">Home</a>
                         </li>
                         <li className="position-relative">
-                            <a href="about.html">About Us</a>
+                            <a href="/about">About Us</a>
                         </li>
                         <li className="position-relative">
-                            <a href="speaker.html">Summits</a>
+                            <a href="/meetings">Meetings</a>
                         </li>
                         <li className="position-relative">
-                            <a href="single-blog.html">Policies</a>
+                            <a href="/policies">Policies</a>
                         </li>
                         <li className="position-relative">
-                            <a href="contact.html">Code of Conduct</a>
+                            <a href="/code-of-conduct">Code of Conduct</a>
                         </li>
                         <li className="position-relative">
-                            <a href="contact.html">Contact</a>
+                            <a href="/contact">Contact</a>
                         </li>
                     </ul>
                 </div>
