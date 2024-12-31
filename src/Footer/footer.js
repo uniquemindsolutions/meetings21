@@ -9,11 +9,11 @@ const Footer = () => {
         <div className="container">
             <div className="footer-inner-con">
                 <div className="footer-box">
-                    <a href="index.html">
+                    <Link to="/">
                         <figure>
                             <img className='logo' src="/images/meetings-logo.png" alt="footer-logo" />
                         </figure>
-                    </a>
+                    </Link>
                     <p>We work closely with conference organizers, speakers, and participants to ensure that each event meets the unique needs of the academic community it serves.</p>
                     <div className="footer-call-button d-inline-block">
                         <a className="d-flex align-items-center footer-call-btn" href="tel:+11234567890">

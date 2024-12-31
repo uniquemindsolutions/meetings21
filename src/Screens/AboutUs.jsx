@@ -1,6 +1,8 @@
 import React from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/footer'
+import { Link } from 'react-router-dom';
+
 const AboutUs = () => {
   return (
     
@@ -13,7 +15,7 @@ const AboutUs = () => {
                 <p>Inspiring Talks, Meet the Best Product People Around the World, <br /> and Party Together After the Event!</p>
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb d-inline-block mb-0">
-                        <li className="breadcrumb-item d-inline-block"><a href="index.html">HOME</a></li>
+                        <li className="breadcrumb-item d-inline-block"><Link to="/">HOME</Link></li>
                         <li className="breadcrumb-item active d-inline-block" aria-current="page">ABOUT</li>
                     </ol>
                 </nav>

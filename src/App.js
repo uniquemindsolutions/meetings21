@@ -16,6 +16,12 @@ import Blogs from './Screens/Blogs';
 import Committee from './Screens/Committee';
 import Topics from './Screens/Topics';
 import Abstract from './Screens/Abstract';
+import SubmitAbstract from './Screens/SubmitAbstract';
+import Awards from './Screens/Awards';
+import Sponsors from './Screens/Sponsors';
+import Venue from './Screens/Venue';
+import Speakers from './Screens/Speakers';
+import Programs from './Screens/Programs';
 // import '../node_modules/swiper/swiper.min.css';
 
 
@@ -37,6 +43,12 @@ function App() {
         <Route path="/committee" element={<Committee />} />
         <Route path="/topics" element={<Topics />} />
         <Route path="/abstract" element={<Abstract />} />
+        <Route path="/submit-abstract" element={<SubmitAbstract />} />
+        <Route path="/awards" element={<Awards />} />
+        <Route path="/sponsors" element={<Sponsors />} />
+        <Route path="/venue" element={<Venue />} />
+        <Route path="/speakers" element={<Speakers />} />
+        <Route path="/programs" element={<Programs />} />
       </Routes>
       
       <Outlet />

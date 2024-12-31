@@ -10,7 +10,7 @@ const Topics = () => {
     <section className="sub-banner-main-section w-100 justify-content-center">
     <div className="sub-banner-inner-con text-center">
                 <h1>Topics</h1>
-                <p>The Organizing Committee welcome abstract submissions on the following topics. Topics of interest for submission include, but are not limited to:</p>
+                {/* <p>The Organizing Committee welcome abstract submissions on the following topics. Topics of interest for submission include, but are not limited to:</p> */}
                 <nav aria-label="breadcrumb">
                     <ol className="breadcrumb d-inline-block mb-0">
                         <li className="breadcrumb-item d-inline-block"><a href="/">HOME</a></li>
@@ -21,6 +21,11 @@ const Topics = () => {
     </section>
     </div>
     <div class="container padding-top padding-bottom">
+        <div className="row mb-4">
+            <div className="col-lg-12">
+            <p>The Organizing Committee welcome abstract submissions on the following topics. Topics of interest for submission include, but are not limited to:</p>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-6 col-sm-12 col-xs-12 display-table margin-25px-top">
                                         <ul class="no-padding list-style-5">

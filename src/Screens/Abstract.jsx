@@ -110,7 +110,7 @@ const Abstract = () => {
 </div>
 
 <div class="row">
-<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 generic-btn mt-5"><a class="" href="https://industrial-engineering.synergiasummits.com/abstract">Submit Now</a></div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 generic-btn text-center"><a class="" href="https://industrial-engineering.synergiasummits.com/abstract">Submit Now</a></div>
 </div>
     </div>
     </section>
