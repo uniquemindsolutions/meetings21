@@ -224,25 +224,26 @@ const Events = () => {
                     <div className="container-fluid">
                         <div className="journey-inner-con">
                             <div className="journey-text-con">
+                                <span className="small-text">MSEDUBAI2025</span>
                                 <h2>About Conference</h2>
+                                <p>Dear Colleagues,</p>
                                 <p>
-                                    We understand the importance of academic conferences in 21st century to foster collaboration, sharing knowledge, and advancing innovation. As part of our commitment to providing a platform for meaningful dialogue and the exchange of cutting-edge research, we curate conferences with a deep appreciation for the scholarly community.
+                                It is our great pleasure to welcome you to the International Congress of Materials Science and Engineering (MSEDUBAI2025) that will be held on October 21-23, 2025 at Hotel Crowne Plaza Dubai-Deira in Dubai, UAE. MSEDUBAI2025 is intended as an International Forum for those who wish to present their latest research results, innovative ideas, and experiences in the fields of Materials Science and Engineering.
                                 </p>
                                 <p>
-                                    Each conference we organize is designed to surpass expectations by our team of experienced professionals. We handle every detail with precision, from meticulously planning the program to coordinating logistics, so you can focus on what really matters – the content and connections that make academic conferences so meaningful.
+                                Progress in materials science is always linked to the progress and welfare of human civilization. Future advances in multiple fields of science and engineering critically depend on the availability of superior materials. This congress, accordingly, attempts to provide a platform for researchers, scientists, engineers and students to share their findings and experience on the emerging and interesting trends of multifaceted materials science.
                                 </p>
                                 <p>
-                                    It is our passion for academic excellence and understanding of the changing landscape of research and education that sets us apart. In order to create a rich tapestry of ideas, we curate conferences that bring together experts from diverse fields.
+                                We would be honored to have your presence and active participation at MSEDUBAI2025. Your expertise and insights would greatly contribute to the success of the conference, and we believe your research and experience will inspire fellow participants.
                                 </p>
                                 <p>
-                                    Meetings21 remains at the forefront of conference organization innovation in an era of rapid technological advancement. Using the latest technology, we provide virtual attendance options, interactive sessions, and seamless networking opportunities to enhance the conference experience.
-                                </p>
-                                <p>
-                                    Welcome to the world where ideas converge, knowledge thrives, and connections flourish at Meetings21.
-                                </p>
-                                <div className="generic-btn">
+                                    <div>Sincerely,</div>
+                                    <div>Organizing Committee</div>
+                                 </p>
+                              
+                                {/* <div className="generic-btn">
                                     <a href="about.html">READ MORE <i className="fas fa-arrow-right"></i></a>
-                                </div>
+                                </div> */}
                             </div>
 
                             <div className="journey-video-con d-inline-block">

@@ -145,3 +145,9 @@
   margin-bottom: 16px;
   color: white;
 }
+.form-section .form-group label {
+  margin-top: 0.5rem;
+}
+.regster-packages .form-group label {
+  margin-top: 1.5rem;
+}

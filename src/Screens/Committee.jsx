@@ -20,10 +20,17 @@ const Committee = () => {
                 </section>
             </div>
             <div className='container padding-top padding-bottom'>
-
-                <h4>CO-CHAIR</h4>
+                
                 <div className="row">
-                    <div className="col-lg-4 col-md-6 mb-4">
+                    <div className="col-lg-6 col-md-6 mb-4">
+                        <h4>CHAIR</h4>
+                        <div className="committee-box h-100">
+                            <h4>Reza Kashtiban</h4>
+                            <p>University of Warwick, UK</p>
+                        </div>
+                    </div>
+                    <div className="col-lg-6 col-md-6 mb-4">
+                        <h4>CO-CHAIR</h4>
                         <div className="committee-box h-100">
                             <h4>Reza Kashtiban</h4>
                             <p>University of Warwick, UK</p>
@@ -31,35 +38,25 @@ const Committee = () => {
                     </div>
                 </div>
 
-                <div className="row">
-
-                <div className="col-lg-12 col-md-12 mb-4">
-                    <h4>COMMITTEE MEMBERS</h4>
-                </div>             
-
-
+                <div className="row mt-5">
+                    <div className="col-lg-12 col-md-12 mb-4">
+                        <h4>COMMITTEE MEMBERS</h4>
+                    </div>
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Reza Kashtiban</h4>
                             <p>University of Warwick, UK</p>
                         </div>
                     </div>
-
-
-
-
-
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Rodrigo Martins</h4>
                             <p>Universidade NOVA de Lisboa, Portugal</p>
                         </div>
                     </div>
-
-
-
-
-
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Daniele Botticelli</h4>
@@ -67,110 +64,70 @@ const Committee = () => {
                                 ARDEC Academy, Italy</p>
                         </div>
                     </div>
-
-
-
-
-
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Francesco Caridi</h4>
                             <p>University of Messina, Italy</p>
                         </div>
                     </div>
-
-
-
-
-
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Agnieszka Cizman</h4>
                             <p>Wroclaw University of Science and Technology, Poland</p>
                         </div>
                     </div>
-
-
-
-
-
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Sayan Bhattacharyya</h4>
                             <p>Indian Institute of Science Education &amp; Research (IISER) Kolkata, India</p>
                         </div>
                     </div>
-
-
-
-
-
-                    <div className="col-lg-4 col-md-6 mb-4">
+                    
+                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>A Senthil Kumar</h4>
                             <p>National University of Singapore, Singapore</p>
                         </div>
                     </div>
-
-
-
-
-
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Francesco Fabbrocino</h4>
                             <p>Pegaso University, Italy</p>
                         </div>
                     </div>
-
-
-
-
-
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Tomasz KISIELEWICZ</h4>
                             <p>Warsaw University of Technology, Poland</p>
                         </div>
                     </div>
-
-
-
-
-
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Pedro Fonte</h4>
                             <p>University of Algarve, Portugal</p>
                         </div>
                     </div>
-
-
-
-
-
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Walid A. Daoud</h4>
                             <p>City University of Hong Kong, Hong Kong</p>
                         </div>
                     </div>
-
-
-
-
-
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Bidyut Saha</h4>
                             <p>University of Burdwan, India</p>
                         </div>
                     </div>
-
-
-
-
-
+                    
                     <div className="col-lg-4 col-md-6 mb-4">
                         <div className="committee-box h-100">
                             <h4>Raul Duarte Campilho</h4>

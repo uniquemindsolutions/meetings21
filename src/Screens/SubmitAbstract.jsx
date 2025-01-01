@@ -20,22 +20,22 @@ const SubmitAbstract = () => {
     </div>
     </section>
     <section className='padding-top'>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-12">
+    <div className="container">
+        <div className="row">
+            <div className="col-md-12 col-sm-12 col-xs-12">
                 <p>Prospective authors are invited to submit abstract via conference website. The accepted abstracts and/or the presentations will be included in summit program and abstract book.</p>
-                <p class="font-weight-bold text-center">
-                Please do follow the template when preparing your abstract. <a class="btn btn-very-small btn-dark-gray" href="https://industrial-engineering.synergiasummits.com/storage/abstract_templates/1700548262.docx">Download Template</a></p>
+                <p className="font-weight-bold text-center">
+                Please do follow the template when preparing your abstract. <a className="btn btn-very-small btn-dark-gray" href="https://industrial-engineering.synergiasummits.com/storage/abstract_templates/1700548262.docx">Download Template</a></p>
             </div> 
         </div>
     </div>
     </section>
 
 
-    <section class="contact-form-section w-100 float-left padding-top light-bg submit-abs-p">
-        <div class="container">
-            <form class="form-box" method="post" id="contactpage">
-                <ul class="list-unstyled">
+    <section className="contact-form-section w-100 float-left padding-top light-bg submit-abs-p">
+        <div className="container">
+            <form className="form-box" method="post" id="contactpage">
+                <ul className="list-unstyled">
                     <li>
                         <select name="respect" id="respect" required="">
                             <option value="">Title *</option>
@@ -65,8 +65,8 @@ const SubmitAbstract = () => {
                         <textarea placeholder="Message" name="subject" id="subject"></textarea>
                     </li>
                 </ul>
-                <div class="submit-btn generic-btn">
-                    <button type="submit" id="submit">SEND MESSAGE <i class="fas fa-arrow-right"></i></button>
+                <div className="submit-btn generic-btn">
+                    <button type="submit" id="submit">SEND MESSAGE <i className="fas fa-arrow-right"></i></button>
                 </div>
             </form>
         </div>
@@ -77,18 +77,18 @@ const SubmitAbstract = () => {
 
 
 
-    <section class="mt-5">
-        <div class="container">
-        <div class="row">
-                 {/* <div class="col-md-12">
-                    <div id="success-project-contact-form" class="no-margin-lr" style="display: none;"></div>
+    <section className="mt-5">
+        <div className="container">
+        <div className="row">
+                 {/* <div className="col-md-12">
+                    <div id="success-project-contact-form" className="no-margin-lr" style="display: none;"></div>
                 </div> */}
 
 
 
-                <div class="col-md-4">
-                    <div class="select-style big-select">
-                        <select name="respect" id="respect" class="bg-transparent no-margin-bottom" required="">
+                <div className="col-md-4">
+                    <div className="select-style big-select">
+                        <select name="respect" id="respect" className="bg-transparent no-margin-bottom" required="">
                             <option value="">Title *</option>
                             <option value="Prof.">Prof.</option>
                             <option value="Dr.">Dr.</option>
@@ -98,27 +98,27 @@ const SubmitAbstract = () => {
                         </select>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <input type="text" name="first_name" id="first_name" required="" placeholder="First Name*" class="big-input" />
+                <div className="col-md-4">
+                    <input type="text" name="first_name" id="first_name" required="" placeholder="First Name*" className="big-input" />
                 </div>
-                <div class="col-md-4">
-                    <input type="text" name="last_name" id="last_name" required="" placeholder="Last Name *" class="big-input" />
+                <div className="col-md-4">
+                    <input type="text" name="last_name" id="last_name" required="" placeholder="Last Name *" className="big-input" />
                 </div>
-                <div class="col-md-8">
-                    <input type="text" name="university_institute" required="" id="university_institute" placeholder="University/Institute *" class="big-input" />
+                <div className="col-md-8">
+                    <input type="text" name="university_institute" required="" id="university_institute" placeholder="University/Institute *" className="big-input" />
                 </div>
-                <div class="col-md-4">
-                    <input type="text" name="country" id="country" required="" placeholder="Country *" class="big-input" />
+                <div className="col-md-4">
+                    <input type="text" name="country" id="country" required="" placeholder="Country *" className="big-input" />
                 </div>
-                <div class="col-md-6">
-                    <input type="text" name="email" id="email" required="" placeholder="Email *" class="big-input" />
+                <div className="col-md-6">
+                    <input type="text" name="email" id="email" required="" placeholder="Email *" className="big-input" />
                 </div>
-                <div class="col-md-6">
-                    <input type="text" name="whatsapp" id="whatsapp" required="" placeholder="WhatsApp Number*" class="big-input" />
+                <div className="col-md-6">
+                    <input type="text" name="whatsapp" id="whatsapp" required="" placeholder="WhatsApp Number*" className="big-input" />
                 </div>
-                <div class="col-md-6">
-                    <div class="select-style big-select">
-                        <select name="presentation_type" required="" id="presentation_type" class="bg-transparent no-margin-bottom">
+                <div className="col-md-6">
+                    <div className="select-style big-select">
+                        <select name="presentation_type" required="" id="presentation_type" className="bg-transparent no-margin-bottom">
                             <option value="">Presentation type *</option>
                             <option value="Plenary Presentation">Plenary Presentation</option>
                             <option value="Keynote Presentation">Keynote Presentation</option>
@@ -130,9 +130,9 @@ const SubmitAbstract = () => {
                         </select>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="select-style big-select">
-                        <select name="topic_of_interest" required="" id="topic_of_interest" class="bg-transparent no-margin-bottom">
+                <div className="col-md-6">
+                    <div className="select-style big-select">
+                        <select name="topic_of_interest" required="" id="topic_of_interest" className="bg-transparent no-margin-bottom">
                             <option value="">Topic of Interest *</option>
                                                                                     <option value="Industrial Engineering and Management">Industrial Engineering and Management</option>
                                                         <option value="Artificial intelligence in Production">Artificial intelligence in Production</option>
@@ -158,20 +158,20 @@ const SubmitAbstract = () => {
                         </select>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <input type="text" required="" name="title_of_the_abstract" id="title_of_the_abstract" placeholder="Title of the Abstract *" class="big-input" />
+                <div className="col-md-12">
+                    <input type="text" required="" name="title_of_the_abstract" id="title_of_the_abstract" placeholder="Title of the Abstract *" className="big-input" />
                 </div>
-                <div class="col-md-6">
-                    <input type="file" required="" name="file" id="file" class="big-input" />
+                <div className="col-md-6">
+                    <input type="file" required="" name="file" id="file" className="big-input" />
                 </div>
-                <div class="col-md-6">
+                <div className="col-md-6">
                 What's 14 + 16 = <input name="captcha" type="text" required="" /> 
                 </div>
-                <div class="col-md-12">
-                    <input type="checkbox" required="" name="accept" class="float-left width-40px" /> <span class="alt-font font-size-15px font-weight-600 text-light-blue tab-tag">If accepted, I agree to all policies and terms and permit my abstract to be included in the proceedings and conference website.</span>
+                <div className="col-md-12">
+                    <input type="checkbox" required="" name="accept" className="float-left width-40px" /> <span className="alt-font font-size-15px font-weight-600 text-light-blue tab-tag">If accepted, I agree to all policies and terms and permit my abstract to be included in the proceedings and conference website.</span>
                 </div>
-                <div class="col-md-12 text-center margin-25px-top">
-                    <button type="submit" class="btn btn-extra-large btn-blue md-margin-15px-bottom sm-display-table sm-margin-lr-auto">Submit Abstract</button>
+                <div className="col-md-12 text-center margin-25px-top">
+                    <button type="submit" className="btn btn-extra-large btn-blue md-margin-15px-bottom sm-display-table sm-margin-lr-auto">Submit Abstract</button>
                 </div>
             </div>
         </div>

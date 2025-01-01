@@ -172,36 +172,36 @@ const Speakers = () => {
         </section>
 
         {/* <section>
-          <div class="container padding-top">
-            <div class="events-box">
+          <div className="container padding-top">
+            <div className="events-box">
               <div className="row">
-                <div class="col-lg-3">
+                <div className="col-lg-3">
                   <img src="/images/speakers/pspeaker1.png" alt="" />
                 </div>
-                <div class="col-lg-8">
+                <div className="col-lg-8">
                   <div className='generic-title'>
                     <h3>Federico Rosei</h3>
                     <small className='small-text'> INRS, Canada</small>
                     <p>Our Plenary and Keynote Speakers possess specialized knowledge and insights into specific fields. They can provide valuable information and trends, making them of great benefit to our attendees.</p>
                     <div className="generic-btn">
-                      <a class="" href="https://industrial-engineering.synergiasummits.com/abstract">show more</a>
+                      <a className="" href="https://industrial-engineering.synergiasummits.com/abstract">show more</a>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="events-box">
+            <div className="events-box">
               <div className="row">
-                <div class="col-lg-3">
+                <div className="col-lg-3">
                   <img src="/images/speakers/pspeaker2.jpg" alt="" />
                 </div>
-                <div class="col-lg-8">
+                <div className="col-lg-8">
                   <div className='generic-title'>
                     <h3>Federico Rosei</h3>
                     <small className='small-text'> INRS, Canada</small>
                     <p>Our Plenary and Keynote Speakers possess specialized knowledge and insights into specific fields. They can provide valuable information and trends, making them of great benefit to our attendees.</p>
                     <div className="generic-btn">
-                      <a class="" href="https://industrial-engineering.synergiasummits.com/abstract">show more</a>
+                      <a className="" href="https://industrial-engineering.synergiasummits.com/abstract">show more</a>
                     </div>
                   </div>
                 </div>

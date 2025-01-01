@@ -20,15 +20,15 @@ const Topics = () => {
             </div>
     </section>
     </div>
-    <div class="container padding-top padding-bottom">
+    <div className="container padding-top padding-bottom">
         <div className="row mb-4">
             <div className="col-lg-12">
             <p>The Organizing Committee welcome abstract submissions on the following topics. Topics of interest for submission include, but are not limited to:</p>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6 col-sm-12 col-xs-12 display-table margin-25px-top">
-                                        <ul class="no-padding list-style-5">
+        <div className="row">
+            <div className="col-md-6 col-sm-12 col-xs-12 display-table margin-25px-top">
+                                        <ul className="no-padding list-style-5">
                                                         <li>Industrial Engineering and Management</li>
                                                         <li>Artificial intelligence in Production</li>
                                                         <li>Sustainable Manufacturing</li>
@@ -41,8 +41,8 @@ const Topics = () => {
                                                         <li>Automation &amp; Robotics</li>
                                                     </ul>
                                     </div> 
-            <div class="col-md-6 col-sm-12 col-xs-12 display-table margin-25px-top">
-                                        <ul class="no-padding list-style-5">
+            <div className="col-md-6 col-sm-12 col-xs-12 display-table margin-25px-top">
+                                        <ul className="no-padding list-style-5">
                                                         <li>Systems Engineering</li>
                                                         <li>Computer Aided Manufacturing &amp; Design</li>
                                                         <li>Chemical Engineering</li>
@@ -57,9 +57,9 @@ const Topics = () => {
                                     </div> 
         </div>
         <div className="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center-col margin-two-top margin-two-bottom sm-margin-15px-bottom xs-margin-10px-bottom text-center">
+        <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 center-col margin-two-top margin-two-bottom sm-margin-15px-bottom xs-margin-10px-bottom text-center">
         <div className='generic-btn mt-5'>
-        <a class="btn" href="#">Submit Now</a>
+        <a className="btn" href="#">Submit Now</a>
         </div>
         </div>
         </div>

@@ -19,17 +19,17 @@ const Sponsors = () => {
                     </div>
                 </section>
                 <section className='padding-top'>
-                    <div class="container">
-                        <div class="row">
+                    <div className="container">
+                        <div className="row">
                             <div className="col-lg-12 text-center mb-4">
                                 <h3>Why you should join as Sponsor/Exhibitor?</h3>
                             </div>
-                            <div class="col-md-6">
+                            <div className="col-md-6">
                                 <figure className="mb-0">
                                     <img src="/images/index3-expert-img-6.jpg" alt="index3-registration-right-img" className='img-fluid w-100' />
                                 </figure>
                             </div>
-                            <div class="col-md-6">
+                            <div className="col-md-6">
                                 <div className="pl-lg-4">
 
 
@@ -45,8 +45,8 @@ const Sponsors = () => {
                                         <li> Community Connect</li>
                                         <li>Valuable Business Insights</li>
                                     </ol>
-                                    <p class="font-weight-bold generic-btn text-center my-4">
-                                        <a class="btn btn-very-small btn-dark-gray" href="https://industrial-engineering.synergiasummits.com/storage/abstract_templates/1700548262.docx">Download Conference Brochure</a>
+                                    <p className="font-weight-bold generic-btn text-center my-4">
+                                        <a className="btn btn-very-small btn-dark-gray" href="https://industrial-engineering.synergiasummits.com/storage/abstract_templates/1700548262.docx">Download Conference Brochure</a>
                                     </p>
                                     <h5>Exhibition:</h5>
                                     <p>Exhibition Time: <span className='text-primary'>09:00-17:00</span>,  on all conference days</p>
@@ -80,7 +80,7 @@ const Sponsors = () => {
                             </div>
                             <div className="col-lg-12 generic-btn text-center mt-4 mb-5">
                                 <p>Any questions or information about exhibiting at this conference, please do not hesitate to contact:</p>
-                                <a class="" href="https://industrial-engineering.synergiasummits.com/abstract">Register Now</a>
+                                <a className="" href="https://industrial-engineering.synergiasummits.com/abstract">Register Now</a>
                             </div>
                         </div>
                     </div>

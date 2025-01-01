@@ -83,9 +83,9 @@ const EventHeader = () => {
                                 </li>
 
                             </ul>
-                            <div class="header-contact d-flex align-items-center">
-                                <div class="lets-talk-btn">
-                                    <Link to="registration">Registration <i class="fas fa-arrow-right"></i></Link>
+                            <div className="header-contact d-flex align-items-center">
+                                <div className="lets-talk-btn">
+                                    <Link to="/registration_form">Registration <i className="fas fa-arrow-right"></i></Link>
                                 </div>
                             </div>
                         </div>
