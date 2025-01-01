@@ -656,11 +656,10 @@ const Events = () => {
                                             <div id="collapseOne" className="collapse" aria-labelledby="headingOne"
                                                 data-parent="#accordion">
                                                 <div className="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                                                        ultrices gravida. </p>
-                                                    <span className="d-block"><i className="fas fa-map-marker-alt"></i> 21 KING STREET, 1175
-                                                        AUSTRALIA</span>
+                                                    <p>Women in STEAM, Breaking the glass ceiling</p>
+                                                    <span className="d-block">
+                                                        Nita Sukdeo, Univ. of Johannesburg, South Africa
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -671,16 +670,11 @@ const Events = () => {
                                                         data-target="#collapseTwo" aria-expanded="false"
                                                         aria-controls="collapseTwo">
                                                         <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-date">
-                                                                    26
-                                                                </div>
+                                                            <div className="index3-event-date-con">                                                               
                                                                 <div className="index3-event-month text-left">
-                                                                    <span className="d-block">NOVEMBER</span>
                                                                     <small className="d-block">09:00 AM-10.00 AM</small>
                                                                 </div>
                                                             </div>
-
                                                         </div>
                                                     </button>
                                                 </h6>
@@ -688,11 +682,8 @@ const Events = () => {
                                             <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"
                                                 data-parent="#accordion">
                                                 <div className="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                                                        ultrices gravida. </p>
-                                                    <span className="d-block"><i className="fas fa-map-marker-alt"></i> 21 KING STREET, 1175
-                                                        AUSTRALIA</span>
+                                                    <p>Futurama on Industrial and Manufacturing Engineering</p>
+                                                    <span className="d-block">Luiz Moutinho, University of Suffolk, UK</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -704,11 +695,7 @@ const Events = () => {
                                                         aria-controls="collapseThree">
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
-                                                                <div className="index3-event-date">
-                                                                    27
-                                                                </div>
                                                                 <div className="index3-event-month text-left">
-                                                                    <span className="d-block">NOVEMBER</span>
                                                                     <small className="d-block">10:00 AM-11.15 AM</small>
                                                                 </div>
                                                             </div>
@@ -720,18 +707,16 @@ const Events = () => {
                                             <div id="collapseThree" className="collapse" aria-labelledby="headingThree"
                                                 data-parent="#accordion">
                                                 <div className="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                                                        ultrices gravida. </p>
-                                                    <span className="d-block"><i className="fas fa-map-marker-alt"></i> 21 KING STREET, 1175
-                                                        AUSTRALIA</span>
+                                                    <p>Digital Supply Chains: the Role of Advanced Optimization Techniques</p>
+                                                    <span className="d-block">
+                                                    Ignacio Grossmann, Carnegie Mellon University, USA
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
 
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
-                                        <p>This is a Detailed List Event of Conference for Digital Technology 2024.</p>
                                         <div className="generic-btn">
                                             <a href="contact.html">DOWNLOAD SCHEDULE <i className="fas fa-arrow-right"></i></a>
                                         </div>
@@ -747,23 +732,8 @@ const Events = () => {
                                                         aria-controls="collapsesix">
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
-                                                                <div className="index3-event-date">
-                                                                    27
-                                                                </div>
-                                                                <div className="index3-event-month text-left">
-                                                                    <span className="d-block">NOVEMBER</span>
+                                                               <div className="index3-event-month text-left">
                                                                     <small className="d-block">10:00 AM-11.15 AM</small>
-                                                                </div>
-                                                            </div>
-                                                            <div className="index3-event-organizer">
-                                                                <figure className="mb-0">
-                                                                    <img src="assets/images/index3-organizer-img3.png"
-                                                                        alt="index3-organizer-img3" />
-                                                                </figure>
-                                                                <div className="index3-organizer-detail">
-                                                                    <span className="d-block">Bringing al to Life</span>
-                                                                    <small className="d-block"><span>By:</span> Satya Nadella - CEO of
-                                                                        Microsoft</small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -773,11 +743,10 @@ const Events = () => {
                                             <div id="collapsesix" className="collapse" aria-labelledby="headingsix"
                                                 data-parent="#accordion">
                                                 <div className="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                                                        ultrices gravida. </p>
-                                                    <span className="d-block"><i className="fas fa-map-marker-alt"></i> 21 KING STREET, 1175
-                                                        AUSTRALIA</span>
+                                                    <p>Deep Learning for Industrial Robot Vision: Challenges and Opportunities</p>
+                                                    <span className="d-block">
+                                                    Michael Greenspan, Queen’s University, Kingston, Canada
+                                                    </span>
                                                 </div>
                                             </div>
                                         </div>
@@ -789,23 +758,8 @@ const Events = () => {
                                                         aria-controls="collapseseven">
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
-                                                                <div className="index3-event-date">
-                                                                    28
-                                                                </div>
                                                                 <div className="index3-event-month text-left">
-                                                                    <span className="d-block">NOVEMBER</span>
-                                                                    <small className="d-block">11:00 AM-12.00 AM</small>
-                                                                </div>
-                                                            </div>
-                                                            <div className="index3-event-organizer">
-                                                                <figure className="mb-0">
-                                                                    <img src="assets/images/index3-organizer-img4.png"
-                                                                        alt="index3-organizer-img4" />
-                                                                </figure>
-                                                                <div className="index3-organizer-detail">
-                                                                    <span className="d-block">Creativitye Technology</span>
-                                                                    <small className="d-block"><span>By:</span> Neal Mohan CEO of
-                                                                        YouTube</small>
+                                                                   <small className="d-block">11:00 AM-12.00 AM</small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -815,11 +769,8 @@ const Events = () => {
                                             <div id="collapseseven" className="collapse" aria-labelledby="headingseven"
                                                 data-parent="#accordion">
                                                 <div className="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                                                        ultrices gravida. </p>
-                                                    <span className="d-block"><i className="fas fa-map-marker-alt"></i> 21 KING STREET, 1175
-                                                        AUSTRALIA</span>
+                                                    <p>Dongsheng Li, Founder: Advanced Manufacturing LLC and AM Energization Corp</p>
+                                                    <span className="d-block">Dongsheng Li, Founder: Advanced Manufacturing LLC and AM Energization Corp</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -831,23 +782,8 @@ const Events = () => {
                                                         aria-controls="collapseeight">
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
-                                                                <div className="index3-event-date">
-                                                                    25
-                                                                </div>
                                                                 <div className="index3-event-month text-left">
-                                                                    <span className="d-block">NOVEMBER</span>
                                                                     <small className="d-block">08:00 AM-08.45 AM</small>
-                                                                </div>
-                                                            </div>
-                                                            <div className="index3-event-organizer">
-                                                                <figure className="mb-0">
-                                                                    <img src="assets/images/index3-organizer-img1.png"
-                                                                        alt="index3-organizer-img1" />
-                                                                </figure>
-                                                                <div className="index3-organizer-detail">
-                                                                    <span className="d-block">Creativitye Technology</span>
-                                                                    <small className="d-block"><span>By:</span> Tim Cook - CEO of
-                                                                        Apple</small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -858,11 +794,8 @@ const Events = () => {
                                             <div id="collapseeight" className="collapse" aria-labelledby="headingeight"
                                                 data-parent="#accordion">
                                                 <div className="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                                                        ultrices gravida. </p>
-                                                    <span className="d-block"><i className="fas fa-map-marker-alt"></i> 21 KING STREET, 1175
-                                                        AUSTRALIA</span>
+                                                    <p>Zineb Britel, Industrial Engineering Department, Mohammadia School of Engineers EMI, Mohammed V University, Morocco</p>
+                                                    <span className="d-block">Human-Robot Interaction: Bridging the Gap Between Humans and Cobots in Industry</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -874,23 +807,8 @@ const Events = () => {
                                                         aria-controls="collapsenine">
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
-                                                                <div className="index3-event-date">
-                                                                    26
-                                                                </div>
                                                                 <div className="index3-event-month text-left">
-                                                                    <span className="d-block">NOVEMBER</span>
                                                                     <small className="d-block">09:00 AM-10.00 AM</small>
-                                                                </div>
-                                                            </div>
-                                                            <div className="index3-event-organizer">
-                                                                <figure className="mb-0">
-                                                                    <img src="assets/images/index3-organizer-img2.png"
-                                                                        alt="index3-organizer-img2" />
-                                                                </figure>
-                                                                <div className="index3-organizer-detail">
-                                                                    <span className="d-block">Driverless Cities</span>
-                                                                    <small className="d-block"><span>By:</span> Andy Jassy - CEO of
-                                                                        Amazon</small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -900,17 +818,13 @@ const Events = () => {
                                             <div id="collapsenine" className="collapse" aria-labelledby="headingnine"
                                                 data-parent="#accordion">
                                                 <div className="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                                                        ultrices gravida. </p>
-                                                    <span className="d-block"><i className="fas fa-map-marker-alt"></i> 21 KING STREET, 1175
-                                                        AUSTRALIA</span>
+                                                    <p>Risk and Mitigation Strategies for Smart Manufacturing </p>
+                                                    <span className="d-block">Shipra Pandey, Management Development Institute Gurgaon, India</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
-                                        <p>This is a Detailed List Event of Conference for Digital Technology 2024.</p>
                                         <div className="generic-btn">
                                             <a href="contact.html">DOWNLOAD SCHEDULE <i className="fas fa-arrow-right"></i></a>
                                         </div>
@@ -925,23 +839,8 @@ const Events = () => {
                                                         data-target="#collapseten" aria-expanded="true" aria-controls="collapseten">
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
-                                                                <div className="index3-event-date">
-                                                                    25
-                                                                </div>
                                                                 <div className="index3-event-month text-left">
-                                                                    <span className="d-block">NOVEMBER</span>
                                                                     <small className="d-block">08:00 AM-08.45 AM</small>
-                                                                </div>
-                                                            </div>
-                                                            <div className="index3-event-organizer">
-                                                                <figure className="mb-0">
-                                                                    <img src="assets/images/index3-organizer-img1.png"
-                                                                        alt="index3-organizer-img1" />
-                                                                </figure>
-                                                                <div className="index3-organizer-detail">
-                                                                    <span className="d-block">Creativitye Technology</span>
-                                                                    <small className="d-block"><span>By:</span> Tim Cook - CEO of
-                                                                        Apple</small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -952,11 +851,8 @@ const Events = () => {
                                             <div id="collapseten" className="collapse" aria-labelledby="headingten"
                                                 data-parent="#accordion">
                                                 <div className="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                                                        ultrices gravida. </p>
-                                                    <span className="d-block"><i className="fas fa-map-marker-alt"></i> 21 KING STREET, 1175
-                                                        AUSTRALIA</span>
+                                                    <p>Industry 4.0 for Supply Chain Resilience in the Future of Manufacturing</p>
+                                                    <span className="d-block">NISHTHA AGARWAL, New Delhi Institute of Management,India</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -968,23 +864,8 @@ const Events = () => {
                                                         aria-controls="collapseeleven">
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
-                                                                <div className="index3-event-date">
-                                                                    26
-                                                                </div>
                                                                 <div className="index3-event-month text-left">
-                                                                    <span className="d-block">NOVEMBER</span>
                                                                     <small className="d-block">09:00 AM-10.00 AM</small>
-                                                                </div>
-                                                            </div>
-                                                            <div className="index3-event-organizer">
-                                                                <figure className="mb-0">
-                                                                    <img src="assets/images/index3-organizer-img2.png"
-                                                                        alt="index3-organizer-img2" />
-                                                                </figure>
-                                                                <div className="index3-organizer-detail">
-                                                                    <span className="d-block">Driverless Cities</span>
-                                                                    <small className="d-block"><span>By:</span> Andy Jassy - CEO of
-                                                                        Amazon</small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -994,11 +875,8 @@ const Events = () => {
                                             <div id="collapseeleven" className="collapse" aria-labelledby="headingeleven"
                                                 data-parent="#accordion">
                                                 <div className="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                                                        ultrices gravida. </p>
-                                                    <span className="d-block"><i className="fas fa-map-marker-alt"></i> 21 KING STREET, 1175
-                                                        AUSTRALIA</span>
+                                                    <p>Industrial management and artificial intelligence, what relationships for what performance</p>
+                                                    <span className="d-block">Zitouni Beidouri, Hassan II University, Marruecos</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1010,23 +888,8 @@ const Events = () => {
                                                         aria-controls="collapsetwelve">
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
-                                                                <div className="index3-event-date">
-                                                                    27
-                                                                </div>
                                                                 <div className="index3-event-month text-left">
-                                                                    <span className="d-block">NOVEMBER</span>
                                                                     <small className="d-block">10:00 AM-11.15 AM</small>
-                                                                </div>
-                                                            </div>
-                                                            <div className="index3-event-organizer">
-                                                                <figure className="mb-0">
-                                                                    <img src="assets/images/index3-organizer-img3.png"
-                                                                        alt="index3-organizer-img3" />
-                                                                </figure>
-                                                                <div className="index3-organizer-detail">
-                                                                    <span className="d-block">Bringing al to Life</span>
-                                                                    <small className="d-block"><span>By:</span> Satya Nadella - CEO of
-                                                                        Microsoft</small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1036,11 +899,8 @@ const Events = () => {
                                             <div id="collapsetwelve" className="collapse" aria-labelledby="headingtwelve"
                                                 data-parent="#accordion">
                                                 <div className="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                                                        ultrices gravida. </p>
-                                                    <span className="d-block"><i className="fas fa-map-marker-alt"></i> 21 KING STREET, 1175
-                                                        AUSTRALIA</span>
+                                                    <p>Physics-Informed Machine Learning for Solving Inverse Heat Transfer and Fluid Flow Problems</p>
+                                                    <span className="d-block">Yanglong Lu, Southeast University,Hong kong</span>
                                                 </div>
                                             </div>
                                         </div>
@@ -1052,23 +912,8 @@ const Events = () => {
                                                         aria-controls="collapsethirteen">
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
-                                                                <div className="index3-event-date">
-                                                                    28
-                                                                </div>
-                                                                <div className="index3-event-month text-left">
-                                                                    <span className="d-block">NOVEMBER</span>
+                                                               <div className="index3-event-month text-left">
                                                                     <small className="d-block">11:00 AM-12.00 AM</small>
-                                                                </div>
-                                                            </div>
-                                                            <div className="index3-event-organizer">
-                                                                <figure className="mb-0">
-                                                                    <img src="assets/images/index3-organizer-img4.png"
-                                                                        alt="index3-organizer-img4" />
-                                                                </figure>
-                                                                <div className="index3-organizer-detail">
-                                                                    <span className="d-block">Creativitye Technology</span>
-                                                                    <small className="d-block"><span>By:</span> Neal Mohan CEO of
-                                                                        YouTube</small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1078,17 +923,13 @@ const Events = () => {
                                             <div id="collapsethirteen" className="collapse" aria-labelledby="headingthirteen"
                                                 data-parent="#accordion">
                                                 <div className="card-body">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                                                        tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse
-                                                        ultrices gravida. </p>
-                                                    <span className="d-block"><i className="fas fa-map-marker-alt"></i> 21 KING STREET, 1175
-                                                        AUSTRALIA</span>
+                                                    <p>Additive Manufacturing Process Monitoring Based on Physics-Constrained Dictionary Learning</p>
+                                                    <span className="d-block">Yanglong Lu, Southeast University,Hong kong</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
-                                        <p>This is a Detailed List Event of Conference for Digital Technology 2024.</p>
                                         <div className="generic-btn">
                                             <a href="contact.html">DOWNLOAD SCHEDULE <i className="fas fa-arrow-right"></i></a>
                                         </div>

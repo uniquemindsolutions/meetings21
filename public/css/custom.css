@@ -1067,7 +1067,7 @@ h6 {
     font-size: 24px;
     font-weight: 400;
     position: relative;
-    top: -18px;
+    top: -8px;
     left: -3px;
 }
 
@@ -1731,7 +1731,8 @@ a.footer-call-btn:hover p small {
 
 .copyright-content {
     padding: 30px 20px;
-    border-top: 1px solid rgb(204, 204, 204);
+    /* border-top: 1px solid rgb(204, 204, 204); */
+    background-color: #ddd;
 }
 
 /* footer section styling end here */
@@ -5282,6 +5283,9 @@ h5.newsCaption-title {
 }
 .home-p .footer-main-section{
     padding-top: 100px;
+}
+.footer-main-section {
+    background: #f7f7f7;
 }
 
 .owl-theme .owl-dots .owl-dot span{

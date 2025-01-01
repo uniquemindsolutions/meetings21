@@ -96,11 +96,14 @@ const Services = () => {
                 </div>
             </section>
             <section className="journey-section w-100 float-left padding-bottom grey-bg position-relative">
+                   
+
+
+                <div className="container text-center">
+                <h2 data-aos="fade-up" data-aos-duration="700">Why You Should Join Our Event? </h2>
+                <p className="px-lg-5" data-aos="fade-up" data-aos-duration="700">Attending our event not only gives you the opportunity to meet experts in the field but also gives exposure to new ideas that could be implemented in your own business.</p>
+                </div>
                 <div className="container-fluid">
-                    <h2 data-aos="fade-up" data-aos-duration="700">Why You Should Join Our Event? </h2>
-                    <p data-aos="fade-up" data-aos-duration="700">Attending our event not only gives you the opportunity to meet experts in the field but also gives exposure to new ideas that could be implemented in your own business.</p>
-
-
                     <div className="journey-inner-con mt-5">
                         <div className="journey-text-con">
 
