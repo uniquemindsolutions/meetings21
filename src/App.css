@@ -133,3 +133,15 @@
     margin: 30px 0px;
   }
 }
+.btn-biography {
+  background: white;
+  padding: 3px 10px;
+  border: solid 1px white;
+  border-radius: 5px;
+  color: blue;
+  cursor: pointer;
+}
+.sub-banner-inner-con h1 {
+  margin-bottom: 16px;
+  color: white;
+}

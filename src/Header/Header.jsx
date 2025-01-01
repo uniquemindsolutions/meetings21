@@ -20,8 +20,8 @@ const Header = () => {
     return (
         <div>
 
-            <div className="header-main-con w-100 float-left">
-                <div className="container-fluid">
+            <div className="header-main-con w-100 float-left ">
+                <div className="container-fluid ">
                     <nav className="navbar navbar-expand-lg navbar-light p-0">
                         <Link to="/" className="navbar-brand">
                             <figure className="mb-0 custom-logo">

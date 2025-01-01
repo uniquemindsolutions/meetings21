@@ -545,16 +545,16 @@ const Events = () => {
                                                 <div className="display-table height-100 width-100">
                                                     <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
                                                         <div className="min-height-176px">
-                                                        <ul className="text-white font-size-15px display-inline-block no-margin ">
-                                                             {speaker.details.map((detail, index) => (
-                                                                <li key={index}>
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                                                                <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8"/>
-                                                              </svg> {detail}</li>
+                                                            <ul className="text-white font-size-15px display-inline-block no-margin ">
+                                                                {speaker.details.map((detail, index) => (
+                                                                    <li key={index}>
+                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                                                                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
+                                                                        </svg> {detail}</li>
                                                                 )
-                                                            )}
-                                                         </ul>
-                                                         </div>
+                                                                )}
+                                                            </ul>
+                                                        </div>
                                                         <div className="separator-line-horrizontal-full bg-light-blue margin-eleven-tb bg-white"></div>
                                                         <a
                                                             href="#"
@@ -643,7 +643,8 @@ const Events = () => {
                                                     <button className="btn btn-link collapsed" data-toggle="collapse"
                                                         data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                         <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con"><div className="index3-event-month text-left">
+                                                            <div className="index3-event-date-con">
+                                                                <div className="index3-event-month text-left">
                                                                     <small className="d-block">08:00 AM-08.45 AM</small>
                                                                 </div>
                                                             </div>
@@ -670,7 +671,7 @@ const Events = () => {
                                                         data-target="#collapseTwo" aria-expanded="false"
                                                         aria-controls="collapseTwo">
                                                         <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">                                                               
+                                                            <div className="index3-event-date-con">
                                                                 <div className="index3-event-month text-left">
                                                                     <small className="d-block">09:00 AM-10.00 AM</small>
                                                                 </div>
@@ -709,7 +710,7 @@ const Events = () => {
                                                 <div className="card-body">
                                                     <p>Digital Supply Chains: the Role of Advanced Optimization Techniques</p>
                                                     <span className="d-block">
-                                                    Ignacio Grossmann, Carnegie Mellon University, USA
+                                                        Ignacio Grossmann, Carnegie Mellon University, USA
                                                     </span>
                                                 </div>
                                             </div>
@@ -732,7 +733,7 @@ const Events = () => {
                                                         aria-controls="collapsesix">
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
-                                                               <div className="index3-event-month text-left">
+                                                                <div className="index3-event-month text-left">
                                                                     <small className="d-block">10:00 AM-11.15 AM</small>
                                                                 </div>
                                                             </div>
@@ -745,7 +746,7 @@ const Events = () => {
                                                 <div className="card-body">
                                                     <p>Deep Learning for Industrial Robot Vision: Challenges and Opportunities</p>
                                                     <span className="d-block">
-                                                    Michael Greenspan, Queen’s University, Kingston, Canada
+                                                        Michael Greenspan, Queen’s University, Kingston, Canada
                                                     </span>
                                                 </div>
                                             </div>
@@ -759,7 +760,7 @@ const Events = () => {
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
                                                                 <div className="index3-event-month text-left">
-                                                                   <small className="d-block">11:00 AM-12.00 AM</small>
+                                                                    <small className="d-block">11:00 AM-12.00 AM</small>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -912,7 +913,7 @@ const Events = () => {
                                                         aria-controls="collapsethirteen">
                                                         <div className="index3-event-detail">
                                                             <div className="index3-event-date-con">
-                                                               <div className="index3-event-month text-left">
+                                                                <div className="index3-event-month text-left">
                                                                     <small className="d-block">11:00 AM-12.00 AM</small>
                                                                 </div>
                                                             </div>
