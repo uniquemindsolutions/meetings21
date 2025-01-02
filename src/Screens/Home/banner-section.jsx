@@ -1,19 +1,27 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import $ from "jquery";
 // import "owl.carousel/dist/owl.carousel.min.js"; // Import Owl Carousel JS
 // import "owl.carousel/dist/assets/owl.carousel.css"; // Owl Carousel CSS
 // import "owl.carousel/dist/assets/owl.theme.default.css"; // Owl Carousel Theme CSS
-
-
 import "owl.carousel/dist/assets/owl.carousel.css"; // Owl Carousel styles
 import "owl.carousel"; // Owl Carousel functionality
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+// import {env} from "../../Config/env";
 
 
 
 window.$ = window.jQuery = $;
 const BannerSection = () => {
+    const apiUrl = process.env.REACT_APP_API_URL;
+    console.log("apiurl",apiUrl);
+    const { id } = useParams();
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [bannersData, setBanners] = useState({})
     useEffect(() => {
-
+        gethomebanners();
         $('#owl-carouselone').owlCarousel({
             loop: true,
             margin: 30,
@@ -70,7 +78,25 @@ const BannerSection = () => {
 
        
       }, []);
-    
+      
+
+      const gethomebanners = async () => {
+        try {
+            // const baseurl=env.baseUrl;
+          
+            console.log('api testiing ====',apiUrl);
+            const res = await axios.get(apiUrl+'HomepageBanner/');
+            console.log('api testiing ====', res);
+            setBanners(res.data[0])
+            
+        }
+        catch (error) {
+            setError("Error fetching data")
+        }
+        finally {
+            setLoading(false)
+        }
+    };
   return (
     <>
         <section className="banner-main-section w-100 float-left">
@@ -80,8 +106,11 @@ const BannerSection = () => {
                     <div className="item">
                         <div className="banner-inner-section">
                             <div className="banner-left-section">
-                                <h1 className="text-white">Welcome to<br />21st Century Meetings <span className="d-inline-block">2024</span></h1>
-                                <span>Welcome to the world where ideas converge, knowledge thrives, and connections flourish.</span>
+                                {/* <h1 className="text-white">Welcome to<br />21st Century Meetings <span className="d-inline-block">2024</span></h1>
+                                <span>Welcome to the world where ideas converge, knowledge thrives, and connections flourish.</span> */}
+                                <div>
+                                {bannersData.home_page_banner_text}
+                                </div>
                                 <div className="generic-btn">
                                     <a href="contact.html">REGISTER FOR FREE <i className="fas fa-arrow-right"></i></a>
                                 </div>
