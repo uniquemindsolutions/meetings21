@@ -1,0 +1,153 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 575px) {
+  .events-box .layout-img-wrap img {
+    width: 100% !important;
+    left: 0;
+}
+.events-box img {
+  max-width: 100%;
+  border-radius: 20px;
+  color: white;
+}
+.events-box .layout-img-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+}
+@media (max-width:768px){
+  .custom-logo img {
+  width: 200px !important;
+}
+.about-p .about-inner-con {
+  grid-template-columns: 100%;
+}
+}
+@media only screen and (max-width: 1600px) {
+  .banner-main-section, .banner-main-section::after {
+      height: 650px;
+      padding-top: 50px;
+  }
+}
+.banner-inner-section h1 {
+  font-size: 60px;
+  line-height: 70px;
+  font-weight: 800;
+  color: var(--primary-color);
+  font-family: 'Raleway', sans-serif;
+}
+@media only screen and (max-width: 991px) {
+ .bnr-mob h1 {
+      font-size: 32px;
+      line-height: 42px;
+  }
+}
+.generic-title span {
+  text-transform: uppercase;
+}
+@media only screen and (max-width: 1600px) {
+  .footer-main-section {
+      padding-top: 70px;
+      padding-bottom: 55px;
+      margin-top: 0px;
+  }
+}
+.event-card {
+  box-shadow: 3px 7px 10px #00000005;
+  padding:40px 20px ;
+  border-radius: 20px;
+  display: flex;
+  border: solid 1px #f0f0f0;
+  transition: 0.4s;
+  margin-bottom: 20px;
+}
+.event-card:hover{
+  text-decoration: none;
+  box-shadow: 0px 7px 10px #00000020;
+  transition: 0.4s;
+}
+.event-card-img img {
+  width: 260px;
+  height: 190px;
+  margin-left: -100px;
+  border-radius: 20px;
+}
+.event-card-content {
+  margin-left: 20px;
+}
+.event-card-title {
+  color: #06196b;
+}
+
+@media (max-width:575px){
+  .event-card {
+    display: initial;
+    padding: 20px;
+    float: inline-end;
+  }
+  .event-card-img img {
+    width: 100%;
+    height: 190px;
+    margin-left: 0;
+    border-radius: 20px;
+  }
+  .event-card-content {
+    margin: 30px 0px;
+  }
+}
+.btn-biography {
+  background: white;
+  padding: 3px 10px;
+  border: solid 1px white;
+  border-radius: 5px;
+  color: blue;
+  cursor: pointer;
+}
+.sub-banner-inner-con h1 {
+  margin-bottom: 16px;
+  color: white;
+}
+.form-section .form-group label {
+  margin-top: 0.5rem;
+}
+.regster-packages .form-group label {
+  margin-top: 1.5rem;
+}
