@@ -23,9 +23,8 @@ import Venue from './Screens/Venue';
 import Speakers from './Screens/Speakers';
 import Programs from './Screens/Programs';
 import RegistrationForm from './Screens/registration_form';
-
-// import '../node_modules/swiper/swiper.min.css';
-
+import PresentationGuidelines from './Screens/PresentationGuidelines';
+import DiscountForm from './Screens/DiscountForm';
 
 
 
@@ -52,6 +51,8 @@ function App() {
         <Route path="/speakers" element={<Speakers />} />
         <Route path="/programs" element={<Programs />} />
         <Route path="/registration_form" element={<RegistrationForm />} />
+        <Route path="/presentation-guidelines" element={<PresentationGuidelines />} />
+        <Route path="/discount-form" element={<DiscountForm />} />
       </Routes>
       
       <Outlet />

@@ -599,7 +599,7 @@
 
     .journey-inner-con {
         gap: 60px;
-        grid-template-columns: 45% 49%;
+        grid-template-columns: 50% 45%;
         margin-bottom: 90px;
     }
 
@@ -1546,11 +1546,11 @@
     }
 
     .index3-plan-inner-con .ticket-details {
-        height: 415px;
+        height: 355px;
     }
 
     .index3-plan-inner-con .gold-ticket-details {
-        height: 475px;
+        height: 400px;
         margin: 0;
         padding: 70px 40px 70px;
     }

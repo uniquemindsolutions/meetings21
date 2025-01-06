@@ -21,67 +21,66 @@ const Sponsors = () => {
                 <section className='padding-top'>
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-12 text-center mb-4">
-                                <h3>Why you should join as Sponsor/Exhibitor?</h3>
-                            </div>
-                            <div className="col-md-6">
+
+                            <div className="col-md-5">
                                 <figure className="mb-0">
-                                    <img src="/images/index3-expert-img-6.jpg" alt="index3-registration-right-img" className='img-fluid w-100' />
+                                    <img src={process.env.PUBLIC_URL + "/images/expo-stand.jpg"} alt="index3-registration-right-img" className='img-fluid w-100' />
                                 </figure>
                             </div>
-                            <div className="col-md-6">
-                                <div className="pl-lg-4">
 
-
-                                    <p className='font-weight-bold'>We are pleased to invite your participation as Sponsor or Exhibitor in the World Summit and Expo on Industrial and Manufacturing Engineering.</p>
-                                    <p>The extensive 3 day program will bring together the global community of engineers, scientists, academics, researchers, industry leaders and government representatives to share knowledge and expertise and build valuable professional networks.</p>
-                                    <p>Congress Partners are offered the valuable opportunity to associate their brand and profile with this significant event, demonstrating their commitment, innovation and leadership in the field.</p>
-                                    <p>Some companies have been thinking of ways that events can help their business, let me show you the 6 ways that you will benefit from this grand event.</p>
-                                    <ol className='ml-5'>
-                                        <li>Position your product</li>
-                                        <li>Brand exposure</li>
-                                        <li> Global Networking</li>
-                                        <li>Lead Generation</li>
-                                        <li> Community Connect</li>
-                                        <li>Valuable Business Insights</li>
-                                    </ol>
-                                    <p className="font-weight-bold generic-btn text-center my-4">
-                                        <a className="btn btn-very-small btn-dark-gray" href="https://industrial-engineering.synergiasummits.com/storage/abstract_templates/1700548262.docx">Download Conference Brochure</a>
+                            <div className="col-md-7 mb-5 pt-5">
+                                <h3>Why Partner with Us?</h3>
+                                <div className=" ">
+                                    <p>
+                                        Partnering with our conference offers unique opportunities to showcase your brand, connect with industry leaders, and engage with a diverse audience of professionals. As a sponsor, you gain visibility and recognition, allowing you to:
                                     </p>
-                                    <h5>Exhibition:</h5>
-                                    <p>Exhibition Time: <span className='text-primary'>09:00-17:00</span>,  on all conference days</p>
+                                    
+                                    <ul className='ml-4'>
+                                        <li>
+                                           <b>Enhance Brand Awareness:</b>  Position your brand prominently before an engaged audience of decision-makers and influencers.
+                                        </li>
+                                        <li>
+                                           <b>Network with Key Stakeholders:</b>  Build relationships with potential clients, collaborators, and industry peers during networking sessions and breakout discussions.
+                                        </li>
+                                        <li>
+                                           <b>Showcase Your Solutions:</b>  Highlight your products and services through speaking opportunities, workshops, and interactive booths.
+                                        </li>
+
+                                    </ul>
                                 </div>
+                             </div>
+
+                            <div className="col-md-12 mt-4">
+                                <h5>Sponsorship Opportunities:</h5>
+                                <p>
+                                    We offer a variety of sponsorship packages designed to suit different needs and budgets. Each package includes a range of benefits, such as:
+                                </p>
+
+                                <ul className='ml-4'>
+                                    <li><b>Logo Placement:</b> Your company logo featured on event materials, including the website, brochures, and signage.</li>
+                                    <li><b>Exhibit Space:</b> Showcase your products or services with a dedicated booth in the exhibition area.</li>
+                                    <li><b>Speaking Opportunities:</b> Share your insights and expertise through keynote addresses, panel discussions, or workshops.</li>
+                                    <li><b>Networking Events:</b> Participate in exclusive sponsor-only events to connect with other sponsors and industry leaders.</li>
+                                </ul>
+
+
+                                <p>
+                                    Interested in becoming a sponsor? We’d love to have you on board! Please reach out to our sponsorship team at <b>contact@meetings21.com</b> to discuss available opportunities and find the perfect fit for your organization.
+                                </p>
+
+                                <p>
+                                    For Sponsorship and Exhibition opportunities download our Sponsor Prospectus. Thank you for considering sponsorship at our conference. Together, we can create an impactful experience for all attendees!
+                                </p>
+                            <p className="font-weight-bold generic-btn text-center my-5">
+                                <a className="btn btn-very-small btn-dark-gray" href="https://industrial-engineering.synergiasummits.com/storage/abstract_templates/1700548262.docx">Download Brochure</a>
+                            </p>
                             </div>
-                            <div className="col-lg-12 text-center mt-5 mb-5">
-                                <h3>Other Sponsorship Packages:</h3>
-                            </div>
-                            <br />
-                                <h6>Conference Bag: $6000</h6>
-                            <div className="col-lg-12 ml-4">
-                                <ul>
-                                    <li>Sponsor’s signage on conference bags</li>
-                                    <li>Standard sponsorship benefits</li>
-                                </ul>
-                                <p>Meeting Notebook/Ballpoint Pen/Memory Stick: $6000</p>
-                                <ul>
-                                    <li>Sponsors signage on meeting notebook/ballpoint pen/memory stick</li>
-                                    <li>Standard sponsorship benefits</li>
-                                </ul>
-                                <p>Best Poster Presentation: $300 ($300*3 )</p>
-                                <ul>
-                                    <li>Sponsors signage on Conference website</li>
-                                    <li>Sponsors signage on Certificate of the winner</li>
-                                </ul>
-                                <p>Best Oral Presentation: $1500($500*3)</p>
-                                <ul>
-                                    <li>Sponsors signage on Conference website</li>
-                                    <li>Sponsors signage on Certificate of the winner</li>
-                                </ul>
-                            </div>
-                            <div className="col-lg-12 generic-btn text-center mt-4 mb-5">
+
+
+                            {/* <div className="col-lg-12 generic-btn text-center mt-4 mb-5">
                                 <p>Any questions or information about exhibiting at this conference, please do not hesitate to contact:</p>
                                 <a className="" href="https://industrial-engineering.synergiasummits.com/abstract">Register Now</a>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </section>

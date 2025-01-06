@@ -11,7 +11,7 @@ const Footer = () => {
                         <div className="footer-box">
                             <Link to="/">
                                 <figure>
-                                    <img className='logo' src="/images/meetings-logo.png" alt="footer-logo" />
+                                    <img src={process.env.PUBLIC_URL + "/images/meetings-logo.png"} className='logo' alt="footer-logo" />
                                 </figure>
                             </Link>
                             <p>We work closely with conference organizers, speakers, and participants to ensure that each event meets the unique needs of the academic community it serves.</p>

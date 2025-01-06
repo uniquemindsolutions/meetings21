@@ -32,7 +32,7 @@ const Contacts = () => {
                     <div className="contact-info-inner-con">
                         <div className="contact-box">
                             <figure>
-                                <img src="/images/location-icon1.png" alt="location-icon" />
+                                <img src={process.env.PUBLIC_URL + "images/location-icon1.png"} alt="location-icon" />
                             </figure>
                             <h6>Office Address</h6>
                             <p>1D. No. 404, 100 Feet Road, Ayyappa Society, Madhapur, Hyderabad, Postal Code: 500081, India</p>
@@ -40,7 +40,7 @@ const Contacts = () => {
                         </div>
                         <div className="contact-box">
                             <figure>
-                                <img src="/images/mobile-icon.png" alt="mobile-icon" />
+                                <img src={process.env.PUBLIC_URL + "images/mobile-icon.png"} alt="mobile-icon" />
                             </figure>
                             <h6>Phone</h6>
                             <ul className="list-unstyled">
@@ -51,7 +51,7 @@ const Contacts = () => {
                         </div>
                         <div className="contact-box">
                             <figure>
-                                <img src="/images/mail-icon.png" alt="mail-icon" />
+                                <img src={process.env.PUBLIC_URL + "images/mail-icon.png"} alt="mail-icon" />
                             </figure>
                             <h6>Email</h6>
                             <ul className="list-unstyled">

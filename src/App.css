@@ -140,6 +140,13 @@
   border-radius: 5px;
   color: blue;
   cursor: pointer;
+  transition: 0.4s;
+}
+.btn-biography:hover {
+  background: #231769;
+  color: #fff;
+  transform: scale(1.1);
+  transition: 0.4s;
 }
 .sub-banner-inner-con h1 {
   margin-bottom: 16px;
@@ -150,4 +157,46 @@
 }
 .regster-packages .form-group label {
   margin-top: 1.5rem;
+}
+.journey-text-con p {
+  font-size: 17px;
+  line-height: 25px;
+  color: #72678f;
+  margin-bottom: 18px;
+  margin-left: 3px;
+}
+
+.schedule-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.schedule-table th, 
+.schedule-table td {
+  border: 1px solid #494972;
+  padding: 8px;
+}
+
+.schedule-table th {
+  background-color: #ec398b;
+  font-weight: bold;
+}
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 0px solid #dee2e6;
+}
+.table td, .table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 0px solid #dee2e6;
+}
+
+
+.table td, .table th {
+  padding: .75rem;
+  vertical-align: top;
+  border-top: 2px solid #322a81!important;
+  color: white;
+  text-align: center;
 }

@@ -24,7 +24,7 @@ const EventHeader = () => {
                     <nav className="navbar navbar-expand-lg navbar-light p-0">
                         <Link to="/" className="navbar-brand">
                             <figure className="mb-0 custom-logo bg-white p-2 rounded">
-                                <img src="/images/meetings-logo.png" alt="meetings21" />
+                                <img src={process.env.PUBLIC_URL + "/images/meetings-logo.png"} alt="meetings21" />
                             </figure>
                         </Link>
                         <button className="navbar-toggler collapsed" type="button" data-toggle="collapse"
@@ -61,7 +61,7 @@ const EventHeader = () => {
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown3">
                                         <Link to="/speakers" className="dropdown-item">Speakers</Link>
                                         <Link to="/programs" className="dropdown-item">Program</Link>
-                                        <Link to="/#" className="dropdown-item">Presentation Guidelines</Link>
+                                        <Link to="/presentation-guidelines" className="dropdown-item">Presentation Guidelines</Link>
                                     </div>
                                 </li>
                                 <li className="nav-item">
@@ -81,8 +81,8 @@ const EventHeader = () => {
                                 <li className="nav-item">
                                     <Link to="/contact" className='nav-link p-0'>CONTACT</Link>
                                 </li>
-
                             </ul>
+
                             <div className="header-contact d-flex align-items-center">
                                 <div className="lets-talk-btn">
                                     <Link to="/registration_form">Registration <i className="fas fa-arrow-right"></i></Link>

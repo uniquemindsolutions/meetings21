@@ -83,7 +83,7 @@ const BannerSection = () => {
                                 <h1 className="text-white">Welcome to<br />21st Century Meetings <span className="d-inline-block">2024</span></h1>
                                 <span>Welcome to the world where ideas converge, knowledge thrives, and connections flourish.</span>
                                 <div className="generic-btn">
-                                    <a href="contact.html">REGISTER FOR FREE <i className="fas fa-arrow-right"></i></a>
+                                    <a href="contact.html">Explore Meetings <i className="fas fa-arrow-right"></i></a>
                                 </div>
                                 {/* <div className="banner-left-images d-flex">
                                     <figure className="mb-0">
@@ -96,7 +96,7 @@ const BannerSection = () => {
                             </div>
                             <div className="banner-right-section">
                                 <figure>
-                                    <img src="/images/home-banner.png" alt="banner-right-img" className="img-fluid" />
+                                    <img src={process.env.PUBLIC_URL + "/images/home-banner.png"} alt="banner-right-img" className="img-fluid" />
                                 </figure>
                                 
                                 {/* <div className="social-links d-flex">
@@ -114,7 +114,7 @@ const BannerSection = () => {
                             <h1 className="text-white">Welcome to<br />21st Century Meetings <span className="d-inline-block">2024</span></h1>
                             <span>Welcome to the world where ideas converge, knowledge thrives, and connections flourish.</span>
                                 <div className="generic-btn">
-                                    <a href="contact.html">REGISTER FOR FREE <i className="fas fa-arrow-right"></i></a>
+                                    <a href="contact.html">Explore Meetings <i className="fas fa-arrow-right"></i></a>
                                 </div>
                                 {/* <div className="banner-left-images d-flex">
                                     <figure className="mb-0">
@@ -127,7 +127,7 @@ const BannerSection = () => {
                             </div>
                             <div className="banner-right-section">
                                 <figure>
-                                    <img src="/images/home-banner-3.png" alt="banner-right-img2" />
+                                    <img src={process.env.PUBLIC_URL + "/images/home-banner-3.png"} alt="banner-right-img2" />
                                 </figure>
                                 {/* <span>21 King Street, 1175 Australia</span> */}
                                 {/* <div className="social-links d-flex">
@@ -145,7 +145,7 @@ const BannerSection = () => {
                             <h1 className="text-white">Welcome to<br />21st Century Meetings <span className="d-inline-block">2024</span></h1>
                             <span>Welcome to the world where ideas converge, knowledge thrives, and connections flourish.</span>
                                 <div className="generic-btn">
-                                    <a href="contact.html">REGISTER FOR FREE <i className="fas fa-arrow-right"></i></a>
+                                    <a href="contact.html">Explore Meetings <i className="fas fa-arrow-right"></i></a>
                                 </div>
                                 {/* <div className="banner-left-images d-flex">
                                      <figure className="mb-0">
@@ -158,7 +158,7 @@ const BannerSection = () => {
                             </div>
                             <div className="banner-right-section">
                                 <figure>
-                                    <img src="/images/home-banner.png" alt="banner-right-img" />
+                                    <img src={process.env.PUBLIC_URL + "/images/home-banner.png"} alt="banner-right-img" />
                                 </figure>
                                 {/* <span>21 King Street, 1175 Australia</span> */}
                                 {/* <div className="social-links d-flex">

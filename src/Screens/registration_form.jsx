@@ -11,6 +11,7 @@ const RegistrationForm = () => {
     const [extraAccom, setExtraAccom] = useState(false);
     const [accompanying, setAccompanying] = useState(0);
     const [selectedRoom, setSelectedRoom] = useState("");
+    const [processingFee, setProcessingFee] = useState(10); // Base registration price
     const [totalPrice, setTotalPrice] = useState(1099); // Base registration price
     // const [promoCode, setPromoCode] = useState(false); // Base registration price
 
@@ -23,12 +24,7 @@ const RegistrationForm = () => {
         }
     }
 
-    const ExtraAccommodation = () => {
-        setExtraAccom(true)
-        if (extraAccom) {
-            setExtraAccom(false)
-        }
-    }
+
 
     const plans = [
         {
@@ -77,6 +73,7 @@ const RegistrationForm = () => {
     const rooms = [
         { id: "single", label: "Single Occupancy", price: 630 },
         { id: "double", label: "Double Occupancy", price: 720 },
+        { id: "triple", label: "Triple Occupancy", price: 810 },
     ];
     const handleRoomSelection = (roomPrice) => {
         setSelectedRoom(roomPrice);
@@ -110,6 +107,7 @@ const RegistrationForm = () => {
         setTotalPrice(1099);
     };
 
+
     return (
         <main>
             <EventHeader />
@@ -128,15 +126,17 @@ const RegistrationForm = () => {
             <div className="container mt-5">
                 <form className="p-4 border rounded shadow-sm mb-5">
                     <div className="form-section">
+                        <h5>Personal Details</h5>
                         <div className="row">
                             <div className="col-2">
                                 <div className="form-group">
                                     <label htmlFor="title">Title:</label>
                                     <select className="form-control" id="title">
+                                        <option>Prof.</option>
+                                        <option>Dr.</option>
                                         <option>Mr.</option>
                                         <option>Ms.</option>
                                         <option>Mrs.</option>
-                                        <option>Dr.</option>
                                     </select>
                                 </div>
                             </div>
@@ -250,15 +250,6 @@ const RegistrationForm = () => {
                         </div>
 
                         <div className="form-group">
-                            <label htmlFor="interested">Interested In:</label>
-                            <select className="form-control" id="interested">
-                                <option>Poster Presentation</option>
-                                <option>Keynote Speech</option>
-                                <option>Workshop</option>
-                            </select>
-                        </div>
-
-                        <div className="form-group">
                             <label htmlFor="billing">Billing Address:</label>
                             <textarea
                                 className="form-control"
@@ -268,7 +259,7 @@ const RegistrationForm = () => {
                             ></textarea>
                         </div>
 
-                        <div className="row">
+                        {/* <div className="row">
                             <div className="col-2">
                                 <div className="form-group">
                                     <label>Participants:</label>
@@ -292,11 +283,12 @@ const RegistrationForm = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     {/* packages types start */}
                     <div className="my-5 regster-packages">
+                        <h5 className='mb-4'>Registration</h5>
                         <div className="row">
                             {plans.map((plan, index) => (
                                 <div className="col-md-4" key={index}>
@@ -379,27 +371,40 @@ const RegistrationForm = () => {
                     {/* acomidation start */}
                     <div className=" mt-5">
                         <div className="row">
+                            <div className="col-md-12 mb-3"><h5>Accommodation</h5></div>
                             {rooms.map((room) => (
                                 <div className="col-md-4 mb-4" key={room.id}>
-                                    <div className="card">
+
+                                    <div className="card" style={{ minHeight: 250 }}>
                                         <div className="card-header bg-dark text-white">
-                                            <h5>Accommodation</h5>
-                                            <p>February 23 - 25, 2025</p>
+                                            <h5>{room.label}: ${room.price}</h5>
+                                            <p>Breakfast included</p>
                                         </div>
                                         <div className="card-body d-flex justify-content-between align-items-center">
                                             <div>
-                                                <strong className='btn btn-link px-0' onClick={ExtraAccommodation}>
-                                                    ${room.price} {room.label}
-                                                </strong>
-                                                <p>Breakfast included</p>
+                                                <div className='d-flex justify-content-between'>
+                                                    <strong>
+                                                        <span className='text-primary'>Select No. of Nights</span>
+                                                    </strong>
+                                                    <select name="" id="" className='form-selct float-right' style={{ width: '50px', height: 25, fontSize: '16px', marginLeft: '10px' }}>
+                                                        <option value="">0</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+
+
                                             </div>
-                                            <button
+                                            {/* <button
                                                 className={`btn ${selectedRoom === room.price ? "btn-primary" : "btn-outline-primary"
                                                     }`}
                                                 onClick={() => handleRoomSelection(room.price)}
                                             >
                                                 <i className="fas fa-bed"></i>
-                                            </button>
+                                            </button> */}
 
                                         </div>
                                     </div>
@@ -407,7 +412,7 @@ const RegistrationForm = () => {
                             ))}
                         </div>
 
-                        {
+                        {/* {
                             extraAccom ? <div className='card  mb-3' style={{ width: '350px' }}>
                                 <div className="card-header bg-secondary text-white"><h6 className='tex'>Need Extra Nights Accommodation</h6></div>
                                 <div className="card-body">
@@ -440,9 +445,9 @@ const RegistrationForm = () => {
                                 </div>
 
                             </div> : ""
-                        }
+                        } */}
 
-                        <div className=" bg-secondary text-white px-3 py-2 border mb-4" style={{ width: '300px' }}>
+                        {/* <div className=" bg-secondary text-white px-3 py-2 border mb-4" style={{ width: '300px' }}>
                             <div className="form-check">
                                 <input
                                     type="checkbox"
@@ -457,12 +462,14 @@ const RegistrationForm = () => {
                         </div>
                         {
                             promoCode ? <div className='input-group mb-4' style={{ width: '300px' }}> <input type='text' className='form-control' /> <button className='btn btn-warning'>Apply</button> </div> : null
-                        }
+                        } */}
 
-                        <div className="d-flex align-items-center mb-4">
-                            <label className="mr-3">Accompanying (<b className='text-primary'>$200 for each person</b>):</label>
+                        <div className="  align-items-center mb-4">
+                            <h5>Add on:</h5>
+                            <label className="mr-3">
+                                <input type="radio" /> Accompanying Person (<b className='text-primary'>$200 for each person</b>)</label>
 
-                            <div className="form-group" style={{ width: 150 }}>
+                            {/* <div className="form-group" style={{ width: 150 }}>
                                 <div className="input-group">
                                     <div className="input-group-prepend">
                                         <button onClick={decCount} className="btn btn-secondary" type="button">
@@ -481,7 +488,7 @@ const RegistrationForm = () => {
                                         </button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> */}
                             {/* <button
         className="btn btn-outline-secondary mr-2"
         onClick={() => handleAccompanyingChange(-1)}
@@ -504,19 +511,20 @@ const RegistrationForm = () => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-md-6">
-                                        <p>Registration Price: $<b className='text-primary'>1099</b></p>
-                                        <p>Accommodation: $<b className='text-primary'>{selectedRoom || 0}</b></p>
+                                        <p><span style={{ width: '350px', display: 'inline-block' }}>Registration Price:</span> $<b className='text-primary'>1099</b></p>
+                                        <p><span style={{ width: '350px', display: 'inline-block' }}>Accommodation Price:</span> $<b className='text-primary'>{selectedRoom || 0}</b></p>
                                         {/* <p>Accompanying: $<b className='text-primary'>{accompanying * 200}</b></p> */}
+                                        <p><span style={{ width: '350px', display: 'inline-block' }}>Accompanying Person Price:</span> $<b className='text-primary'>0</b></p>
                                     </div>
-                                    <div className="col-md-6">
-                                        <p>Participants: <b className='text-primary'>1</b></p>
-                                        <p>Total No. Nights: <b className='text-primary'>0</b></p>
-                                        <p>Accompanying: <b className='text-primary'>0</b></p>
-                                    </div>
+
                                 </div>
 
                                 <hr />
-                                <h5>Total Price: $<b className='text-primary'>{totalPrice}</b></h5>
+                                <h5>Sub-Total : $<b className='text-primary'>{totalPrice}</b></h5>
+                                <hr />
+                                <h5>Processing Fee(5%) : $<b className='text-primary'>10</b></h5>
+                                <hr />
+                                <h5>Grand Total : $<b className='text-primary'>{totalPrice}</b></h5>
                             </div>
                         </div>
 
@@ -528,22 +536,26 @@ const RegistrationForm = () => {
                                     </h4>
                                     <div className="form-group">
                                         <label>Selected Price: $ (Inclusive of all taxes)</label>
-
-                                        {/* <div className="input-group" style={{ width: '200px' }}>
-                                            <label htmlFor="" className='btn btn-secondary'>$</label>
-                                            <input
-                                                type="text"
-                                                className="form-control d-inline-block w-auto ml-2"
-                                                value={totalPrice}
-                                                readOnly
-                                            />
-                                        </div> */}
                                         <div class="input-group mb-3 mx-auto my-4" style={{ width: '300px' }}>
                                             <span class="input-group-text px-3" id="basic-addon1">$</span>
                                             <input type="text" value={totalPrice} class="form-control form-control-lg bg-white text-primary font-weight-bold" readOnly />
                                         </div>
-
                                     </div>
+
+                                    <div className="text-center">
+                                        <label htmlFor="option1" className='mr-5'>
+                                            <input type="radio" name="option" id='option1'
+                                                value="option2" className='mr-3' />
+                                            <img src={process.env.PUBLIC_URL + 'images/cc-avenue_logo.png'} alt="logo" style={{ width: 150 }} />
+                                        </label>
+
+                                        <label htmlFor="option2">
+                                            <input type="radio" name="option" id='option2'
+                                                value="option2" className='mr-3' />
+                                            <img src={process.env.PUBLIC_URL + 'images/paypal-logo.png'} alt="logo" style={{ width: 150 }} />
+                                        </label>
+                                    </div>
+
                                     <button className="btn btn-outline-secondary px-3 mr-3" onClick={handleReset}>
                                         Reset
                                     </button>
@@ -552,7 +564,7 @@ const RegistrationForm = () => {
                             </div>
                         </div>
 
-                        <div className="card my-3">
+                        {/* <div className="card my-3">
                             <div className="card-body bg-light">
                                 <div className="registration-includes">
                                     <h5>Registration includes ↓</h5>
@@ -568,9 +580,9 @@ const RegistrationForm = () => {
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className="card my-3">
+                        {/* <div className="card my-3">
                             <div className="card-body bg-light">
                                 <div className="policies-section">
                                     <h5>Registration Cancellation Policy ↓</h5>
@@ -590,9 +602,9 @@ const RegistrationForm = () => {
                                     </ul>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
 
-                        <div className="card mt-3">
+                        {/* <div className="card mt-3">
                             <div className="card-body">
                                 <div className="disaster-policy-section">
                                     <h5>Cancellation Policy in the Events of Natural Disasters or Unpredictable Activity ↓</h5>
@@ -621,7 +633,7 @@ const RegistrationForm = () => {
                                 </div>
 
                             </div>
-                        </div>
+                        </div> */}
 
                     </div>
                     {/* acomidation end */}

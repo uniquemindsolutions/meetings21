@@ -1741,7 +1741,7 @@ a.footer-call-btn:hover p small {
 .sub-banner-main-section {
     background: url(../images/about-sub-banner-bg.jpg) no-repeat center;
     background-size: cover;
-    height: 602px;
+    height: 400px;
     position: relative;
     align-items: center;
     display: flex;
@@ -1934,7 +1934,7 @@ a.footer-call-btn:hover p small {
 .contact-banner {
     background: url(../images/contact-banner-img.jpg) no-repeat center;
     background-size: cover;
-    height: 602px;
+    height: 400px;
 }
 
 .contact-box {
@@ -2022,7 +2022,7 @@ a.footer-call-btn:hover p small {
 
 /* contact form section styling start here */
 .contact-p .contact-form-section {
-    padding-bottom: 425px !important;
+    /* padding-bottom: 425px !important; */
 }
 
 .contact-form-section form ul {
@@ -2135,7 +2135,7 @@ a.footer-call-btn:hover p small {
 .event-banner-section {
     background: url(../images/event-banner-img1.jpg) no-repeat center;
     background-size: cover;
-    height: 602px;
+    height: 400px;
 }
 
 /* event page styling end here */
@@ -4291,10 +4291,16 @@ a.footer-call-btn:hover p small {
     margin-bottom: 4px;
 }
 
-.index3-event-month small {
+/* .index3-event-month small {
     font-size: 14px;
     line-height: 16px;
     color: #bfbdd2;
+} */
+.index3-event-month small {
+    font-size: 20px;
+    line-height: 16px;
+    color: #bfbdd2;
+    font-weight: 600;
 }
 
 .index3-faqs .btn-link:hover,
@@ -5496,7 +5502,7 @@ h5.newsCaption-title {
 }
 .team-style-1 figure:hover .overlay-content {
     opacity: 1;
-    z-index: 1111;
+    z-index: 11;
     top: 0;
 }
 /* *:hover {
@@ -5599,8 +5605,8 @@ min-height: 384px;
     max-width: 700px;
     min-height: 400px;
     padding: 50px;
-    justify-content: center;
-    align-items: center;
+    /* justify-content: center;
+    align-items: center; */
   }
   
   .modal-title {
@@ -5652,13 +5658,13 @@ min-height: 384px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 .list-style-5 li:before {
-    content: "\f192";
+    content: "\27A4";
     position: absolute;
     top: 1px;
     left: 0;
     font-family: Font Awesome\ 5 Free;
     font-weight: 400;
-    color: #c0c0c0;
+    color: #8f8e8e;
 }
 .list-style-5 {
     list-style: none;

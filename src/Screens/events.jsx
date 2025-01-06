@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
+import SubscribeSection from './Home/subscribe-section';
 // import AOS from "aos";
 import "aos/dist/aos.css";
 // import Footer from '../Footer/footer';
@@ -23,6 +24,8 @@ const Events = () => {
         {
             id: 1,
             name: "Federico Rosei",
+            talkTitle: "Lorem Ipsum is simply dummy text",
+            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
             image: "/images/speakers/pspeaker1.png",
             details: [
                 "2010 PEO Engineering Medal for Entrepreneurship",
@@ -163,11 +166,11 @@ const Events = () => {
                                     <div className="index3-banner-inner-con">
                                         <div className="index3-banner-img-con">
                                             <figure className="mb-0">
-                                                <img src="/images/index3-banner-img3.jpg" alt="index3-banner-img1" />
+                                                <img src={process.env.PUBLIC_URL + "images/index3-banner-img3.jpg"} alt="index3-banner-img1" />
                                             </figure>
                                         </div>
                                         <div className="index3-banner-text-con">
-                                            <span className="d-block position-relative">October 21-23, 2025</span>
+                                            <span className="d-block position-relative">October 21-23, 2025 <span className="position-relative" style={{ marginLeft: '15%' }}> Hybrid Event</span></span>
                                             <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'>International Congress of</small><br />Materials Science and Engineering</h1>
                                             <ul className="list-unstyled">
                                                 <li><i className="fas fa-map-marker-alt"></i> Dubai, UAE</li>
@@ -182,11 +185,11 @@ const Events = () => {
                                     <div className="index3-banner-inner-con">
                                         <div className="index3-banner-img-con">
                                             <figure className="mb-0">
-                                                <img src="/images/events-banner1.jpg" alt="index3-banner-img2" />
+                                                <img src={process.env.PUBLIC_URL + "images/events-banner1.jpg"} alt="index3-banner-img2" />
                                             </figure>
                                         </div>
                                         <div className="index3-banner-text-con">
-                                            <span className="d-block position-relative">October 21-23, 2025</span>
+                                            <span className="d-block position-relative">October 21-23, 2025 <span className="position-relative" style={{ marginLeft: '15%' }}> Hybrid Event</span></span>
                                             <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'>International Congress of</small><br />Materials Science and Engineering</h1>
                                             <ul className="list-unstyled">
                                                 <li><i className="fas fa-map-marker-alt"></i> Dubai, UAE</li>
@@ -201,11 +204,11 @@ const Events = () => {
                                     <div className="index3-banner-inner-con">
                                         <div className="index3-banner-img-con">
                                             <figure className="mb-0">
-                                                <img src="/images/index3-banner-img3.jpg" alt="index3-banner-img1" />
+                                                <img src={process.env.PUBLIC_URL + "images/index3-banner-img3.jpg"} alt="index3-banner-img1" />
                                             </figure>
                                         </div>
                                         <div className="index3-banner-text-con">
-                                            <span className="d-block position-relative">October 21-23, 2025</span>
+                                            <span className="d-block position-relative">October 21-23, 2025 <span className="position-relative" style={{ marginLeft: '15%' }}> Hybrid Event</span></span>
                                             <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'>International Congress of</small><br />Materials Science and Engineering</h1>
                                             <ul className="list-unstyled">
                                                 <li><i className="fas fa-map-marker-alt"></i> Dubai, UAE</li>
@@ -221,29 +224,32 @@ const Events = () => {
                     </div>
                 </section>
                 <section className="journey-section w-100 float-left padding-top padding-bottom grey-bg position-relative">
-                    <div className="container-fluid">
+                    <div className="container-fluid p-md-5">
                         <div className="journey-inner-con">
                             <div className="journey-text-con">
-                                <span className="small-text">MSEDUBAI2025</span>
-                                <h2>About Conference</h2>
-                                <p>Dear Colleagues,</p>
-                                <p>
-                                It is our great pleasure to welcome you to the International Congress of Materials Science and Engineering (MSEDUBAI2025) that will be held on October 21-23, 2025 at Hotel Crowne Plaza Dubai-Deira in Dubai, UAE. MSEDUBAI2025 is intended as an International Forum for those who wish to present their latest research results, innovative ideas, and experiences in the fields of Materials Science and Engineering.
-                                </p>
-                                <p>
-                                Progress in materials science is always linked to the progress and welfare of human civilization. Future advances in multiple fields of science and engineering critically depend on the availability of superior materials. This congress, accordingly, attempts to provide a platform for researchers, scientists, engineers and students to share their findings and experience on the emerging and interesting trends of multifaceted materials science.
-                                </p>
-                                <p>
-                                We would be honored to have your presence and active participation at MSEDUBAI2025. Your expertise and insights would greatly contribute to the success of the conference, and we believe your research and experience will inspire fellow participants.
-                                </p>
-                                <p>
-                                    <div>Sincerely,</div>
-                                    <div>Organizing Committee</div>
-                                 </p>
-                              
-                                {/* <div className="generic-btn">
+                                <div className="">
+                                    <span className="small-text">MSEDUBAI2025</span>
+                                    <h2>About Conference</h2>
+                                    <p>Dear Colleagues,</p>
+                                    <p>
+                                        It is our great pleasure to welcome you to the International Congress of Materials Science and Engineering (MSEDUBAI2025) that will be held on October 21-23, 2025 at Hotel Crowne Plaza Dubai-Deira in Dubai, UAE. MSEDUBAI2025 is intended as an International Forum for those who wish to present their latest research results, innovative ideas, and experiences in the fields of Materials Science and Engineering.
+                                    </p>
+                                    <p>
+                                        Progress in materials science is always linked to the progress and welfare of human civilization. Future advances in multiple fields of science and engineering critically depend on the availability of superior materials. This congress, accordingly, attempts to provide a platform for researchers, scientists, engineers and students to share their findings and experience on the emerging and interesting trends of multifaceted materials science.
+                                    </p>
+                                    <p>
+                                        We would be honored to have your presence and active participation at MSEDUBAI2025. Your expertise and insights would greatly contribute to the success of the conference, and we believe your research and experience will inspire fellow participants.
+                                    </p>
+                                    <p>
+                                        <div>Sincerely,</div>
+                                        <div>Organizing Committee</div>
+                                    </p>
+
+                                    {/* <div className="generic-btn">
                                     <a href="about.html">READ MORE <i className="fas fa-arrow-right"></i></a>
                                 </div> */}
+                                </div>
+
                             </div>
 
                             <div className="journey-video-con d-inline-block">
@@ -258,13 +264,13 @@ const Events = () => {
                                         modules={[Navigation, Pagination]}
                                     >
                                         <SwiperSlide>
-                                            <img className='img-fluid w-100' src="/images/event-sm-slider.jpg" alt="" />
+                                            <img src={process.env.PUBLIC_URL + "images/event-sm-slider.jpg"} className='img-fluid w-100' alt="" />
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <img className='img-fluid w-100' src="/images/event-sm-slider.jpg" alt="" />
+                                            <img src={process.env.PUBLIC_URL + "images/event-sm-slider.jpg"} className='img-fluid w-100' alt="" />
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <img className='img-fluid w-100' src="/images/event-sm-slider.jpg" alt="" />
+                                            <img src={process.env.PUBLIC_URL + "images/event-sm-slider.jpg"} className='img-fluid w-100' alt="" />
                                         </SwiperSlide>
                                     </Swiper>
 
@@ -289,27 +295,27 @@ const Events = () => {
                         <div className="digital-conference-section">
                             <div className="digital-conference-img-con">
                                 <figure className="mb-0 position-relative">
-                                    <img src="/images/digital-conference-img2.jpg" alt="digital-conference-img" />
+                                    <img src={process.env.PUBLIC_URL + "images/digital-conference-img2.jpg"} alt="digital-conference-img" />
                                 </figure>
                             </div>
                             <div className="digital-counter-con">
                                 <ul className="list-unstyled mb-0">
                                     <li className="position-relative">
-                                        <div className="count d-inline-block">25</div>
+                                        <div className="count d-inline-block">100</div>
                                         <div className="plus-details">
                                             <div className="plus d-inline-block"><span>+</span></div>
                                             <span className="d-block client-status">Speakers</span>
                                         </div>
                                     </li>
                                     <li className="position-relative">
-                                        <div className="count d-inline-block">32</div>
+                                        <div className="count d-inline-block">10</div>
                                         <div className="plus-details">
                                             <div className="plus d-inline-block"><span>+</span></div>
                                             <span className="d-block client-status">Sponsors</span>
                                         </div>
                                     </li>
                                     <li className="position-relative">
-                                        <div className="count d-inline-block">40</div>
+                                        <div className="count d-inline-block">21</div>
                                         <div className="plus-details">
                                             <div className="plus d-inline-block"><span>+</span></div>
                                             <span className="d-block client-status">Session</span>
@@ -318,8 +324,7 @@ const Events = () => {
                                     <li className="position-relative">
                                         <div className="counter-box position-relative">
                                             <div className="2k-con">
-                                                <div className="count d-inline-block">2</div>
-                                                <small className="d-inline-block">K</small>
+                                                <div className="count d-inline-block">200</div>
                                             </div>
                                             <div className="plus-details">
                                                 <div className="plus d-inline-block"><span>+</span></div>
@@ -330,7 +335,7 @@ const Events = () => {
                                 </ul>
                                 <div className="digital-text-con">
                                     <h3>Join Us at the Biggest Conference
-                                        <span className="d-inline-block">NOV 21-25</span>, 2024</h3>
+                                        <span className="d-inline-block">October 21-23, 2025 </span> </h3>
                                     <div className="generic-btn">
                                         <a href="contact.html">Add to Calendar <i className="fas fa-arrow-right"></i></a>
                                     </div>
@@ -527,6 +532,9 @@ const Events = () => {
                         <div className="generic-title2 text-center">
                             <span className="small-text">The Speakers</span>
                             <h2>Meet Our Stellar Speakers</h2>
+                            <p>
+                                Our Plenary and Keynote Speakers possess specialized knowledge and insights into specific fields. They can provide valuable information and trends, making them of great benefit to our attendees.
+                            </p>
                         </div>
                         <div className='row'>
 
@@ -592,21 +600,27 @@ const Events = () => {
                     {speakers.map(
                         (speaker) =>
                             openModalId === speaker.id && (
-                                <div key={speaker.id} className="modal-overlay">
-                                    <div className="modal-content">
-                                        <h5 className="modal-title">{speaker.name}</h5>
-                                        <p>{speaker.position}</p>
-                                        <ul>
+                                <div key={speaker.id} className="modal-overlay  text-left">
+                                    <div className="modal-content text-left">
+                                        {/* <h5 className="modal-title">{speaker.name}</h5> */}
+                                        <h5 className='mb-4'>Talk Title: <span style={{ fontWeight: 400 }}>{speaker.talkTitle}</span></h5>
+                                        <h5>Biography: </h5>
+                                        <p>{speaker.Biography}</p>
+                                        <p>{speaker.Biography}</p>
+
+                                        {/* <p>{speaker.position}</p> */}
+                                        {/* <ul>
                                             {speaker.details.map((detail, index) => (
                                                 <li key={index}>{detail}</li>
                                             ))}
-                                        </ul>
-                                        <button
-                                            className="custom-button"
-                                            onClick={closeModal}
-                                        >
-                                            Close
-                                        </button>
+                                        </ul> */}
+                                        <div className="text-center mx-auto">
+                                            <button
+                                                className="custom-button mt-5"
+                                                onClick={closeModal} >
+                                                Close
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             )
@@ -637,303 +651,169 @@ const Events = () => {
                             </ul>
                             <div className="tab-content" id="myTabContent">
                                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    <div id="accordion" className="index3-faqs">
-                                        <div className="card">
-                                            <div className="card-header" id="headingOne">
-                                                <h6 className="mb-0">
-                                                    <button className="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                                        <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-month text-left">
-                                                                    <small className="d-block">08:00 AM-08.45 AM</small>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </button>
-                                                </h6>
-                                            </div>
-
-                                            <div id="collapseOne" className="collapse" aria-labelledby="headingOne"
-                                                data-parent="#accordion">
-                                                <div className="card-body">
-                                                    <p>Women in STEAM, Breaking the glass ceiling</p>
-                                                    <span className="d-block">
-                                                        Nita Sukdeo, Univ. of Johannesburg, South Africa
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <div className="card-header" id="headingTwo">
-                                                <h6 className="mb-0">
-                                                    <button className="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapseTwo" aria-expanded="false"
-                                                        aria-controls="collapseTwo">
-                                                        <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-month text-left">
-                                                                    <small className="d-block">09:00 AM-10.00 AM</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                </h6>
-                                            </div>
-                                            <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"
-                                                data-parent="#accordion">
-                                                <div className="card-body">
-                                                    <p>Futurama on Industrial and Manufacturing Engineering</p>
-                                                    <span className="d-block">Luiz Moutinho, University of Suffolk, UK</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <div className="card-header" id="headingThree">
-                                                <h6 className="mb-0">
-                                                    <button className="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapseThree" aria-expanded="false"
-                                                        aria-controls="collapseThree">
-                                                        <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-month text-left">
-                                                                    <small className="d-block">10:00 AM-11.15 AM</small>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </button>
-                                                </h6>
-                                            </div>
-                                            <div id="collapseThree" className="collapse" aria-labelledby="headingThree"
-                                                data-parent="#accordion">
-                                                <div className="card-body">
-                                                    <p>Digital Supply Chains: the Role of Advanced Optimization Techniques</p>
-                                                    <span className="d-block">
-                                                        Ignacio Grossmann, Carnegie Mellon University, USA
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div id="accordion" className="index3-faqs table-responsive">
+                                        <table class="schedule-table table table-striped table-hover" border="1" cellpadding="10" cellspacing="0">
+                                            <thead className='text-dark'>
+                                                <tr>
+                                                    <th>Time</th>
+                                                    <th>Presentations</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>08:00-08:30</td>
+                                                    <td>Registration and Badge Pickup</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>08:30-08:45</td>
+                                                    <td>Introduction</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>08:45-10:45</td>
+                                                    <td>Plenary Presentations</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>10:45-11:00</td>
+                                                    <td>Networking Break</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>11:00-13:00</td>
+                                                    <td>Plenary Presentations</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>13:00-14:00</td>
+                                                    <td>Networking Lunch</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>14:00-16:00</td>
+                                                    <td>Keynote Presentation</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>16:00-16:20</td>
+                                                    <td>Networking Break</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>16:20-18:00</td>
+                                                    <td>Keynote Presentations</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
 
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a href="contact.html">DOWNLOAD SCHEDULE <i className="fas fa-arrow-right"></i></a>
+                                            <a href="contact.html">DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                    <div id="accordion" className="index3-faqs">
-                                        <div className="card">
-                                            <div className="card-header" id="headingsix">
-                                                <h6 className="mb-0">
-                                                    <button className="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapsesix" aria-expanded="false"
-                                                        aria-controls="collapsesix">
-                                                        <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-month text-left">
-                                                                    <small className="d-block">10:00 AM-11.15 AM</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                </h6>
-                                            </div>
-                                            <div id="collapsesix" className="collapse" aria-labelledby="headingsix"
-                                                data-parent="#accordion">
-                                                <div className="card-body">
-                                                    <p>Deep Learning for Industrial Robot Vision: Challenges and Opportunities</p>
-                                                    <span className="d-block">
-                                                        Michael Greenspan, Queen’s University, Kingston, Canada
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <div className="card-header" id="headingseven">
-                                                <h6 className="mb-0">
-                                                    <button className="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapseseven" aria-expanded="false"
-                                                        aria-controls="collapseseven">
-                                                        <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-month text-left">
-                                                                    <small className="d-block">11:00 AM-12.00 AM</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                </h6>
-                                            </div>
-                                            <div id="collapseseven" className="collapse" aria-labelledby="headingseven"
-                                                data-parent="#accordion">
-                                                <div className="card-body">
-                                                    <p>Dongsheng Li, Founder: Advanced Manufacturing LLC and AM Energization Corp</p>
-                                                    <span className="d-block">Dongsheng Li, Founder: Advanced Manufacturing LLC and AM Energization Corp</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <div className="card-header" id="headingeight">
-                                                <h6 className="mb-0">
-                                                    <button className="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapseeight" aria-expanded="true"
-                                                        aria-controls="collapseeight">
-                                                        <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-month text-left">
-                                                                    <small className="d-block">08:00 AM-08.45 AM</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                </h6>
-                                            </div>
+                                    <div id="accordion" className="index3-faqs table-responsive">
+                                        <table class="schedule-table table table-striped table-hover" border="1" cellpadding="10" cellspacing="0">
+                                            <thead className='text-dark'>
+                                                <tr>
+                                                    <th>Time</th>
+                                                    <th>Presentations</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>08:00-08:30</td>
+                                                    <td>Registration and Badge Pickup</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>08:30-08:45</td>
+                                                    <td>Introduction</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>08:45-10:45</td>
+                                                    <td>Invited Session-1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>10:45-11:00</td>
+                                                    <td>Networking Break</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>11:00-13:00</td>
+                                                    <td>Invited Session-2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>13:00-14:00</td>
+                                                    <td>Networking Lunch</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>14:00-16:00</td>
+                                                    <td>Invited Session-3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>16:00-16:20</td>
+                                                    <td>Networking Break</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>16:20-18:00</td>
+                                                    <td>Invited Session-4</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
 
-                                            <div id="collapseeight" className="collapse" aria-labelledby="headingeight"
-                                                data-parent="#accordion">
-                                                <div className="card-body">
-                                                    <p>Zineb Britel, Industrial Engineering Department, Mohammadia School of Engineers EMI, Mohammed V University, Morocco</p>
-                                                    <span className="d-block">Human-Robot Interaction: Bridging the Gap Between Humans and Cobots in Industry</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <div className="card-header" id="headingnine">
-                                                <h6 className="mb-0">
-                                                    <button className="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapsenine" aria-expanded="false"
-                                                        aria-controls="collapsenine">
-                                                        <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-month text-left">
-                                                                    <small className="d-block">09:00 AM-10.00 AM</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                </h6>
-                                            </div>
-                                            <div id="collapsenine" className="collapse" aria-labelledby="headingnine"
-                                                data-parent="#accordion">
-                                                <div className="card-body">
-                                                    <p>Risk and Mitigation Strategies for Smart Manufacturing </p>
-                                                    <span className="d-block">Shipra Pandey, Management Development Institute Gurgaon, India</span>
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a href="contact.html">DOWNLOAD SCHEDULE <i className="fas fa-arrow-right"></i></a>
+                                            <a href="contact.html">DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
                                 <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                                     <div id="accordion" className="index3-faqs">
-                                        <div className="card">
-                                            <div className="card-header" id="headingten">
-                                                <h6 className="mb-0">
-                                                    <button className="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapseten" aria-expanded="true" aria-controls="collapseten">
-                                                        <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-month text-left">
-                                                                    <small className="d-block">08:00 AM-08.45 AM</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                </h6>
-                                            </div>
-
-                                            <div id="collapseten" className="collapse" aria-labelledby="headingten"
-                                                data-parent="#accordion">
-                                                <div className="card-body">
-                                                    <p>Industry 4.0 for Supply Chain Resilience in the Future of Manufacturing</p>
-                                                    <span className="d-block">NISHTHA AGARWAL, New Delhi Institute of Management,India</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <div className="card-header" id="headingeleven">
-                                                <h6 className="mb-0">
-                                                    <button className="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapseeleven" aria-expanded="false"
-                                                        aria-controls="collapseeleven">
-                                                        <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-month text-left">
-                                                                    <small className="d-block">09:00 AM-10.00 AM</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                </h6>
-                                            </div>
-                                            <div id="collapseeleven" className="collapse" aria-labelledby="headingeleven"
-                                                data-parent="#accordion">
-                                                <div className="card-body">
-                                                    <p>Industrial management and artificial intelligence, what relationships for what performance</p>
-                                                    <span className="d-block">Zitouni Beidouri, Hassan II University, Marruecos</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <div className="card-header" id="headingtwelve">
-                                                <h6 className="mb-0">
-                                                    <button className="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapsetwelve" aria-expanded="false"
-                                                        aria-controls="collapsetwelve">
-                                                        <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-month text-left">
-                                                                    <small className="d-block">10:00 AM-11.15 AM</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                </h6>
-                                            </div>
-                                            <div id="collapsetwelve" className="collapse" aria-labelledby="headingtwelve"
-                                                data-parent="#accordion">
-                                                <div className="card-body">
-                                                    <p>Physics-Informed Machine Learning for Solving Inverse Heat Transfer and Fluid Flow Problems</p>
-                                                    <span className="d-block">Yanglong Lu, Southeast University,Hong kong</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <div className="card-header" id="headingthirteen">
-                                                <h6 className="mb-0">
-                                                    <button className="btn btn-link collapsed" data-toggle="collapse"
-                                                        data-target="#collapsethirteen" aria-expanded="false"
-                                                        aria-controls="collapsethirteen">
-                                                        <div className="index3-event-detail">
-                                                            <div className="index3-event-date-con">
-                                                                <div className="index3-event-month text-left">
-                                                                    <small className="d-block">11:00 AM-12.00 AM</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </button>
-                                                </h6>
-                                            </div>
-                                            <div id="collapsethirteen" className="collapse" aria-labelledby="headingthirteen"
-                                                data-parent="#accordion">
-                                                <div className="card-body">
-                                                    <p>Additive Manufacturing Process Monitoring Based on Physics-Constrained Dictionary Learning</p>
-                                                    <span className="d-block">Yanglong Lu, Southeast University,Hong kong</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <table class="schedule-table table table-striped table-hover" border="1" cellpadding="10" cellspacing="0">
+                                            <thead className='text-dark'>
+                                                <tr>
+                                                    <th>Time</th>
+                                                    <th>Presentations</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>08:00-08:30</td>
+                                                    <td>Registration and Badge Pickup</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>08:30-08:45</td>
+                                                    <td>Introduction</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>08:45-10:45</td>
+                                                    <td>Oral Session-1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>10:45-11:00</td>
+                                                    <td>Networking Break</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>11:00-13:00</td>
+                                                    <td>Oral Session-2</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>13:00-14:00</td>
+                                                    <td>Networking Lunch</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>14:00-16:00</td>
+                                                    <td>Oral Session-3</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>16:00-16:20</td>
+                                                    <td>Networking Break</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>16:20-18:00</td>
+                                                    <td>Oral Session-4</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a href="contact.html">DOWNLOAD SCHEDULE <i className="fas fa-arrow-right"></i></a>
+                                            <a href="contact.html">DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -941,6 +821,7 @@ const Events = () => {
                         </div>
                     </div>
                 </section>
+
                 <section className="index3-pricing-plans-section w-100 float-left padding-top padding-bottom">
                     <div className="container">
                         <div className="generic-title2 text-center">
@@ -952,7 +833,7 @@ const Events = () => {
                                 <h3>Oral Talk</h3>
                                 {/* <p>For individuals</p>
                     <span>Starting at:</span> */}
-                                <div className="price"><small>$ / ₹</small>699</div>
+                                <div className="price"><small>$</small>699</div>
                                 <ul className="list-unstyled">
                                     <li className="position-relative">Welcome Coffee</li>
                                     <li className="position-relative">Access to All Talks and Posters</li>
@@ -968,7 +849,7 @@ const Events = () => {
                                 <h3>Invited Talk</h3>
                                 {/* <p>For individuals</p>
                     <span>Starting at:</span> */}
-                                <div className="price"><small>$ / ₹</small>649</div>
+                                <div className="price"><small>$</small>649</div>
                                 <ul className="list-unstyled">
                                     <li className="position-relative">Welcome Coffee</li>
                                     <li className="position-relative">Access to All Talks and Posters</li>
@@ -987,7 +868,7 @@ const Events = () => {
                                 <h3>Poster Presentation</h3>
                                 {/* <p>For individuals</p>
                     <span>Starting at:</span> */}
-                                <div className="price"><small>$ / ₹</small>399</div>
+                                <div className="price"><small>$</small>399</div>
                                 <ul className="list-unstyled">
                                     <li className="position-relative">Welcome Coffee</li>
                                     <li className="position-relative">Access to All Talks and Posters</li>
@@ -1001,7 +882,6 @@ const Events = () => {
                             </div>
                         </div>
                         <div className="index3-plan-btn text-center">
-                            <p>This is a Detailed List Event of Conference for Digital Technology 2024.</p>
                             <div className="generic-btn">
                                 <a href="pricing.html">GET VIP PASS <i className="fas fa-arrow-right"></i></a>
                             </div>
@@ -1013,7 +893,7 @@ const Events = () => {
                         <div className="index3-registration-inner-con">
                             <div className="index3-registration-left-con">
                                 <h2>Join the Biggest <br />
-                                    Conf-2024 of The Year</h2>
+                                    Conference of The Year</h2>
                                 <p>Hear Highlights From Our Sponsors, or Get a Lite or Core Subscription
                                     to Watch the Full Main Stage Event on Demand.</p>
                                 <div className="generic-btn">
@@ -1022,7 +902,7 @@ const Events = () => {
                             </div>
                             <div className="index3-registration-right-con">
                                 <figure className="mb-0">
-                                    <img src="/images/index3-registration-right-img-2.png" alt="index3-registration-right-img" />
+                                    <img src={process.env.PUBLIC_URL + "/images/index3-registration-right-img-2.png"} alt="index3-registration-right-img" />
                                 </figure>
                             </div>
                         </div>
@@ -1031,26 +911,25 @@ const Events = () => {
                 <section className="index3-top-experts-section w-100 float-left padding-top padding-bottom">
                     <div className="container-fluid">
                         <div className="generic-title2 text-center">
-                            <span className="small-text">SHOWCASE CONFERENCE</span>
-                            <h2>We Bring Together Top Experts <br />
-                                to Discuss the Future.</h2>
+                            <span className="small-text">GALLERY</span>
+                            <h2>Previous Conference Highlights</h2>
                         </div>
                         <div className="index3-top-experts-inner-section">
                             <div className="index3-experts-left-con">
                                 <div className="index3-expert index3-expert-con1 container__img-holder">
-                                    <img src="/images/index3-expert-img-1.jpg" alt="index3-expert-img1" />
+                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-1.jpg"} alt="index3-expert-img1" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert container__img-holder">
-                                    <img src="/images/index3-expert-img-6.jpg" alt="index3-expert-img6" />
+                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-6.jpg"} alt="index3-expert-img6" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert container__img-holder">
-                                    <img src="/images/index3-expert-img-7.jpg" alt="index3-expert-img7" />
+                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-7.jpg"} alt="index3-expert-img7" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
@@ -1058,38 +937,38 @@ const Events = () => {
                             </div>
                             <div className="index3-experts-right-con">
                                 <div className="index3-expert container__img-holder">
-                                    <img src="/images/index3-expert-img-2.jpg" alt="index3-expert-img2" />
+                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-2.jpg"} alt="index3-expert-img2" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert container__img-holder">
-                                    <img src="/images/index3-expert-img-3.jpg" alt="index3-expert-img3" />
+                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-3.jpg"} alt="index3-expert-img3" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert container__img-holder">
-                                    <img src="/images/index3-expert-img-4.jpg" alt="index3-expert-img4" />
+                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-4.jpg"} alt="index3-expert-img4" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert container__img-holder">
-                                    <img src="/images/index3-expert-img-5.jpg" alt="index3-expert-img5" />
+                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-5.jpg"} alt="index3-expert-img5" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert-right-bottom-con">
                                     <div className="index3-expert container__img-holder">
-                                        <img src="/images/index3-expert-img-8.jpg" alt="index3-expert-img8" />
+                                        <img src={process.env.PUBLIC_URL + "images/index3-expert-img-8.jpg"} alt="index3-expert-img8" />
                                         <div className="search-icon-con">
                                             <i className="fas fa-search"></i>
                                         </div>
                                     </div>
                                     <div className="index3-expert container__img-holder">
-                                        <img src="/images/index3-expert-img-9.jpg" alt="index3-expert-img9" />
+                                        <img src={process.env.PUBLIC_URL + "images/index3-expert-img-9.jpg"} alt="index3-expert-img9" />
                                         <div className="search-icon-con">
                                             <i className="fas fa-search"></i>
                                         </div>
@@ -1099,7 +978,7 @@ const Events = () => {
                         </div>
                     </div>
                     <div className="img-popup">
-                        <img src="/images/index3-expert-img9.jpg" alt="Popup Image" />
+                        <img src={process.env.PUBLIC_URL + "images/index3-expert-img9.jpg"} alt="Popup Image" />
                         <div className="close-btn">
                             <div className="bar"></div>
                             <div className="bar"></div>
@@ -1117,14 +996,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src="/images/index3-client-img-1.png" alt="index3-client-img1" />
+                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-1.png"} alt="index3-client-img1" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src="/images/index3-quote-icon.png" alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1132,14 +1011,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src="/images/index3-client-img-2.png" alt="index3-client-img2" />
+                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-2.png"} alt="index3-client-img2" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src="/images/index3-quote-icon.png" alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1147,14 +1026,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src="/images/index3-client-img-3.png" alt="index3-client-img3" />
+                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-3.png"} alt="index3-client-img3" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src="/images/index3-quote-icon.png" alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1162,14 +1041,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src="/images/index3-client-img-1.png" alt="index3-client-img1" />
+                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-1.png"} alt="index3-client-img1" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src="/images/index3-quote-icon.png" alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1177,14 +1056,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src="/images/index3-client-img-2.png" alt="index3-client-img2" />
+                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-2.png"} alt="index3-client-img2" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src="/images/index3-quote-icon.png" alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1192,14 +1071,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src="/images/index3-client-img-3.png" alt="index3-client-img3" />
+                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-3.png"} alt="index3-client-img3" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src="/images/index3-quote-icon.png" alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1207,14 +1086,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src="/images/index3-client-img1.png" alt="index3-client-img1" />
+                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img1.png"} alt="index3-client-img1" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src="/images/index3-quote-icon.png" alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1222,14 +1101,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src="/images/index3-client-img2.png" alt="index3-client-img2" />
+                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img2.png"} alt="index3-client-img2" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src="/images/index3-quote-icon.png" alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1237,14 +1116,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src="/images/index3-client-img3.png" alt="index3-client-img3" />
+                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img3.png"} alt="index3-client-img3" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src="/images/index3-quote-icon.png" alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1264,7 +1143,7 @@ const Events = () => {
                                 <div className="blog-img position-relative">
                                     <span className="d-inline-block">Illustration, Art</span>
                                     <figure className="mb-0">
-                                        <img src="/images/blog-img1-1.jpg" alt="blog-img1" />
+                                        <img src={process.env.PUBLIC_URL + "images/blog-img1-1.jpg"} alt="blog-img1" />
                                     </figure>
                                 </div>
                                 <div className="blog-text">
@@ -1276,7 +1155,7 @@ const Events = () => {
                                 <div className="blog-img position-relative">
                                     <span className="d-inline-block">Vintage, Design</span>
                                     <figure className="mb-0">
-                                        <img src="/images/blog-img-2.jpg" alt="blog-img3" />
+                                        <img src={process.env.PUBLIC_URL + "images/blog-img-2.jpg"} alt="blog-img3" />
                                     </figure>
                                 </div>
                                 <div className="blog-text">
@@ -1288,7 +1167,7 @@ const Events = () => {
                                 <div className="blog-img position-relative">
                                     <span className="d-inline-block">Questions, Answers</span>
                                     <figure className="mb-0">
-                                        <img src="/images/blog-img-3.jpg" alt="blog-img3" />
+                                        <img src={process.env.PUBLIC_URL + "images/blog-img-3.jpg"} alt="blog-img3" />
                                     </figure>
                                 </div>
                                 <div className="blog-text">
@@ -1299,33 +1178,38 @@ const Events = () => {
                         </div>
                     </div>
                 </section>
+                <SubscribeSection />
                 <div className="index3-sponsers-main-section sponsers-main-section w-100 float-left">
                     <div className="container">
+                        <div class="generic-title2 text-center">
+                            {/* <span class="small-text">SKILLS &amp; EXPERIENCE</span> */}
+                            <h2 class="mb-0">Our Partners & Sponsors</h2>
+                        </div>
                         <div className="sponsers-companies">
                             <ul className="list-unstyled mb-0">
                                 <li>
                                     <figure className="mb-0">
-                                        <img src="/images/sponsers-logo1.png" alt="sponsers-logo1" />
+                                        <img src={process.env.PUBLIC_URL + "images/sponsers-logo1.png"} alt="sponsers-logo1" />
                                     </figure>
                                 </li>
                                 <li>
                                     <figure className="mb-0">
-                                        <img src="/images/sponsers-logo2.png" alt="sponsers-logo2" />
+                                        <img src={process.env.PUBLIC_URL + "images/sponsers-logo2.png"} alt="sponsers-logo2" />
                                     </figure>
                                 </li>
                                 <li>
                                     <figure className="mb-0">
-                                        <img src="/images/sponsers-logo3.png" alt="sponsers-logo3" />
+                                        <img src={process.env.PUBLIC_URL + "images/sponsers-logo3.png"} alt="sponsers-logo3" />
                                     </figure>
                                 </li>
                                 <li>
                                     <figure className="mb-0">
-                                        <img src="/images/sponsers-logo4.png" alt="sponsers-logo4" />
+                                        <img src={process.env.PUBLIC_URL + "images/sponsers-logo4.png"} alt="sponsers-logo4" />
                                     </figure>
                                 </li>
                                 <li>
                                     <figure className="mb-0">
-                                        <img src="/images/sponsers-logo5.png" alt="sponsers-logo5" />
+                                        <img src={process.env.PUBLIC_URL + "images/sponsers-logo5.png"} alt="sponsers-logo5" />
                                     </figure>
                                 </li>
                             </ul>

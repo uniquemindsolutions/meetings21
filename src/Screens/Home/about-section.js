@@ -21,11 +21,11 @@ const AboutSection = () => {
                     <div className="co-box" data-aos="fade-up" data-aos-duration="700">
                         <div className="investment d-flex">
                             <span>100</span>
-                            <small>Speakers <br /> Funds</small>
+                            <small>Plus <br /> Speakers</small>
                         </div>
                         <div className="co-image-box">
                             <figure className="mb-0">
-                                <img src="/images/co-image-abt.jpg" alt="co-image" />
+                               <img src={process.env.PUBLIC_URL + "/images/co-image-abt.jpg"} alt="co-image" />
                             </figure>
                             {/* <div className="status">
                                 EVE OWENS - <span className="d-inline-block">CO</span>
@@ -35,7 +35,7 @@ const AboutSection = () => {
                     <div className="ceo-box" data-aos="fade-up" data-aos-duration="700">
                         <div className="ceo-image-box">
                             <figure className="mb-0">
-                                <img src="/images/ceo-img1.jpg" alt="ceo-image" />
+                            <img src={process.env.PUBLIC_URL + "images/ceo-img1.jpg"} alt="ceo-image" />
                             </figure>
                             {/* <div className="status">
                             Global Networking - <br /><span className="d-inline-block">Great place to network<br /> with your peers.</span>

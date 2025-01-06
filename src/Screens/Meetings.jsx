@@ -12,7 +12,7 @@ const Meetings = () => {
       <section className="sub-banner-main-section event-banner-section w-100 float-left">
         <div className="container">
           <div className="sub-banner-inner-con">
-            <h1>Meetings21</h1>
+            <h1>Upcoming Meetings</h1>
             <p>Inspiring Talks, Meet the Best Product People Around the World, <br /> and Party Together After the Event!</p>
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb d-inline-block mb-0">
@@ -27,7 +27,7 @@ const Meetings = () => {
       <div className='container padding-bottom padding-top'>
         <div className='row'>
           <div className='col-lg-12 text-center mt-5 mb-5'>
-            <h2>Upcoming Meetings</h2>
+            <h2>October, 2025</h2>
           </div>
         </div>
 
@@ -85,7 +85,7 @@ const Meetings = () => {
           <div className="col-md-5">
             <Link to="/events" target='_blank' className="event-card">
               <div className='event-card-img'>
-                <img src="https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg" alt="" className='' />
+                <img src={process.env.PUBLIC_URL + "https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg"} alt="" className='' />
               </div>
               <div className='event-card-content'>
                 <h5 className="event-card-title">
@@ -103,7 +103,7 @@ const Meetings = () => {
           <div className="col-md-5  offset-md-1">
             <Link to="/events" target='_blank' className="event-card">
               <div className='event-card-img'>
-                <img src="https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg" alt="" className='' />
+              <img src={process.env.PUBLIC_URL + "https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg"} alt="" className='' />
               </div>
               <div className='event-card-content'>
                 <h5 className="event-card-title">

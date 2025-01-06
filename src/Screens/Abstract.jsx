@@ -32,15 +32,10 @@ const Abstract = () => {
                 </section>
                 <section className="mt-5">
                     <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 center-col margin-two-bottom sm-margin-15px-bottom xs-margin-10px-bottom text-center">
-                                <h4 className="mb-5">Key Dates</h4>
-                            </div>
-                        </div>
 
                         <div className="row">
-                            <div className="col-md-8 offset-lg-2 display-table margin-25px-top">
-
+                            <div className="col-md-6 display-table margin-25px-top">
+                                <h4 className="mb-3">Key Dates</h4>
                                 <div className="card">
                                     <div className="card-body">
                                         <li className="form-control-md">Super Earlybird Registration closes on: <span className="color-p font-weight-bold">February 28, 2024</span></li>
@@ -51,49 +46,41 @@ const Abstract = () => {
                                     </div>
                                     <div className="card-body">
                                         <li className="font-size-15px">Standard Registration closes on: <span className="color-p font-weight-bold">September 15, 2024</span></li>
+                                    </div>
+
+                                    <div className="card-body">
+                                        <li className="font-size-15px">Abstract submission closes on: <span className="color-p font-weight-bold">August 30, 2024</span></li>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="col-md-6 display-table margin-25px-top">
+                                <h4 className="mb-3">Presentation Types</h4>
+                                <div className="card">
+                                    <div className="card-body">
+                                        <li className="form-control-md">Plenary Presentation <span className="color-p font-weight-bold">(40 minutes including Q&A)</span></li>
+                                    </div>
+                                    <div className="card-body">
+                                        <li className="font-size-15px">Keynote Presentation  <span className="color-p font-weight-bold">(30 minutes including Q&A)</span></li>
 
                                     </div>
                                     <div className="card-body">
-                                        <li className="font-size-15px">Abstract submission closes on: <span className="color-p font-weight-bold">August 30, 2024</span></li>
-
+                                        <li className="font-size-15px">Poster Presentation  <span className="color-p font-weight-bold">(in person at the Congress)</span></li>
                                     </div>
 
+                                    <div className="card-body">
+                                        <li className="font-size-15px">Invited Presentation  <span className="color-p font-weight-bold">(25 minutes including Q&A)</span></li>
+                                    </div>
+                                    <div className="card-body">
+                                        <li className="font-size-15px">Oral Presentation   <span className="color-p font-weight-bold">(20 minutes including Q&A)</span></li>
+                                    </div>
                                 </div>
-
-                                <ul className="no-padding list-style-5">
-
-                                </ul>
                             </div>
 
                         </div>
                     </div>
                 </section>
-                <section className="mt-5">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 center-col margin-two-bottom sm-margin-15px-bottom xs-margin-10px-bottom text-center">
-                                <h4 className="mb-5">Presentation Types</h4>
-                            </div>
-                        </div>
 
-                        <div className="row">
-                            <div className="col-md-6 col-sm-12 col-xs-12 display-table margin-25px-top">
-                                <ul className="no-padding list-style-5">
-                                    <li className="font-size-15px">Plenary Presentation  <span className="color-p font-weight-bold">(40 minutes including Q&amp;A)</span></li>
-                                    <li className="font-size-15px">Keynote Presentation <span className="color-p font-weight-bold">(30 minutes including Q&amp;A)</span></li>
-                                    <li className="font-size-15px">Poster Presentation <span className="color-p font-weight-bold">(in person at the Congress) </span></li>
-                                </ul>
-                            </div>
-
-                            <div className="col-md-6 col-sm-12 col-xs-12 display-table margin-25px-top">
-                                <ul className="no-padding list-style-5">
-                                    <li className="font-size-15px">Invited Presentation <span className="color-p font-weight-bold">(25 minutes including Q&amp;A)</span></li>
-                                    <li className="font-size-15px">Oral Presentation <span className="color-p font-weight-bold">(20 minutes including Q&amp;A) </span></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </section>
                 <section className='padding-top'>
                     <div className="container">
                         <div className="row">

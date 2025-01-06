@@ -33,7 +33,7 @@ const Blogs = () => {
                     <div className="blog-img position-relative">
                         <span className="d-inline-block">01.</span>
                         <figure className="mb-0">
-                            <img src="/images/rear-view-of-audience-listening-speakers-on-the-stage-in-the-conference-hall-or-seminar-meeting.jpg" alt="blog-img1" />
+                        <img src={process.env.PUBLIC_URL + '/images/rear-view-of-audience-listening-speakers-on-the-stage-in-the-conference-hall-or-seminar-meeting.jpg'} alt="blog-img1" />
                         </figure>
                     </div>
                     <div className="blog-text">
@@ -46,7 +46,7 @@ const Blogs = () => {
                     <div className="blog-img position-relative">
                         <span className="d-inline-block">02.</span>
                         <figure className="mb-0">
-                            <img src="/images/young-happy-businesswoman-talking-on-microphone-while-attending-education-event-in-conference-hall-.jpg" alt="blog-img3" />
+                            <img src={process.env.PUBLIC_URL + "images/young-happy-businesswoman-talking-on-microphone-while-attending-education-event-in-conference-hall-.jpg"} alt="blog-img3" />
                         </figure>
                     </div>
                     <div className="blog-text">
@@ -59,7 +59,7 @@ const Blogs = () => {
                     <div className="blog-img position-relative">
                         <span className="d-inline-block">03.</span>
                         <figure className="mb-0">
-                            <img src="/images/female-office-employee-making-report-at-business-conference.jpg" alt="blog-img3" />
+                        <img src={process.env.PUBLIC_URL + "images/female-office-employee-making-report-at-business-conference.jpg"} alt="blog-img3" />
                         </figure>
                     </div>
                     <div className="blog-text">

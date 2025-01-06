@@ -23,16 +23,12 @@ const CodeOfConduct = () => {
           </section>
           <section className='padding-top padding-bottom'>
               <div className='container'>
-                  <div className="row">
-                    <div className="col-lg-12">
-                      <h3>Code of Conduct:</h3>
-                    </div>
-                  </div>
+                 
 
-                  <div className='ml-3 ml-lg-5 mt-4'> 
+                  <div> 
                   <p>The MEETINGS21 is dedicated to providing an environment free from discrimination, bullying, harassment or victimization, where all attendees are treated with respect and dignity aiming to create a culture of diversity where all are valued for their contribution and individuality.</p>
                       <p>This code applies to all attendees both in person or remotely.</p>
-                      <ul>
+                      <ul className='ml-3 ml-lg-5 mt-4'>
                         <li>
                         All communications (both verbal and written) should be appropriate for a professional audience that includes a diverse range of background. Sexist or inappropriate language and imagery should not be used at any time during meetings, conference and events – including presentations and posters. The Organizing Committee and Management of MEETINGS21 will have the prerogative to withdraw talks, posters and social media post from the premises and on online platforms, if they are deemed to contravene this code.
                         </li>

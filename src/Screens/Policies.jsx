@@ -21,7 +21,7 @@ const Policies = () => {
         </section>
         <section className='padding-top padding-bottom'>
           <div className='container'>
-            <h2>Cancellation policy:</h2>
+            <h4>Cancellation policy:</h4>
 
             <p>
               If a registrant is unable to attend conference, they may substitute, by arrangement with the conference organizer, someone else to attend the conference, or transfer their participation to another conference organized by Meetings21(within 15 months). If the aforementioned solutions are not applicable to the registrant, the following policies of cancellation and refund apply:
@@ -53,18 +53,18 @@ const Policies = () => {
               </ul>
             </div>
 
-            <div className='ml-3 ml-lg-5 mt-4'>
+            <div>
               <h4>Please note:</h4>
-              <ul>
-                <li>* The cancellation and refund request must be made formally through email to contact@meetings21.com</li>
-                <li>* For “No-Show” without cancelation notice sent within the period specified in the policy, registration fee and accommodation are nonrefundable.</li>
-                <li>* All refunds will be processed only after the conference.</li>
+              <ul className='ml-3 ml-lg-5 mt-4'>
+                <li>The cancellation and refund request must be made formally through email to contact@meetings21.com</li>
+                <li>For “No-Show” without cancelation notice sent within the period specified in the policy, registration fee and accommodation are nonrefundable.</li>
+                <li>All refunds will be processed only after the conference.</li>
               </ul>
             </div>
 
-            <div className='ml-3 ml-lg-5 mt-4'>
+            <div>
               <h4>Transfer of Registration:</h4>
-              <ul>
+              <ul className='ml-3 ml-lg-5 mt-4'>
                 <li>
                   All fully paid registrations are transferable to other persons from the same organization, if registered person is unable to attend the event.
                 </li>
@@ -83,16 +83,16 @@ const Policies = () => {
               </ul>
             </div>
 
-            <div className='ml-3 ml-lg-5 mt-4'>
+            <div>
               <h4>Personal Reason:</h4>
-              <p>
+              <p className='ml-3 ml-lg-5 mt-4'>
                 The Organizer cannot refund or pay any compensation where could not attend the conference is prevented by reason of circumstances which amount to “personal reason”. Such as travel difficulties, visa problems, health issues, financial default etc.
               </p>
             </div>
 
-            <div className='ml-3 ml-lg-5 mt-4'>
+            <div>
             <h4>Terms and Conditions:</h4>
-                <ul>
+                <ul className='ml-3 ml-lg-5 mt-4'>
                   <li>
                     Organizer is not responsible for any loss or damage as a result of substitution, alteration, postponement, or cancellation of an event due to causes beyond its control including without limitation, force majeure, natural disasters, sabotage, accident, pandemics, trade or industrial disputes, terrorism, or hostilities.
                   </li>
