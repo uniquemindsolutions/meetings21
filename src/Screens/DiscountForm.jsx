@@ -319,13 +319,13 @@ const DiscountForm = () => {
                     <label htmlFor="option1" className='mr-5'>
                       <input type="radio" name="option" id='option1'
                         value="option2" className='mr-3' />
-                      <img src={process.env.PUBLIC_URL + 'images/cc-avenue_logo.png'} alt="logo" style={{ width: 150 }} />
+                      <img src={process.env.PUBLIC_URL + '/' + 'images/cc-avenue_logo.png'} alt="logo" style={{ width: 150 }} />
                     </label>
 
                     <label htmlFor="option2">
                       <input type="radio" name="option" id='option2'
                         value="option2" className='mr-3' />
-                      <img src={process.env.PUBLIC_URL + 'images/paypal-logo.png'} alt="logo" style={{ width: 150 }} />
+                      <img src={process.env.PUBLIC_URL + '/' + 'images/paypal-logo.png'} alt="logo" style={{ width: 150 }} />
                     </label>
                   </div>
 

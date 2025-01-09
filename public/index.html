@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <meta name="description" content="Web site created using create-react-app" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/favicon.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
@@ -26,21 +24,19 @@
     -->
     <title>React App</title>
     <!-- Add this in public/index.html -->
-<link rel="stylesheet" href="./css/aos.css" />
-<link rel="stylesheet" href="./css/owl.carousel.css" />
-<link rel="stylesheet" href="./css/swiper-bundle.min.css" />
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-<link rel="stylesheet" href="./css/bootstrap/bootstrap.min.css">
-<link rel="stylesheet" href="./css/custom.css">
-<link rel="stylesheet" href="./css/mobile.css">
-<link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-  />
+    <link rel="stylesheet" href="./css/aos.css" />
+    <link rel="stylesheet" href="./css/owl.carousel.css" />
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="./css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/custom.css">
+    <link rel="stylesheet" href="./css/mobile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
 
-  </head>
-  <body>
+</head>
+
+<body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <a id="button"></a>
     <div id="root"></div>
@@ -53,13 +49,13 @@
     <script src="./js/jquery.validate.js"></script>
     <script src="./js/custom.js"></script>
     <script>
-        $(window).on('load', function(){ 
-        // Preloader
-        $('.loader').fadeOut();
-        $('.loader-mask').delay(350).fadeOut('slow');
+        $(window).on('load', function () {
+            // Preloader
+            $('.loader').fadeOut();
+            $('.loader-mask').delay(350).fadeOut('slow');
         });
     </script>
-    
+
     <script>
         $('.data').hide()
         jQuery('button.showBtn1').on('click', function () {
@@ -217,19 +213,20 @@
     </script>
     <script>
         var btn = $('#button');
-         
-         $(window).scroll(function() {
-           if ($(window).scrollTop() > 300) {
-           btn.addClass('show');
-         }
-          else {
-           btn.removeClass('show');
-         }
-         });
-         btn.on('click', function(e) {
-         e.preventDefault();
-         $('html, body').animate({scrollTop:0}, '300');
-       });
+
+        $(window).scroll(function () {
+            if ($(window).scrollTop() > 300) {
+                btn.addClass('show');
+            }
+            else {
+                btn.removeClass('show');
+            }
+        });
+        btn.on('click', function (e) {
+            e.preventDefault();
+            $('html, body').animate({ scrollTop: 0 }, '300');
+        });
     </script>
-  </body>
+</body>
+
 </html>

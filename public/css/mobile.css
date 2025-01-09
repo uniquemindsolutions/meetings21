@@ -9,6 +9,13 @@
     }
 }
 
+@media screen and(min-width: 1180px) and (max-width: 1600px) {
+    .header-main-con.index3-header .navbar-nav {
+        gap: 35px;
+        margin-right: 100px;
+    }
+}
+
 @media only screen and (max-width: 1800px) {
 
     /* header section */
@@ -17,8 +24,8 @@
     }
 
     .header-main-con.index3-header .navbar-nav {
-        gap: 46px;
-        margin-right: 140px;
+        gap: 30px;
+        margin-right: 40px;
     }
 
     /* header section */
@@ -563,7 +570,7 @@
     .index3-banner-text-con {
         padding: 70px 50px;
         width: 480px;
-        height: 470px;
+        min-height: 470px;
     }
 
     .index3-banner-text-con h1 {
@@ -1342,12 +1349,14 @@
     /* index3 page styling start here */
     .index3-banner-section .container-fluid,
     .header-main-con.index3-header .container-fluid {
-        padding: 0 8%;
+        padding: 0 5%;
     }
 
     .header-main-con.index3-header .navbar-light .navbar-nav .nav-link {
         font-size: 15px;
-        line-height: 16px;
+        display: flex;
+        line-height: 0;
+        font-weight: 400;
     }
 
     .header-main-con.index3-header .nav-btns a i {
@@ -1380,7 +1389,8 @@
     .index3-banner-text-con {
         padding: 50px 40px;
         width: 450px;
-        height: 420px;
+        min-height: 420px;
+        display: inline-table;
     }
 
     .journey-text-con h2 {
@@ -1550,7 +1560,7 @@
     }
 
     .index3-plan-inner-con .gold-ticket-details {
-        height: 400px;
+        height: 415px;
         margin: 0;
         padding: 70px 40px 70px;
     }
@@ -4998,6 +5008,9 @@
 
     .header-main-con.index3-header .navbar-light .navbar-nav .nav-link {
         font-size: 16px;
+        line-height: 5px;
+        margin-bottom: 15px;
+        font-weight: 400;
     }
 
     .index3-header {
@@ -5018,7 +5031,8 @@
     }
 
     .index3-header .navbar-collapse {
-        top: 46px;
+        top: 55px;
+        width: 100%;
     }
 
     .index3-banner-section {

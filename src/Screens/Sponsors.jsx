@@ -24,7 +24,7 @@ const Sponsors = () => {
 
                             <div className="col-md-5">
                                 <figure className="mb-0">
-                                    <img src={process.env.PUBLIC_URL + "/images/expo-stand.jpg"} alt="index3-registration-right-img" className='img-fluid w-100' />
+                                    <img src={process.env.PUBLIC_URL + '/' + "images/expo-stand.jpg"} alt="index3-registration-right-img" className='img-fluid w-100' />
                                 </figure>
                             </div>
 

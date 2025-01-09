@@ -7,10 +7,11 @@ import { BrowserRouter } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-<BrowserRouter>
-
-<App />
-</BrowserRouter>
+    // "homepage": "/meeting21",
+    //  basename="/meeting21"
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
 
 );
 

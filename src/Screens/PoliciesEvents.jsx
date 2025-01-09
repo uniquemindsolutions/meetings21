@@ -2,11 +2,13 @@ import React from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/footer'
 import { Link } from 'react-router-dom'
-const Policies = () => {
+import EventHeader from '../Header/EventHeader'
+
+const PoliciesEvents = () => {
   return (
     <>
       <div className='policy-p'>
-        <Header />
+        <EventHeader />
         <section className="sub-banner-main-section w-100 justify-content-center">
           <div className="sub-banner-inner-con text-center">
             <h1>Policies</h1>
@@ -27,7 +29,7 @@ const Policies = () => {
               If a registrant is unable to attend conference, they may substitute, by arrangement with the conference organizer, someone else to attend the conference, or transfer their participation to another conference organized by Meetings21(within 15 months). If the aforementioned solutions are not applicable to the registrant, the following policies of cancellation and refund apply:
             </p>
 
-            <div className='ml-3 ml-lg-5 mt-4'>
+            <div className='ml-3 ml-lg-5 mt-4'>             
               <ul>
                 <li>
                   Cancellation order placed before 90 days of the conference: Eligible for 50% of payment Refund.
@@ -91,35 +93,35 @@ const Policies = () => {
             </div>
 
             <div>
-              <h4>Terms and Conditions:</h4>
-              <ul className='ml-3 ml-lg-5 mt-4'>
-                <li>
-                  Organizer is not responsible for any loss or damage as a result of substitution, alteration, postponement, or cancellation of an event due to causes beyond its control including without limitation, force majeure, natural disasters, sabotage, accident, pandemics, trade or industrial disputes, terrorism, or hostilities.
-                </li>
-                <li>
-                  The organizer reserves the right to cancel or postpone the conference in case of any natural disasters, calamities or terrorism activity. In this case, organizer cannot accept refund requests from the conference delegates, speakers or attendees that result from cancelled flights and or natural disasters, calamities, pandemic, terrorism activity or any other restrictions imposed by the conference venue country. The organizer will provide opportunity for the registered delegates and attendees to transfer their registration fee and accommodation charges to any future or related conferences.
-                </li>
-                <li>
-                  The organizer will not accept any liability for personal injuries or for loss or damage to property belonging to the delegates, either during, or as a result of the conference.
-                </li>
-                <li>
-                  By registering for the conference, you hereby agree the policies, terms and conditions.
-                </li>
-                <li>
-                  The organization reserves the right to make alterations to the program, date and/or venue at any time without prior notice.
-                </li>
-                <li>
-                  Registrations remain valid for event with new dates or for future editions, if the conference has to be postponed by causes beyond organizer control. Refund policy is not applicable in this condition.
-                </li>
-                <li>
-                  In the event of cancellation, the organization will use reasonable and suitable alternative arrangements such as posting the news of cancellation on the appropriate event website to alert those who have booked or purchased tickets to attend the event.
-                </li>
-                <li>
-                  Delegates are responsible for checking this information prior to the event. We advised to keep checking the website for updates of our conference.
-                </li>
-              </ul>
+            <h4>Terms and Conditions:</h4>
+                <ul className='ml-3 ml-lg-5 mt-4'>
+                  <li>
+                    Organizer is not responsible for any loss or damage as a result of substitution, alteration, postponement, or cancellation of an event due to causes beyond its control including without limitation, force majeure, natural disasters, sabotage, accident, pandemics, trade or industrial disputes, terrorism, or hostilities.
+                  </li>
+                  <li>
+                    The organizer reserves the right to cancel or postpone the conference in case of any natural disasters, calamities or terrorism activity. In this case, organizer cannot accept refund requests from the conference delegates, speakers or attendees that result from cancelled flights and or natural disasters, calamities, pandemic, terrorism activity or any other restrictions imposed by the conference venue country. The organizer will provide opportunity for the registered delegates and attendees to transfer their registration fee and accommodation charges to any future or related conferences.
+                  </li>
+                  <li>
+                    The organizer will not accept any liability for personal injuries or for loss or damage to property belonging to the delegates, either during, or as a result of the conference.
+                  </li>
+                  <li>
+                    By registering for the conference, you hereby agree the policies, terms and conditions.
+                  </li>
+                  <li>
+                    The organization reserves the right to make alterations to the program, date and/or venue at any time without prior notice.
+                  </li>
+                  <li>
+                    Registrations remain valid for event with new dates or for future editions, if the conference has to be postponed by causes beyond organizer control. Refund policy is not applicable in this condition.
+                  </li>
+                  <li>
+                    In the event of cancellation, the organization will use reasonable and suitable alternative arrangements such as posting the news of cancellation on the appropriate event website to alert those who have booked or purchased tickets to attend the event.
+                  </li>
+                  <li>
+                    Delegates are responsible for checking this information prior to the event. We advised to keep checking the website for updates of our conference.
+                  </li>
+                </ul>
             </div>
-
+            
 
             <div className="row">
               <div className="col-lg-12">
@@ -141,4 +143,4 @@ const Policies = () => {
   )
 }
 
-export default Policies
+export default PoliciesEvents

@@ -15,7 +15,7 @@ const SpeakerSection = () => {
                     <div className="speaker-box position-relative">
                         <a href="https://www.linkedin.com/login"><i className="fab fa-linkedin-in"></i></a>
                         <figure className="mb-0">
-                            <img src={process.env.PUBLIC_URL + "images/speakers-img1.jpg"} alt="speakers-img1" />
+                            <img src={process.env.PUBLIC_URL + '/' + "images/speakers-img1.jpg"} alt="speakers-img1" />
                         </figure>
                         <div className="speaker-status">
                             <button className="showBtn1">Declan Heyes <i className="fas fa-angle-up"></i></button>
@@ -27,7 +27,7 @@ const SpeakerSection = () => {
                     <div className="speaker-box position-relative">
                         <a href="https://www.linkedin.com/login"><i className="fab fa-linkedin-in"></i></a>
                         <figure className="mb-0">
-                            <img src={process.env.PUBLIC_URL + "assets/images/speakers-img2.jpg"} alt="speakers-img2" />
+                            <img src={process.env.PUBLIC_URL + '/' + "assets/images/speakers-img2.jpg"} alt="speakers-img2" />
                         </figure>
                         <div className="speaker-status">
                             <button className="showBtn2">Stella Hindley <i className="fas fa-angle-up"></i></button>

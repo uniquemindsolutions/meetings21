@@ -71,17 +71,17 @@ const Venue = () => {
           <div className="row">
             <div className="col-md-4">
               <figure className="mb-0">
-               <img src={process.env.PUBLIC_URL + "/images/index3-expert-img-4.jpg"} alt="img" className='img-fluid w-100' />
+               <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-4.jpg"} alt="img" className='img-fluid w-100' />
               </figure>
             </div>
             <div className="col-md-4">
               <figure className="mb-0">
-                <img src={process.env.PUBLIC_URL + "/images/index3-expert-img-8.jpg"} alt="img" className='img-fluid w-100' />
+                <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-8.jpg"} alt="img" className='img-fluid w-100' />
               </figure>
             </div>
             <div className="col-md-4">
               <figure className="mb-0">
-                <img src={process.env.PUBLIC_URL + "/images/index3-expert-img-5.jpg"} alt="img" className='img-fluid w-100' />
+                <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-5.jpg"} alt="img" className='img-fluid w-100' />
               </figure>
             </div>
           </div>

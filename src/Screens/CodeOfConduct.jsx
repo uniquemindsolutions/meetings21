@@ -16,7 +16,7 @@ const CodeOfConduct = () => {
                       <nav aria-label="breadcrumb">
                           <ol className="breadcrumb d-inline-block mb-0">
                               <li className="breadcrumb-item d-inline-block"><Link to="/">HOME</Link></li>
-                              <li className="breadcrumb-item active d-inline-block" aria-current="page">code-of-conduct</li>
+                              <li className="breadcrumb-item active d-inline-block" aria-current="page">Code of Conduct</li>
                           </ol>
                       </nav>
                   </div>

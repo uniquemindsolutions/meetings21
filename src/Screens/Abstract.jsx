@@ -25,7 +25,7 @@ const Abstract = () => {
                             <div className="col-md-12 col-sm-12 col-xs-12">
                                 <p>You are invited to contribute to the global discussion and submit an abstract for consideration for inclusion in the Scientific Program. Please read the information on this page carefully and when you are ready to submit your abstract please click the button below which will open the Call for Abstracts portal in a new window.</p>
                                 <p className="font-weight-bold text-center">
-                                    Please download the Abstract Template available here: <a className="btn btn-very-small btn-dark-gray" href="https://industrial-engineering.synergiasummits.com/storage/abstract_templates/1700548262.docx">Download Template</a></p>
+                                    Please download the Abstract Template available here: <a className="btn btn-outline-success btn-circle" href="https://industrial-engineering.synergiasummits.com/storage/abstract_templates/1700548262.docx">Download Template</a></p>
                             </div>
                         </div>
                     </div>
@@ -109,7 +109,7 @@ const Abstract = () => {
                             </div>
                         </div>
 
-                        <div className="row">
+                        <div className="row mb-5">
                             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 generic-btn text-center"><a className="" href="https://industrial-engineering.synergiasummits.com/abstract">Submit Now</a></div>
                         </div>
                     </div>

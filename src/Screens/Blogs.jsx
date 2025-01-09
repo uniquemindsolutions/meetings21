@@ -1,76 +1,88 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import Footer from '../Footer/footer'
+import axios from 'axios'
+import { Link } from 'react-router-dom'
+
 
 
 const Blogs = () => {
-  return (
-    <>
-      <section className='blogs-p'>
-      <Header />
-      <section className="sub-banner-main-section event-banner-section w-100 float-left">
-        <div className="container">
-            <div className="sub-banner-inner-con">
-                <h1>Blogs</h1>
-                <p>Inspiring Talks, Meet the Best Product People Around the World, <br /> and Party Together After the Event!</p>
-                <nav aria-label="breadcrumb">
-                    <ol className="breadcrumb d-inline-block mb-0">
-                        <li className="breadcrumb-item d-inline-block"><a href="/">HOME</a></li>
-                        <li className="breadcrumb-item active d-inline-block" aria-current="page">Blog 1</li>
-                    </ol>
-                </nav>
-            </div>
-        </div>
-      </section>
-      <section className="blog-main-section index3-blog-section w-100 float-left padding-top position-relative">
-        <div className="container">
-            <div className="generic-title2 text-center">
-                {/* <span className="small-text">SKILLS &amp; EXPERIENCE</span> */}
-                <h2 className="mb-0">Blogs</h2>
-            </div>
-            <div className="blogs-inner-con">
-                <div className="blog-box position-relative">
-                    <div className="blog-img position-relative">
-                        <span className="d-inline-block">01.</span>
-                        <figure className="mb-0">
-                        <img src={process.env.PUBLIC_URL + '/images/rear-view-of-audience-listening-speakers-on-the-stage-in-the-conference-hall-or-seminar-meeting.jpg'} alt="blog-img1" />
-                        </figure>
+
+    const apiBlogUrl = process.env.REACT_APP_API_URL;
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const [blogData, setBlogData] = useState([])
+
+    useEffect(() => {
+        getBlogData();
+    }, [])
+
+    const getBlogData = async () => {
+        setLoading(true)
+        try {
+            const res = await axios.get(`${apiBlogUrl}Blogs/`)
+            console.log("apiBlogUrl === ", res)
+            setBlogData(res.data)
+            console.log("blogData === ", blogData)
+        } catch {
+            setError('No data found')
+        } finally {
+            setLoading(false)
+        }
+    }
+
+
+
+    return (
+        <>
+            <section className='blogs-p'>
+                <Header />
+                <section className="sub-banner-main-section event-banner-section w-100 float-left">
+                    <div className="container">
+                        <div className="sub-banner-inner-con">
+                            <h1>Blogs</h1>
+                            <p>Inspiring Talks, Meet the Best Product People Around the World, <br /> and Party Together After the Event!</p>
+                            <nav aria-label="breadcrumb">
+                                <ol className="breadcrumb d-inline-block mb-0">
+                                    <li className="breadcrumb-item d-inline-block"><a href="/">HOME</a></li>
+                                    <li className="breadcrumb-item active d-inline-block" aria-current="page">Blogs</li>
+                                </ol>
+                            </nav>
+                        </div>
                     </div>
-                    <div className="blog-text">
-                    <span className="d-block">Nov 18, 2020</span>
-                        <span className="small-text aos-init aos-animate">21+ Hours of Content</span>
-                        <h6 className="position-relative"><a href="single-blog.html">Listen to the 21 hours of quality presentations by the experts in the field.</a></h6>
-                    </div>
-                </div>
-                <div className="blog-box position-relative">
-                    <div className="blog-img position-relative">
-                        <span className="d-inline-block">02.</span>
-                        <figure className="mb-0">
-                            <img src={process.env.PUBLIC_URL + "images/young-happy-businesswoman-talking-on-microphone-while-attending-education-event-in-conference-hall-.jpg"} alt="blog-img3" />
-                        </figure>
-                    </div>
-                    <div className="blog-text">
-                        <span className="d-block">Nov 18, 2020</span>
-                        <span className="small-text aos-init aos-animate">World Class Speakers:</span>
-                        <h6 className="position-relative"><a href="single-blog.html">Our conference features Top speakers as Plenary and Keynote Speakers.</a></h6>
-                    </div>
-                </div>
-                <div className="blog-box position-relative">
-                    <div className="blog-img position-relative">
-                        <span className="d-inline-block">03.</span>
-                        <figure className="mb-0">
-                        <img src={process.env.PUBLIC_URL + "images/female-office-employee-making-report-at-business-conference.jpg"} alt="blog-img3" />
-                        </figure>
-                    </div>
-                    <div className="blog-text">
-                        <span className="d-block">Nov 25, 2020</span>
-                        <span className="small-text aos-init aos-animate">Live Q&A:</span>
-                        <h6 className="position-relative"><a href="single-blog.html">Get answers and Clarify your doubts directly from the experts.</a></h6>
-                    </div>
-                </div>
-            </div>
-            <div className="mt-8"></div>
-            {/* <div className="blogs-inner-con mt-5">
+                </section>
+                <section className="blog-main-section index3-blog-section w-100 float-left padding-top position-relative">
+                    <div className="container">
+                        <div className="generic-title2 text-center">
+                            <h2 className="mb-0">All Blogs</h2>
+                        </div>
+                        <div className="blogs-inner-con">
+
+                            {loading ? (
+                                <p>Loading...</p>
+                            ) : blogData && Array.isArray(blogData) && blogData.length > 0 ? (
+                                blogData.map((items, index) => (
+                                    <Link to={`/blog-details/${items.id}`} key={index} className="blog-box position-relative">
+                                        <div className="blog-img position-relative">
+                                            <span className="d-inline-block">{index+1}</span>
+                                            <figure className="mb-0">
+                                                <img src={items.blog_image} className='img-fluid' alt="blog-img1" />
+                                            </figure>
+                                        </div>
+                                        <div className="blog-text">
+                                            <span className="d-block">{items.blog_date}</span>
+                                            <span className="small-text aos-init aos-animate">{items.blog_description}</span>
+                                            <h6 className="position-relative">{items.blog_heading}</h6>
+                                        </div>
+                                    </Link>
+                                ))
+                            ) : (
+                                <p>No blogs found.</p>
+                            )}
+                        </div>
+                        <div className=" "></div>
+                        {/* <div className="blogs-inner-con mt-5">
                 <div className="blog-box position-relative">
                     <div className="blog-img position-relative">
                         <span className="d-inline-block">04.</span>
@@ -111,10 +123,10 @@ const Blogs = () => {
                     </div>
                 </div>
             </div> */}
-            
-        </div>
-    </section>
-      {/* <section className="blog-posts blogpage-section w-100 float-left padding-top">
+
+                    </div>
+                </section>
+                {/* <section className="blog-posts blogpage-section w-100 float-left padding-top">
         <div className="container">
             <div className="row wow fadeInUp">
                 <div id="blog" className="col-xl-12">
@@ -284,10 +296,10 @@ const Blogs = () => {
         </div>
       </section> */}
 
-      <Footer />
-      </section>
-    </>
-  )
+                <Footer />
+            </section>
+        </>
+    )
 }
 
 export default Blogs

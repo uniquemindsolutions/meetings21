@@ -8,50 +8,58 @@ const Speakers = () => {
   const closeModal = () => setOpenModalId(null);
   const speakers = [
     {
-      id: 1,
-      name: "Federico Rosei",
-      image: "/images/speakers/pspeaker1.png",
-      details: [
-        "2010 PEO Engineering Medal for Entrepreneurship",
-        "2013 EIC Sir John Kennedy Medal",
-        "2016 IEEE A.G.L. McNaughton Gold Medal",
-      ],
-      position: "INRS, Canada",
+        id: 1,
+        name: "Federico Rosei",
+        talkTitle: "Lorem Ipsum is simply dummy text",
+        Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
+        image: "images/speakers/pspeaker1.png",
+        details: [
+            "2010 PEO Engineering Medal for Entrepreneurship",
+            "2013 EIC Sir John Kennedy Medal",
+            "2016 IEEE A.G.L. McNaughton Gold Medal",
+        ],
+        position: "INRS, Canada",
     },
     {
-      id: 2,
-      name: "Ben Zhong TANG",
-      image: "/images/speakers/pspeaker2.jpg",
-      details: [
-        "2010 PEO Engineering Medal for Entrepreneurship",
-        "2013 EIC Sir John Kennedy Medal",
-        "2016 IEEE A.G.L. McNaughton Gold Medal",
-      ],
-      position: "Ben Zhong TANG",
+        id: 2,
+        name: "Ben Zhong TANG",
+        talkTitle: "Lorem Ipsum is simply dummy text",
+        Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
+        image: "images/speakers/pspeaker2.jpg",
+        details: [
+            "2010 PEO Engineering Medal for Entrepreneurship",
+            "2013 EIC Sir John Kennedy Medal",
+            "2016 IEEE A.G.L. McNaughton Gold Medal",
+        ],
+        position: "Ben Zhong TANG",
     },
     {
-      id: 3,
-      name: "Jose M. Kenny",
-      image: "/images/speakers/pspeaker3.jpg",
-      details: [
-        "2010 PEO Engineering Medal for Entrepreneurship",
-        "2013 EIC Sir John Kennedy Medal",
-        "2016 IEEE A.G.L. McNaughton Gold Medal",
-      ],
-      position: "University of Perugia, Italy",
+        id: 3,
+        name: "Jose M. Kenny",
+        talkTitle: "Lorem Ipsum is simply dummy text",
+        Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
+        image: "images/speakers/pspeaker3.jpg",
+        details: [
+            "2010 PEO Engineering Medal for Entrepreneurship",
+            "2013 EIC Sir John Kennedy Medal",
+            "2016 IEEE A.G.L. McNaughton Gold Medal",
+        ],
+        position: "University of Perugia, Italy",
     },
     {
-      id: 4,
-      name: "Jan DUSZA",
-      image: "/images/speakers/pspeaker4.jpg",
-      details: [
-        "2010 PEO Engineering Medal for Entrepreneurship",
-        "2013 EIC Sir John Kennedy Medal",
-        "2016 IEEE A.G.L. McNaughton Gold Medal",
-      ],
-      position: "Institute of Materials Research of SAS, Slovakia",
+        id: 4,
+        name: "Jan DUSZA",
+        talkTitle: "Lorem Ipsum is simply dummy text",
+        Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
+        image: "images/speakers/pspeaker4.jpg",
+        details: [
+            "2010 PEO Engineering Medal for Entrepreneurship",
+            "2013 EIC Sir John Kennedy Medal",
+            "2016 IEEE A.G.L. McNaughton Gold Medal",
+        ],
+        position: "Institute of Materials Research of SAS, Slovakia",
     },
-  ];
+];
 
 
   return (
@@ -80,7 +88,7 @@ const Speakers = () => {
               </p>
             </div>
             <div className='row'>
-              <div className="col-lg-12 mb-4"><h2>Plenary Speakers</h2></div>
+              <div className="col-lg-12 mb-2"><h2>Plenary Speakers</h2></div>
               {speakers.map((speaker) => (
                 <div
                   key={speaker.id}
@@ -97,12 +105,10 @@ const Speakers = () => {
                         <div className="display-table height-100 width-100">
                           <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
                             <div className="min-height-176px">
-                              <ul className="text-white font-size-15px display-inline-block no-margin ">
+                              <ul className="text-white font-size-15px display-inline-block no-margin text-left">
                                 {speaker.details.map((detail, index) => (
                                   <li key={index}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                                      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
-                                    </svg> {detail}</li>
+                                     {detail}</li>
                                 )
                                 )}
                               </ul>
@@ -141,7 +147,7 @@ const Speakers = () => {
             
 
             <div className='row'>
-              <div className="col-lg-12 mb-4"><h2>Keynote Speakers</h2></div>
+              <div className="col-lg-12 mb-2"><h2>Keynote Speakers</h2></div>
               {speakers.map((speaker) => (
                 <div
                   key={speaker.id}
@@ -158,12 +164,10 @@ const Speakers = () => {
                         <div className="display-table height-100 width-100">
                           <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
                             <div className="min-height-176px">
-                              <ul className="text-white font-size-15px display-inline-block no-margin ">
+                              <ul className="text-white font-size-15px display-inline-block no-margin text-left">
                                 {speaker.details.map((detail, index) => (
                                   <li key={index}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                                      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
-                                    </svg> {detail}</li>
+                                    {detail}</li>
                                 )
                                 )}
                               </ul>
@@ -201,7 +205,7 @@ const Speakers = () => {
             </div>
 
             <div className='row'>
-              <div className="col-lg-12 mb-4"><h2>Invited Speakers</h2></div>
+              <div className="col-lg-12 mb-2"><h2>Invited Speakers</h2></div>
               {speakers.map((speaker) => (
                 <div
                   key={speaker.id}
@@ -218,12 +222,10 @@ const Speakers = () => {
                         <div className="display-table height-100 width-100">
                           <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
                             <div className="min-height-176px">
-                              <ul className="text-white font-size-15px display-inline-block no-margin ">
+                              <ul className="text-white font-size-15px display-inline-block no-margin text-left">
                                 {speaker.details.map((detail, index) => (
                                   <li key={index}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                                      <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
-                                    </svg> {detail}</li>
+                                     {detail}</li>
                                 )
                                 )}
                               </ul>
@@ -262,27 +264,33 @@ const Speakers = () => {
           </div>
           {/* Modal */}
           {speakers.map(
-            (speaker) =>
-              openModalId === speaker.id && (
-                <div key={speaker.id} className="modal-overlay">
-                  <div className="modal-content">
-                    <h5 className="modal-title">{speaker.name}</h5>
-                    <p>{speaker.position}</p>
-                    <ul>
-                      {speaker.details.map((detail, index) => (
-                        <li key={index}>{detail}</li>
-                      ))}
-                    </ul>
-                    <button
-                      className="custom-button"
-                      onClick={closeModal}
-                    >
-                      Close
-                    </button>
-                  </div>
-                </div>
-              )
-          )}
+                        (speaker) =>
+                            openModalId === speaker.id && (
+                                <div key={speaker.id} className="modal-overlay  text-left">
+                                    <div className="modal-content text-left">
+                                        {/* <h5 className="modal-title">{speaker.name}</h5> */}
+                                        <h5 className='mb-4'>Talk Title: <span style={{ fontWeight: 400 }}>{speaker.talkTitle}</span></h5>
+                                        <h5>Biography: </h5>
+                                        <p>{speaker.Biography}</p>
+                                        <p>{speaker.Biography}</p>
+
+                                        {/* <p>{speaker.position}</p> */}
+                                        {/* <ul>
+                                            {speaker.details.map((detail, index) => (
+                                                <li key={index}>{detail}</li>
+                                            ))}
+                                        </ul> */}
+                                        <div className="text-center mx-auto">
+                                            <button
+                                                className="custom-button mt-5"
+                                                onClick={closeModal} >
+                                                Close
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                    )}
 
         </section>
 

@@ -159,41 +159,41 @@
   margin-top: 1.5rem;
 }
 .journey-text-con p {
-  font-size: 17px;
+  font-size: 16px;
   line-height: 25px;
-  color: #72678f;
+  color: #212529;
   margin-bottom: 18px;
   margin-left: 3px;
 }
 
-.schedule-table {
+.event-table .schedule-table {
   width: 100%;
   border-collapse: collapse;
   text-align: left;
 }
 
-.schedule-table th, 
+.event-table .schedule-table th, .event-table
 .schedule-table td {
   border: 1px solid #494972;
   padding: 8px;
 }
 
-.schedule-table th {
+.event-table .schedule-table th {
   background-color: #ec398b;
   font-weight: bold;
 }
-.table thead th {
+.event-table .table thead th {
   vertical-align: bottom;
   border-bottom: 0px solid #dee2e6;
 }
-.table td, .table th {
+.event-table .table td, .event-table .table th {
   padding: .75rem;
   vertical-align: top;
   border-top: 0px solid #dee2e6;
 }
 
 
-.table td, .table th {
+.event-table .table td, .event-table .table th {
   padding: .75rem;
   vertical-align: top;
   border-top: 2px solid #322a81!important;

@@ -1,12 +1,12 @@
 import React from 'react';
-import Header from '../Header/Header';
 import Footer from '../Footer/footer';
 import { Link } from 'react-router-dom';
+import EventHeader from '../Header/EventHeader';
 
-const Contacts = () => {
+const ContactsEvent = () => {
     return (
         <div className='contact-p'>
-            <Header />
+            <EventHeader />
             <section className="sub-banner-main-section contact-banner w-100 float-left">
                 <div className="container">
                     <div className="sub-banner-inner-con">
@@ -99,4 +99,4 @@ const Contacts = () => {
     )
 }
 
-export default Contacts
+export default ContactsEvent

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import SubscribeSection from './Home/subscribe-section';
+// import SubscribeSection from './Home/subscribe-section';
+
 // import AOS from "aos";
 import "aos/dist/aos.css";
 // import Footer from '../Footer/footer';
@@ -13,6 +14,9 @@ import 'swiper/swiper.min.css';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination } from 'swiper';
 import Footer from '../Footer/footer';
+import SubscribeSection from './Home/subscribe-section';
+import { Link } from 'react-router-dom';
+import Services from './Home/services';
 // import "./ModalPopup.css"; 
 
 window.$ = window.jQuery = $; // Expose jQuery globally
@@ -26,7 +30,7 @@ const Events = () => {
             name: "Federico Rosei",
             talkTitle: "Lorem Ipsum is simply dummy text",
             Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-            image: "/images/speakers/pspeaker1.png",
+            image: "images/speakers/pspeaker1.png",
             details: [
                 "2010 PEO Engineering Medal for Entrepreneurship",
                 "2013 EIC Sir John Kennedy Medal",
@@ -37,7 +41,9 @@ const Events = () => {
         {
             id: 2,
             name: "Ben Zhong TANG",
-            image: "/images/speakers/pspeaker2.jpg",
+            talkTitle: "Lorem Ipsum is simply dummy text",
+            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
+            image: "images/speakers/pspeaker2.jpg",
             details: [
                 "2010 PEO Engineering Medal for Entrepreneurship",
                 "2013 EIC Sir John Kennedy Medal",
@@ -48,7 +54,9 @@ const Events = () => {
         {
             id: 3,
             name: "Jose M. Kenny",
-            image: "/images/speakers/pspeaker3.jpg",
+            talkTitle: "Lorem Ipsum is simply dummy text",
+            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
+            image: "images/speakers/pspeaker3.jpg",
             details: [
                 "2010 PEO Engineering Medal for Entrepreneurship",
                 "2013 EIC Sir John Kennedy Medal",
@@ -59,7 +67,9 @@ const Events = () => {
         {
             id: 4,
             name: "Jan DUSZA",
-            image: "/images/speakers/pspeaker4.jpg",
+            talkTitle: "Lorem Ipsum is simply dummy text",
+            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
+            image: "images/speakers/pspeaker4.jpg",
             details: [
                 "2010 PEO Engineering Medal for Entrepreneurship",
                 "2013 EIC Sir John Kennedy Medal",
@@ -79,7 +89,7 @@ const Events = () => {
             loop: true,
             margin: 30,
             nav: true,
-            navText: ["<i className='fas fa-arrow-left'></i>", "<i className='fas fa-arrow-right'></i>"],
+            // navText: ["<i className='fas fa-arrow-left'></i>", "<i className='fas fa-arrow-right'></i>"],
             responsive: {
                 0: {
                     items: 1
@@ -97,7 +107,7 @@ const Events = () => {
             loop: true,
             margin: 20, // Corrected the margin value for consistency
             nav: true,
-            navText: ["<i className='fas fa-arrow-left'></i>", "<i className='fas fa-arrow-right'></i>"],
+            // navText: ["<i className='fas fa-arrow-left'></i>", "<i className='fas fa-arrow-right'></i>"],
             responsive: {
                 0: {
                     items: 1
@@ -166,17 +176,17 @@ const Events = () => {
                                     <div className="index3-banner-inner-con">
                                         <div className="index3-banner-img-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/index3-banner-img3.jpg"} alt="index3-banner-img1" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-banner-img3.jpg"} alt="index3-banner-img1" />
                                             </figure>
                                         </div>
                                         <div className="index3-banner-text-con">
                                             <span className="d-block position-relative">October 21-23, 2025 <span className="position-relative" style={{ marginLeft: '15%' }}> Hybrid Event</span></span>
-                                            <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'>International Congress of</small><br />Materials Science and Engineering</h1>
+                                            <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'>International Congress of</small><br />Civil, Architectural and Environmental Engineering</h1>
                                             <ul className="list-unstyled">
                                                 <li><i className="fas fa-map-marker-alt"></i> Dubai, UAE</li>
                                             </ul>
                                             <div className="generic-btn">
-                                                <a href="contact.html">REGISTER NOW <i className="fas fa-arrow-right"></i></a>
+                                                <Link to="/registration_form">REGISTER NOW<i className="fas fa-arrow-right"></i></Link>
                                             </div>
                                         </div>
                                     </div>
@@ -185,17 +195,17 @@ const Events = () => {
                                     <div className="index3-banner-inner-con">
                                         <div className="index3-banner-img-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/events-banner1.jpg"} alt="index3-banner-img2" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/events-banner1.jpg"} alt="index3-banner-img2" />
                                             </figure>
                                         </div>
                                         <div className="index3-banner-text-con">
                                             <span className="d-block position-relative">October 21-23, 2025 <span className="position-relative" style={{ marginLeft: '15%' }}> Hybrid Event</span></span>
-                                            <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'>International Congress of</small><br />Materials Science and Engineering</h1>
+                                            <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'> </small><br />MSEDUBAI2026</h1>
                                             <ul className="list-unstyled">
                                                 <li><i className="fas fa-map-marker-alt"></i> Dubai, UAE</li>
                                             </ul>
                                             <div className="generic-btn">
-                                                <a href="contact.html">REGISTER NOW <i className="fas fa-arrow-right"></i></a>
+                                                <Link to="/registration_form">REGISTER NOW <i className="fas fa-arrow-right"></i></Link>
                                             </div>
                                         </div>
                                     </div>
@@ -204,7 +214,7 @@ const Events = () => {
                                     <div className="index3-banner-inner-con">
                                         <div className="index3-banner-img-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/index3-banner-img3.jpg"} alt="index3-banner-img1" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-banner-img3.jpg"} alt="index3-banner-img1" />
                                             </figure>
                                         </div>
                                         <div className="index3-banner-text-con">
@@ -214,7 +224,7 @@ const Events = () => {
                                                 <li><i className="fas fa-map-marker-alt"></i> Dubai, UAE</li>
                                             </ul>
                                             <div className="generic-btn">
-                                                <a href="contact.html">REGISTER NOW <i className="fas fa-arrow-right"></i></a>
+                                                <Link to="/registration_form">REGISTER NOW <i className="fas fa-arrow-right"></i></Link>
                                             </div>
                                         </div>
                                     </div>
@@ -264,13 +274,13 @@ const Events = () => {
                                         modules={[Navigation, Pagination]}
                                     >
                                         <SwiperSlide>
-                                            <img src={process.env.PUBLIC_URL + "images/event-sm-slider.jpg"} className='img-fluid w-100' alt="" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/event-sm-slider.jpg"} className='img-fluid w-100' alt="" />
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <img src={process.env.PUBLIC_URL + "images/event-sm-slider.jpg"} className='img-fluid w-100' alt="" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/event-sm-slider.jpg"} className='img-fluid w-100' alt="" />
                                         </SwiperSlide>
                                         <SwiperSlide>
-                                            <img src={process.env.PUBLIC_URL + "images/event-sm-slider.jpg"} className='img-fluid w-100' alt="" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/event-sm-slider.jpg"} className='img-fluid w-100' alt="" />
                                         </SwiperSlide>
                                     </Swiper>
 
@@ -295,7 +305,7 @@ const Events = () => {
                         <div className="digital-conference-section">
                             <div className="digital-conference-img-con">
                                 <figure className="mb-0 position-relative">
-                                    <img src={process.env.PUBLIC_URL + "images/digital-conference-img2.jpg"} alt="digital-conference-img" />
+                                    <img src={process.env.PUBLIC_URL + '/' + "images/digital-conference-img2.jpg"} alt="digital-conference-img" />
                                 </figure>
                             </div>
                             <div className="digital-counter-con">
@@ -344,59 +354,8 @@ const Events = () => {
                         </div>
                     </div>
                 </section>
-                <section className="index3-event-info-zone w-100 float-left padding-bottom">
-                    <div className="container">
-                        <div className="generic-title2 text-center">
-                            <span className="small-text">WHY MEETINGS21?</span>
-                            <h2>Our Services and Highlights</h2>
-                        </div>
-                        <div className="index3-event-info-inner-con">
-                            <div className="index3-event-zone">
-                                <figure>
-                                    <img src="/images/event-zone-img1.png" alt="event-zone-img1" />
-                                </figure>
-                                <h3>21+ Hours of Content</h3>
-                                <p>Listen to the 21 hours of quality presentations by the experts in the field.</p>
-                            </div>
-                            <div className="index3-event-zone">
-                                <figure>
-                                    <img src="/images/event-zone-img2.png" alt="event-zone-img2" />
-                                </figure>
-                                <h3>World Class Speakers:</h3>
-                                <p>Our conference features Top speakers as Plenary and Keynote Speakers.</p>
-                            </div>
-                            <div className="index3-event-zone">
-                                <figure>
-                                    <img src="/images/event-zone-img3.png" alt="event-zone-img3" />
-                                </figure>
-                                <h3>Live Q&A:</h3>
-                                <p>Get answers and Clarify your doubts directly from the experts.</p>
-                            </div>
-                        </div>
-                        <div className="index3-event-info-inner-con mt-5">
-                            <div className="index3-event-zone">
-                                <figure>
-                                    <img src="/images/event-zone-img1.png" alt="event-zone-img1" />
-                                </figure>
-                                <h3>Conference & Awards:</h3>
-                                <p>We recognize and award the top presentations in the conference.</p>
-                            </div>
-                            <div className="index3-event-zone">
-                                <figure>
-                                    <img src="/images/event-zone-img2.png" alt="event-zone-img2" />
-                                </figure>
-                                <h3>24/7 support:</h3>
-                                <p>We are available round the clock to support with any concern.</p>
-                            </div>
-                            <div className="index3-event-zone">
-                                <figure>
-                                    <img src="/images/event-zone-img3.png" alt="event-zone-img3" />
-                                </figure>
-                                <h3>Quick Refunds:</h3>
-                                <p>All refunds will be processed within a fixed timeframe for hassle free refunds.</p>
-                            </div>
-                        </div>
-                    </div>
+                <section className="index3-event-info-zone w-100 float-left ">
+
                 </section>
                 {/* <section className='index3-event-info-zone padding-top padding-bottom'>
         <div className='container'>
@@ -527,10 +486,11 @@ const Events = () => {
             </div>
         </div>
       </section> */}
-                <section className='index3-event-info-zone padding-top padding-bottom'>
+                <section className='index3-event-info-zone bg-white py-5'>
                     <div className='container'>
-                        <div className="generic-title2 text-center">
-                            <span className="small-text">The Speakers</span>
+                        <div className="clearfix"></div>
+                        <div className="generic-title2 text-center ">                           
+                            <span className="small-text padding-top">The Speakers</span>
                             <h2>Meet Our Stellar Speakers</h2>
                             <p>
                                 Our Plenary and Keynote Speakers possess specialized knowledge and insights into specific fields. They can provide valuable information and trends, making them of great benefit to our attendees.
@@ -554,12 +514,10 @@ const Events = () => {
                                                 <div className="display-table height-100 width-100">
                                                     <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
                                                         <div className="min-height-176px">
-                                                            <ul className="text-white font-size-15px display-inline-block no-margin ">
+                                                            <ul className="text-white font-size-15px display-inline-block no-margin text-left">
                                                                 {speaker.details.map((detail, index) => (
                                                                     <li key={index}>
-                                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-arrow-right-short" viewBox="0 0 16 16">
-                                                                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8" />
-                                                                        </svg> {detail}</li>
+                                                                        {detail}</li>
                                                                 )
                                                                 )}
                                                             </ul>
@@ -627,14 +585,17 @@ const Events = () => {
                     )}
 
                 </section>
-
+                <section className='pt-5'>
+                    <div className='clearfix'></div>
+                    <Services />
+                </section>
                 <section className="index3-event-section w-100 float-left padding-top padding-bottom">
                     <div className="container">
                         <div className="generic-title">
                             <span className="small-text">SCHEDULE OF EVENT</span>
                             <h2 className="mb-0">Conference Schedule</h2>
                         </div>
-                        <div className="index3-event-tabs-con">
+                        <div className="index3-event-tabs-con event-table">
                             <ul className="nav nav-tabs" id="myTab" role="tablist">
                                 <li className="nav-item" role="presentation">
                                     <button className="nav-link active" id="home-tab" data-toggle="tab" data-target="#home"
@@ -842,7 +803,7 @@ const Events = () => {
                                     <li className="position-relative">WiFi in meeting rooms</li>
                                 </ul>
                                 <div className="generic-btn">
-                                    <a href="shop.html">BUY TICKET <i className="fas fa-arrow-right"></i></a>
+                                    <Link to="/online-registration">BUY TICKET <i className="fas fa-arrow-right"></i></Link>
                                 </div>
                             </div>
                             <div className="ticket-details gold-ticket-details">
@@ -858,7 +819,7 @@ const Events = () => {
                                     <li className="position-relative">WiFi in meeting rooms</li>
                                 </ul>
                                 <div className="generic-btn">
-                                    <a href="shop.html">BUY TICKET <i className="fas fa-arrow-right"></i></a>
+                                    <Link to="/online-registration">BUY TICKET <i className="fas fa-arrow-right"></i></Link>
                                 </div>
                                 <div className="recomended-box">
                                     RECOMMENDED
@@ -877,13 +838,13 @@ const Events = () => {
                                     <li className="position-relative">WiFi in meeting rooms</li>
                                 </ul>
                                 <div className="generic-btn">
-                                    <a href="shop.html">BUY TICKET <i className="fas fa-arrow-right"></i></a>
+                                    <Link to="/online-registration">BUY TICKET <i className="fas fa-arrow-right"></i></Link>
                                 </div>
                             </div>
                         </div>
                         <div className="index3-plan-btn text-center">
                             <div className="generic-btn">
-                                <a href="pricing.html">GET VIP PASS <i className="fas fa-arrow-right"></i></a>
+                                <Link to="/registration_form">REGISTER NOW <i className="fas fa-arrow-right"></i></Link>
                             </div>
                         </div>
                     </div>
@@ -897,12 +858,12 @@ const Events = () => {
                                 <p>Hear Highlights From Our Sponsors, or Get a Lite or Core Subscription
                                     to Watch the Full Main Stage Event on Demand.</p>
                                 <div className="generic-btn">
-                                    <a href="contact.html">REGISTER NOW <i className="fas fa-arrow-right"></i></a>
+                                    <Link to="/registration_form">REGISTER NOW <i className="fas fa-arrow-right"></i></Link>
                                 </div>
                             </div>
                             <div className="index3-registration-right-con">
                                 <figure className="mb-0">
-                                    <img src={process.env.PUBLIC_URL + "/images/index3-registration-right-img-2.png"} alt="index3-registration-right-img" />
+                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-registration-right-img-2.png"} alt="index3-registration-right-img" />
                                 </figure>
                             </div>
                         </div>
@@ -917,19 +878,19 @@ const Events = () => {
                         <div className="index3-top-experts-inner-section">
                             <div className="index3-experts-left-con">
                                 <div className="index3-expert index3-expert-con1 container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-1.jpg"} alt="index3-expert-img1" />
+                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-1.jpg"} alt="index3-expert-img1" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-6.jpg"} alt="index3-expert-img6" />
+                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-6.jpg"} alt="index3-expert-img6" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-7.jpg"} alt="index3-expert-img7" />
+                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-7.jpg"} alt="index3-expert-img7" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
@@ -937,38 +898,38 @@ const Events = () => {
                             </div>
                             <div className="index3-experts-right-con">
                                 <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-2.jpg"} alt="index3-expert-img2" />
+                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-2.jpg"} alt="index3-expert-img2" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-3.jpg"} alt="index3-expert-img3" />
+                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-3.jpg"} alt="index3-expert-img3" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-4.jpg"} alt="index3-expert-img4" />
+                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-4.jpg"} alt="index3-expert-img4" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + "images/index3-expert-img-5.jpg"} alt="index3-expert-img5" />
+                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-5.jpg"} alt="index3-expert-img5" />
                                     <div className="search-icon-con">
                                         <i className="fas fa-search"></i>
                                     </div>
                                 </div>
                                 <div className="index3-expert-right-bottom-con">
                                     <div className="index3-expert container__img-holder">
-                                        <img src={process.env.PUBLIC_URL + "images/index3-expert-img-8.jpg"} alt="index3-expert-img8" />
+                                        <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-8.jpg"} alt="index3-expert-img8" />
                                         <div className="search-icon-con">
                                             <i className="fas fa-search"></i>
                                         </div>
                                     </div>
                                     <div className="index3-expert container__img-holder">
-                                        <img src={process.env.PUBLIC_URL + "images/index3-expert-img-9.jpg"} alt="index3-expert-img9" />
+                                        <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-9.jpg"} alt="index3-expert-img9" />
                                         <div className="search-icon-con">
                                             <i className="fas fa-search"></i>
                                         </div>
@@ -978,7 +939,7 @@ const Events = () => {
                         </div>
                     </div>
                     <div className="img-popup">
-                        <img src={process.env.PUBLIC_URL + "images/index3-expert-img9.jpg"} alt="Popup Image" />
+                        <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img9.jpg"} alt="Popup Image" />
                         <div className="close-btn">
                             <div className="bar"></div>
                             <div className="bar"></div>
@@ -996,14 +957,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-1.png"} alt="index3-client-img1" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-1.png"} alt="index3-client-img1" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1011,14 +972,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-2.png"} alt="index3-client-img2" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-2.png"} alt="index3-client-img2" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1026,14 +987,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-3.png"} alt="index3-client-img3" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-3.png"} alt="index3-client-img3" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1041,14 +1002,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-1.png"} alt="index3-client-img1" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-1.png"} alt="index3-client-img1" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1056,14 +1017,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-2.png"} alt="index3-client-img2" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-2.png"} alt="index3-client-img2" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1071,14 +1032,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img-3.png"} alt="index3-client-img3" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-3.png"} alt="index3-client-img3" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1086,14 +1047,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img1.png"} alt="index3-client-img1" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img1.png"} alt="index3-client-img1" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1101,14 +1062,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img2.png"} alt="index3-client-img2" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img2.png"} alt="index3-client-img2" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1116,14 +1077,14 @@ const Events = () => {
                                 <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + "images/index3-client-img3.png"} alt="index3-client-img3" />
+                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img3.png"} alt="index3-client-img3" />
                                         </figure>
                                         <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
                                         <h6>Peter Johns</h6>
                                         <small>CEO- Company</small>
                                         <div className="index3-quote-con">
                                             <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
+                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
                                             </figure>
                                         </div>
                                     </div>
@@ -1143,7 +1104,7 @@ const Events = () => {
                                 <div className="blog-img position-relative">
                                     <span className="d-inline-block">Illustration, Art</span>
                                     <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + "images/blog-img1-1.jpg"} alt="blog-img1" />
+                                        <img src={process.env.PUBLIC_URL + '/' + "images/blog-img1-1.jpg"} alt="blog-img1" />
                                     </figure>
                                 </div>
                                 <div className="blog-text">
@@ -1155,7 +1116,7 @@ const Events = () => {
                                 <div className="blog-img position-relative">
                                     <span className="d-inline-block">Vintage, Design</span>
                                     <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + "images/blog-img-2.jpg"} alt="blog-img3" />
+                                        <img src={process.env.PUBLIC_URL + '/' + "images/blog-img-2.jpg"} alt="blog-img3" />
                                     </figure>
                                 </div>
                                 <div className="blog-text">
@@ -1167,7 +1128,7 @@ const Events = () => {
                                 <div className="blog-img position-relative">
                                     <span className="d-inline-block">Questions, Answers</span>
                                     <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + "images/blog-img-3.jpg"} alt="blog-img3" />
+                                        <img src={process.env.PUBLIC_URL + '/' + "images/blog-img-3.jpg"} alt="blog-img3" />
                                     </figure>
                                 </div>
                                 <div className="blog-text">
@@ -1189,27 +1150,27 @@ const Events = () => {
                             <ul className="list-unstyled mb-0">
                                 <li>
                                     <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + "images/sponsers-logo1.png"} alt="sponsers-logo1" />
+                                        <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo1.png"} alt="sponsers-logo1" />
                                     </figure>
                                 </li>
                                 <li>
                                     <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + "images/sponsers-logo2.png"} alt="sponsers-logo2" />
+                                        <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo2.png"} alt="sponsers-logo2" />
                                     </figure>
                                 </li>
                                 <li>
                                     <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + "images/sponsers-logo3.png"} alt="sponsers-logo3" />
+                                        <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo3.png"} alt="sponsers-logo3" />
                                     </figure>
                                 </li>
                                 <li>
                                     <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + "images/sponsers-logo4.png"} alt="sponsers-logo4" />
+                                        <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo4.png"} alt="sponsers-logo4" />
                                     </figure>
                                 </li>
                                 <li>
                                     <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + "images/sponsers-logo5.png"} alt="sponsers-logo5" />
+                                        <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo5.png"} alt="sponsers-logo5" />
                                     </figure>
                                 </li>
                             </ul>
