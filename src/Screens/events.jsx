@@ -29,6 +29,8 @@ const Events = () => {
     const bannersApi = process.env.REACT_APP_API_URL;
     const aboutBannersApi = process.env.REACT_APP_API_URL;
     const expertsGalleryApi = process.env.REACT_APP_API_URL;
+    const recentNewsApi = process.env.REACT_APP_API_URL;
+    const ourPartnersApi = process.env.REACT_APP_API_URL;
 
     const [error, setError] = useState('')
     const [loading, setLoading] = useState('')
@@ -37,6 +39,8 @@ const Events = () => {
     const [bannersData, setBannersData] = useState([])
     const [aboutBanner, setAboutBanner] = useState([])
     const [expertsGallery, setExpertsGallery] = useState([])
+    const [recentNews, setRecentNews] = useState([])
+    const [ourPartners, setOurPartners] = useState([])
     const { eventName } = useParams();
     const location = useLocation();
 
@@ -47,18 +51,22 @@ const Events = () => {
     const fetchingApis = async () => {
         try {
             const currentEvents = location.pathname.split('/');
-            const [testimonialRes, bannersRes, aboutBannerRes, expertsGalleryRes] = await Promise.all([
+            const [testimonialRes, bannersRes, aboutBannerRes, expertsGalleryRes, recentNewsRes, ourPartnersRes] = await Promise.all([
                 axios.get(testimonialApi + currentEvents[1] + '/event/testimonials/'),
                 axios.get(bannersApi + currentEvents[1] + '/event/banner/'),
                 axios.get(aboutBannersApi + currentEvents[1] + '/event/about/'),
-                axios.get(expertsGalleryApi + currentEvents[1] + '/event/experts/')
+                axios.get(expertsGalleryApi + currentEvents[1] + '/event/experts/'),
+                axios.get(recentNewsApi + currentEvents[1] + '/event/news/'),
+                axios.get(ourPartnersApi + currentEvents[1] + '/event/partners/'),
             ])
 
             setTestiData(testimonialRes.data);
             setBannersData(bannersRes.data);
             setAboutBanner(aboutBannerRes.data)
             setExpertsGallery(expertsGalleryRes.data)
-            console.log("testimonialRes data", testimonialRes);
+            setRecentNews(recentNewsRes.data)
+            setOurPartners(ourPartnersRes.data)
+            console.log("ourPartnersRes data ===", ourPartnersRes);
         } catch {
             setError('Error: no data found')
         }
@@ -1221,7 +1229,23 @@ const Events = () => {
                             <h2 className="mb-0">Recent News Articles</h2>
                         </div>
                         <div className="blogs-inner-con">
-                            <div className="blog-box position-relative">
+                            {
+                                recentNews.map((news)=>(
+                                    <div className="blog-box position-relative">
+                                <div className="blog-img position-relative">
+                                    <span className="d-inline-block">{news.news_about}</span>
+                                    <figure className="mb-0">
+                                        <img src={news.news_image} className='img-fluid' alt="blog-img1" />
+                                    </figure>
+                                </div>
+                                <div className="blog-text">
+                                    <span className="d-block">{news.news_date}</span>
+                                    <h6 className="position-relative"><a href="single-blog.html">{news.news_description}</a></h6>
+                                </div>
+                            </div>
+                                ))
+                            }
+                            {/* <div className="blog-box position-relative">
                                 <div className="blog-img position-relative">
                                     <span className="d-inline-block">Illustration, Art</span>
                                     <figure className="mb-0">
@@ -1256,7 +1280,7 @@ const Events = () => {
                                     <span className="d-block">Nov 25, 2020</span>
                                     <h6 className="position-relative"><a href="single-blog.html">Sit amet, consecteturs elit, sed.</a></h6>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </section>

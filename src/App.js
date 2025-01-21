@@ -43,13 +43,13 @@ function App() {
         <Route path="/upcoming-meetings" element={<Meetings />} />
         <Route path="/completed-meetings" element={<CompletedEvents />} />
         <Route path="/policies" element={<Policies />} />
-        <Route path="/policies-event" element={<PoliciesEvents />} />
         <Route path="/code-of-conduct" element={<CodeOfConduct />} />
         <Route path="/contact" element={<Contacts />} />
         <Route path="/:name/:id/events" element={<Events />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog-details/:id" element={<BlogDetails />} />
         <Route path="/:name/:id/contact-us" element={<ContactsEvent />} />
+        <Route path="/:name/:id/policies-event" element={<PoliciesEvents />} />
         <Route path="/:name/:id/committee" element={<Committee />} />
         <Route path="/:name/:id/topics" element={<Topics />} />
         <Route path="/:name/:id/call-for-Abstracts" element={<Abstract />} />
