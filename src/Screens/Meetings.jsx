@@ -1,10 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import SubscribeSection from './Home/subscribe-section'
 import Footer from '../Footer/footer'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+
 
 const Meetings = () => {
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // const gotoEvent = () => {
+  //   debugger
+  //   navigate("/events/Material_science/2")
+  // }
+
+  const dynamicEventUrl = process.env.REACT_APP_API_URL + 'api/';
+
+
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [currentEventName, setCurrentEventName] = useState('');
+  // const [currentEventId, setCurrentEventId] = useState('');
+
+
+  console.log("currentEventName === ", currentEventName)
+
+  useEffect(() => {
+    dynamicEvents()
+  }, [])
+
+  const dynamicEvents = async () => {
+    try {
+      const res = await axios.get(dynamicEventUrl + 'EventMeetings/')
+      setCurrentEventName(res.data);
+      console.log('dynamicEventUrl ===', res.data)
+    } catch {
+      setError('Error loaded')
+    }
+  }
+
   return (
     <>
       <Header />
@@ -29,6 +63,74 @@ const Meetings = () => {
           <div className='col-lg-12 text-center mt-5 mb-5'>
             <h2>October, 2025</h2>
           </div>
+        </div>
+
+        <div className="row">
+          {/* {currentEventName.length > 0 && currentEventName.map(() => {
+            <div className="col-md-5 offset-md-1">
+              <div Link to={`/events/${currentEventName}`} className="event-card">
+                <div className='event-card-img'>
+                  <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
+                </div>
+                <div className='event-card-content'>
+                  <h5 className="event-card-title">
+                    International Congress of Materials Science and Engineering
+                  </h5>
+                  <p className='mb-0 mt-4'>
+                    <small><i className="fa fa-calendar text-secondary"></i> October 21-08, 2025</small>   </p>
+                  <p className='mb-0'>
+                    <small><i className="fa fa-map-marker text-secondary"></i> Dubai, UAE </small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          })} */}
+
+
+          {loading ? (
+            <p>Loading...</p>
+          ) : currentEventName && Array.isArray(currentEventName) && currentEventName.length > 0 ? (
+            currentEventName.map((items, index) => (
+              <div key={index} className="col-md-5 offset-md-1">
+                <Link to={`/${items.domain_name}/${items.domain_id}/events`} className="event-card">
+                  <div className='event-card-img'>
+                    <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
+                  </div>
+                  <div className='event-card-content'>
+                    <h5 className="event-card-title">
+                      {items.domain_name}
+                    </h5>
+                    <p className='mb-0 mt-4'>
+                      <small><i className="fa fa-calendar text-secondary"></i> {items.meettings_date}</small>   </p>
+                    <p className='mb-0'>
+                      <small><i className="fa fa-map-marker text-secondary"></i> {items.meetingslocation} </small>
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p>Not found Events.</p>
+          )}
+
+
+          {/* <div className="col-md-5  offset-md-1">
+            <Link to="/events" target='_blank' className="event-card">
+              <div className='event-card-img'>
+                <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
+              </div>
+              <div className='event-card-content'>
+                <h5 className="event-card-title">
+                  International Congress of Environmental Science and Technology
+                </h5>
+                <p className='mb-0 mt-4'>
+                  <small><i className="fa fa-calendar text-secondary"></i> October 21-12, 2025</small>   </p>
+                <p className='mb-0'>
+                  <small><i className="fa fa-map-marker text-secondary"></i> Dubai, UAE </small>
+                </p>
+              </div>
+            </Link>
+          </div> */}
         </div>
 
 
@@ -81,44 +183,8 @@ const Meetings = () => {
         </div> */}
 
 
-        <div className="row">
-          <div className="col-md-5 offset-md-1">
-            <Link to="/events" target='_blank' className="event-card">
-              <div className='event-card-img'>
-                <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
-              </div>
-              <div className='event-card-content'>
-                <h5 className="event-card-title">
-                International Congress of Materials Science and Engineering
-                </h5>
-                <p className='mb-0 mt-4'>
-                  <small><i className="fa fa-calendar text-secondary"></i> October 21-08, 2025</small>   </p>
-                <p className='mb-0'>
-                  <small><i className="fa fa-map-marker text-secondary"></i> Dubai, UAE </small>
-                </p>
-              </div>
-            </Link>
-          </div>
-          
-          <div className="col-md-5  offset-md-1">
-            <Link to="/events" target='_blank' className="event-card">
-              <div className='event-card-img'>
-              <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
-              </div>
-              <div className='event-card-content'>
-                <h5 className="event-card-title">
-                  International Congress of Environmental Science and Technology
-                </h5>
-                <p className='mb-0 mt-4'>
-                  <small><i className="fa fa-calendar text-secondary"></i> October 21-12, 2025</small>   </p>
-                <p className='mb-0'>
-                  <small><i className="fa fa-map-marker text-secondary"></i> Dubai, UAE </small>
-                </p>
-              </div>
-            </Link>
-          </div>
-        </div>
-        
+
+
         {/* <div className='row'>
         <div className="col-lg-6">
             <a href="/events" target="_blank" className="url-box">
@@ -193,7 +259,7 @@ const Meetings = () => {
           </div>
         </section>
       </div>
-       
+
       <Footer />
     </>
   )

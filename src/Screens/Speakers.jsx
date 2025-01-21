@@ -1,9 +1,31 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../Footer/footer'
 import EventHeader from '../Header/EventHeader'
+import axios from 'axios';
 const Speakers = () => {
 
+  const spekersUrl = process.env.REACT_APP_API_URL;
+
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [speakerData, setSpekerData] = useState([])
   const [openModalId, setOpenModalId] = useState(null);
+
+  useEffect(()=>{
+    getSpekers();
+  }, [])
+
+  const getSpekers = async ()=>{
+    setLoading(true);
+    try {
+      const res = await axios.get(`${spekersUrl}speakers/`);
+      setSpekerData(res.data)
+      console.log("speakers data ===", res)
+    }catch {
+      setError('No data found')
+    }
+  }
+
   const openModal = (id) => setOpenModalId(id);
   const closeModal = () => setOpenModalId(null);
   const speakers = [

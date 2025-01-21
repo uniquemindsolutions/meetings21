@@ -18,11 +18,53 @@ import SubscribeSection from './Home/subscribe-section';
 import { Link } from 'react-router-dom';
 import Services from './Home/services';
 // import "./ModalPopup.css"; 
+import { useParams } from "react-router-dom";
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 window.$ = window.jQuery = $; // Expose jQuery globally
 const Events = () => {
 
+    const testimonialApi = process.env.REACT_APP_API_URL;
+    const bannersApi = process.env.REACT_APP_API_URL;
+    const aboutBannersApi = process.env.REACT_APP_API_URL;
+    const expertsGalleryApi = process.env.REACT_APP_API_URL;
+
+    const [error, setError] = useState('')
+    const [loading, setLoading] = useState('')
     const [openModalId, setOpenModalId] = useState(null);
+    const [testiData, setTestiData] = useState([])
+    const [bannersData, setBannersData] = useState([])
+    const [aboutBanner, setAboutBanner] = useState([])
+    const [expertsGallery, setExpertsGallery] = useState([])
+    const { eventName } = useParams();
+    const location = useLocation();
+
+    useEffect(() => {
+        fetchingApis();
+    }, [])
+
+    const fetchingApis = async () => {
+        try {
+            const currentEvents = location.pathname.split('/');
+            const [testimonialRes, bannersRes, aboutBannerRes, expertsGalleryRes] = await Promise.all([
+                axios.get(testimonialApi + currentEvents[1] + '/event/testimonials/'),
+                axios.get(bannersApi + currentEvents[1] + '/event/banner/'),
+                axios.get(aboutBannersApi + currentEvents[1] + '/event/about/'),
+                axios.get(expertsGalleryApi + currentEvents[1] + '/event/experts/')
+            ])
+
+            setTestiData(testimonialRes.data);
+            setBannersData(bannersRes.data);
+            setAboutBanner(aboutBannerRes.data)
+            setExpertsGallery(expertsGalleryRes.data)
+            console.log("testimonialRes data", testimonialRes);
+        } catch {
+            setError('Error: no data found')
+        }
+    }
+
+
 
     const speakers = [
         {
@@ -83,8 +125,6 @@ const Events = () => {
     const closeModal = () => setOpenModalId(null);
 
     useEffect(() => {
-
-
         $('#owl-carouselone').owlCarousel({
             loop: true,
             margin: 30,
@@ -125,7 +165,7 @@ const Events = () => {
             loop: true,
             margin: 30,
             nav: true,
-            navText: ["<i className='fas fa-arrow-left'></i>", "<i className='fas fa-arrow-right'></i>"],
+            // navText: ["<i className='fas fa-arrow-left'></i>", "<i className='fas fa-arrow-right'></i>"],
             responsive: {
                 0: {
                     items: 1
@@ -171,27 +211,80 @@ const Events = () => {
                 <section className="index3-banner-section w-100 float-left">
                     <div className="container-fluid">
                         <div className="index3-banner-outer-con">
-                            <div id="owl-carouselone" className="owl-carousel owl-theme">
-                                <div className="item">
-                                    <div className="index3-banner-inner-con">
-                                        <div className="index3-banner-img-con">
-                                            <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-banner-img3.jpg"} alt="index3-banner-img1" />
-                                            </figure>
-                                        </div>
-                                        <div className="index3-banner-text-con">
-                                            <span className="d-block position-relative">October 21-23, 2025 <span className="position-relative" style={{ marginLeft: '15%' }}> Hybrid Event</span></span>
-                                            <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'>International Congress of</small><br />Civil, Architectural and Environmental Engineering</h1>
-                                            <ul className="list-unstyled">
-                                                <li><i className="fas fa-map-marker-alt"></i> Dubai, UAE</li>
-                                            </ul>
-                                            <div className="generic-btn">
-                                                <Link to="/registration_form">REGISTER NOW<i className="fas fa-arrow-right"></i></Link>
+
+                            {/* bootstrap slider start */}
+                            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+
+
+                                <div class="carousel-indicators">
+                                    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                                    <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
+                                    <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
+                                </div>
+
+
+                                <div class="carousel-inner">
+                                    {Array.isArray(bannersData) &&
+                                        bannersData.length > 0 ? bannersData.map((banner) => {
+                                            return <div class="carousel-item active">
+                                                <div className="index3-banner-inner-con">
+                                                    <div className="index3-banner-img-con">
+                                                        <figure className="mb-0">
+                                                            <img src={banner.meettings_photo} className='img-fluid' alt="index3-banner-img1" />
+                                                        </figure>
+                                                    </div>
+                                                    <div className="index3-banner-text-con">
+                                                        <span className="d-block position-relative">{banner.meettings_date} <span className="position-relative" style={{ marginLeft: '15%' }}> Hybrid Event</span></span>
+                                                        <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'>{banner.meetings_subject}</small><br />{banner.meeting_prefix}</h1>
+                                                        <ul className="list-unstyled">
+                                                            <li><i className="fas fa-map-marker-alt"></i> {banner.meetingslocation}</li>
+                                                        </ul>
+                                                        <div className="generic-btn">
+                                                            <Link to="/registration_form">REGISTER NOW<i className="fas fa-arrow-right"></i></Link>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }) : "No banner found"
+                                    }
+
+                                </div>
+
+                                <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </button>
+                            </div>
+                            {/* bootstrap slider end */}
+
+                            <div id="owl-carouseltwo" className="owl-carousel owl-theme">
+                                {/* {Array.isArray(bannersData) &&
+                                    bannersData.length > 0 ? bannersData.map((banner) => {
+                                        return <div className="item">
+                                            <div className="index3-banner-inner-con">
+                                                <div className="index3-banner-img-con">
+                                                    <figure className="mb-0">
+                                                        <img src={banner.meettings_photo} className='img-fluid' alt="index3-banner-img1" />
+                                                    </figure>
+                                                </div>
+                                                <div className="index3-banner-text-con">
+                                                    <span className="d-block position-relative">{banner.meettings_date} <span className="position-relative" style={{ marginLeft: '15%' }}> Hybrid Event</span></span>
+                                                    <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'>{banner.meetings_subject}</small><br />{banner.meeting_prefix}</h1>
+                                                    <ul className="list-unstyled">
+                                                        <li><i className="fas fa-map-marker-alt"></i> {banner.meetingslocation}</li>
+                                                    </ul>
+                                                    <div className="generic-btn">
+                                                        <Link to="/registration_form">REGISTER NOW<i className="fas fa-arrow-right"></i></Link>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="item">
+                                    }) : "No banner found"
+                                } */}
+
+                                {/* <div className="item">
                                     <div className="index3-banner-inner-con">
                                         <div className="index3-banner-img-con">
                                             <figure className="mb-0">
@@ -228,11 +321,12 @@ const Events = () => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
                 </section>
+
                 <section className="journey-section w-100 float-left padding-top padding-bottom grey-bg position-relative">
                     <div className="container-fluid p-md-5">
                         <div className="journey-inner-con">
@@ -489,7 +583,7 @@ const Events = () => {
                 <section className='index3-event-info-zone bg-white py-5'>
                     <div className='container'>
                         <div className="clearfix"></div>
-                        <div className="generic-title2 text-center ">                           
+                        <div className="generic-title2 text-center ">
                             <span className="small-text padding-top">The Speakers</span>
                             <h2>Meet Our Stellar Speakers</h2>
                             <p>
@@ -875,7 +969,24 @@ const Events = () => {
                             <span className="small-text">GALLERY</span>
                             <h2>Previous Conference Highlights</h2>
                         </div>
-                        <div className="index3-top-experts-inner-section">
+
+                        <div className="row mb-4">
+                            {expertsGallery.map((img) => (
+                                <div className="col-md-6 col-lg-4">
+                                    <div className="index3-experts-left-con">
+                                        <div className="index3-expert index3-expert-con1 container__img-holder">
+                                            <img src={img.gallery} className='img-fluid' alt="index3-expert-img1" />
+                                            <div className="search-icon-con">
+                                                <i className="fas fa-search"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            ))}
+
+                        </div>
+
+                        {/* <div className="index3-top-experts-inner-section">
                             <div className="index3-experts-left-con">
                                 <div className="index3-expert index3-expert-con1 container__img-holder">
                                     <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-1.jpg"} alt="index3-expert-img1" />
@@ -896,6 +1007,7 @@ const Events = () => {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="index3-experts-right-con">
                                 <div className="index3-expert container__img-holder">
                                     <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-2.jpg"} alt="index3-expert-img2" />
@@ -936,7 +1048,7 @@ const Events = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                     <div className="img-popup">
                         <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img9.jpg"} alt="Popup Image" />
@@ -951,25 +1063,34 @@ const Events = () => {
                         <div className="generic-title2 text-center">
                             <span className="small-text">TESTIMONIALS</span>
                             <h2>Hear it From Our Clients</h2>
+                            {/* <h1>{testiData[0].testimonials_name}</h1> */}
+
                         </div>
-                        <div className="index3-testimonial-inner-con">
-                            <div id="owl-carouseltwo" className="owl-carousel owl-theme">
-                                <div className="item">
-                                    <div className="index3-testimonial-box position-relative">
-                                        <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-1.png"} alt="index3-client-img1" />
-                                        </figure>
-                                        <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
-                                        <h6>Peter Johns</h6>
-                                        <small>CEO- Company</small>
-                                        <div className="index3-quote-con">
-                                            <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
-                                            </figure>
+                        <div className="index3-testimonial-inner-con testimonialSlides">
+                            <div id="owl-carouselone" className="owl-carousel owl-theme"> 
+                                { Array.isArray(testiData) &&
+                                    testiData.length > 0 ? (testiData.map((item) => (
+                                        <div className="item"> 
+                                            <div className="index3-testimonial-box position-relative">
+                                                <figure className="mb-0">
+                                                    <img src={item.testimonials_image} style={{ width: '50px', height: "50px" }} className="img-fluid" alt="index3-client-img1" />
+                                                </figure>fsadfdsafdsaf
+                                                <p dangerouslySetInnerHTML={{ __html: item.testimonials_description }}></p>
+                                                <h6>{item.testimonials_name}</h6>
+                                                <small>{item.testimonials_position}</small>
+                                                <div className="index3-quote-con">
+                                                    <figure className="mb-0">
+                                                        <img src={`${process.env.PUBLIC_URL}/images/index3-quote-icon.png`} alt="index3-quote-icon" />
+                                                    </figure>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className="item">
+                                    ))) : "no data"
+                                }
+
+                                
+
+                                {/* <div className="item">
                                     <div className="index3-testimonial-box position-relative">
                                         <figure className="mb-0">
                                             <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-2.png"} alt="index3-client-img2" />
@@ -1088,7 +1209,7 @@ const Events = () => {
                                             </figure>
                                         </div>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

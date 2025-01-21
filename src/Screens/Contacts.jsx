@@ -1,9 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer/footer';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 const Contacts = () => {
+
+    const contactApi = process.env.REACT_APP_API_URL
+
+    const cfField = {
+        name: '',
+        phone_number: 0,
+        email: '',
+        website_url: '',
+        message: ''
+    }
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [msg, setMsg] = useState('')
+    const [formData, setFormData] = useState(cfField)
+
+
+    const showMessage = () => {
+        setMsg("Form was submited successfully ");
+        setTimeout(() => {
+            setMsg(""); // Clear the message after 3 seconds
+        }, 4000);
+    };
+
+    const handleInput = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value })
+    }
+
+    const handlePostForm = async (e) => {
+        e.preventDefault(); // Prevent form reload
+        try {
+            const cfData = await axios.post(contactApi + 'Contact/', formData, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            })
+            setMsg(msg)
+        } catch {
+            setError("Error: data not posted")
+        }
+    }
+
     return (
         <div className='contact-p'>
             <Header />
@@ -69,31 +112,64 @@ const Contacts = () => {
                         <span className="text-center small-text">GET IN TOUCH WITH US</span>
                         <h2>Send Us a Message</h2>
                     </div>
-                    <form className="form-box" method="post" id="contactpage">
+                    <form onSubmit={handlePostForm} className="form-box" method="post" id="contactpage">
                         <ul className="list-unstyled">
                             <li>
-                                <input type="text" name="fname" id="fname" placeholder="Name" />
+                                <input type="text"
+                                    value={formData.name}
+                                    onChange={handleInput}
+                                    name="name"
+                                    id="fname"
+                                    placeholder="Name"
+                                    required />
                             </li>
                             <li>
-                                <input type="tel" name="phone" id="phone" placeholder="Phone" />
+                                <input type="tel"
+                                    value={formData.phone_number}
+                                    onChange={handleInput}
+                                    name="phone_number"
+                                    id="phone"
+                                    placeholder="Phone" />
                             </li>
                             <li>
-                                <input type="email" placeholder="Email" name="email" id="email" />
+                                <input type="email"
+                                    value={formData.email}
+                                    onChange={handleInput}
+                                    name="email"
+                                    placeholder="Email"
+                                    id="email" />
                             </li>
                             <li>
-                                <input type="text" placeholder="Website URL" />
+                                <input type="text"
+                                    value={formData.website_url}
+                                    onChange={handleInput}
+                                    name='website_url'
+                                    placeholder="Subject" />
                             </li>
                             <li>
-                                <textarea placeholder="Message" name="subject" id="subject"></textarea>
+                                <textarea
+                                    value={formData.message}
+                                    onChange={handleInput}
+                                    name="message"
+                                    placeholder="Message"
+                                    id="message"></textarea>
                             </li>
                         </ul>
                         <div className="submit-btn generic-btn">
-                            <button type="submit" id="submit">SEND MESSAGE <i className="fas fa-arrow-right"></i></button>
+                            <button type="submit" onClick={showMessage} id="submit">SEND MESSAGE <i className="fas fa-arrow-right"></i></button>
                         </div>
                     </form>
+                    <div className='text-success text-center mt-4'>
+                        <h5>{msg}</h5>
+                    </div>
+                    <div className='text-danger text-center mt-4'>
+                    <h5>{error}</h5>
+                    </div>
+                        
+                    
                 </div>
             </section>
-           
+
             <Footer />
         </div>
     )

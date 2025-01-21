@@ -1,9 +1,46 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Footer from '../Footer/footer';
 import { Link } from 'react-router-dom';
 import EventHeader from '../Header/EventHeader';
+import { useParams } from "react-router-dom";
+import axios from 'axios';
 
 const ContactsEvent = () => {
+
+    const cfField = {
+        name: '',
+        phone_number: 0,
+        email: '',
+        website_url: '',
+        message: ''
+    }
+
+    const contactForm = process.env.REACT_APP_API_URL;
+
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState(cfField);
+
+    const handleInput = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value })
+    }
+
+    const handlePostForm = async (e) => {
+        e.preventDefault()
+        try {
+            const res = await axios.post(contactForm + 'Contact/', formData, {
+                header: {
+                    'Content-Type': 'application/json',
+                }
+            }
+            )
+            setFormData(res.data)
+        } catch {
+            setError('error')
+        }
+    }
+
     return (
         <div className='contact-p'>
             <EventHeader />
@@ -69,22 +106,46 @@ const ContactsEvent = () => {
                         <span className="text-center small-text">GET IN TOUCH WITH US</span>
                         <h2>Send Us a Message</h2>
                     </div>
-                    <form className="form-box" method="post" id="contactpage">
+                    <form onSubmit={handlePostForm} className="form-box" method="post" id="contactpage">
                         <ul className="list-unstyled">
                             <li>
-                                <input type="text" name="fname" id="fname" placeholder="Name" />
+                                <input type="text"
+                                    name="name"
+                                    value={formData.name}
+                                    onChange={handleInput}
+                                    id="fname"
+                                    placeholder="Name" />
                             </li>
                             <li>
-                                <input type="tel" name="phone" id="phone" placeholder="Phone" />
+                                <input type="tel"
+                                    name="phone_number"
+                                    value={formData.phone_number}
+                                    onChange={handleInput}
+                                    id="phone"
+                                    placeholder="Phone" />
                             </li>
                             <li>
-                                <input type="email" placeholder="Email" name="email" id="email" />
+                                <input type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleInput}
+                                    placeholder="Email"
+                                    id="email" />
                             </li>
                             <li>
-                                <input type="text" placeholder="Website URL" />
+                                <input type="text"
+                                    name="website_url"
+                                    value={formData.website_url}
+                                    onChange={handleInput}
+                                    placeholder="Subject" />
                             </li>
                             <li>
-                                <textarea placeholder="Message" name="subject" id="subject"></textarea>
+                                <textarea
+                                    name="message"
+                                    value={formData.message}
+                                    onChange={handleInput}
+                                    placeholder="Message"
+                                    id="subject"></textarea>
                             </li>
                         </ul>
                         <div className="submit-btn generic-btn">
@@ -93,7 +154,7 @@ const ContactsEvent = () => {
                     </form>
                 </div>
             </section>
-           
+
             <Footer />
         </div>
     )

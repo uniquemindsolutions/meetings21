@@ -200,3 +200,10 @@
   color: white;
   text-align: center;
 }
+#myTabContent .table>:not(caption)>*>* {
+  background-color: #ffffff00;
+}
+#myTabContent .table>thead {
+  vertical-align: bottom;
+  background: #ec398b;
+}

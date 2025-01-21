@@ -15,7 +15,15 @@
         margin-right: 100px;
     }
 }
-
+.testimonialSlides .item {
+    width: 340px;
+    display: inline-flex;
+    margin-right: 20px;
+    min-height: 325px;
+}
+.testimonialSlides .item p {
+    font-size: 15px;
+}
 @media only screen and (max-width: 1800px) {
 
     /* header section */
@@ -600,8 +608,8 @@
     }
 
     .index3-banner-section {
-        height: 840px;
-        padding: 180px 0 0;
+        height: 760px;
+        padding: 100px 0 0;
     }
 
     .journey-inner-con {
