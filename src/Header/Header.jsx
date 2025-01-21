@@ -25,7 +25,7 @@ const Header = () => {
                     <nav className="navbar navbar-expand-lg navbar-light p-0">
                         <Link to="/" className="navbar-brand">
                             <figure className="mb-0 custom-logo">
-                                <img src="/images/meetings-logo.png" alt="meetings21" className='img-fluid' />
+                                <img src={process.env.PUBLIC_URL + '/' + "images/meetings-logo.png"} alt="meetings21" className='img-fluid' />
                             </figure>
                         </Link>
                         <button className="navbar-toggler collapsed" type="button" data-toggle="collapse"
@@ -51,8 +51,8 @@ const Header = () => {
                                         MEETINGS
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown5">
-                                        <Link to="/meetings" className="dropdown-item">UPCOMING</Link>
-                                        <Link to="#" className="dropdown-item">COMPLETED</Link>
+                                        <Link to="/upcoming-meetings" className="dropdown-item">UPCOMING</Link>
+                                        <Link to="/completed-meetings" className="dropdown-item">COMPLETED</Link>
                                     </div>
                                 </li>
                                 <li className="nav-item">

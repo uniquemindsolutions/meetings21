@@ -18,7 +18,14 @@ code {
 }
 .custom-logo img{
   width: 100%;
-  max-width: 190px;
+  max-width: 230px;
+}
+@media (min-width: 1600px){
+  .custom-logo img{
+    width: 100%;
+    max-width: 230px;
+    margin-left: 50px;
+  }
 }
 .footer-box .logo{
   width: 100%;

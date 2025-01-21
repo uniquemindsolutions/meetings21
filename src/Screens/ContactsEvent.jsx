@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import Header from '../Header/Header';
+import React, { useState } from 'react';
 import Footer from '../Footer/footer';
 import { Link } from 'react-router-dom';
+import EventHeader from '../Header/EventHeader';
+import { useParams } from "react-router-dom";
 import axios from 'axios';
 
-const Contacts = () => {
-
-    const contactApi = process.env.REACT_APP_API_URL
+const ContactsEvent = () => {
 
     const cfField = {
         name: '',
@@ -15,18 +14,12 @@ const Contacts = () => {
         website_url: '',
         message: ''
     }
+
+    const contactForm = process.env.REACT_APP_API_URL;
+
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [msg, setMsg] = useState('')
-    const [formData, setFormData] = useState(cfField)
-
-
-    const showMessage = () => {
-        setMsg("Form was submited successfully ");
-        setTimeout(() => {
-            setMsg(""); // Clear the message after 3 seconds
-        }, 4000);
-    };
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState(cfField);
 
     const handleInput = (e) => {
         const { name, value } = e.target;
@@ -34,22 +27,23 @@ const Contacts = () => {
     }
 
     const handlePostForm = async (e) => {
-        e.preventDefault(); // Prevent form reload
+        e.preventDefault()
         try {
-            const cfData = await axios.post(contactApi + 'Contact/', formData, {
-                headers: {
+            const res = await axios.post(contactForm + 'Contact/', formData, {
+                header: {
                     'Content-Type': 'application/json',
-                },
-            })
-            setMsg(msg)
+                }
+            }
+            )
+            setFormData(res.data)
         } catch {
-            setError("Error: data not posted")
+            setError('error')
         }
     }
 
     return (
         <div className='contact-p'>
-            <Header />
+            <EventHeader />
             <section className="sub-banner-main-section contact-banner w-100 float-left">
                 <div className="container">
                     <div className="sub-banner-inner-con">
@@ -116,57 +110,48 @@ const Contacts = () => {
                         <ul className="list-unstyled">
                             <li>
                                 <input type="text"
+                                    name="name"
                                     value={formData.name}
                                     onChange={handleInput}
-                                    name="name"
                                     id="fname"
-                                    placeholder="Name"
-                                    required />
+                                    placeholder="Name" />
                             </li>
                             <li>
                                 <input type="tel"
+                                    name="phone_number"
                                     value={formData.phone_number}
                                     onChange={handleInput}
-                                    name="phone_number"
                                     id="phone"
                                     placeholder="Phone" />
                             </li>
                             <li>
                                 <input type="email"
+                                    name="email"
                                     value={formData.email}
                                     onChange={handleInput}
-                                    name="email"
                                     placeholder="Email"
                                     id="email" />
                             </li>
                             <li>
                                 <input type="text"
+                                    name="website_url"
                                     value={formData.website_url}
                                     onChange={handleInput}
-                                    name='website_url'
                                     placeholder="Subject" />
                             </li>
                             <li>
                                 <textarea
+                                    name="message"
                                     value={formData.message}
                                     onChange={handleInput}
-                                    name="message"
                                     placeholder="Message"
-                                    id="message"></textarea>
+                                    id="subject"></textarea>
                             </li>
                         </ul>
                         <div className="submit-btn generic-btn">
-                            <button type="submit" onClick={showMessage} id="submit">SEND MESSAGE <i className="fas fa-arrow-right"></i></button>
+                            <button type="submit" id="submit">SEND MESSAGE <i className="fas fa-arrow-right"></i></button>
                         </div>
                     </form>
-                    <div className='text-success text-center mt-4'>
-                        <h5>{msg}</h5>
-                    </div>
-                    <div className='text-danger text-center mt-4'>
-                    <h5>{error}</h5>
-                    </div>
-                        
-                    
                 </div>
             </section>
 
@@ -175,4 +160,4 @@ const Contacts = () => {
     )
 }
 
-export default Contacts
+export default ContactsEvent

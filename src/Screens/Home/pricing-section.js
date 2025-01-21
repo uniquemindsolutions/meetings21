@@ -14,8 +14,8 @@ const PricingSection = () => {
                         <div className="ticket-details silver-ticket-details">
                             <h3>Oral Talk</h3>
                             {/* <p>For individuals</p>
-                    <span>Starting at:</span> */}
-                            <div className="price"> <span><small>$</small>699</span> <span><small> ₹</small>50000</span></div>
+                                <span>Starting at:</span> */}
+                            <div className="price"> <span><small>$</small>699</span>/ <span><small> ₹</small>60K</span></div>
                             <ul className="list-unstyled">
                                 <li className="position-relative">Welcome Coffee</li>
                                 <li className="position-relative">Access to All Talks and Posters</li>
@@ -23,15 +23,15 @@ const PricingSection = () => {
                                 <li className="position-relative">Lunch, tea / coffee breaks</li>
                                 <li className="position-relative">WiFi in meeting rooms</li>
                             </ul>
-                            <div className="generic-btn">
+                            {/* <div className="generic-btn">
                                 <a href="shop.html">BUY TICKET <i className="fas fa-arrow-right"></i></a>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="ticket-details gold-ticket-details">
                             <h3>Invited Talk</h3>
                             {/* <p>For individuals</p>
                     <span>Starting at:</span> */}
-                            <div className="price"> <span><small>$</small>699</span> <span><small> ₹</small>50000</span></div>
+                            <div className="price"> <span><small>$</small>699</span>/ <span><small> ₹</small>55K</span></div>
                             <ul className="list-unstyled">
                                 <li className="position-relative">Welcome Coffee</li>
                                 <li className="position-relative">Access to All Talks and Posters</li>
@@ -39,9 +39,9 @@ const PricingSection = () => {
                                 <li className="position-relative">Lunch, tea / coffee breaks</li>
                                 <li className="position-relative">WiFi in meeting rooms</li>
                             </ul>
-                            <div className="generic-btn">
+                            {/* <div className="generic-btn">
                                 <a href="shop.html">BUY TICKET <i className="fas fa-arrow-right"></i></a>
-                            </div>
+                            </div> */}
                             <div className="recomended-box">
                                 RECOMMENDED
                             </div>
@@ -49,8 +49,8 @@ const PricingSection = () => {
                         <div className="ticket-details premium-ticket-details">
                             <h3>Poster Presentation</h3>
                             {/* <p>For individuals</p>
-                    <span>Starting at:</span> */}
-                            <div className="price"> <span><small>$</small>699</span> <span><small>₹</small>50000</span></div>
+                            <span>Starting at:</span> */}
+                            <div className="price"> <span><small>$</small>699</span>/ <span><small>₹</small>35K</span></div>
                             <ul className="list-unstyled">
                                 <li className="position-relative">Welcome Coffee</li>
                                 <li className="position-relative">Access to All Talks and Posters</li>
@@ -58,17 +58,17 @@ const PricingSection = () => {
                                 <li className="position-relative">Lunch, tea / coffee breaks</li>
                                 <li className="position-relative">WiFi in meeting rooms</li>
                             </ul>
-                            <div className="generic-btn">
+                            {/* <div className="generic-btn">
                                 <a href="shop.html">BUY TICKET <i className="fas fa-arrow-right"></i></a>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
-                    <div className="index3-plan-btn text-center">
+                    {/* <div className="index3-plan-btn text-center">
                         <p>This is a Detailed List Event of Conference for Digital Technology 2024.</p>
                         <div className="generic-btn">
                             <a href="pricing.html">GET VIP PASS <i className="fas fa-arrow-right"></i></a>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </section>
         </>

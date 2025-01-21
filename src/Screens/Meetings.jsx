@@ -1,10 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../Header/Header'
 import SubscribeSection from './Home/subscribe-section'
 import Footer from '../Footer/footer'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import axios from 'axios'
+
 
 const Meetings = () => {
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // const gotoEvent = () => {
+  //   debugger
+  //   navigate("/events/Material_science/2")
+  // }
+
+  const dynamicEventUrl = process.env.REACT_APP_API_URL + 'api/';
+
+
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [currentEventName, setCurrentEventName] = useState('');
+  // const [currentEventId, setCurrentEventId] = useState('');
+
+
+  console.log("currentEventName === ", currentEventName)
+
+  useEffect(() => {
+    dynamicEvents()
+  }, [])
+
+  const dynamicEvents = async () => {
+    try {
+      const res = await axios.get(dynamicEventUrl + 'EventMeetings/')
+      setCurrentEventName(res.data);
+      console.log('dynamicEventUrl ===', res.data)
+    } catch {
+      setError('Error loaded')
+    }
+  }
+
   return (
     <>
       <Header />
@@ -12,7 +46,7 @@ const Meetings = () => {
       <section className="sub-banner-main-section event-banner-section w-100 float-left">
         <div className="container">
           <div className="sub-banner-inner-con">
-            <h1>Meetings21</h1>
+            <h1>Upcoming Meetings</h1>
             <p>Inspiring Talks, Meet the Best Product People Around the World, <br /> and Party Together After the Event!</p>
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb d-inline-block mb-0">
@@ -27,8 +61,76 @@ const Meetings = () => {
       <div className='container padding-bottom padding-top'>
         <div className='row'>
           <div className='col-lg-12 text-center mt-5 mb-5'>
-            <h2>Upcoming Meetings</h2>
+            <h2>October, 2025</h2>
           </div>
+        </div>
+
+        <div className="row">
+          {/* {currentEventName.length > 0 && currentEventName.map(() => {
+            <div className="col-md-5 offset-md-1">
+              <div Link to={`/events/${currentEventName}`} className="event-card">
+                <div className='event-card-img'>
+                  <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
+                </div>
+                <div className='event-card-content'>
+                  <h5 className="event-card-title">
+                    International Congress of Materials Science and Engineering
+                  </h5>
+                  <p className='mb-0 mt-4'>
+                    <small><i className="fa fa-calendar text-secondary"></i> October 21-08, 2025</small>   </p>
+                  <p className='mb-0'>
+                    <small><i className="fa fa-map-marker text-secondary"></i> Dubai, UAE </small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          })} */}
+
+
+          {loading ? (
+            <p>Loading...</p>
+          ) : currentEventName && Array.isArray(currentEventName) && currentEventName.length > 0 ? (
+            currentEventName.map((items, index) => (
+              <div key={index} className="col-md-5 offset-md-1">
+                <Link to={`/${items.domain_name}/${items.domain_id}/events`} className="event-card">
+                  <div className='event-card-img'>
+                    <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
+                  </div>
+                  <div className='event-card-content'>
+                    <h5 className="event-card-title">
+                      {items.domain_name}
+                    </h5>
+                    <p className='mb-0 mt-4'>
+                      <small><i className="fa fa-calendar text-secondary"></i> {items.meettings_date}</small>   </p>
+                    <p className='mb-0'>
+                      <small><i className="fa fa-map-marker text-secondary"></i> {items.meetingslocation} </small>
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <p>Not found Events.</p>
+          )}
+
+
+          {/* <div className="col-md-5  offset-md-1">
+            <Link to="/events" target='_blank' className="event-card">
+              <div className='event-card-img'>
+                <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
+              </div>
+              <div className='event-card-content'>
+                <h5 className="event-card-title">
+                  International Congress of Environmental Science and Technology
+                </h5>
+                <p className='mb-0 mt-4'>
+                  <small><i className="fa fa-calendar text-secondary"></i> October 21-12, 2025</small>   </p>
+                <p className='mb-0'>
+                  <small><i className="fa fa-map-marker text-secondary"></i> Dubai, UAE </small>
+                </p>
+              </div>
+            </Link>
+          </div> */}
         </div>
 
 
@@ -81,44 +183,8 @@ const Meetings = () => {
         </div> */}
 
 
-        <div className="row">
-          <div className="col-md-5">
-            <Link to="/events" target='_blank' className="event-card">
-              <div className='event-card-img'>
-                <img src="https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg" alt="" className='' />
-              </div>
-              <div className='event-card-content'>
-                <h5 className="event-card-title">
-                International Congress of Materials Science and Engineering
-                </h5>
-                <p className='mb-0 mt-4'>
-                  <small><i className="fa fa-calendar text-secondary"></i> October 21-08, 2025</small>   </p>
-                <p className='mb-0'>
-                  <small><i className="fa fa-map-marker text-secondary"></i> Dubai, UAE </small>
-                </p>
-              </div>
-            </Link>
-          </div>
-          
-          <div className="col-md-5  offset-md-1">
-            <Link to="/events" target='_blank' className="event-card">
-              <div className='event-card-img'>
-                <img src="https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg" alt="" className='' />
-              </div>
-              <div className='event-card-content'>
-                <h5 className="event-card-title">
-                  International Congress of Environmental Science and Technology
-                </h5>
-                <p className='mb-0 mt-4'>
-                  <small><i className="fa fa-calendar text-secondary"></i> October 21-12, 2025</small>   </p>
-                <p className='mb-0'>
-                  <small><i className="fa fa-map-marker text-secondary"></i> Dubai, UAE </small>
-                </p>
-              </div>
-            </Link>
-          </div>
-        </div>
-        
+
+
         {/* <div className='row'>
         <div className="col-lg-6">
             <a href="/events" target="_blank" className="url-box">
@@ -193,69 +259,7 @@ const Meetings = () => {
           </div>
         </section>
       </div>
-      <div className='d-flex'>
-        <section className="w-100 float-left padding-top padding-bottom light-bg">
-          <div className="container">
-            <div className="generic-title2 text-center">
-              <span className="small-text">TICKET PRICING</span>
-              <h2>Our Conference Ticket Prices</h2>
-            </div>
-            <div className="index3-plan-inner-con">
-              <div className="ticket-details silver-ticket-details">
-                <h3>Oral Talk</h3>
-                <p>For individuals</p>
-                <span>Starting at:</span>
-                <div className="price"><small>$</small>699</div>
-                <ul className="list-unstyled">
-                  <li className="position-relative">Welcome Coffee</li>
-                  <li className="position-relative">Access to All Talks and Posters</li>
-                  <li className="position-relative">Conference Material</li>
-                  <li className="position-relative">Lunch, tea / coffee breaks</li>
-                  <li className="position-relative">WiFi in meeting rooms</li>
-                </ul>
-                <div className="generic-btn">
-                  <a href="shop.html">BUY TICKET <i className="fas fa-arrow-right"></i></a>
-                </div>
-              </div>
-              <div className="ticket-details gold-ticket-details">
-                <h3>Invited Talk</h3>
-                <p>For individuals</p>
-                <span>Starting at:</span>
-                <div className="price"><small>$</small>649</div>
-                <ul className="list-unstyled">
-                  <li className="position-relative">Welcome Coffee</li>
-                  <li className="position-relative">Access to All Talks and Posters</li>
-                  <li className="position-relative">Conference Material</li>
-                  <li className="position-relative">Lunch, tea / coffee breaks</li>
-                  <li className="position-relative">WiFi in meeting rooms</li>
-                </ul>
-                <div className="generic-btn">
-                  <a href="shop.html">BUY TICKET <i className="fas fa-arrow-right"></i></a>
-                </div>
-                <div className="recomended-box">
-                  RECOMMENDED
-                </div>
-              </div>
-              <div className="ticket-details premium-ticket-details">
-                <h3>Poster Presentation</h3>
-                <p>For individuals</p>
-                <span>Starting at:</span>
-                <div className="price"><small>$</small>399</div>
-                <ul className="list-unstyled">
-                  <li className="position-relative">Welcome Coffee</li>
-                  <li className="position-relative">Access to All Talks and Posters</li>
-                  <li className="position-relative">Conference Material</li>
-                  <li className="position-relative">Lunch, tea / coffee breaks</li>
-                  <li className="position-relative">WiFi in meeting rooms</li>
-                </ul>
-                <div className="generic-btn">
-                  <a href="shop.html">BUY TICKET <i className="fas fa-arrow-right"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
+
       <Footer />
     </>
   )
