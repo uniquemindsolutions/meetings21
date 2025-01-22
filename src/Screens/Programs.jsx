@@ -1,13 +1,77 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../Footer/footer'
 import EventHeader from '../Header/EventHeader'
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import './Tabs.css'; // Import CSS styles
 const Programs = () => {
+
+  const committeeUrl = process.env.REACT_APP_API_URL;
+  const location = useLocation();
+
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [currentEventName, setCurrentEventName] = useState('');
+  const [currentEventId, setCurrentEventId] = useState('');
+  const [programData, setProgram] = useState('');
+  const [activeTab, setActiveTab] = useState(0);
+  const [activesubTab, setActivesubTab] = useState(0);
+  useEffect(()=>{
+    getPrograms();
+  }, [])
+
+  const getPrograms = async ()=>{
+    const currentEvents = location.pathname.split('/');
+  setCurrentEventName(currentEvents[1])
+  console.log("currentEventNameres ===", currentEvents[1], currentEvents)
+  try {
+      const res = await  axios.get(`${committeeUrl}${currentEvents[1]}/agenda/program/`);
+      setProgram(res.data);
+      console.log('programdata ===', res.data);
+  } catch {
+      setError('Error loaded')
+  }
+  }
+  const tabData = [
+    { title: 'Tab 1', content: 'This is the content for Tab 1' },
+    { title: 'Tab 2', content: 'This is the content for Tab 2' },
+    { title: 'Tab 3', content: 'This is the content for Tab 3' },
+  ];
+
   return (
 
     <div className='call-abstract-p'>
       <div>
         <EventHeader />
-        <section className="sub-banner-main-section w-100 justify-content-center">
+zdfssd
+        <div className="tabs-container">
+      <div className="tab-headers">
+   
+      { Array.isArray(programData) &&
+                                programData?.length > 0 ? (programData?.map((item, index) => (
+          <button key={index} onClick={() => setActiveTab(index)}
+          className={`tab-button ${activeTab === index ? 'active' : ''}`}>{item.program_day_type}
+          </button>
+        ))) : "no data"
+      }
+      </div>
+      <div className="tab-content">
+        {/* <p>{tabData[activeTab].content} {programData[activeTab]?.program_day_type}</p> */}
+        { Array.isArray(programData[activeTab]?.talks) &&
+                                programData[activeTab].talks?.length > 0 ? (programData[activeTab].talks?.map((item, index) => (
+        <button key={index} onClick={() => setActivesubTab(index)}
+          className={`tab-button ${activesubTab === index ? 'active' : ''}`}>{item.talk_title}
+          </button>
+            ))) : "no data"
+          }
+          <span></span>
+      </div>
+      </div>
+
+
+         {/* <section className="sub-banner-main-section w-100 justify-content-center">
           <div className="sub-banner-inner-con text-center">
             <h1>Program</h1>
             <nav aria-label="breadcrumb">
@@ -17,11 +81,11 @@ const Programs = () => {
               </ol>
             </nav>
           </div>
-        </section>
+        </section> */}
 
 
 
-        <section className="index3-event-section w-100 float-left padding-top padding-bottom">
+        {/* <section className="index3-event-section w-100 float-left padding-top padding-bottom">
           <div className="container">
             <div className="generic-title">
               <span className="small-text">TENTATIVE SCHEDULE OF EVENT</span>
@@ -34,24 +98,19 @@ const Programs = () => {
                 </div>
               </div>
             </div>
+            { Array.isArray(programData) &&
+                                programData?.length > 0 ? (programData?.map((item, index) => (
             <div className="index3-event-tabs-con">
               <ul className="nav nav-tabs" id="myTab" role="tablist">
                 <li className="nav-item" role="presentation">
                   <button className="nav-link active" id="home-tab" data-toggle="tab" data-target="#home"
-                    type="button" role="tab" aria-controls="home" aria-selected="true">DAY 1</button>
-                </li>
-                <li className="nav-item" role="presentation">
-                  <button className="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button"
-                    role="tab" aria-controls="profile" aria-selected="false">DAY 2</button>
-                </li>
-                <li className="nav-item" role="presentation">
-                  <button className="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button"
-                    role="tab" aria-controls="contact" aria-selected="false">DAY 3</button>
+                    type="button" role="tab" aria-controls="home" aria-selected="true">DAY {index+1}</button>
                 </li>
               </ul>
               <div className="tab-content" id="myTabContent">
                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                   <div id="accordion" className="index3-faqs">
+                 
                     <div className="card">
                       <div className="card-header" id="headingOne">
                         <h6 className="mb-0">
@@ -60,7 +119,7 @@ const Programs = () => {
                             <div className="index3-event-detail">
                               <div className="index3-event-date-con">
                                 <div className="index3-event-month text-left">
-                                  <small className="d-block">Session title</small>
+                                  <small className="d-block">{item.session_title}</small>
                                 </div>
                               </div>
 
@@ -72,127 +131,23 @@ const Programs = () => {
                       <div id="collapseOne" className="collapse" aria-labelledby="headingOne"
                         data-parent="#accordion">
                         <div className="card-body ">
+                      
+                        { Array.isArray(item.talks) &&
+                                item.talks?.length > 0 ? (item.talks?.map((itemres, index) => (
                           <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
+                            <div className='text-white'> {item.talk_title}</div>
                             <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
+                             {itemres.speaker_affiliation}
                             </span>
                           </div>
-                          <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
-                            <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
-                            </span>
-                          </div>
-                          <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
-                            <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
-                            </span>
-                          </div>
-                          <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
-                            <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
-                            </span>
-                          </div>
+                           ))) : "no data"
+                          }
 
                         </div>
                       </div>
                     </div>
-                    <div className="card">
-                      <div className="card-header" id="headingTwo">
-                        <h6 className="mb-0">
-                          <button className="btn btn-link collapsed" data-toggle="collapse"
-                            data-target="#collapseTwo" aria-expanded="false"
-                            aria-controls="collapseTwo">
-                            <div className="index3-event-detail">
-                              <div className="index3-event-date-con">
-                                <div className="index3-event-month text-left">
-                                  <small className="d-block">Session title</small>
-                                </div>
-                              </div>
-                            </div>
-                          </button>
-                        </h6>
-                      </div>
-                      <div id="collapseTwo" className="collapse" aria-labelledby="headingTwo"
-                        data-parent="#accordion">
-                        <div className="card-body">
-                          <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
-                            <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
-                            </span>
-                          </div>
-                          <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
-                            <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
-                            </span>
-                          </div>
-                          <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
-                            <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
-                            </span>
-                          </div>
-                          <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
-                            <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card">
-                      <div className="card-header" id="headingThree">
-                        <h6 className="mb-0">
-                          <button className="btn btn-link collapsed" data-toggle="collapse"
-                            data-target="#collapseThree" aria-expanded="false"
-                            aria-controls="collapseThree">
-                            <div className="index3-event-detail">
-                              <div className="index3-event-date-con">
-                                <div className="index3-event-month text-left">
-                                  <small className="d-block">Session title</small>
-                                </div>
-                              </div>
-
-                            </div>
-                          </button>
-                        </h6>
-                      </div>
-                      <div id="collapseThree" className="collapse" aria-labelledby="headingThree"
-                        data-parent="#accordion">
-                        <div className="card-body">
-                          <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
-                            <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
-                            </span>
-                          </div>
-                          <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
-                            <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
-                            </span>
-                          </div>
-                          <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
-                            <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
-                            </span>
-                          </div>
-                          <div className="border-bottom pb-2 mb-3">
-                            <div className='text-white'>Talk title</div>
-                            <span className="d-block">
-                              Speaker affilation: Nita Sukdeo, Univ. of Johannesburg, South Africa
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+    
+                 
 
                   </div>
 
@@ -412,8 +367,10 @@ const Programs = () => {
                 </div>
               </div>
             </div>
+               ))) : "no data"
+                  }
           </div>
-        </section>
+        </section>  */}
         
       </div>
 
