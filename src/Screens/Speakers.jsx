@@ -119,9 +119,9 @@ const Speakers = () => {
               </p>
             </div>
             { Array.isArray(speakerData) &&
-                                speakerData.length > 0 ? (speakerData.map((item, index) => (
+                                speakerData?.length > 0 ? (speakerData?.map((item, index) => (
             <div className='row'>
-              <div className="col-lg-12 mb-2"><h2>{speakerData.speakers_type}</h2></div>
+              <div className="col-lg-12 mb-2"><h2>{speakerData?.speakers_type}</h2></div>
             
                 <div
                   key={item.id}
@@ -184,7 +184,8 @@ const Speakers = () => {
          
           </div>
 
-          {speakerData.map(
+          { Array.isArray(speakerData) &&
+                                speakerData?.length > 0 ? speakerData.map(
                         (speaker) =>
                             openModalId === speaker.id && (
                                 <div key={speaker.id} className="modal-overlay  text-left">
@@ -209,7 +210,7 @@ const Speakers = () => {
                                     </div>
                                 </div>
                             )
-                    )}
+                    ): "no data"}
 
         </section>
 
