@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom';
 const Committee = () => {
 
     const committeeUrl = process.env.REACT_APP_API_URL;
+    
     const location = useLocation();
 
     const [error, setError] = useState('');
@@ -35,11 +36,7 @@ const Committee = () => {
         }
     }
 
-
-
-
     return (
-
         <div>
             <div>
                 <EventHeader />

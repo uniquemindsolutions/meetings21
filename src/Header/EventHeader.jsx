@@ -42,10 +42,10 @@ const EventHeader = () => {
     // const navigate = useNavigate('');
     // // const location = useLocation();
     // const committee = () => {
-    //     navigate(`/${currentEventName}/${currentEventId}/committee`)
+    //     navigate(`/${currentEventName}/committee`)
     // }
     // const topics = () => {
-    //     navigate(`/${currentEventName}/${currentEventId}/topics`)
+    //     navigate(`/${currentEventName}/topics`)
     // }
     return (
         <>
@@ -70,10 +70,10 @@ const EventHeader = () => {
                         <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <Link to={`/${currentEventName}/${currentEventId}/events`} className='nav-link p-0 active'>Home</Link>
+                                    <Link to={`/${currentEventName}/events`} className='nav-link p-0 active'>Home</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to={`/${currentEventName}/${currentEventId}/committee`} className='nav-link p-0'>Committee</Link>
+                                    <Link to={`/${currentEventName}/committee`} className='nav-link p-0'>Committee</Link>
                                 </li>
                                 <li className="nav-item dropdown">
                                     <a href="#" className="nav-link dropdown-toggle p-0 " id="navbarDropdown3" role="button"
@@ -81,9 +81,9 @@ const EventHeader = () => {
                                         Submission
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                        <Link to={`/${currentEventName}/${currentEventId}/topics`} className="dropdown-item">Topics</Link>
-                                        <Link to={`/${currentEventName}/${currentEventId}/call-for-Abstracts`} className="dropdown-item">Call for Abstract</Link>
-                                        <Link to={`/${currentEventName}/${currentEventId}/submit-abstract`} className="dropdown-item">Submit Abstract</Link>
+                                        <Link to={`/${currentEventName}/topics`} className="dropdown-item">Topics</Link>
+                                        <Link to={`/${currentEventName}/call-for-Abstracts`} className="dropdown-item">Call for Abstract</Link>
+                                        <Link to={`/${currentEventName}/submit-abstract`} className="dropdown-item">Submit Abstract</Link>
                                     </div>
                                 </li>
                                 <li className="nav-item dropdown">
@@ -92,9 +92,9 @@ const EventHeader = () => {
                                         Agenda
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                        <Link to={`/${currentEventName}/${currentEventId}/speakers`} className="dropdown-item">Speakers</Link>
-                                        <Link to={`/${currentEventName}/${currentEventId}/programs`} className="dropdown-item">Program</Link>
-                                        <Link to={`/${currentEventName}/${currentEventId}/presentation-guidelines`} className="dropdown-item">Presentation Guidelines</Link>
+                                        <Link to={`/${currentEventName}/speakers`} className="dropdown-item">Speakers</Link>
+                                        <Link to={`/${currentEventName}/programs`} className="dropdown-item">Program</Link>
+                                        <Link to={`/${currentEventName}/presentation-guidelines`} className="dropdown-item">Presentation Guidelines</Link>
                                     </div>
                                 </li>
                                 <li className="nav-item dropdown">
@@ -103,13 +103,13 @@ const EventHeader = () => {
                                         Registration
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                        <Link to={`/${currentEventName}/${currentEventId}/registration_form`} className="dropdown-item">Registration Fee</Link>
-                                        <Link to={`/${currentEventName}/${currentEventId}/online-registration`} className="dropdown-item">Online Registration</Link>
-                                        <Link to={`/${currentEventName}/${currentEventId}/policies-event`} className="dropdown-item">Policies</Link>
+                                        <Link to={`/${currentEventName}/registration_form`} className="dropdown-item">Registration Fee</Link>
+                                        <Link to={`/${currentEventName}/online-registration`} className="dropdown-item">Online Registration</Link>
+                                        <Link to={`/${currentEventName}/policies-event`} className="dropdown-item">Policies</Link>
                                     </div>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to={`/${currentEventName}/${currentEventId}/sponsors`} className='nav-link p-0'>Sponsors</Link>
+                                    <Link to={`/${currentEventName}/sponsors`} className='nav-link p-0'>Sponsors</Link>
                                 </li>
                                 <li className="nav-item dropdown">
                                     <a href="#" className="nav-link dropdown-toggle p-0 " id="navbarDropdown3" role="button"
@@ -117,18 +117,18 @@ const EventHeader = () => {
                                         More
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                        <Link to={`/${currentEventName}/${currentEventId}/awards`} className="dropdown-item">Awards</Link>
-                                        <Link to={`/${currentEventName}/${currentEventId}/venue`} className="dropdown-item">Venue</Link>
+                                        <Link to={`/${currentEventName}/awards`} className="dropdown-item">Awards</Link>
+                                        <Link to={`/${currentEventName}/venue`} className="dropdown-item">Venue</Link>
                                     </div>
                                 </li>
                                 <li className="nav-item">
-                                    <Link to={`/${currentEventName}/${currentEventId}/contact-us`} className='nav-link p-0'>CONTACT</Link>
+                                    <Link to={`/${currentEventName}/contact-us`} className='nav-link p-0'>CONTACT</Link>
                                 </li>
                             </ul>
 
                             <div className="header-contact d-flex align-items-center">
                                 <div className="lets-talk-btn">
-                                    <Link to={`/${currentEventName}/${currentEventId}/registration_form`}>Registration <i className="fas fa-arrow-right"></i></Link>
+                                    <Link to={`/${currentEventName}/registration_form`}>Registration <i className="fas fa-arrow-right"></i></Link>
                                 </div>
                             </div>
                         </div>
