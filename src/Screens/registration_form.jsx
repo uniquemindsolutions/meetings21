@@ -1,11 +1,72 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import EventHeader from '../Header/EventHeader'
 import { Link } from 'react-router-dom'
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 const RegistrationForm = () => {
 
+    const baseurl = process.env.REACT_APP_API_URL;
+  const location = useLocation();
 
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [currentEventName, setCurrentEventName] = useState('');
+  const [currentEventId, setCurrentEventId] = useState('');
+  const [regiFeedata, setRegifeeData] = useState('');
+  const [accmData, setAccmData] = useState('');
+
+const basedata = [ 
+    { key: "registration_type", name: 'Registration Type ' },
+    { key: "end_date", name: 'Date' },
+    { key: "invited_presentation", name: 'Invited Presentation' },
+    { key: "oral_presentation", name: 'Oral Presentation' },
+    { key: "poster_presentaion", name: 'Poster Presentation' },
+    { key: "student_delegate", name: 'Student Delegate' },
+    { key: "delegate", name: 'Delegate' },
+    { key: "virtual_presentation", name: 'Virtual Presentation' },
+    { key: "accommodation_name", name: 'accommodation_name' },
+    { key: "One_Night", name: 'One_Night' },
+    { key: "two_Nights", name: 'two_Nights' },
+    { key: "three_Nights", name: 'three_Nights' },
+    { key: "four_Nights", name: 'four_Nights' },
+  ];
+
+  const getNameByKey = (key) => {
+    const item = basedata.find((entry) => entry.key === key);
+    return item ? item.name : 'Not Found';
+  };
+
+  useEffect(()=>{
+    getregfeeData();
+    getaccmData();
+  }, [])
+
+  const getregfeeData = async ()=>{
+    const currentEvents = location.pathname.split('/');
+  setCurrentEventName(currentEvents[1])
+  try {
+      const res = await  axios.get(`${baseurl}${currentEvents[1]}/registration/register_categorys/`);
+      setRegifeeData(res.data);
+      console.log('speakersdata ===', res.data);
+  } catch {
+      setError('Error loaded')
+  }
+  }
+
+  const getaccmData = async ()=>{
+    const currentEvents = location.pathname.split('/');
+  setCurrentEventName(currentEvents[1])
+  try {
+      const res = await  axios.get(`${baseurl}${currentEvents[1]}/registration/accommodations/`);
+      setAccmData(res.data);
+      console.log('speakersdata ===', res.data);
+  } catch {
+      setError('Error loaded')
+  }
+  }
 
     return (
         <main>
@@ -26,90 +87,63 @@ const RegistrationForm = () => {
                 <h2>Registration Fees (USD)</h2>
                 <p>Fees that apply to payments received prior to the indicated deadlines.</p>
                 <table className='table table-striped table-hover table-bordered' border="1" cellspacing="0" cellpadding="8">
-                    <thead className='bg-primary text-white'>
+                <table border="1">
+                <thead>
                         <tr>
                             <th>Category</th>
-                            <th>Early Rate<br />Until January 21, 2025</th>
-                            <th>Standard Rate<br />Until April 28, 2025</th>
-                            <th>Late Rate<br />Until August 21, 2025</th>
+                            <th>Early Bird Registration</th>
+                            <th>Mid Term Registration</th>
+                            <th>Late Registration</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>Invited Presentation</td>
-                            <td>$ 649</td>
-                            <td>$ 749</td>
-                            <td>$ 849</td>
-                        </tr>
-                        <tr>
-                            <td>Oral Presentation</td>
-                            <td>$ 699</td>
-                            <td>$ 799</td>
-                            <td>$ 899</td>
-                        </tr>
-                        <tr>
-                            <td>Poster Presentation</td>
-                            <td>$ 399</td>
-                            <td>$ 499</td>
-                            <td>$ 599</td>
-                        </tr>
-                        <tr>
-                            <td>Student Delegate</td>
-                            <td>$ 299</td>
-                            <td>$ 399</td>
-                            <td>$ 499</td>
-                        </tr>
-                        <tr>
-                            <td>Delegate</td>
-                            <td>$ 799</td>
-                            <td>$ 899</td>
-                            <td>$ 999</td>
-                        </tr>
-                        <tr>
-                            <td>Virtual Presentation</td>
-                            <td>$ 199</td>
-                            <td>$ 299</td>
-                            <td>$ 399</td>
-                        </tr>
-                    </tbody>
-                </table>
+                    			
+      <tbody>  
+      { Array.isArray(regiFeedata) && regiFeedata?.length > 0 ? Object.keys(regiFeedata[0]).map((key, colIndex) => (
+        key !== "id" && key !=='domain' && key !=='registration_type' ? (
+          <tr key={colIndex+1}>
+             <td >{getNameByKey(key)}</td>
+            {regiFeedata.map((row, rowIndex) => (
+              <td key={`${colIndex}-${rowIndex}`}>{row[key]}</td>
+            ))}
+          </tr>
+    ) : null 
 
+        )): "no data"
+        }
+      </tbody>
+    </table>
+                </table>
+        
                 <h2 className='mt-5'>Accommodation Fees (USD)</h2>
                 <table className='table table-striped table-hover table-bordered' border="1" cellspacing="0" cellpadding="8">
-                    <thead className='bg-primary text-white'>
+                   
+                <table border="1">
+                    <thead>
                         <tr>
-                            <th>Category</th>
+                            <th>Accommodation Name</th>
                             <th>Single Occupancy</th>
                             <th>Double Occupancy</th>
                             <th>Triple Occupancy</th>
+                      
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>One Night</td>
-                            <td>$ 200</td>
-                            <td>$ 230</td>
-                            <td>$ 260</td>
-                        </tr>
-                        <tr>
-                            <td>Two Nights</td>
-                            <td>$ 400</td>
-                            <td>$ 460</td>
-                            <td>$ 520</td>
-                        </tr>
-                        <tr>
-                            <td>Three Nights</td>
-                            <td>$ 600</td>
-                            <td>$ 690</td>
-                            <td>$ 780</td>
-                        </tr>
-                        <tr>
-                            <td>Four Nights</td>
-                            <td>$ 800</td>
-                            <td>$ 920</td>
-                            <td>$ 1040</td>
-                        </tr>
-                    </tbody>
+                        <tbody>  
+                        { Array.isArray(accmData) &&
+                                accmData?.length > 0 ? Object.keys(accmData[0]).map((key, colIndex) => (
+                            key !== "id" && key !=='domain' &&  key !=='accommodation_name' ? (
+                            <tr key={colIndex+1}>
+                                <td >{getNameByKey(key)}</td>
+                                {accmData.map((row, rowIndex) => (
+                                <td key={`${colIndex}-${rowIndex}`}>{row[key]}</td>
+                                ))}
+                            </tr>
+                        ) : null 
+
+                            )):"No Data"
+                        }
+                        </tbody>
+                        </table>
+                       
                 </table>
 
                 <h6>*4.5% transaction fee to be added.</h6>
