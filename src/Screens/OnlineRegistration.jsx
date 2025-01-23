@@ -2,18 +2,114 @@ import React, { useEffect, useState } from 'react'
 import EventHeader from '../Header/EventHeader'
 import Footer from '../Footer/footer'
 import { Link } from 'react-router-dom'
-
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const OnlineRegistration = () => {
+
+    const onlineFormApi = process.env.REACT_APP_API_URL;
+
+    const location = useLocation();
+
+    const submitForm = {
+        title: "",
+        name: "",
+        email: "",
+        telephone: "",
+        organization: "",
+        city: "",
+        country: 0,
+
+    }
+
+    const [error, setError] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const [loading, setLoading] = useState(false);
     const [selectedPlans, setSelectedPlans] = useState([]);
     const [promoCode, setPromoCode] = useState(false);
     const [accompanying, setAccompanying] = useState(0);
     const [selectedRoom, setSelectedRoom] = useState("");
     const [totalPrice, setTotalPrice] = useState(1099); // Base registration price
 
+    const [submitFormData, setSubmitFormData] = useState(submitForm);
+    const [countries, setCountries] = useState([]);
+
     useEffect(() => {
         return window.scrollTo(0, 0)
     }, [])
+
+    // new code start
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        // Convert to integer for specific fields
+        // const intValueFields = ["country", "presentation_type", "topic_of_interest"];
+        // const parsedValue = intValueFields.includes(name) ? parseInt(value, 10) : value;
+        setSubmitFormData({ ...submitFormData, [name]: value });
+    };
+
+    const handleInputChangeCountry = (e) => {
+        const { name, value } = e.target;
+        console.log("country checking ===", e)
+        setSubmitFormData({ ...submitFormData, [name]: value });
+    };
+
+    const handleSubmitForm = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+
+        try {
+            const formData = new FormData();
+            Object.keys(submitFormData).forEach((key) => {
+                formData.append(key, submitFormData[key]);
+            });
+
+            // if (file) {
+            //     formData.append("file", file);
+            // }
+            
+            const currentEvents = location.pathname.split('/');
+            console.log("urlapi", `${onlineFormApi}${currentEvents[1]}/submissions/submit_abstract_form/`)
+            const response = await axios.post(
+                `${onlineFormApi}${currentEvents[1]}/submissions/submit_abstract_form/`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+            setSuccessMessage("Form submitted successfully");
+            console.log("submit_abstract_form", response.data);
+        } catch (error) {
+            console.error(error);
+            setError("Form submission failed");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const getCountry = async () => {
+        try {
+            const res = await axios.get(
+                "https://meetings21.com/Meetings21Backend/api/Country/"
+            );
+            setCountries(res.data);
+        } catch (err) {
+            setError("No data found");
+        }
+    };
+
+    const countryList = (countries) => {
+        if (!countries || countries.length === 0) {
+            return <option>No country found</option>;
+        }
+        return countries.map((c) => (
+            <option key={c.id} value={c.id}>
+                {c.country_name}
+            </option>
+        ));
+    };
+    // new code end
 
     const plans = [
         {
@@ -117,12 +213,18 @@ const OnlineRegistration = () => {
                             <div className="col-2">
                                 <div className="form-group">
                                     <label htmlFor="title">Title:</label>
-                                    <select className="form-control" id="title">
-                                        <option>Prof.</option>
-                                        <option>Dr.</option>
-                                        <option>Mr.</option>
-                                        <option>Ms.</option>
-                                        <option>Mrs.</option>
+                                    <select
+                                        onChange={handleInputChange}
+                                        name="title"
+                                        value={submitFormData.title}
+                                        className="form-control"
+                                        id="title"
+                                    >
+                                        <option value="Prof.">Prof.</option>
+                                        <option value="Dr.">Dr.</option>
+                                        <option value="Mr.">Mr.</option>
+                                        <option value="Ms.">Ms.</option>
+                                        <option value="Mrs.">Mrs.</option>
                                     </select>
                                 </div>
                             </div>
@@ -137,6 +239,9 @@ const OnlineRegistration = () => {
                                         </div>
                                         <input
                                             type="text"
+                                            name="name"
+                                            onChange={handleInputChange}
+                                            value={submitFormData.name}
                                             className="form-control"
                                             id="name"
                                             placeholder="Enter your name"
@@ -158,6 +263,9 @@ const OnlineRegistration = () => {
                                         </div>
                                         <input
                                             type="email"
+                                            name="email"
+                                            onChange={handleInputChange}
+                                            value={submitFormData.email}
                                             className="form-control"
                                             id="email"
                                             placeholder="Enter your email"
@@ -177,6 +285,9 @@ const OnlineRegistration = () => {
                                         </div>
                                         <input
                                             type="tel"
+                                            name="telephone"
+                                            onChange={handleInputChange}
+                                            value={submitFormData.telephone}
                                             className="form-control"
                                             id="phone"
                                             placeholder="Enter your phone number"
@@ -196,6 +307,9 @@ const OnlineRegistration = () => {
                                 </div>
                                 <input
                                     type="text"
+                                    name="organization"
+                                    onChange={handleInputChange}
+                                    value={submitFormData.organization}
                                     className="form-control"
                                     id="organization"
                                     placeholder="Organization/Institution"
@@ -215,6 +329,9 @@ const OnlineRegistration = () => {
                                         </div>
                                         <input
                                             type="text"
+                                            name="city"
+                                            onChange={handleInputChange}
+                                            value={submitFormData.city}
                                             className="form-control"
                                             id="city"
                                             placeholder="Enter your city name"
@@ -223,15 +340,17 @@ const OnlineRegistration = () => {
                                 </div>
                             </div>
                             <div className="col-sm-6">
-                                <div className="form-group">
-                                    <label htmlFor="country">Country:</label>
-                                    <select className="form-control" id="country">
-                                        <option>Select country</option>
-                                        <option>India</option>
-                                        <option>USA</option>
-                                        <option>UK</option>
-                                    </select>
-                                </div>
+                                <label htmlFor="country">Country:</label>
+                                <select
+                                    onChange={handleInputChangeCountry}
+                                    name="country"
+                                    value={submitFormData.country || ""}
+                                    className="form-control"
+                                    id="country"
+                                >
+                                    <option value="">Select country</option>
+                                    {countryList(countries)}
+                                </select>
                             </div>
                         </div>
 
