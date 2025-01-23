@@ -35,11 +35,7 @@ const Committee = () => {
         }
     }
 
-
-
-
     return (
-
         <div>
             <div>
                 <EventHeader />

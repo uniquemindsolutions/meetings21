@@ -45,24 +45,25 @@ function App() {
         <Route path="/policies" element={<Policies />} />
         <Route path="/code-of-conduct" element={<CodeOfConduct />} />
         <Route path="/contact" element={<Contacts />} />
-        <Route path="/:name/:id/events" element={<Events />} />
+        <Route path="/:id/:name/" element={<Events />} />
+        <Route path="/:name" element={<Events />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog-details/:id" element={<BlogDetails />} />
-        <Route path="/:name/:id/contact-us" element={<ContactsEvent />} />
-        <Route path="/:name/:id/policies-event" element={<PoliciesEvents />} />
-        <Route path="/:name/:id/committee" element={<Committee />} />
-        <Route path="/:name/:id/topics" element={<Topics />} />
-        <Route path="/:name/:id/call-for-Abstracts" element={<Abstract />} />
-        <Route path="/:name/:id/submit-abstract" element={<SubmitAbstract />} />
-        <Route path="/:name/:id/awards" element={<Awards />} />
-        <Route path="/:name/:id/sponsors" element={<Sponsors />} />
-        <Route path="/:name/:id/venue" element={<Venue />} />
-        <Route path="/:name/:id/speakers" element={<Speakers />} />
-        <Route path="/:name/:id/programs" element={<Programs />} />
-        <Route path="/:name/:id/registration_form" element={<RegistrationForm />} />
-        <Route path="/:name/:id/presentation-guidelines" element={<PresentationGuidelines />} />
-        <Route path="/:name/:id/online-registration" element={<OnlineRegistration />} />
-        <Route path="/:name/:id/discount-form" element={<DiscountForm />} />
+        <Route path="/:name/contact-us" element={<ContactsEvent />} />
+        <Route path="/:name/policies-event" element={<PoliciesEvents />} />
+        <Route path="/:name/committee" element={<Committee />} />
+        <Route path="/:name/topics" element={<Topics />} />
+        <Route path="/:name/call-for-Abstracts" element={<Abstract />} />
+        <Route path="/:name/submit-abstract" element={<SubmitAbstract />} />
+        <Route path="/:name/awards" element={<Awards />} />
+        <Route path="/:name/sponsors" element={<Sponsors />} />
+        <Route path="/:name/venue" element={<Venue />} />
+        <Route path="/:name/speakers" element={<Speakers />} />
+        <Route path="/:name/programs" element={<Programs />} />
+        <Route path="/:name/registration_form" element={<RegistrationForm />} />
+        <Route path="/:name/presentation-guidelines" element={<PresentationGuidelines />} />
+        <Route path="/:name/online-registration" element={<OnlineRegistration />} />
+        <Route path="/:name/discount-form" element={<DiscountForm />} />
       </Routes>
       
       <Outlet />

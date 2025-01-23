@@ -92,7 +92,7 @@ const Meetings = () => {
           ) : currentEventName && Array.isArray(currentEventName) && currentEventName.length > 0 ? (
             currentEventName.map((items, index) => (
               <div key={index} className="col-md-5 offset-md-1">
-                <Link to={`/${items.domain_name}/${items.domain_id}/events`} className="event-card">
+                <Link to={`/${items.domain_name}`} className="event-card">
                   <div className='event-card-img'>
                     <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
                   </div>
@@ -114,8 +114,11 @@ const Meetings = () => {
           )}
 
 
-          {/* <div className="col-md-5  offset-md-1">
-            <Link to="/events" target='_blank' className="event-card">
+          
+
+
+          <div className="col-md-5  offset-md-1">
+            <Link to="http://localhost:3000/2025/material-science" target='_blank' className="event-card">
               <div className='event-card-img'>
                 <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
               </div>
@@ -130,7 +133,7 @@ const Meetings = () => {
                 </p>
               </div>
             </Link>
-          </div> */}
+          </div>
         </div>
 
 

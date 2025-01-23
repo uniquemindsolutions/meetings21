@@ -119,7 +119,7 @@ const RegistrationForm = () => {
             <div className="text-center my-5">
                 <div class="index3-plan-btn text-center">
                     <div class="generic-btn">
-                        <Link to="/online-registration">Proceed to Registration <i class="fas fa-arrow-right"></i></Link>
+                        <Link to="/:name/:id/online-registration">Proceed to Registration <i class="fas fa-arrow-right"></i></Link>
                     </div>
                 </div>
             </div>

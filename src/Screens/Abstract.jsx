@@ -1,9 +1,44 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../Footer/footer'
 import EventHeader from '../Header/EventHeader'
-const Abstract = () => {
-    return (
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
+const Abstract = () => {
+
+    const abstractApi = process.env.REACT_APP_API_URL;
+
+    const [abstractData, setAbstractData] = useState([])
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+    const [currentEventName, setCurrentEventName] = useState('');
+
+    console.log("abstractData ===", abstractData)
+
+    const location = useLocation();
+
+
+    useEffect(() => {
+        getAbstract();
+    }, [])
+
+    const getAbstract = async () => {
+        setLoading(true);
+        try {
+            const currentEvents = location.pathname.split('/');
+            // setCurrentEventName(currentEvents[1])
+
+            const res = await axios.get(abstractApi + currentEvents[1] + '/submissions/call_for_abstract/')
+            setAbstractData(res.data)
+            console.log("AbstractData === ", res.data)
+        } catch {
+            setError("no data found")
+        }
+    }
+
+
+
+    return (
         <div className='call-abstract-p'>
             <div>
                 <EventHeader />
@@ -30,54 +65,55 @@ const Abstract = () => {
                         </div>
                     </div>
                 </section>
+
                 <section className="mt-5">
                     <div className="container">
-
                         <div className="row">
-                            <div className="col-md-6 display-table margin-25px-top">
-                                <h4 className="mb-3">Key Dates</h4>
-                                <div className="card">
-                                    <div className="card-body">
-                                        <li className="form-control-md">Super Earlybird Registration closes on: <span className="color-p font-weight-bold">February 28, 2024</span></li>
-                                    </div>
-                                    <div className="card-body">
-                                        <li className="font-size-15px">Earlybird Registration closes on: <span className="color-p font-weight-bold">June 28, 2024</span></li>
+                            {
+                                abstractData.map((abs) => {
+                                    {
+                                        if (abs.select_heading === 'Key dates') {
+                                            return <div className="col-md-6 display-table margin-25px-top">
+                                                <div className="card">
+                                                    <div className="card-header bg-info">
+                                                        <h4 className="text-white">Key Dates</h4>
+                                                    </div>
+                                                    <div className="card-body">
+                                                        <p dangerouslySetInnerHTML={{ __html: abs.abstracts_description }}></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
 
+                                        if (abs.select_heading === 'Presenation Types') {
+                                            return <div className="col-md-6 display-table margin-25px-top">
+                                                <div className="card">
+                                                    <div className="card-header bg-info">
+                                                        <h4 className="text-white">Presenation Types</h4>
+                                                    </div>
+                                                    <div className="card-body">
+                                                        <p dangerouslySetInnerHTML={{ __html: abs.abstracts_description }}></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                    {/* if (member.committe_type === 'Chair') {
+                                return (
+                                    <div className="col-lg-6 col-md-6 mb-4">
+                                        <h4>CHAIR</h4>
+                                        <div className="committee-box h-100">
+                                            <h4>{member.member_name}</h4>
+                                            <p>{member.member_affiliation}</p>
+                                        </div>
                                     </div>
-                                    <div className="card-body">
-                                        <li className="font-size-15px">Standard Registration closes on: <span className="color-p font-weight-bold">September 15, 2024</span></li>
-                                    </div>
+                                );
+                            } */}
 
-                                    <div className="card-body">
-                                        <li className="font-size-15px">Abstract submission closes on: <span className="color-p font-weight-bold">August 30, 2024</span></li>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div className="col-md-6 display-table margin-25px-top">
-                                <h4 className="mb-3">Presentation Types</h4>
-                                <div className="card">
-                                    <div className="card-body">
-                                        <li className="form-control-md">Plenary Presentation <span className="color-p font-weight-bold">(40 minutes including Q&A)</span></li>
-                                    </div>
-                                    <div className="card-body">
-                                        <li className="font-size-15px">Keynote Presentation  <span className="color-p font-weight-bold">(30 minutes including Q&A)</span></li>
-
-                                    </div>
-                                    <div className="card-body">
-                                        <li className="font-size-15px">Poster Presentation  <span className="color-p font-weight-bold">(in person at the Congress)</span></li>
-                                    </div>
-
-                                    <div className="card-body">
-                                        <li className="font-size-15px">Invited Presentation  <span className="color-p font-weight-bold">(25 minutes including Q&A)</span></li>
-                                    </div>
-                                    <div className="card-body">
-                                        <li className="font-size-15px">Oral Presentation   <span className="color-p font-weight-bold">(20 minutes including Q&A)</span></li>
-                                    </div>
-                                </div>
-                            </div>
-
+                                })
+                            }
                         </div>
+
                     </div>
                 </section>
 

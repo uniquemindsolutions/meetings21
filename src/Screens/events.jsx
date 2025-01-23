@@ -23,10 +23,15 @@ import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
 window.$ = window.jQuery = $; // Expose jQuery globally
+
 const Events = () => {
+
+    const location = useLocation();
+    console.log("checking url", location.pathname)
 
     const testimonialApi = process.env.REACT_APP_API_URL;
     const bannersApi = process.env.REACT_APP_API_URL;
+    const aboutContentApi = process.env.REACT_APP_API_URL;
     const aboutBannersApi = process.env.REACT_APP_API_URL;
     const expertsGalleryApi = process.env.REACT_APP_API_URL;
     const recentNewsApi = process.env.REACT_APP_API_URL;
@@ -37,24 +42,30 @@ const Events = () => {
     const [openModalId, setOpenModalId] = useState(null);
     const [testiData, setTestiData] = useState([])
     const [bannersData, setBannersData] = useState([])
+    const [aboutContent, setAboutContent] = useState([])
     const [aboutBanner, setAboutBanner] = useState([])
     const [expertsGallery, setExpertsGallery] = useState([])
     const [recentNews, setRecentNews] = useState([])
     const [ourPartners, setOurPartners] = useState([])
     const { eventName } = useParams();
-    const location = useLocation();
+
 
     useEffect(() => {
+        if (window.location.origin + location.pathname == window.location.origin + '/2025/material-science') {
+            window.location.href = window.location.origin + "/material-science"
+        }
+
         fetchingApis();
     }, [])
 
     const fetchingApis = async () => {
         try {
             const currentEvents = location.pathname.split('/');
-            const [testimonialRes, bannersRes, aboutBannerRes, expertsGalleryRes, recentNewsRes, ourPartnersRes] = await Promise.all([
+            const [testimonialRes, bannersRes, aboutContentRes, aboutBannerRes, expertsGalleryRes, recentNewsRes, ourPartnersRes] = await Promise.all([
                 axios.get(testimonialApi + currentEvents[1] + '/event/testimonials/'),
                 axios.get(bannersApi + currentEvents[1] + '/event/banner/'),
-                axios.get(aboutBannersApi + currentEvents[1] + '/event/about/'),
+                axios.get(aboutContentApi + currentEvents[1] + '/event/about'),
+                axios.get(aboutBannersApi + currentEvents[1] + '/event/about/Images/'),
                 axios.get(expertsGalleryApi + currentEvents[1] + '/event/experts/'),
                 axios.get(recentNewsApi + currentEvents[1] + '/event/news/'),
                 axios.get(ourPartnersApi + currentEvents[1] + '/event/partners/'),
@@ -62,11 +73,12 @@ const Events = () => {
 
             setTestiData(testimonialRes.data);
             setBannersData(bannersRes.data);
+            setAboutContent(aboutContentRes.data)
             setAboutBanner(aboutBannerRes.data)
             setExpertsGallery(expertsGalleryRes.data)
             setRecentNews(recentNewsRes.data)
             setOurPartners(ourPartnersRes.data)
-            console.log("ourPartnersRes data ===", ourPartnersRes);
+            console.log("aboutContent data ===", aboutContentRes);
         } catch {
             setError('Error: no data found')
         }
@@ -221,20 +233,20 @@ const Events = () => {
                         <div className="index3-banner-outer-con">
 
                             {/* bootstrap slider start */}
-                            <div id="demo" class="carousel slide" data-bs-ride="carousel">
+                            <div id="demo" className="carousel slide" data-bs-ride="carousel">
 
 
-                                <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" class="active"></button>
+                                {/* <div className="carousel-indicators">
+                                    <button type="button" data-bs-target="#demo" data-bs-slide-to="0" className="active"></button>
                                     <button type="button" data-bs-target="#demo" data-bs-slide-to="1"></button>
                                     <button type="button" data-bs-target="#demo" data-bs-slide-to="2"></button>
-                                </div>
+                                </div> */}
 
 
-                                <div class="carousel-inner">
+                                <div className="carousel-inner">
                                     {Array.isArray(bannersData) &&
                                         bannersData.length > 0 ? bannersData.map((banner) => {
-                                            return <div class="carousel-item active">
+                                            return <div className="carousel-item active" data-interval="false">
                                                 <div className="index3-banner-inner-con">
                                                     <div className="index3-banner-img-con">
                                                         <figure className="mb-0">
@@ -258,11 +270,11 @@ const Events = () => {
 
                                 </div>
 
-                                <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon"></span>
+                                <button className="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                                    <span className="carousel-control-prev-icon"></span>
                                 </button>
-                                <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon"></span>
+                                <button className="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                                    <span className="carousel-control-next-icon"></span>
                                 </button>
                             </div>
                             {/* bootstrap slider end */}
@@ -339,35 +351,44 @@ const Events = () => {
                     <div className="container-fluid p-md-5">
                         <div className="journey-inner-con">
                             <div className="journey-text-con">
-                                <div className="">
-                                    <span className="small-text">MSEDUBAI2025</span>
-                                    <h2>About Conference</h2>
-                                    <p>Dear Colleagues,</p>
-                                    <p>
-                                        It is our great pleasure to welcome you to the International Congress of Materials Science and Engineering (MSEDUBAI2025) that will be held on October 21-23, 2025 at Hotel Crowne Plaza Dubai-Deira in Dubai, UAE. MSEDUBAI2025 is intended as an International Forum for those who wish to present their latest research results, innovative ideas, and experiences in the fields of Materials Science and Engineering.
-                                    </p>
-                                    <p>
-                                        Progress in materials science is always linked to the progress and welfare of human civilization. Future advances in multiple fields of science and engineering critically depend on the availability of superior materials. This congress, accordingly, attempts to provide a platform for researchers, scientists, engineers and students to share their findings and experience on the emerging and interesting trends of multifaceted materials science.
-                                    </p>
-                                    <p>
-                                        We would be honored to have your presence and active participation at MSEDUBAI2025. Your expertise and insights would greatly contribute to the success of the conference, and we believe your research and experience will inspire fellow participants.
-                                    </p>
-                                    <p>
-                                        <div>Sincerely,</div>
-                                        <div>Organizing Committee</div>
-                                    </p>
-
-                                    {/* <div className="generic-btn">
-                                    <a href="about.html">READ MORE <i className="fas fa-arrow-right"></i></a>
-                                </div> */}
-                                </div>
+                            {
+                                    aboutContent.map((cnt)=>(
+                                        <div>
+                                            <span className="small-text">{cnt.event_short_name}</span>
+                                            <h2>{cnt.event_heading}</h2> 
+                                            {/* <p>{cnt.event_description}</p> */}
+                                            <p dangerouslySetInnerHTML={{ __html: cnt.event_description }}></p>
+                                        </div>
+                                   
+                                    ))
+                                }
+                                
 
                             </div>
 
                             <div className="journey-video-con d-inline-block">
                                 <div className="ticket-right-section">
 
+
                                     <Swiper
+                                        spaceBetween={50}
+                                        slidesPerView={1}
+                                        navigation
+                                        pagination={{ clickable: true }}
+                                        loop={true}
+                                        modules={[Navigation, Pagination]}
+                                    >
+                                        {
+                                            aboutBanner.map((img) => (
+                                                <SwiperSlide>
+                                                    <img src={img.event_image} className='img-fluid w-100' alt="" />
+                                                </SwiperSlide>
+                                            ))
+                                        }
+                                    </Swiper>
+                                       
+
+                                    {/* <Swiper
                                         spaceBetween={50}
                                         slidesPerView={1}
                                         navigation
@@ -384,7 +405,7 @@ const Events = () => {
                                         <SwiperSlide>
                                             <img src={process.env.PUBLIC_URL + '/' + "images/event-sm-slider.jpg"} className='img-fluid w-100' alt="" />
                                         </SwiperSlide>
-                                    </Swiper>
+                                    </Swiper> */}
 
                                 </div>
                                 {/* <div id="light">
@@ -715,7 +736,7 @@ const Events = () => {
                             <div className="tab-content" id="myTabContent">
                                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <div id="accordion" className="index3-faqs table-responsive">
-                                        <table class="schedule-table table table-striped table-hover" border="1" cellpadding="10" cellspacing="0">
+                                        <table className="schedule-table table table-striped table-hover" border="1" cellpadding="10" cellspacing="0">
                                             <thead className='text-dark'>
                                                 <tr>
                                                     <th>Time</th>
@@ -771,7 +792,7 @@ const Events = () => {
                                 </div>
                                 <div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                                     <div id="accordion" className="index3-faqs table-responsive">
-                                        <table class="schedule-table table table-striped table-hover" border="1" cellpadding="10" cellspacing="0">
+                                        <table className="schedule-table table table-striped table-hover" border="1" cellpadding="10" cellspacing="0">
                                             <thead className='text-dark'>
                                                 <tr>
                                                     <th>Time</th>
@@ -827,7 +848,7 @@ const Events = () => {
                                 </div>
                                 <div className="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                                     <div id="accordion" className="index3-faqs">
-                                        <table class="schedule-table table table-striped table-hover" border="1" cellpadding="10" cellspacing="0">
+                                        <table className="schedule-table table table-striped table-hover" border="1" cellpadding="10" cellspacing="0">
                                             <thead className='text-dark'>
                                                 <tr>
                                                     <th>Time</th>
@@ -1075,14 +1096,14 @@ const Events = () => {
 
                         </div>
                         <div className="index3-testimonial-inner-con testimonialSlides">
-                            <div id="owl-carouselone" className="owl-carousel owl-theme"> 
-                                { Array.isArray(testiData) &&
+                            <div id="owl-carouselone" className="owl-carousel owl-theme">
+                                {Array.isArray(testiData) &&
                                     testiData.length > 0 ? (testiData.map((item) => (
-                                        <div className="item"> 
+                                        <div className="item">
                                             <div className="index3-testimonial-box position-relative">
                                                 <figure className="mb-0">
                                                     <img src={item.testimonials_image} style={{ width: '50px', height: "50px" }} className="img-fluid" alt="index3-client-img1" />
-                                                </figure>fsadfdsafdsaf
+                                                </figure>
                                                 <p dangerouslySetInnerHTML={{ __html: item.testimonials_description }}></p>
                                                 <h6>{item.testimonials_name}</h6>
                                                 <small>{item.testimonials_position}</small>
@@ -1096,7 +1117,7 @@ const Events = () => {
                                     ))) : "no data"
                                 }
 
-                                
+
 
                                 {/* <div className="item">
                                     <div className="index3-testimonial-box position-relative">
@@ -1230,19 +1251,19 @@ const Events = () => {
                         </div>
                         <div className="blogs-inner-con">
                             {
-                                recentNews.map((news)=>(
+                                recentNews.map((news) => (
                                     <div className="blog-box position-relative">
-                                <div className="blog-img position-relative">
-                                    <span className="d-inline-block">{news.news_about}</span>
-                                    <figure className="mb-0">
-                                        <img src={news.news_image} className='img-fluid' alt="blog-img1" />
-                                    </figure>
-                                </div>
-                                <div className="blog-text">
-                                    <span className="d-block">{news.news_date}</span>
-                                    <h6 className="position-relative"><a href="single-blog.html">{news.news_description}</a></h6>
-                                </div>
-                            </div>
+                                        <div className="blog-img position-relative">
+                                            <span className="d-inline-block">{news.news_about}</span>
+                                            <figure className="mb-0">
+                                                <img src={news.news_image} className='img-fluid' alt="blog-img1" />
+                                            </figure>
+                                        </div>
+                                        <div className="blog-text">
+                                            <span className="d-block">{news.news_date}</span>
+                                            <h6 className="position-relative"><a href="single-blog.html">{news.news_description}</a></h6>
+                                        </div>
+                                    </div>
                                 ))
                             }
                             {/* <div className="blog-box position-relative">
@@ -1287,13 +1308,22 @@ const Events = () => {
                 <SubscribeSection />
                 <div className="index3-sponsers-main-section sponsers-main-section w-100 float-left">
                     <div className="container">
-                        <div class="generic-title2 text-center">
-                            {/* <span class="small-text">SKILLS &amp; EXPERIENCE</span> */}
-                            <h2 class="mb-0">Our Partners & Sponsors</h2>
+                        <div className="generic-title2 text-center">
+                            {/* <span className="small-text">SKILLS &amp; EXPERIENCE</span> */}
+                            <h2 className="mb-0">Our Partners & Sponsors</h2>
                         </div>
                         <div className="sponsers-companies">
                             <ul className="list-unstyled mb-0">
-                                <li>
+                                {
+                                    ourPartners.map((p) => (
+                                        <li>
+                                            <figure className="mb-0">
+                                                <img src={p.partners_logo} className='img-fluid' alt="sponsers-logo1" />
+                                            </figure>
+                                        </li>
+                                    ))
+                                }
+                                {/* <li>
                                     <figure className="mb-0">
                                         <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo1.png"} alt="sponsers-logo1" />
                                     </figure>
@@ -1317,7 +1347,7 @@ const Events = () => {
                                     <figure className="mb-0">
                                         <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo5.png"} alt="sponsers-logo5" />
                                     </figure>
-                                </li>
+                                </li> */}
                             </ul>
                         </div>
                     </div>

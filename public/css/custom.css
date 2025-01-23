@@ -5666,11 +5666,12 @@ figure.speakers-box{
 .list-style-5 li:before {
     content: "\27A4";
     position: absolute;
-    top: 1px;
+    top: 4px;
     left: 0;
     font-family: Font Awesome\ 5 Free;
     font-weight: 400;
-    color: #8f8e8e;
+    color: #231769;
+    font-size: 12px;
 }
 .list-style-5 {
     list-style: none;

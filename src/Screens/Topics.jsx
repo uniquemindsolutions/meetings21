@@ -1,9 +1,37 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import Footer from '../Footer/footer'
 import EventHeader from '../Header/EventHeader'
-const Topics = () => {
-    return (
+import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
+const Topics = () => {
+
+    const topicsUrl = process.env.REACT_APP_API_URL ;
+
+    const location = useLocation();
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+    const [currentEventName, setCurrentEventName] = useState('');
+
+    useEffect(()=>{
+        getTopics();
+    }, [])
+
+    const getTopics = async ()=>{
+        setLoading(true);
+        const currentEvents = location.pathname.split('/');
+        setCurrentEventName(currentEvents[1])
+        try {
+            const res = await axios.get(topicsUrl + currentEvents[1] + '/submissions/topics/')
+            setCurrentEventName(res.data)
+            console.log("topics ===", res.data)
+        } catch{
+            setError('no data found')
+        }
+    }
+
+    return (
         <div>
             <div>
                 <EventHeader />
@@ -27,8 +55,19 @@ const Topics = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-md-6 col-sm-12 col-xs-12 display-table margin-25px-top">
+                    <div className="col-md-8 col-sm-12 col-xs-12 offset-md-2 display-table margin-25px-top">
+                       <div className="card shadow">
+                        <div className="card-body">
                         <ul className="no-padding list-style-5">
+                            { Array.isArray(currentEventName) &&
+                               currentEventName.length>0 ? currentEventName.map((item)=>(
+                                    <li>{item.topic_name}</li>
+                                )): "no data found"
+                            }
+                            </ul>
+                        </div>
+                       </div>
+                        {/*<ul className="no-padding list-style-5">
                             <li>Industrial Engineering and Management</li>
                             <li>Artificial intelligence in Production</li>
                             <li>Sustainable Manufacturing</li>
@@ -38,10 +77,10 @@ const Topics = () => {
                             <li>Quality Engineering &amp; Supply Chain Management</li>
                             <li>Production Planning and Quality Control</li>
                             <li>Manufacturing Processes &amp; Technology</li>
-                            <li>Automation &amp; Robotics</li>
-                        </ul>
+                            <li>Automation &amp; Robotics</li> 
+                        </ul>*/}
                     </div>
-                    <div className="col-md-6 col-sm-12 col-xs-12 display-table margin-25px-top">
+                    {/* <div className="col-md-6 col-sm-12 col-xs-12 display-table margin-25px-top">
                         <ul className="no-padding list-style-5">
                             <li>Systems Engineering</li>
                             <li>Computer Aided Manufacturing &amp; Design</li>
@@ -54,7 +93,7 @@ const Topics = () => {
                             <li>Fluid Mechanics</li>
                             <li>Control System</li>
                         </ul>
-                    </div>
+                    </div> */}
                 </div>
                 <div className="row">
                     <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 center-col margin-two-top margin-two-bottom sm-margin-15px-bottom xs-margin-10px-bottom text-center">

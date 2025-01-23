@@ -28,7 +28,7 @@ const BannerSection = () => {
     useEffect(() => {
         gethomebanners();
 
-       
+
 
         // $('#owl-carouseltwo').owlCarousel({
         //     loop: true,
@@ -103,16 +103,69 @@ const BannerSection = () => {
         }
     });
 
-    
+
 
     return (
         <>
             <section className="banner-main-section w-100 float-left">
                 <div className="container-fluid bnr-mob">
                     <div className="banner-outer-con">
+                        {/* new banner start */}
+                        <div id="demo" className="carousel slide" data-bs-ride="carousel">
+                            <div className="carousel-inner">
+                                {Array.isArray(bannersData) &&
+                                    bannersData.length > 0 ? (bannersData.map((item) => (
+                                        <div className="carousel-item active">
+                                            <div className="banner-inner-section">
+                                                <div className="banner-left-section">
+                                                    <h1 className="text-white">{item.home_page_banner_heading}</h1>
+                                                    <span>{item.home_page_banner_subheading}</span>
+                                                    <div className="generic-btn">
+                                                        <Link to="upcoming-meetings">
+                                                            Explore Meetings <i className="fas fa-arrow-right"></i>
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                                <div className="banner-right-section">
+                                                    <figure>
+                                                        <img
+                                                            src={item.home_page_banner_image}
+                                                            alt="banner-right-img"
+                                                            className="img-fluid"
+                                                        />
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    ))) : "no data"
+                                }
+
+                                {/* <div className="carousel-item active">
+                                <img src="la.jpg" alt="Los Angeles" className="d-block w-100" />
+                            </div>
+                            <div className="carousel-item">
+                                <img src="chicago.jpg" alt="Chicago" className="d-block w-100" />
+                            </div>
+                            <div className="carousel-item">
+                                <img src="ny.jpg" alt="New York" className="d-block w-100" />
+                            </div> */}
+                            </div>
+
+
+                            <button className="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                                <span className="carousel-control-prev-icon"></span>
+                            </button>
+                            <button className="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                                <span className="carousel-control-next-icon"></span>
+                            </button>
+                        </div>
+                    </div>
+                    {/* new banner end */}
+
+                    <div className="banner-outer-con">
                         <div id="owl-carouselone" className="owl-carousel owl-theme">
 
-                            { Array.isArray(bannersData) &&
+                            {/* {Array.isArray(bannersData) &&
                                 bannersData.length > 0 ? (bannersData.map((item, index) => (
                                     <div key={index} className="item">
                                         <div className="banner-inner-section">
@@ -137,7 +190,7 @@ const BannerSection = () => {
                                         </div>
                                     </div>
                                 ))) : "no data"
-                            }
+                            } */}
 
 
                             {/* {loading ? (
