@@ -37,61 +37,6 @@ const Speakers = () => {
 
   const openModal = (id) => setOpenModalId(id);
   const closeModal = () => setOpenModalId(null);
-//   const speakers = [
-//     {
-//         id: 1,
-//         name: "Federico Rosei",
-//         talkTitle: "Lorem Ipsum is simply dummy text",
-//         Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-//         image: "images/speakers/pspeaker1.png",
-//         details: [
-//             "2010 PEO Engineering Medal for Entrepreneurship",
-//             "2013 EIC Sir John Kennedy Medal",
-//             "2016 IEEE A.G.L. McNaughton Gold Medal",
-//         ],
-//         position: "INRS, Canada",
-//     },
-//     {
-//         id: 2,
-//         name: "Ben Zhong TANG",
-//         talkTitle: "Lorem Ipsum is simply dummy text",
-//         Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-//         image: "images/speakers/pspeaker2.jpg",
-//         details: [
-//             "2010 PEO Engineering Medal for Entrepreneurship",
-//             "2013 EIC Sir John Kennedy Medal",
-//             "2016 IEEE A.G.L. McNaughton Gold Medal",
-//         ],
-//         position: "Ben Zhong TANG",
-//     },
-//     {
-//         id: 3,
-//         name: "Jose M. Kenny",
-//         talkTitle: "Lorem Ipsum is simply dummy text",
-//         Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-//         image: "images/speakers/pspeaker3.jpg",
-//         details: [
-//             "2010 PEO Engineering Medal for Entrepreneurship",
-//             "2013 EIC Sir John Kennedy Medal",
-//             "2016 IEEE A.G.L. McNaughton Gold Medal",
-//         ],
-//         position: "University of Perugia, Italy",
-//     },
-//     {
-//         id: 4,
-//         name: "Jan DUSZA",
-//         talkTitle: "Lorem Ipsum is simply dummy text",
-//         Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-//         image: "images/speakers/pspeaker4.jpg",
-//         details: [
-//             "2010 PEO Engineering Medal for Entrepreneurship",
-//             "2013 EIC Sir John Kennedy Medal",
-//             "2016 IEEE A.G.L. McNaughton Gold Medal",
-//         ],
-//         position: "Institute of Materials Research of SAS, Slovakia",
-//     },
-// ];
-
 
   return (
 

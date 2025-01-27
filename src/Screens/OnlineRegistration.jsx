@@ -7,8 +7,7 @@ import { useLocation } from 'react-router-dom';
 
 const OnlineRegistration = () => {
 
-    const onlineFormApi = process.env.REACT_APP_API_URL;
-
+    const baseurl = process.env.REACT_APP_API_URL;
     const location = useLocation();
 
     const submitForm = {
@@ -34,9 +33,62 @@ const OnlineRegistration = () => {
     const [submitFormData, setSubmitFormData] = useState(submitForm);
     const [countries, setCountries] = useState([]);
 
+    const [regiFeedata, setRegifeeData] = useState('');
+    const [accmData, setAccmData] = useState('');
+    const [currentEventName, setCurrentEventName] = useState('');
+
+
+    const basedata = [ 
+        { key: "registration_type", name: 'Registration Type ' },
+        { key: "end_date", name: 'Date' },
+        { key: "invited_presentation", name: 'Invited Presentation' },
+        { key: "oral_presentation", name: 'Oral Presentation' },
+        { key: "poster_presentaion", name: 'Poster Presentation' },
+        { key: "student_delegate", name: 'Student Delegate' },
+        { key: "delegate", name: 'Delegate' },
+        { key: "virtual_presentation", name: 'Virtual Presentation' },
+        { key: "accommodation_name", name: 'accommodation_name' },
+        { key: "One_Night", name: 'One_Night' },
+        { key: "two_Nights", name: 'two_Nights' },
+        { key: "three_Nights", name: 'three_Nights' },
+        { key: "four_Nights", name: 'four_Nights' },
+      ];
+    
+      const getNameByKey = (key) => {
+        const item = basedata.find((entry) => entry.key === key);
+        return item ? item.name : 'Not Found';
+      };
+
     useEffect(() => {
+        getCountry();
+        getregfeeData();
+        getaccmData();
         return window.scrollTo(0, 0)
     }, [])
+
+    const getregfeeData = async ()=>{
+        const currentEvents = location.pathname.split('/');
+      setCurrentEventName(currentEvents[1])
+      try {
+          const res = await  axios.get(`${baseurl}${currentEvents[1]}/registration/register_categorys/`);
+          setRegifeeData(res.data);
+          console.log('speakersdata ===', res.data);
+      } catch {
+          setError('Error loaded')
+      }
+      }
+    
+      const getaccmData = async ()=>{
+        const currentEvents = location.pathname.split('/');
+      setCurrentEventName(currentEvents[1])
+      try {
+          const res = await  axios.get(`${baseurl}${currentEvents[1]}/registration/accommodations/`);
+          setAccmData(res.data);
+          console.log('speakersdata ===', res.data);
+      } catch {
+          setError('Error loaded')
+      }
+      }
 
     // new code start
     const handleInputChange = (e) => {
@@ -68,9 +120,9 @@ const OnlineRegistration = () => {
             // }
             
             const currentEvents = location.pathname.split('/');
-            console.log("urlapi", `${onlineFormApi}${currentEvents[1]}/submissions/submit_abstract_form/`)
+            console.log("urlapi", `${baseurl}${currentEvents[1]}/submissions/submit_abstract_form/`)
             const response = await axios.post(
-                `${onlineFormApi}${currentEvents[1]}/submissions/submit_abstract_form/`,
+                `${baseurl}${currentEvents[1]}/submissions/submit_abstract_form/`,
                 formData,
                 {
                     headers: {
@@ -188,6 +240,12 @@ const OnlineRegistration = () => {
         setAccompanying(0);
         setSelectedRoom("");
         setTotalPrice(1099);
+    };
+
+    const handleaccom = (e) => {
+       
+        const { name, value } = e.target;
+        setSubmitFormData({ ...submitFormData, [name]: value });
     };
 
     return (
@@ -395,15 +453,15 @@ const OnlineRegistration = () => {
                     <div className="my-5 regster-packages">
                         <h5 className='mb-4'>Registration</h5>
                         <div className="row">
-                            {plans.map((plan, index) => (
+                            {Array.isArray(regiFeedata) && regiFeedata.length > 0 ? (regiFeedata.map((plan,index) => (
                                 <div className="col-md-4" key={index}>
                                     <div
                                         className={`card text-center ${plan.highlight ? "text-dark" : " text-dark"
                                             }`}
                                     >
                                         <div className="card-header bg-dark text-white">
-                                            <h5 className="card-title">{plan.title}</h5>
-                                            <p className="mb-0">{plan.date}</p>
+                                            <h5 className="card-title">{plan.registration_type}</h5>
+                                            <p className="mb-0">{plan.end_date}</p>
                                             <small>Oral/ Poster/ Delegate</small>
 
                                             <div className='text-center'>
@@ -427,21 +485,21 @@ const OnlineRegistration = () => {
                                                 <label className="d-flex justify-content-between">
                                                     <span>
                                                         <input type="radio" name={`plan-${index}`} className="mr-2" />
-                                                        Academic
+                                                        Invited Presentation   
                                                     </span>
 
                                                     <span className="float-right text-danger font-weight-bold">
-                                                        ${plan.price.Academic}
+                                                        ${plan.invited_presentation}
                                                     </span>
                                                 </label>
 
                                                 <label className="d-flex justify-content-between">
                                                     <span>
                                                         <input type="radio" name={`plan-${index}`} className="mr-2" />
-                                                        Industry
+                                                        Oral Presentation
                                                     </span>
                                                     <span className="float-right text-danger font-weight-bold">
-                                                        ${plan.price.Industry}
+                                                    ${plan.oral_presentation}
                                                     </span>
                                                 </label>
 
@@ -451,24 +509,53 @@ const OnlineRegistration = () => {
                                                         Student
                                                     </span>
                                                     <span className="float-right text-danger font-weight-bold">
-                                                        ${plan.price.Student}
+                                                    ${plan.invited_presentation}
                                                     </span>
                                                 </label>
 
                                                 <label className="d-flex justify-content-between">
                                                     <span>
                                                         <input type="radio" name={`plan-${index}`} className="mr-2" />
-                                                        Virtual
+                                                        Poster Presentation
                                                     </span>
                                                     <span className="float-right text-danger font-weight-bold">
-                                                        ${plan.price.Virtual}
+                                                    ${plan.poster_presentaion}
+                                                    </span>
+                                                </label>
+                                                <label className="d-flex justify-content-between">
+                                                    <span>
+                                                        <input type="radio" name={`plan-${index}`} className="mr-2" />
+                                                        Student Delegate
+                                                    </span>
+                                                    <span className="float-right text-danger font-weight-bold">
+                                                    ${plan.student_delegate}
+                                                    </span>
+                                                </label>
+                                                <label className="d-flex justify-content-between">
+                                                    <span>
+                                                        <input type="radio" name={`plan-${index}`} className="mr-2" />
+                                                        Delegate
+                                                    </span>
+                                                    <span className="float-right text-danger font-weight-bold">
+                                                    ${plan.delegate}
+                                                    </span>
+                                                </label>
+                                                <label className="d-flex justify-content-between">
+                                                    <span>
+                                                        <input type="radio" name={`plan-${index}`} className="mr-2" />
+                                                        Virtual Presentation
+                                                    </span>
+                                                    <span className="float-right text-danger font-weight-bold">
+                                                    ${plan.virtual_presentation}
                                                     </span>
                                                 </label>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            ))}
+                                // <div className="col-md-4" key={index}>sdds{plan.registration_type}</div>
+                            ))) : "no data"
+                        }
                         </div>
                     </div>
                     {/* packages types end */}
@@ -477,12 +564,12 @@ const OnlineRegistration = () => {
                     <div className=" mt-5">
                         <div className="row">
                             <div className="col-md-12 mb-3"><h5>Accommodation</h5></div>
-                            {rooms.map((room) => (
+                            {Array.isArray(accmData) && accmData.length > 0 ? (accmData.map((room,index) => (
                                 <div className="col-md-4 mb-4" key={room.id}>
-
+{room.two_Nights}
                                     <div className="card" style={{ minHeight: 250 }}>
                                         <div className="card-header bg-dark text-white">
-                                            <h5>{room.label}: ${room.price}</h5>
+                                            <h5>{room.accommodation_name}: ${room.price}</h5>
                                             <p>Breakfast included</p>
                                         </div>
                                         <div className="card-body d-flex justify-content-between align-items-center">
@@ -491,30 +578,24 @@ const OnlineRegistration = () => {
                                                     <strong>
                                                         <span className='text-primary'>Select No. of Nights</span>
                                                     </strong>
-                                                    <select name="" id="" className='form-selct float-right' style={{ width: '50px', height: 25, fontSize: '16px', marginLeft: '10px' }}>
+                                                    <select name="accnights" id=""  onChange={(event) => handleaccom(event)} className='form-selct float-right' style={{ width: '50px', height: 25, fontSize: '16px', marginLeft: '10px' }}>
                                                         <option value="">0</option>
-                                                        <option value="1">1</option>
-                                                        <option value="2">2</option>
-                                                        <option value="3">3</option>
-                                                        <option value="4">4</option>
-                                                        <option value="5">5</option>
+                                                        <option value={room.One_Night}>1</option>
+                                                        <option value={room.two_Nights}>2</option>
+                                                        <option value={room.three_Nights}>3</option>
+                                                        <option value={room.four_Nights}>4</option>
                                                     </select>
                                                 </div>
 
 
                                             </div>
-                                            {/* <button
-                                                className={`btn ${selectedRoom === room.price ? "btn-primary" : "btn-outline-primary"
-                                                    }`}
-                                                onClick={() => handleRoomSelection(room.price)}
-                                            >
-                                                <i className="fas fa-bed"></i>
-                                            </button> */}
+                                          
 
                                         </div>
                                     </div>
                                 </div>
-                            ))}
+                           ))) : "no data"
+                        }
                         </div>
 
                         {/* {
