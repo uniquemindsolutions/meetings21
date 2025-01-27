@@ -66,25 +66,7 @@ const Meetings = () => {
         </div>
 
         <div className="row">
-          {/* {currentEventName.length > 0 && currentEventName.map(() => {
-            <div className="col-md-5 offset-md-1">
-              <div Link to={`/events/${currentEventName}`} className="event-card">
-                <div className='event-card-img'>
-                  <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
-                </div>
-                <div className='event-card-content'>
-                  <h5 className="event-card-title">
-                    International Congress of Materials Science and Engineering
-                  </h5>
-                  <p className='mb-0 mt-4'>
-                    <small><i className="fa fa-calendar text-secondary"></i> October 21-08, 2025</small>   </p>
-                  <p className='mb-0'>
-                    <small><i className="fa fa-map-marker text-secondary"></i> Dubai, UAE </small>
-                  </p>
-                </div>
-              </div>
-            </div>
-          })} */}
+         
 
 
           {loading ? (
@@ -135,95 +117,6 @@ const Meetings = () => {
             </Link>
           </div>
         </div>
-
-
-        {/* <div className="container my-5">
-          <div className="row justify-content-center">
-             
-            <div className="col-md-5 mb-4">
-              <div className="card shadow-sm rounded">
-                <img
-                  src="https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg" // Replace with your image URL
-                  className="card-img-top rounded"
-                  alt="Event"
-                />
-                <div className="card-body">
-                  <h5 className="card-title text-primary">
-                    International Congress of Materials Science and Engineering
-                  </h5>
-                  <p className="card-text text-muted mb-2">
-                    <i className="far fa-calendar-alt"></i> October 21-23, 2025
-                  </p>
-                  <p className="card-text text-muted">
-                    <i className="fas fa-map-marker-alt"></i> Dubai, UAE
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            
-            <div className="col-md-5 mb-4">
-              <div className="card shadow-sm rounded">
-                <img
-                  src="https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg" // Replace with your image URL
-                  className="card-img-top rounded"
-                  alt="Event"
-                />
-                <div className="card-body">
-                  <h5 className="card-title text-primary">
-                    International Congress of Materials Science and Engineering
-                  </h5>
-                  <p className="card-text text-muted mb-2">
-                    <i className="far fa-calendar-alt"></i> October 21-23, 2025
-                  </p>
-                  <p className="card-text text-muted">
-                    <i className="fas fa-map-marker-alt"></i> Dubai, UAE
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
-
-
-
-        {/* <div className='row'>
-        <div className="col-lg-6">
-            <a href="/events" target="_blank" className="url-box">
-              <figure className="newsCard news-Slide-up ">
-                <img src="https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg" />
-                <div className="newsCaption px-4">
-                <div className="d-flex align-items-center justify-content-between cnt-title">
-                <h5 className="newsCaption-title text-white m-0">International Congress of Materials Science and Engineering</h5> <i className="fas fa-arrow-alt-circle-right "></i>
-                </div>
-                <div className="newsCaption-content d-flex ">
-                <p className="col-10 py-3 px-0"><i className="fa fa-calendar"></i> October 21-23, 2025 <i className="fa fa-map-marker"></i> Dubai, UAE </p>
-                </div>
-                </div>
-                <span className="overlay"></span>
-              </figure>
-            </a>
-            </div>
-
-
-            <div className="col-lg-6">
-            <a href="https://meetings21.com/2025/material-science" target="_blank" className="url-box">
-              <figure className="newsCard news-Slide-up ">
-                <img src="https://meetings21.com/wp-content/uploads/sites/113/2024/06/Dubai.jpg" />
-                <div className="newsCaption px-4">
-                <div className="d-flex align-items-center justify-content-between cnt-title">
-                <h5 className="newsCaption-title text-white m-0">International Congress of Materials Science and Engineering</h5> <i className="fas fa-arrow-alt-circle-right "></i>
-                </div>
-                <div className="newsCaption-content d-flex ">
-                <p className="col-10 py-3 px-0"><i className="fa fa-calendar"></i> October 21-23, 2025 <i className="fa fa-map-marker"></i> Dubai, UAE </p>
-                </div>
-                </div>
-                <span className="overlay"></span>
-              </figure>
-            </a>
-            </div>
-        </div> */}
       </div>
 
 
