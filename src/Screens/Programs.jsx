@@ -94,38 +94,38 @@ const Programs = () => {
 
               {/* Tab Content */}
               <div className="tab-content mt-0 p-0">
-  {/* Sub-tabs (Talks) */}
-  <div className="sub-tab-headers">
-    {Array.isArray(programData[activeTab]?.talks) &&
-    programData[activeTab]?.talks.length > 0 ? (
-      programData[activeTab].talks.map((talk, subIndex) => (
-        <div key={subIndex}>
-          {/* Button to toggle accordion */}
-          <button
-            onClick={() =>
-              setActiveSubTab(activeSubTab === subIndex ? null : subIndex)
-            }
-            className={`tab-button ${activeSubTab === subIndex ? 'active' : ''}`}
-          >
-            {talk.talk_title}
-          </button>
+                {/* Sub-tabs (Talks) */}
+                <div className="sub-tab-headers">
+                  {Array.isArray(programData[activeTab]?.talks) &&
+                    programData[activeTab]?.talks.length > 0 ? (
+                    programData[activeTab].talks.map((talk, subIndex) => (
+                      <div key={subIndex}>
+                        {/* Button to toggle accordion */}
+                        <button
+                          onClick={() =>
+                            setActiveSubTab(activeSubTab === subIndex ? null : subIndex)
+                          }
+                          className={`tab-button ${activeSubTab === subIndex ? 'active' : ''}`}
+                        >
+                          {talk.talk_title}
+                        </button>
 
-          {/* Accordion Content */}
-          {activeSubTab === subIndex && (
-            <div className="sub-tab-content">
-              <h5>{talk.talk_title}</h5>
-              <p className='text-pink' style={{fontSize:'15px'}}>
-                <strong>Speaker Affiliation:</strong> {talk.speaker_affiliation}
-              </p>
-            </div>
-          )}
-        </div>
-      ))
-    ) : (
-      <div>No talks available for this session.</div>
-    )}
-  </div>
-</div>
+                        {/* Accordion Content */}
+                        {activeSubTab === subIndex && (
+                          <div className="sub-tab-content">
+                            <h5>{talk.talk_title}</h5>
+                            <p className='text-pink' style={{ fontSize: '15px' }}>
+                              <strong>Speaker Affiliation:</strong> {talk.speaker_affiliation}
+                            </p>
+                          </div>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <div>No talks available for this session.</div>
+                  )}
+                </div>
+              </div>
 
 
 

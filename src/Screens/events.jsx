@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 // import SubscribeSection from './Home/subscribe-section';
 
@@ -36,7 +36,7 @@ const Events = () => {
     const expertsGalleryApi = process.env.REACT_APP_API_URL;
     const recentNewsApi = process.env.REACT_APP_API_URL;
     const ourPartnersApi = process.env.REACT_APP_API_URL;
-    const addToCalender = process.env.REACT_APP_API_URL;
+    const addToCalenderApi = process.env.REACT_APP_API_URL;
     const speakersApi = process.env.REACT_APP_API_URL;
 
     const [error, setError] = useState('')
@@ -51,8 +51,10 @@ const Events = () => {
     const [ourPartners, setOurPartners] = useState([])
     const [currentEventName, setCurrentEventName] = useState([])
     const [eventSpeakers, setEventSpeakers] = useState([])
+    const [addToCalendar, setAddToCalendar] = useState([])
     const { eventName } = useParams();
 
+    const addToCalendarCurrent = useRef(addToCalendar)
 
     useEffect(() => {
         if (window.location.origin + location.pathname == window.location.origin + '/2025/material-science') {
@@ -61,6 +63,7 @@ const Events = () => {
 
         fetchingApis();
         getSpeakers();
+        getAddtoCalendar();
     }, [])
 
     const fetchingApis = async () => {
@@ -103,94 +106,50 @@ const Events = () => {
         } catch {
             setError('no speakers found')
         }
-
     }
 
-    const handleDownload = async () => {
-        const currentEvents = location.pathname.split('/')
-        setCurrentEventName(currentEvents[1])
+    const getAddtoCalendar = async ()=> {
+        setLoading(true);
+        const currentEvents = location.pathname.split('/');  
         try {
-            const response = await axios.get(addToCalender + currentEvents[1] + '/Uploads/add_to_calenders/', {
-                responseType: "blob", // Important to handle file downloads
-            });
-            console.log("add calendar file url", response.data)
+            const res = await axios.get(addToCalenderApi + currentEvents[1] + '/Uploads/add_to_calenders/');
+            setAddToCalendar(res.data[0].add_to_calender)
+            addToCalendarCurrent.current=res.data[0].add_to_calender;
+            console.log("add to calendar api", res.data[0])
+        }catch {
+            setError('File not downloaded')
+        }
+        handleDownload();
+    }
 
-            // Create a URL for the file
-            const url = window.URL.createObjectURL(new Blob([response.data]));
-
-            // Create a temporary anchor element for download
+ 
+    const handleDownload = async () => {
+        console.log(addToCalendarCurrent.current, "calendar ===")
+       try {
+            const response = await fetch("https://meetings21.com/Meetings21Backend/download?file_path="+addToCalendarCurrent.current);
+            if (!response.ok) {
+              throw new Error("Failed to fetch file");
+            }
+            
+            const blob = await response.blob(); // Convert to blob
+            const url = window.URL.createObjectURL(blob);
+        
+            // Create an anchor element for download
             const link = document.createElement("a");
             link.href = url;
-
-            // Set the file name (optional)
-            link.setAttribute("download", "filename.pdf"); // Replace with desired file name
-
-            // Append link to the document body and trigger the click
+            link.setAttribute("download", "sample.pdf"); // ✅ Ensure correct filename
             document.body.appendChild(link);
             link.click();
-
-            // Remove the temporary link from the DOM
             document.body.removeChild(link);
-        } catch (error) {
-            console.error("File download failed", error);
-        }
-    };
-
-    const speakers = [
-        {
-            id: 1,
-            name: "Federico Rosei",
-            talkTitle: "Lorem Ipsum is simply dummy text",
-            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-            image: "images/speakers/pspeaker1.png",
-            details: [
-                "2010 PEO Engineering Medal for Entrepreneurship",
-                "2013 EIC Sir John Kennedy Medal",
-                "2016 IEEE A.G.L. McNaughton Gold Medal",
-            ],
-            position: "INRS, Canada",
-        },
-        {
-            id: 2,
-            name: "Ben Zhong TANG",
-            talkTitle: "Lorem Ipsum is simply dummy text",
-            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-            image: "images/speakers/pspeaker2.jpg",
-            details: [
-                "2010 PEO Engineering Medal for Entrepreneurship",
-                "2013 EIC Sir John Kennedy Medal",
-                "2016 IEEE A.G.L. McNaughton Gold Medal",
-            ],
-            position: "Ben Zhong TANG",
-        },
-        {
-            id: 3,
-            name: "Jose M. Kenny",
-            talkTitle: "Lorem Ipsum is simply dummy text",
-            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-            image: "images/speakers/pspeaker3.jpg",
-            details: [
-                "2010 PEO Engineering Medal for Entrepreneurship",
-                "2013 EIC Sir John Kennedy Medal",
-                "2016 IEEE A.G.L. McNaughton Gold Medal",
-            ],
-            position: "University of Perugia, Italy",
-        },
-        {
-            id: 4,
-            name: "Jan DUSZA",
-            talkTitle: "Lorem Ipsum is simply dummy text",
-            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-            image: "images/speakers/pspeaker4.jpg",
-            details: [
-                "2010 PEO Engineering Medal for Entrepreneurship",
-                "2013 EIC Sir John Kennedy Medal",
-                "2016 IEEE A.G.L. McNaughton Gold Medal",
-            ],
-            position: "Institute of Materials Research of SAS, Slovakia",
-        },
-    ];
-
+        
+            // Clean up memory
+            window.URL.revokeObjectURL(url);
+          } catch (error) {
+            console.error("Download failed:", error);
+          }
+        };
+      
+    
     const openModal = (id) => setOpenModalId(id);
     const closeModal = () => setOpenModalId(null);
 
@@ -520,7 +479,7 @@ const Events = () => {
                                     <h3>Join Us at the Biggest Conference
                                         <span className="d-inline-block">October 21-23, 2025 </span> </h3>
                                     <div className="generic-btn">
-                                        <a onClick={handleDownload} className='user-select-none'>Add to Calendar <i className="fas fa-arrow-right"></i></a>
+                                        <a onClick={getAddtoCalendar} className='user-select-none'>Add to Calendar <i className="fas fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>
