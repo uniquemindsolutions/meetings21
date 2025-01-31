@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import EventHeader from '../Header/EventHeader'
 import Footer from '../Footer/footer'
 import { Link } from 'react-router-dom'
@@ -18,8 +18,27 @@ const OnlineRegistration = () => {
         organization: "",
         city: "",
         country: 0,
-
+        singleacc:'',
+        doubleacc:'',
+        tripleacc:'',
+        billing_address:'',
+        postal_code:'',
+        no_of_nights:'',
+        domain:0,
+        register_category:0,
+        accommodation:0,
+        reg_cat_val:0,
+        add_on:0,
+        reg_price:0,
+        acc_price:0,
+        acc_per_price:0,
+        subtot:0,
+        procfee:0,
+        grand_tot:0
     }
+
+    
+
 
     const [error, setError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
@@ -28,7 +47,9 @@ const OnlineRegistration = () => {
     const [promoCode, setPromoCode] = useState(false);
     const [accompanying, setAccompanying] = useState(0);
     const [selectedRoom, setSelectedRoom] = useState("");
-    const [totalPrice, setTotalPrice] = useState(1099); // Base registration price
+    const [totalPrice, setTotalPrice] = useState(0); // Base registration price
+
+    const [subtotalPrice, setsubTotalPrice] = useState(0);
 
     const [submitFormData, setSubmitFormData] = useState(submitForm);
     const [countries, setCountries] = useState([]);
@@ -36,6 +57,29 @@ const OnlineRegistration = () => {
     const [regiFeedata, setRegifeeData] = useState('');
     const [accmData, setAccmData] = useState('');
     const [currentEventName, setCurrentEventName] = useState('');
+    const [defaultdata, setdefaultData] = useState('');
+
+    const [isChecked, setIsChecked] = useState(false); // Initial state is false (unchecked)
+
+    const [regiPricecal, setregiPriceCal] = useState('');
+    const [accpricecal, setaccpriceCal] = useState('');
+    const [addOn, setAddOn] = useState('');
+    const [subtot, setsubTot] = useState('');
+    const [procssfee, setProcessfee] = useState(0);
+    const [grandtot, setGrandTot] = useState('');
+
+    const textRef = useRef(regiPricecal);
+
+    
+
+        const handleChangeaddon = (event) => {
+            setIsChecked(event.target.checked); // Update the checked state
+            const { name, value } = event.target;
+            setSubmitFormData({ ...submitFormData, [name]: value });
+            setAddOn(value);
+        };
+
+    
 
 
     const basedata = [ 
@@ -84,6 +128,7 @@ const OnlineRegistration = () => {
       try {
           const res = await  axios.get(`${baseurl}${currentEvents[1]}/registration/accommodations/`);
           setAccmData(res.data);
+         
           console.log('speakersdata ===', res.data);
       } catch {
           setError('Error loaded')
@@ -199,10 +244,31 @@ const OnlineRegistration = () => {
         },
     ];
 
-    const handleCheckboxChange = (index) => {
-        setSelectedPlans((prev) =>
-            prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
-        );
+    const handleCheckboxChange = (value,index) => {
+       
+        setSubmitFormData({ ...submitFormData, ['register_category']: index+1 });
+        setSubmitFormData({ ...submitFormData, ['reg_cat_val']: value });
+        
+
+        setregiPriceCal(value);
+
+        textRef.current=value;
+        console.log("Updated Value:", textRef.current);
+      
+        setTimeout(() => {
+            // console.log("Updated Count (after render):", count); // ✅ Logs the correct value
+            setsubTotalPrice(parseFloat(regiPricecal) + parseFloat(accpricecal) + parseFloat(addOn));
+        const getpercentage=(Number(subtotalPrice)*5)/100;
+        setProcessfee(getpercentage);
+        setTotalPrice(subtotalPrice+procssfee);
+
+        console.log("Registration valuechecking1",regiPricecal,accpricecal,addOn);
+        console.log("Registration valuechecking",subtotalPrice,procssfee,totalPrice);
+          }, 10);
+
+        //   console.log("Registration valuechecking3",regiPricecal,value);
+
+       
     };
 
     const rooms = [
@@ -239,13 +305,24 @@ const OnlineRegistration = () => {
         // setPromoCode("");
         setAccompanying(0);
         setSelectedRoom("");
-        setTotalPrice(1099);
+        setTotalPrice(0);
     };
 
-    const handleaccom = (e) => {
-       
+    const handleaccom = (e,type) => {
+    
         const { name, value } = e.target;
-        setSubmitFormData({ ...submitFormData, [name]: value });
+        setSubmitFormData({ ...submitFormData, ['accommodation']: type });
+        setSubmitFormData({ ...submitFormData, ['no_of_nights']: e.target.value});
+        setaccpriceCal(e.target.value);
+
+        setTimeout(() => {
+        setsubTotalPrice(parseFloat(regiPricecal) + parseFloat(accpricecal) + parseFloat(addOn));
+        const getpercentage=(Number(subtotalPrice)*5)/100;
+        setProcessfee(getpercentage);
+        setTotalPrice(subtotalPrice+procssfee);
+        console.log("valuechecking1",regiPricecal,accpricecal,addOn);
+        console.log("valuechecking",subtotalPrice,procssfee,totalPrice);
+        },10)
     };
 
     return (
@@ -417,36 +494,14 @@ const OnlineRegistration = () => {
                             <textarea
                                 className="form-control"
                                 id="billing"
+                                name='billing_address'
                                 rows="3"
+                                onChange={handleInputChange}
                                 placeholder="Enter your billing address"
                             ></textarea>
                         </div>
 
-                        {/* <div className="row">
-                            <div className="col-2">
-                                <div className="form-group">
-                                    <label>Participants:</label>
-                                    <div className="input-group">
-                                        <div className="input-group-prepend">
-                                            <button onClick={decCount} className="btn btn-secondary" type="button">
-                                                <i className="fas fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input
-                                            type="number"
-                                            className="form-control"
-                                            value={countNo}
-                                            readOnly
-                                        />
-                                        <div className="input-group-append">
-                                            <button onClick={incCount} className="btn btn-secondary" type="button">
-                                                <i className="fas fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
+                      
                     </div>
 
                     {/* packages types start */}
@@ -468,8 +523,7 @@ const OnlineRegistration = () => {
                                                 <input
                                                     type="checkbox"
                                                     className="form-check-input"
-                                                    checked={selectedPlans.includes(index)}
-                                                    onChange={() => handleCheckboxChange(index)}
+                                                    // checked={selectedPlans.includes(index)}
                                                     style={{ height: '25px', width: '25px' }} />
                                                 <br />
                                             </div>
@@ -484,7 +538,7 @@ const OnlineRegistration = () => {
                                             <div className="form-group">
                                                 <label className="d-flex justify-content-between">
                                                     <span>
-                                                        <input type="radio" name={`plan-${index}`} className="mr-2" />
+                                                        <input type="radio" name={`plan-${index}`} className="mr-2" value={plan.invited_presentation}  onChange={() => handleCheckboxChange(plan.invited_presentation,index)} />
                                                         Invited Presentation   
                                                     </span>
 
@@ -495,7 +549,7 @@ const OnlineRegistration = () => {
 
                                                 <label className="d-flex justify-content-between">
                                                     <span>
-                                                        <input type="radio" name={`plan-${index}`} className="mr-2" />
+                                                        <input type="radio" name={`plan-${index}`} className="mr-2" onChange={() => handleCheckboxChange(plan.oral_presentation,index)} />
                                                         Oral Presentation
                                                     </span>
                                                     <span className="float-right text-danger font-weight-bold">
@@ -503,19 +557,11 @@ const OnlineRegistration = () => {
                                                     </span>
                                                 </label>
 
-                                                <label className="d-flex justify-content-between">
-                                                    <span>
-                                                        <input type="radio" name={`plan-${index}`} className="mr-2" />
-                                                        Student
-                                                    </span>
-                                                    <span className="float-right text-danger font-weight-bold">
-                                                    ${plan.invited_presentation}
-                                                    </span>
-                                                </label>
+                                               
 
                                                 <label className="d-flex justify-content-between">
                                                     <span>
-                                                        <input type="radio" name={`plan-${index}`} className="mr-2" />
+                                                        <input type="radio" name={`plan-${index}`}  onChange={() => handleCheckboxChange(plan.poster_presentaion,index)} className="mr-2" />
                                                         Poster Presentation
                                                     </span>
                                                     <span className="float-right text-danger font-weight-bold">
@@ -524,7 +570,7 @@ const OnlineRegistration = () => {
                                                 </label>
                                                 <label className="d-flex justify-content-between">
                                                     <span>
-                                                        <input type="radio" name={`plan-${index}`} className="mr-2" />
+                                                        <input type="radio" name={`plan-${index}`} onChange={() => handleCheckboxChange(plan.student_delegate,index)} className="mr-2" />
                                                         Student Delegate
                                                     </span>
                                                     <span className="float-right text-danger font-weight-bold">
@@ -533,7 +579,7 @@ const OnlineRegistration = () => {
                                                 </label>
                                                 <label className="d-flex justify-content-between">
                                                     <span>
-                                                        <input type="radio" name={`plan-${index}`} className="mr-2" />
+                                                        <input type="radio" name={`plan-${index}`}  onChange={() => handleCheckboxChange(plan.delegate,index)} className="mr-2" />
                                                         Delegate
                                                     </span>
                                                     <span className="float-right text-danger font-weight-bold">
@@ -542,7 +588,7 @@ const OnlineRegistration = () => {
                                                 </label>
                                                 <label className="d-flex justify-content-between">
                                                     <span>
-                                                        <input type="radio" name={`plan-${index}`} className="mr-2" />
+                                                        <input type="radio" name={`plan-${index}`} onChange={() => handleCheckboxChange(plan.virtual_presentation,index)} className="mr-2" />
                                                         Virtual Presentation
                                                     </span>
                                                     <span className="float-right text-danger font-weight-bold">
@@ -566,10 +612,10 @@ const OnlineRegistration = () => {
                             <div className="col-md-12 mb-3"><h5>Accommodation</h5></div>
                             {Array.isArray(accmData) && accmData.length > 0 ? (accmData.map((room,index) => (
                                 <div className="col-md-4 mb-4" key={room.id}>
-{room.two_Nights}
+
                                     <div className="card" style={{ minHeight: 250 }}>
                                         <div className="card-header bg-dark text-white">
-                                            <h5>{room.accommodation_name}: ${room.price}</h5>
+                                            <h5>{room.accommodation_name}: ${room.One_Night}</h5>
                                             <p>Breakfast included</p>
                                         </div>
                                         <div className="card-body d-flex justify-content-between align-items-center">
@@ -578,8 +624,8 @@ const OnlineRegistration = () => {
                                                     <strong>
                                                         <span className='text-primary'>Select No. of Nights</span>
                                                     </strong>
-                                                    <select name="accnights" id=""  onChange={(event) => handleaccom(event)} className='form-selct float-right' style={{ width: '50px', height: 25, fontSize: '16px', marginLeft: '10px' }}>
-                                                        <option value="">0</option>
+                                                    <select name="accnights" id=""  onChange={(event) => handleaccom(event,index)} className='form-selct float-right' style={{ width: '50px', height: 25, fontSize: '16px', marginLeft: '10px' }}>
+                                                       
                                                         <option value={room.One_Night}>1</option>
                                                         <option value={room.two_Nights}>2</option>
                                                         <option value={room.three_Nights}>3</option>
@@ -653,7 +699,8 @@ const OnlineRegistration = () => {
                         <div className="  align-items-center mb-4">
                             <h5>Add on:</h5>
                             <label className="mr-3">
-                                <input type="radio" /> Accompanying Person (<b className='text-primary'>$200 for each person</b>)</label>
+                                <input type="radio"  name='add_on' checked={isChecked} // Bind the checked state
+          onChange={handleChangeaddon}  value='200' /> Accompanying Person (<b className='text-primary'>$200 for each person</b>)</label>
 
                             {/* <div className="form-group" style={{ width: 150 }}>
                                 <div className="input-group">
@@ -697,20 +744,20 @@ const OnlineRegistration = () => {
                             <div className="card-body">
                                 <div className="row">
                                     <div className="col-md-6">
-                                        <p><span style={{ width: '350px', display: 'inline-block' }}>Registration Price:</span> $<b className='text-primary'>1099</b></p>
-                                        <p><span style={{ width: '350px', display: 'inline-block' }}>Accommodation Price:</span> $<b className='text-primary'>{selectedRoom || 0}</b></p>
+                                        <p><span style={{ width: '350px', display: 'inline-block' }}>Registration Price:</span> $<b className='text-primary'>{regiPricecal || 0}</b></p>
+                                        <p><span style={{ width: '350px', display: 'inline-block' }}>Accommodation Price:</span> $<b className='text-primary'>{accpricecal || 0}</b></p>
                                         {/* <p>Accompanying: $<b className='text-primary'>{accompanying * 200}</b></p> */}
-                                        <p><span style={{ width: '350px', display: 'inline-block' }}>Accompanying Person Price:</span> $<b className='text-primary'>0</b></p>
+                                        <p><span style={{ width: '350px', display: 'inline-block' }}>Accompanying Person Price:</span> $<b className='text-primary'>{addOn || 0}</b></p>
                                     </div>
 
                                 </div>
 
                                 <hr />
-                                <h5>Sub-Total : $<b className='text-primary'>{totalPrice}</b></h5>
+                                <h5>Sub-Total : $<b className='text-primary'>{subtotalPrice || 0}</b></h5>
                                 <hr />
-                                <h5>Processing Fee(5%) : $<b className='text-primary'>10</b></h5>
+                                <h5>Processing Fee(5%) : $<b className='text-primary'>{procssfee || 0 }</b></h5>
                                 <hr />
-                                <h5>Grand Total : $<b className='text-primary'>{totalPrice}</b></h5>
+                                <h5>Grand Total : $<b className='text-primary'>{totalPrice || 0}</b></h5>
                             </div>
                         </div>
 
@@ -724,7 +771,7 @@ const OnlineRegistration = () => {
                                         <label>Selected Price: $ (Inclusive of all taxes)</label>
                                         <div class="input-group mb-3 mx-auto my-4" style={{ width: '300px' }}>
                                             <span class="input-group-text px-3" id="basic-addon1">$</span>
-                                            <input type="text" value={totalPrice} class="form-control form-control-lg bg-white text-primary font-weight-bold" readOnly />
+                                            <input type="text" value={totalPrice || 0} class="form-control form-control-lg bg-white text-primary font-weight-bold" readOnly />
                                         </div>
                                     </div>
 
