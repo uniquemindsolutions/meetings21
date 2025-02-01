@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 // import SubscribeSection from './Home/subscribe-section';
 
@@ -27,7 +27,6 @@ window.$ = window.jQuery = $; // Expose jQuery globally
 const Events = () => {
 
     const location = useLocation();
-    console.log("checking url", location.pathname)
 
     const testimonialApi = process.env.REACT_APP_API_URL;
     const bannersApi = process.env.REACT_APP_API_URL;
@@ -36,6 +35,10 @@ const Events = () => {
     const expertsGalleryApi = process.env.REACT_APP_API_URL;
     const recentNewsApi = process.env.REACT_APP_API_URL;
     const ourPartnersApi = process.env.REACT_APP_API_URL;
+    const addToCalenderApi = process.env.REACT_APP_API_URL;
+    const speakersApi = process.env.REACT_APP_API_URL;
+    const downloadProgramApi = process.env.REACT_APP_API_URL;
+
 
     const [error, setError] = useState('')
     const [loading, setLoading] = useState('')
@@ -47,18 +50,37 @@ const Events = () => {
     const [expertsGallery, setExpertsGallery] = useState([])
     const [recentNews, setRecentNews] = useState([])
     const [ourPartners, setOurPartners] = useState([])
+    const [currentEventName, setCurrentEventName] = useState([])
+    const [eventSpeakers, setEventSpeakers] = useState([])
+    const [addToCalendar, setAddToCalendar] = useState([])
+    const [downloadProgram, setDownloadProgram] = useState([])
+
     const { eventName } = useParams();
 
+    const addToCalendarCurrent = useRef(addToCalendar)
+    const downloadProgramCurrent = useRef(downloadProgram)
 
     useEffect(() => {
         if (window.location.origin + location.pathname == window.location.origin + '/2025/material-science') {
             window.location.href = window.location.origin + "/material-science"
         }
+        const currentEvents = location.pathname.split('/')
+        setCurrentEventName(currentEvents[1])
 
         fetchingApis();
-    }, [])
+        getSpeakers();
+
+        // Initialize Bootstrap Tabs manually
+        const tabElList = document.querySelectorAll('[data-bs-toggle="tab"]');
+        tabElList.forEach(tab => {
+            new window.bootstrap.Tab(tab);
+        });
+    }, [location])
 
     const fetchingApis = async () => {
+        setLoading(true);
+        const currentEvents = location.pathname.split('/')
+        setCurrentEventName(currentEvents[1])
         try {
             const currentEvents = location.pathname.split('/');
             const [testimonialRes, bannersRes, aboutContentRes, aboutBannerRes, expertsGalleryRes, recentNewsRes, ourPartnersRes] = await Promise.all([
@@ -78,68 +100,97 @@ const Events = () => {
             setExpertsGallery(expertsGalleryRes.data)
             setRecentNews(recentNewsRes.data)
             setOurPartners(ourPartnersRes.data)
-            console.log("aboutContent data ===", aboutContentRes);
         } catch {
             setError('Error: no data found')
+        } finally {
+            setLoading(false)
         }
     }
 
+    const getSpeakers = async () => {
+        const currentEvents = location.pathname.split('/')
+        try {
+            const res = await axios.get(speakersApi + currentEvents[1] + '/agenda/speakers/')
+            setEventSpeakers(res.data)
+        } catch {
+            setError('no speakers found')
+        }
+    }
+
+    const getAddtoCalendar = async () => {
+        setLoading(true);
+        const currentEvents = location.pathname.split('/');
+        try {
+            const res = await axios.get(addToCalenderApi + currentEvents[1] + '/Uploads/add_to_calenders/');
+            setAddToCalendar(res.data[0].add_to_calender)
+            addToCalendarCurrent.current = res.data[0].add_to_calender;
+        } catch {
+            setError('File not downloaded')
+        }
+        handleDownload();
+    }
+
+    const handleDownload = async () => {
+        try {
+            const response = await fetch("https://meetings21.com/Meetings21Backend/download?file_path=" + addToCalendarCurrent.current);
+            if (!response.ok) {
+                throw new Error("Failed to fetch file");
+            }
+
+            const blob = await response.blob(); // Convert to blob
+            const url = window.URL.createObjectURL(blob);
+
+            // Create an anchor element for download
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "calendar.pdf");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Clean up memory
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+        }
+    };
 
 
-    const speakers = [
-        {
-            id: 1,
-            name: "Federico Rosei",
-            talkTitle: "Lorem Ipsum is simply dummy text",
-            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-            image: "images/speakers/pspeaker1.png",
-            details: [
-                "2010 PEO Engineering Medal for Entrepreneurship",
-                "2013 EIC Sir John Kennedy Medal",
-                "2016 IEEE A.G.L. McNaughton Gold Medal",
-            ],
-            position: "INRS, Canada",
-        },
-        {
-            id: 2,
-            name: "Ben Zhong TANG",
-            talkTitle: "Lorem Ipsum is simply dummy text",
-            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-            image: "images/speakers/pspeaker2.jpg",
-            details: [
-                "2010 PEO Engineering Medal for Entrepreneurship",
-                "2013 EIC Sir John Kennedy Medal",
-                "2016 IEEE A.G.L. McNaughton Gold Medal",
-            ],
-            position: "Ben Zhong TANG",
-        },
-        {
-            id: 3,
-            name: "Jose M. Kenny",
-            talkTitle: "Lorem Ipsum is simply dummy text",
-            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-            image: "images/speakers/pspeaker3.jpg",
-            details: [
-                "2010 PEO Engineering Medal for Entrepreneurship",
-                "2013 EIC Sir John Kennedy Medal",
-                "2016 IEEE A.G.L. McNaughton Gold Medal",
-            ],
-            position: "University of Perugia, Italy",
-        },
-        {
-            id: 4,
-            name: "Jan DUSZA",
-            talkTitle: "Lorem Ipsum is simply dummy text",
-            Biography: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the",
-            image: "images/speakers/pspeaker4.jpg",
-            details: [
-                "2010 PEO Engineering Medal for Entrepreneurship",
-                "2013 EIC Sir John Kennedy Medal",
-                "2016 IEEE A.G.L. McNaughton Gold Medal",
-            ],
-            position: "Institute of Materials Research of SAS, Slovakia",
-        },
-    ];
+    const getDownloadProgram = async () => {
+        const currentEvents = location.pathname.split('/')
+        try {
+            const res = await axios.get(downloadProgramApi + currentEvents[1] + '/Uploads/programfile/');
+            setDownloadProgram(res.data[0].Program_file);
+            downloadProgramCurrent.current = res.data[0].Program_file;
+        } catch {
+            setError('no data found')
+        }
+        handleDownloadProgram();
+    }
+    const handleDownloadProgram = async () => {
+        try {
+            const response = await fetch("https://meetings21.com/Meetings21Backend/programfile_download?file_path=" + downloadProgramCurrent.current);
+            if (!response.ok) {
+                throw new Error("Failed to fetch file");
+            }
+
+            const blob = await response.blob(); // Convert to blob
+            const url = window.URL.createObjectURL(blob);
+
+            // Create an anchor element for download
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "Program_file.pdf");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Clean up memory
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
+            console.error("Download failed:", error);
+        }
+    };
+
 
     const openModal = (id) => setOpenModalId(id);
     const closeModal = () => setOpenModalId(null);
@@ -198,32 +249,8 @@ const Events = () => {
                 }
             }
         });
-
-
-
-
-
-        // $("#owl-carousel").owlCarousel({
-        //   loop: true,
-        //   margin: 10,
-        //   nav: true,
-        //   dots: true,
-        //   autoplay: true,
-        //   navText: [
-        //     "<i className='fas fa-arrow-left'></i>",
-        //     "<i className='fas fa-arrow-right'></i>",
-        //   ],
-        //   responsive: {
-        //     0: { items: 1 },
-        //     600: { items: 2 },
-        //     1000: { items: 3 },
-        //   },
-        // });
-        // AOS.init({
-        //   duration: 1000, 
-        //   once: true,    
-        // });
     }, []);
+
     return (
         <div className='event-p'>
             <EventHeader />
@@ -260,7 +287,7 @@ const Events = () => {
                                                             <li><i className="fas fa-map-marker-alt"></i> {banner.meetingslocation}</li>
                                                         </ul>
                                                         <div className="generic-btn">
-                                                            <Link to="/registration_form">REGISTER NOW<i className="fas fa-arrow-right"></i></Link>
+                                                            <Link to={`/${currentEventName}/registration_form`}>REGISTER NOW<i className="fas fa-arrow-right"></i></Link>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -351,18 +378,18 @@ const Events = () => {
                     <div className="container-fluid p-md-5">
                         <div className="journey-inner-con">
                             <div className="journey-text-con">
-                            {
-                                    aboutContent.map((cnt)=>(
+                                {
+                                    aboutContent.map((cnt) => (
                                         <div>
                                             <span className="small-text">{cnt.event_short_name}</span>
-                                            <h2>{cnt.event_heading}</h2> 
+                                            <h2>{cnt.event_heading}</h2>
                                             {/* <p>{cnt.event_description}</p> */}
                                             <p dangerouslySetInnerHTML={{ __html: cnt.event_description }}></p>
                                         </div>
-                                   
+
                                     ))
                                 }
-                                
+
 
                             </div>
 
@@ -386,7 +413,7 @@ const Events = () => {
                                             ))
                                         }
                                     </Swiper>
-                                       
+
 
                                     {/* <Swiper
                                         spaceBetween={50}
@@ -470,145 +497,14 @@ const Events = () => {
                                     <h3>Join Us at the Biggest Conference
                                         <span className="d-inline-block">October 21-23, 2025 </span> </h3>
                                     <div className="generic-btn">
-                                        <a href="contact.html">Add to Calendar <i className="fas fa-arrow-right"></i></a>
+                                        <a onClick={getAddtoCalendar} className='user-select-none'>Add to Calendar <i className="fas fa-arrow-right"></i></a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
-                <section className="index3-event-info-zone w-100 float-left ">
 
-                </section>
-                {/* <section className='index3-event-info-zone padding-top padding-bottom'>
-        <div className='container'>
-            <div className='row'>
-                <div className="col-md-3 col-sm-12 col-xs-12 team-block text-left margin-30px-bottom team-style-1 sm-margin-seven-bottom xs-margin-40px-bottom wow fadeInRight">
-                <figure className='speakers-box'>
-                    <div className="team-image xs-width-100">
-                        <img src="/images/speakers/pspeaker1.png" alt="" data-no-retina="" />
-                        <div className="overlay-content text-center">
-                            <div className="display-table height-100 width-100">
-                                <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
-                                    <ul className="text-white font-size-15px display-inline-block no-margin min-height-176px">
-                                      <li>2010 PEO Engineering Medal for Entrepreneurship</li>
-                                      <li>2013 EIC Sir John Kennedy Medal</li>
-                                      <li>2016 IEEE A.G.L. McNaughton Gold Medal</li>
-                                    </ul>                        
-                                    <div className="separator-line-horrizontal-full bg-light-blue margin-eleven-tb"></div>
-                                    <a href="#" target="_blank" className="text-white font-size-24px mr-3"><i className="fa-regular fa-eye"></i></a>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                        <div className="team-overlay bg-extra-dark-gray opacity8"></div>
-                    </div>
-                    <figcaption>
-                        <div className="team-member-position text-center">
-                            <div className="text-extra-large font-weight-600 text-extra-dark-gray text-uppercase font-weight-bold">Federico Rosei</div>
-                            <div className="text-medium font-weight-500 text-dark-gray"></div>
-                            <div className="text-medium font-weight-500 text-dark-gray font-size-15px">INRS, Canada</div>
-                        </div>   
-                    </figcaption>
-                </figure>
-                </div>
-                <div className="col-md-3 col-sm-12 col-xs-12 team-block text-left margin-30px-bottom team-style-1 sm-margin-seven-bottom xs-margin-40px-bottom wow fadeInRight">
-                <figure className='speakers-box'>
-                    <div className="team-image xs-width-100">
-                        <img src="/images/speakers/pspeaker2.jpg" alt="" data-no-retina="" />
-                        <div className="overlay-content text-center">
-                            <div className="display-table height-100 width-100">
-                                <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
-                                    <ul className="text-white font-size-15px display-inline-block no-margin min-height-176px">
-                                      <li>2010 PEO Engineering Medal for Entrepreneurship</li>
-                                      <li>2013 EIC Sir John Kennedy Medal</li>
-                                      <li>2016 IEEE A.G.L. McNaughton Gold Medal</li>
-                                    </ul>                        
-                                    <div className="separator-line-horrizontal-full bg-light-blue margin-eleven-tb"></div>
-                                    <a href="#" target="_blank" className="text-white font-size-24px mr-3"><i className="fab fa-google"></i></a>
-                                    <a href="#" target="_blank" className="text-white font-size-24px"><i className="fa fa-globe"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="team-overlay bg-extra-dark-gray opacity8"></div>
-                    </div>
-                    <figcaption>
-                        <div className="team-member-position text-center">
-                            <div className="text-extra-large font-weight-600 text-extra-dark-gray text-uppercase font-weight-bold">Ben Zhong TANG</div>
-                            <div className="text-medium font-weight-500 text-dark-gray"></div>
-                            <div className="text-medium font-weight-500 text-dark-gray">Ben Zhong TANG</div>
-                        </div>   
-                    </figcaption>
-                </figure>
-                </div>
-                <div className="col-md-3 col-sm-12 col-xs-12 team-block text-left margin-30px-bottom team-style-1 sm-margin-seven-bottom xs-margin-40px-bottom wow fadeInRight">
-                <figure className='speakers-box'>
-                    <div className="team-image xs-width-100">
-                        <img src="/images/speakers/pspeaker3.jpg" alt="" data-no-retina="" />
-                        <div className="overlay-content text-center">
-                            <div className="display-table height-100 width-100">
-                                <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
-                                    <ul className="text-white font-size-15px display-inline-block no-margin min-height-176px">
-                                      <li>2010 PEO Engineering Medal for Entrepreneurship</li>
-                                      <li>2013 EIC Sir John Kennedy Medal</li>
-                                      <li>2016 IEEE A.G.L. McNaughton Gold Medal</li>
-                                    </ul>                        
-                                    <div className="separator-line-horrizontal-full bg-light-blue margin-eleven-tb"></div>
-                                    <a href="#" target="_blank" className="text-white font-size-24px mr-3"><i className="fab fa-google"></i></a>
-                                    <a href="#" target="_blank" className="text-white font-size-24px"><i className="fa fa-globe"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="team-overlay bg-extra-dark-gray opacity8"></div>
-                    </div>
-                    <figcaption>
-                        <div className="team-member-position text-center">
-                            <div className="text-extra-large font-weight-600 text-extra-dark-gray text-uppercase font-weight-bold">Jose M. Kenny</div>
-                            <div className="text-medium font-weight-500 text-dark-gray"></div>
-                            <div className="text-medium font-weight-500 text-dark-gray">University of Perugia, Italy</div>
-                        </div>   
-                    </figcaption>
-                </figure>
-                </div>
-                <div className="col-md-3 col-sm-12 col-xs-12 team-block text-left margin-30px-bottom team-style-1 sm-margin-seven-bottom xs-margin-40px-bottom wow fadeInRight">
-                <figure className='speakers-box'>
-                    <div className="team-image xs-width-100">
-                        <img src="/images/speakers/pspeaker4.jpg" alt="" data-no-retina="" />
-                        <div className="overlay-content text-center">
-                            <div className="display-table height-100 width-100">
-                                <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
-                                    <ul className="text-white font-size-15px display-inline-block no-margin min-height-176px">
-                                      <li>2010 PEO Engineering Medal for Entrepreneurship</li>
-                                      <li>2013 EIC Sir John Kennedy Medal</li>
-                                      <li>2016 IEEE A.G.L. McNaughton Gold Medal</li>
-                                    </ul>                        
-                                    <div className="separator-line-horrizontal-full bg-light-blue margin-eleven-tb"></div>
-                                    <a href="#" target="_blank" className="text-white font-size-24px mr-3"><i className="fab fa-google"></i></a>
-                                    <a href="#" target="_blank" className="text-white font-size-24px"><i className="fa fa-globe"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="team-overlay bg-extra-dark-gray opacity8"></div>
-                    </div>
-                    <figcaption>
-                        <div className="team-member-position text-center">
-                            <div className="text-extra-large font-weight-600 text-extra-dark-gray text-uppercase font-weight-bold">Jan DUSZA</div>
-                            <div className="text-medium font-weight-500 text-dark-gray"></div>
-                            <div className="text-medium font-weight-500 text-dark-gray">Institute of Materials Research of SAS, Slovakia</div>
-                        </div>   
-                    </figcaption>
-                </figure>
-                </div>
-            </div>
-        </div>
-        <div className="img-popup">
-            <img src="" alt="Popup Image" />
-            <div className="close-btn">
-                <div className="bar"></div>
-                <div className="bar"></div>
-            </div>
-        </div>
-      </section> */}
                 <section className='index3-event-info-zone bg-white py-5'>
                     <div className='container'>
                         <div className="clearfix"></div>
@@ -619,93 +515,103 @@ const Events = () => {
                                 Our Plenary and Keynote Speakers possess specialized knowledge and insights into specific fields. They can provide valuable information and trends, making them of great benefit to our attendees.
                             </p>
                         </div>
-                        <div className='row'>
 
-                            {speakers.map((speaker) => (
-                                <div
-                                    key={speaker.id}
-                                    className="col-md-3 col-sm-12 col-xs-12 team-block text-left margin-30px-bottom team-style-1 sm-margin-seven-bottom xs-margin-40px-bottom wow fadeInRight"
-                                >
-                                    <figure className="speakers-box">
-                                        <div className="team-image xs-width-100">
-                                            <img
-                                                src={speaker.image}
-                                                alt={speaker.name}
-                                                data-no-retina=""
-                                            />
-                                            <div className="overlay-content text-center">
-                                                <div className="display-table height-100 width-100">
-                                                    <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
-                                                        <div className="min-height-176px">
-                                                            <ul className="text-white font-size-15px display-inline-block no-margin text-left">
-                                                                {speaker.details.map((detail, index) => (
-                                                                    <li key={index}>
-                                                                        {detail}</li>
-                                                                )
-                                                                )}
-                                                            </ul>
-                                                        </div>
-                                                        <div className="separator-line-horrizontal-full bg-light-blue margin-eleven-tb bg-white"></div>
-                                                        <a
-                                                            href="#"
-                                                            className="text-white font-size-24px mr-3"
-                                                            onClick={(e) => {
-                                                                e.preventDefault();
-                                                                openModal(speaker.id);
-                                                            }}
-                                                        >
-                                                            {/* <i className="fa-regular fa-eye"></i> */}
-                                                            <button className='btn-biography'> View Biography </button>
-                                                        </a>
+                        {/* speakers start */}
+                        {
+                            Array.isArray(eventSpeakers) && eventSpeakers.length > 0 ? (
+                                <>
+                                    <h4 className='mb-3 text-blue'>PlenarySpeakers</h4>
+                                    <div className="row">
+                                        {
+                                            eventSpeakers.filter((spk) => spk.speakers_type === 'PlenarySpeakers')
+                                                .slice(0, 8).map((item, index) => (
+                                                    <div key={index} className="col-md-3 col-sm-12 col-xs-12 team-block text-left margin-30px-bottom team-style-1 sm-margin-seven-bottom xs-margin-40px-bottom wow fadeInRight">
+                                                        <figure className="speakers-box">
+                                                            <div className="team-image xs-width-100">
+                                                                <img
+                                                                    src={item.speakerphoto}
+                                                                    alt={item.speakername}
+                                                                    data-no-retina=""
+                                                                />
+                                                                <div className="overlay-content text-center">
+                                                                    <div className="display-table height-100 width-100">
+                                                                        <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
+                                                                            <div className="min-height-176px">
+                                                                                <div className="text-white font-size-15px display-inline-block no-margin text-left">
+                                                                                    <div
+                                                                                        dangerouslySetInnerHTML={{
+                                                                                            __html: item.speaker_biography,
+                                                                                        }}
+                                                                                    />
+                                                                                </div>
+                                                                            </div>
+                                                                            <a
+                                                                                href="#"
+                                                                                className="text-white font-size-24px"
+                                                                                onClick={(e) => {
+                                                                                    e.preventDefault();
+                                                                                    openModal(item.id);
+                                                                                }}
+                                                                            >
+                                                                                <button className="btn-biography">View Biography</button>
+                                                                            </a>
+                                                                            <div className="separator-line-horrizontal-full bg-light-blue margin-eleven-tb bg-white"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="team-overlay bg-extra-dark-gray opacity8"></div>
+                                                            </div>
+                                                            <figcaption>
+                                                                <div className="team-member-position text-center">
+                                                                    <div className="text-extra-large font-weight-600 text-extra-dark-gray text-uppercase font-weight-bold">
+                                                                        {item.speakername}
+                                                                    </div>
+                                                                    <div className="text-medium font-weight-500 text-dark-gray font-size-15px">
+                                                                        {item.speaker_affiliation}
+                                                                    </div>
+                                                                </div>
+                                                            </figcaption>
+                                                        </figure>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div className="team-overlay bg-extra-dark-gray opacity8"></div>
-                                        </div>
-                                        <figcaption>
-                                            <div className="team-member-position text-center">
-                                                <div className="text-extra-large font-weight-600 text-extra-dark-gray text-uppercase font-weight-bold">
-                                                    {speaker.name}
-                                                </div>
-                                                <div className="text-medium font-weight-500 text-dark-gray font-size-15px">
-                                                    {speaker.position}
-                                                </div>
-                                            </div>
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                    {/* Modal */}
-                    {speakers.map(
-                        (speaker) =>
-                            openModalId === speaker.id && (
-                                <div key={speaker.id} className="modal-overlay  text-left">
-                                    <div className="modal-content text-left">
-                                        {/* <h5 className="modal-title">{speaker.name}</h5> */}
-                                        <h5 className='mb-4'>Talk Title: <span style={{ fontWeight: 400 }}>{speaker.talkTitle}</span></h5>
-                                        <h5>Biography: </h5>
-                                        <p>{speaker.Biography}</p>
-                                        <p>{speaker.Biography}</p>
+                                                ))
+                                        }
+                                    </div>
+                                </>
+                            ) : <p>No data found</p>
+                        }
+                        {/* speakers end */}
 
-                                        {/* <p>{speaker.position}</p> */}
-                                        {/* <ul>
-                                            {speaker.details.map((detail, index) => (
-                                                <li key={index}>{detail}</li>
-                                            ))}
-                                        </ul> */}
-                                        <div className="text-center mx-auto">
-                                            <button
-                                                className="custom-button mt-5"
-                                                onClick={closeModal} >
-                                                Close
-                                            </button>
+                    </div>
+
+
+                    {/* Modal */}
+                    {Array.isArray(eventSpeakers) &&
+                        eventSpeakers?.length > 0 ? eventSpeakers.map(
+                            (speaker) =>
+                                openModalId === speaker.id && (
+                                    <div key={speaker.id} className="modal-overlay">
+                                        <div className="modal-content text-left" style={{ overflowY: 'auto', maxHeight: '70vh' }}>
+                                            <div className="bg-light shadow-sm p-3 d-flex justify-content-between">
+                                                <h5 className=''><span className='text-primary'>Talk Title:</span> <span style={{ fontWeight: 400 }}>{speaker.speaker_talk_tittle}</span></h5>
+                                                <button
+                                                    className="border-0 text-danger background-none"
+                                                    onClick={closeModal} >
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+
+                                            <div className="p-3">
+                                                <h5 className='text-primary'>Biography: </h5>
+                                                <div dangerouslySetInnerHTML={{ __html: speaker.speaker_biography }} />
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            )
-                    )}
+                                )
+                        ) : "no data"
+                    }
 
                 </section>
                 <section className='pt-5'>
@@ -721,16 +627,37 @@ const Events = () => {
                         <div className="index3-event-tabs-con event-table">
                             <ul className="nav nav-tabs" id="myTab" role="tablist">
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link active" id="home-tab" data-toggle="tab" data-target="#home"
-                                        type="button" role="tab" aria-controls="home" aria-selected="true">DAY 1</button>
+                                    <button className="nav-link active"
+                                        id="home-tab"
+                                        data-toggle="tab"
+                                        data-bs-target="#home"
+                                        type="button"
+                                        data-bs-toggle="tab"
+                                        role="tab"
+                                        aria-controls="home"
+                                        aria-selected="true">DAY 1</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button"
-                                        role="tab" aria-controls="profile" aria-selected="false">DAY 2</button>
+                                    <button className="nav-link"
+                                        id="profile-tab"
+                                        data-toggle="tab"
+                                        data-bs-target="#profile"
+                                        type="button"
+                                        data-bs-toggle="tab"
+                                        role="tab"
+                                        aria-controls="profile"
+                                        aria-selected="false">DAY 2</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button"
-                                        role="tab" aria-controls="contact" aria-selected="false">DAY 3</button>
+                                    <button className="nav-link"
+                                        id="contact-tab"
+                                        data-toggle="tab"
+                                        data-bs-target="#contact"
+                                        type="button"
+                                        data-bs-toggle="tab"
+                                        role="tab"
+                                        aria-controls="contact"
+                                        aria-selected="false">DAY 3</button>
                                 </li>
                             </ul>
                             <div className="tab-content" id="myTabContent">
@@ -786,7 +713,7 @@ const Events = () => {
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a href="contact.html">DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
+                                            <a onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -842,7 +769,7 @@ const Events = () => {
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a href="contact.html">DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
+                                            <a onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -897,7 +824,7 @@ const Events = () => {
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a href="contact.html">DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
+                                            <a onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -967,7 +894,7 @@ const Events = () => {
                         </div>
                         <div className="index3-plan-btn text-center">
                             <div className="generic-btn">
-                                <Link to="/registration_form">REGISTER NOW <i className="fas fa-arrow-right"></i></Link>
+                                <Link to={`/${currentEventName}/registration_form`}>REGISTER NOW <i className="fas fa-arrow-right"></i></Link>
                             </div>
                         </div>
                     </div>
@@ -1005,9 +932,9 @@ const Events = () => {
                                     <div className="index3-experts-left-con">
                                         <div className="index3-expert index3-expert-con1 container__img-holder">
                                             <img src={img.gallery} className='img-fluid' alt="index3-expert-img1" />
-                                            <div className="search-icon-con">
+                                            {/* <div className="search-icon-con">
                                                 <i className="fas fa-search"></i>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>

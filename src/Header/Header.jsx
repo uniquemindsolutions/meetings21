@@ -50,7 +50,7 @@ const Header = () => {
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         MEETINGS
                                     </a>
-                                    <div className="dropdown-menu" aria-labelledby="navbarDropdown5">
+                                    <div className="dropdown-menu mt-2" aria-labelledby="navbarDropdown5">
                                         <Link to="/upcoming-meetings" className="dropdown-item">UPCOMING</Link>
                                         <Link to="/completed-meetings" className="dropdown-item">COMPLETED</Link>
                                     </div>
