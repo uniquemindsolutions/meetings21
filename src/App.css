@@ -262,3 +262,13 @@
   color: white;
   text-align: left;
 }
+  /* Show dropdown on hover */
+  .dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Fix Bootstrap's auto-hide issue */
+.dropdown-menu {
+    margin-top: -10px;
+}
+

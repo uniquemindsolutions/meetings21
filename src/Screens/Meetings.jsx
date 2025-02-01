@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 
+
 const Meetings = () => {
   // const navigate = useNavigate();
   // const location = useLocation();
@@ -74,7 +75,7 @@ const Meetings = () => {
           ) : currentEventName && Array.isArray(currentEventName) && currentEventName.length > 0 ? (
             currentEventName.map((items, index) => (
               <div key={index} className="col-md-5 offset-md-1">
-                <Link to={`/${items.domain_name}`} className="event-card">
+                <Link to={`/${items.domain_name}`} target='_blank' className="event-card">
                   <div className='event-card-img'>
                     <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
                   </div>
@@ -94,68 +95,12 @@ const Meetings = () => {
           ) : (
             <p>Not found Events.</p>
           )}
-
-
           
-
-
-          <div className="col-md-5  offset-md-1">
-            <Link to="http://localhost:3000/2025/material-science" target='_blank' className="event-card">
-              <div className='event-card-img'>
-                <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
-              </div>
-              <div className='event-card-content'>
-                <h5 className="event-card-title">
-                  International Congress of Environmental Science and Technology
-                </h5>
-                <p className='mb-0 mt-4'>
-                  <small><i className="fa fa-calendar text-secondary"></i> October 21-12, 2025</small>   </p>
-                <p className='mb-0'>
-                  <small><i className="fa fa-map-marker text-secondary"></i> Dubai, UAE </small>
-                </p>
-              </div>
-            </Link>
-          </div>
         </div>
       </div>
 
-
-
-
-      <div className='d-flex meetings-section'>
-        <section className='index3-speakers-section w-100 float-left padding-top padding-bottom'>
-          <div className='container mb-5'>
-            <div className="row">
-              <div className="col-6">
-                <div className="generic-title2 text-left">
-                  <span className="fa-2x">Subscribe to get latest news.</span>
-                  <p className="text-white">Don't miss out on this incredible opportunity to learn, grow, and have a great time! Subscribe Now.</p>
-                </div>
-              </div>
-              <div className="col-6">
-                <div className="contact-form-section custom-form-sub float-left">
-                  <form className="form-box custom-form-grid" method="post" id="contactpage">
-                    <ul className="list-unstyled">
-                      <li>
-                        <input type="text" name="fname" id="fname" placeholder="Enter your Name" />
-                      </li>
-
-                      <li>
-                        <input type="email" placeholder="Enter your Email" name="email" id="email" />
-                      </li>
-
-                    </ul>
-                    <div className="submit-btn generic-btn">
-                      <button className="w-100" type="submit" id="submit">SEND MESSAGE <i className="fas fa-arrow-right"></i></button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </div>
-
+      <SubscribeSection/>
+      
       <Footer />
     </>
   )

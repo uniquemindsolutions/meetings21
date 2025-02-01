@@ -25,11 +25,9 @@ const Speakers = () => {
   const getSpekers = async () => {
     const currentEvents = location.pathname.split('/');
     setCurrentEventName(currentEvents[1])
-    console.log("currentEventNameres ===", currentEvents[1], currentEvents)
     try {
       const res = await axios.get(`${committeeUrl}${currentEvents[1]}/agenda/speakers/`);
       setSpeakerData(res.data);
-      console.log('speakersdata ===', res.data);
     } catch {
       setError('Error loaded')
     }

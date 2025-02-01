@@ -189,7 +189,7 @@ const SubmitAbstract = () => {
                                     {/* <a className="btn btn-outline-success ml-5 btn-very-small btn-dark-gray" href="https://industrial-engineering.synergiasummits.com/storage/abstract_templates/1700548262.docx">Download Template</a> */}
                                     <div className="index3-faq-btn-con text-center mt-3">
                                         <div className="generic-btn">
-                                            <a href="contact.html">Download Template <i className="fas fa-arrow-right"></i></a>
+                                            <a href="https://industrial-engineering.synergiasummits.com/storage/abstract_templates/1700548262.docx">Download Template <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </p>

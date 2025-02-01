@@ -27,7 +27,6 @@ window.$ = window.jQuery = $; // Expose jQuery globally
 const Events = () => {
 
     const location = useLocation();
-    console.log("checking url", location.pathname)
 
     const testimonialApi = process.env.REACT_APP_API_URL;
     const bannersApi = process.env.REACT_APP_API_URL;
@@ -38,6 +37,8 @@ const Events = () => {
     const ourPartnersApi = process.env.REACT_APP_API_URL;
     const addToCalenderApi = process.env.REACT_APP_API_URL;
     const speakersApi = process.env.REACT_APP_API_URL;
+    const downloadProgramApi = process.env.REACT_APP_API_URL;
+
 
     const [error, setError] = useState('')
     const [loading, setLoading] = useState('')
@@ -52,19 +53,29 @@ const Events = () => {
     const [currentEventName, setCurrentEventName] = useState([])
     const [eventSpeakers, setEventSpeakers] = useState([])
     const [addToCalendar, setAddToCalendar] = useState([])
+    const [downloadProgram, setDownloadProgram] = useState([])
+
     const { eventName } = useParams();
 
     const addToCalendarCurrent = useRef(addToCalendar)
+    const downloadProgramCurrent = useRef(downloadProgram)
 
     useEffect(() => {
         if (window.location.origin + location.pathname == window.location.origin + '/2025/material-science') {
             window.location.href = window.location.origin + "/material-science"
         }
+        const currentEvents = location.pathname.split('/')
+        setCurrentEventName(currentEvents[1])
 
         fetchingApis();
         getSpeakers();
-        getAddtoCalendar();
-    }, [])
+
+        // Initialize Bootstrap Tabs manually
+        const tabElList = document.querySelectorAll('[data-bs-toggle="tab"]');
+        tabElList.forEach(tab => {
+            new window.bootstrap.Tab(tab);
+        });
+    }, [location])
 
     const fetchingApis = async () => {
         setLoading(true);
@@ -89,7 +100,6 @@ const Events = () => {
             setExpertsGallery(expertsGalleryRes.data)
             setRecentNews(recentNewsRes.data)
             setOurPartners(ourPartnersRes.data)
-            console.log("aboutContent data ===", aboutContentRes);
         } catch {
             setError('Error: no data found')
         } finally {
@@ -102,54 +112,86 @@ const Events = () => {
         try {
             const res = await axios.get(speakersApi + currentEvents[1] + '/agenda/speakers/')
             setEventSpeakers(res.data)
-            console.log("EventSpeakers ===", res.data)
         } catch {
             setError('no speakers found')
         }
     }
 
-    const getAddtoCalendar = async ()=> {
+    const getAddtoCalendar = async () => {
         setLoading(true);
-        const currentEvents = location.pathname.split('/');  
+        const currentEvents = location.pathname.split('/');
         try {
             const res = await axios.get(addToCalenderApi + currentEvents[1] + '/Uploads/add_to_calenders/');
             setAddToCalendar(res.data[0].add_to_calender)
-            addToCalendarCurrent.current=res.data[0].add_to_calender;
-            console.log("add to calendar api", res.data[0])
-        }catch {
+            addToCalendarCurrent.current = res.data[0].add_to_calender;
+        } catch {
             setError('File not downloaded')
         }
         handleDownload();
     }
 
- 
     const handleDownload = async () => {
-        console.log(addToCalendarCurrent.current, "calendar ===")
-       try {
-            const response = await fetch("https://meetings21.com/Meetings21Backend/download?file_path="+addToCalendarCurrent.current);
+        try {
+            const response = await fetch("https://meetings21.com/Meetings21Backend/download?file_path=" + addToCalendarCurrent.current);
             if (!response.ok) {
-              throw new Error("Failed to fetch file");
+                throw new Error("Failed to fetch file");
             }
-            
+
             const blob = await response.blob(); // Convert to blob
             const url = window.URL.createObjectURL(blob);
-        
+
             // Create an anchor element for download
             const link = document.createElement("a");
             link.href = url;
-            link.setAttribute("download", "sample.pdf"); // ✅ Ensure correct filename
+            link.setAttribute("download", "calendar.pdf");
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-        
+
             // Clean up memory
             window.URL.revokeObjectURL(url);
-          } catch (error) {
+        } catch (error) {
+        }
+    };
+
+
+    const getDownloadProgram = async () => {
+        const currentEvents = location.pathname.split('/')
+        try {
+            const res = await axios.get(downloadProgramApi + currentEvents[1] + '/Uploads/programfile/');
+            setDownloadProgram(res.data[0].Program_file);
+            downloadProgramCurrent.current = res.data[0].Program_file;
+        } catch {
+            setError('no data found')
+        }
+        handleDownloadProgram();
+    }
+    const handleDownloadProgram = async () => {
+        try {
+            const response = await fetch("https://meetings21.com/Meetings21Backend/programfile_download?file_path=" + downloadProgramCurrent.current);
+            if (!response.ok) {
+                throw new Error("Failed to fetch file");
+            }
+
+            const blob = await response.blob(); // Convert to blob
+            const url = window.URL.createObjectURL(blob);
+
+            // Create an anchor element for download
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", "Program_file.pdf");
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // Clean up memory
+            window.URL.revokeObjectURL(url);
+        } catch (error) {
             console.error("Download failed:", error);
-          }
-        };
-      
-    
+        }
+    };
+
+
     const openModal = (id) => setOpenModalId(id);
     const closeModal = () => setOpenModalId(null);
 
@@ -207,32 +249,8 @@ const Events = () => {
                 }
             }
         });
-
-
-
-
-
-        // $("#owl-carousel").owlCarousel({
-        //   loop: true,
-        //   margin: 10,
-        //   nav: true,
-        //   dots: true,
-        //   autoplay: true,
-        //   navText: [
-        //     "<i className='fas fa-arrow-left'></i>",
-        //     "<i className='fas fa-arrow-right'></i>",
-        //   ],
-        //   responsive: {
-        //     0: { items: 1 },
-        //     600: { items: 2 },
-        //     1000: { items: 3 },
-        //   },
-        // });
-        // AOS.init({
-        //   duration: 1000, 
-        //   once: true,    
-        // });
     }, []);
+
     return (
         <div className='event-p'>
             <EventHeader />
@@ -269,7 +287,7 @@ const Events = () => {
                                                             <li><i className="fas fa-map-marker-alt"></i> {banner.meetingslocation}</li>
                                                         </ul>
                                                         <div className="generic-btn">
-                                                            <Link to="/registration_form">REGISTER NOW<i className="fas fa-arrow-right"></i></Link>
+                                                            <Link to={`/${currentEventName}/registration_form`}>REGISTER NOW<i className="fas fa-arrow-right"></i></Link>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -609,16 +627,37 @@ const Events = () => {
                         <div className="index3-event-tabs-con event-table">
                             <ul className="nav nav-tabs" id="myTab" role="tablist">
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link active" id="home-tab" data-toggle="tab" data-target="#home"
-                                        type="button" role="tab" aria-controls="home" aria-selected="true">DAY 1</button>
+                                    <button className="nav-link active"
+                                        id="home-tab"
+                                        data-toggle="tab"
+                                        data-bs-target="#home"
+                                        type="button"
+                                        data-bs-toggle="tab"
+                                        role="tab"
+                                        aria-controls="home"
+                                        aria-selected="true">DAY 1</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link" id="profile-tab" data-toggle="tab" data-target="#profile" type="button"
-                                        role="tab" aria-controls="profile" aria-selected="false">DAY 2</button>
+                                    <button className="nav-link"
+                                        id="profile-tab"
+                                        data-toggle="tab"
+                                        data-bs-target="#profile"
+                                        type="button"
+                                        data-bs-toggle="tab"
+                                        role="tab"
+                                        aria-controls="profile"
+                                        aria-selected="false">DAY 2</button>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link" id="contact-tab" data-toggle="tab" data-target="#contact" type="button"
-                                        role="tab" aria-controls="contact" aria-selected="false">DAY 3</button>
+                                    <button className="nav-link"
+                                        id="contact-tab"
+                                        data-toggle="tab"
+                                        data-bs-target="#contact"
+                                        type="button"
+                                        data-bs-toggle="tab"
+                                        role="tab"
+                                        aria-controls="contact"
+                                        aria-selected="false">DAY 3</button>
                                 </li>
                             </ul>
                             <div className="tab-content" id="myTabContent">
@@ -674,7 +713,7 @@ const Events = () => {
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a href="contact.html">DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
+                                            <a onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -730,7 +769,7 @@ const Events = () => {
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a href="contact.html">DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
+                                            <a onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -785,7 +824,7 @@ const Events = () => {
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a href="contact.html">DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
+                                            <a onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -855,7 +894,7 @@ const Events = () => {
                         </div>
                         <div className="index3-plan-btn text-center">
                             <div className="generic-btn">
-                                <Link to="/registration_form">REGISTER NOW <i className="fas fa-arrow-right"></i></Link>
+                                <Link to={`/${currentEventName}/registration_form`}>REGISTER NOW <i className="fas fa-arrow-right"></i></Link>
                             </div>
                         </div>
                     </div>
@@ -893,9 +932,9 @@ const Events = () => {
                                     <div className="index3-experts-left-con">
                                         <div className="index3-expert index3-expert-con1 container__img-holder">
                                             <img src={img.gallery} className='img-fluid' alt="index3-expert-img1" />
-                                            <div className="search-icon-con">
+                                            {/* <div className="search-icon-con">
                                                 <i className="fas fa-search"></i>
-                                            </div>
+                                            </div> */}
                                         </div>
                                     </div>
                                 </div>

@@ -145,9 +145,9 @@ const Abstract = () => {
                             </div>
                         </div>
 
-                        <div className="row mb-5">
+                        {/* <div className="row mb-5">
                             <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12 generic-btn text-center"><a className="" href="https://industrial-engineering.synergiasummits.com/abstract">Submit Now</a></div>
-                        </div>
+                        </div> */}
                     </div>
                 </section>
             </div>
