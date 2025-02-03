@@ -4,6 +4,7 @@ import Footer from '../Footer/footer'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
+import { PayPalButtons, PayPalScriptProvider } from '@paypal/react-paypal-js';
 
 const OnlineRegistration = () => {
 
@@ -68,7 +69,14 @@ const OnlineRegistration = () => {
     const [procssfee, setProcessfee] = useState(0);
     const [grandtot, setGrandTot] = useState('');
 
-    const textRef = useRef(regiPricecal);
+    const regiPricecalCurrent = useRef(regiPricecal);
+    const accpricecalCurrent = useRef(accpricecal);
+    const addOnCurrent = useRef(addOn);
+    const procssfeeCurrent = useRef(procssfee);
+    const subtotCurrent = useRef(subtot);
+    const grandtotCurrent = useRef(totalPrice);
+
+    const submitFormDataCurrent = useRef(submitFormData);
 
     
 
@@ -77,6 +85,37 @@ const OnlineRegistration = () => {
             const { name, value } = event.target;
             setSubmitFormData({ ...submitFormData, [name]: value });
             setAddOn(value);
+            addOnCurrent.current=value;
+
+            setsubTotalPrice(parseFloat(regiPricecalCurrent.current) + parseFloat(accpricecalCurrent.current) + parseFloat(addOnCurrent.current));
+
+            subtotCurrent.current=parseFloat(regiPricecalCurrent.current) + parseFloat(accpricecalCurrent.current) + parseFloat(addOnCurrent.current);
+    
+
+            const getpercentage=(parseFloat(subtotCurrent.current)*5)/100;
+            setProcessfee(getpercentage);
+            procssfeeCurrent.current=getpercentage;
+
+            setTotalPrice(parseFloat(subtotCurrent.current)+parseFloat(procssfeeCurrent.current));
+
+            grandtotCurrent.current=parseFloat(subtotCurrent.current)+parseFloat(procssfeeCurrent.current);
+
+            console.log("grandtot", grandtotCurrent.current,subtotCurrent.current,procssfeeCurrent.current);
+            
+            console.log("submitFormDatawithfulldata",submitFormData);
+
+            setSubmitFormData((prev) => ({
+                ...prev,
+                subtot: subtotCurrent.current,  // ✅ This ensures the latest value is used
+              }));
+
+            setSubmitFormData({ ...submitFormData, ['acc_per_price']: addOnCurrent.current });
+            // setSubmitFormData({ ...submitFormData, ['subtot']: subtotCurrent.current });
+            setSubmitFormData({ ...submitFormData, ['procfee']: procssfeeCurrent.current });
+            setSubmitFormData({ ...submitFormData, ['grand_tot']: grandtotCurrent.current });
+
+            submitFormDataCurrent.current=submitFormData;
+
         };
 
     
@@ -152,37 +191,36 @@ const OnlineRegistration = () => {
 
     const handleSubmitForm = async (e) => {
         e.preventDefault();
-        setLoading(true);
+        // console.log("form values",e,submitFormData);
+        console.log("formdata",submitFormData,addOnCurrent.current,subtotCurrent.current,procssfeeCurrent.current,grandtotCurrent.current);
+        // setLoading(true);
 
-        try {
-            const formData = new FormData();
-            Object.keys(submitFormData).forEach((key) => {
-                formData.append(key, submitFormData[key]);
-            });
+        // try {
+        //     const formData = new FormData();
+        //     Object.keys(submitFormData).forEach((key) => {
+        //         formData.append(key, submitFormData[key]);
+        //     });
 
-            // if (file) {
-            //     formData.append("file", file);
-            // }
             
-            const currentEvents = location.pathname.split('/');
-            console.log("urlapi", `${baseurl}${currentEvents[1]}/submissions/submit_abstract_form/`)
-            const response = await axios.post(
-                `${baseurl}${currentEvents[1]}/submissions/submit_abstract_form/`,
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                }
-            );
-            setSuccessMessage("Form submitted successfully");
-            console.log("submit_abstract_form", response.data);
-        } catch (error) {
-            console.error(error);
-            setError("Form submission failed");
-        } finally {
-            setLoading(false);
-        }
+        //     const currentEvents = location.pathname.split('/');
+        //     console.log("urlapi", `${baseurl}${currentEvents[1]}/submissions/submit_abstract_form/`)
+        //     const response = await axios.post(
+        //         `${baseurl}${currentEvents[1]}/submissions/submit_abstract_form/`,
+        //         formData,
+        //         {
+        //             headers: {
+        //                 "Content-Type": "multipart/form-data",
+        //             },
+        //         }
+        //     );
+        //     setSuccessMessage("Form submitted successfully");
+        //     console.log("submit_abstract_form", response.data);
+        // } catch (error) {
+        //     console.error(error);
+        //     setError("Form submission failed");
+        // } finally {
+        //     setLoading(false);
+        // }
     };
 
     const getCountry = async () => {
@@ -249,25 +287,30 @@ const OnlineRegistration = () => {
         setSubmitFormData({ ...submitFormData, ['register_category']: index+1 });
         setSubmitFormData({ ...submitFormData, ['reg_cat_val']: value });
         
-
         setregiPriceCal(value);
+        regiPricecalCurrent.current=value;
 
-        textRef.current=value;
-        console.log("Updated Value:", textRef.current);
-      
-        setTimeout(() => {
-            // console.log("Updated Count (after render):", count); // ✅ Logs the correct value
-            setsubTotalPrice(parseFloat(regiPricecal) + parseFloat(accpricecal) + parseFloat(addOn));
-        const getpercentage=(Number(subtotalPrice)*5)/100;
+        setsubTotalPrice(parseFloat(regiPricecalCurrent.current) + parseFloat(accpricecalCurrent.current) + parseFloat(addOnCurrent.current));
+        subtotCurrent.current=parseFloat(regiPricecalCurrent.current) + parseFloat(accpricecalCurrent.current) + parseFloat(addOnCurrent.current);
+
+
+        const getpercentage=(parseFloat(subtotCurrent.current)*5)/100;
         setProcessfee(getpercentage);
-        setTotalPrice(subtotalPrice+procssfee);
+        procssfeeCurrent.current=getpercentage;
 
-        console.log("Registration valuechecking1",regiPricecal,accpricecal,addOn);
-        console.log("Registration valuechecking",subtotalPrice,procssfee,totalPrice);
-          }, 10);
+        setTotalPrice(parseFloat(subtotCurrent.current)+parseFloat(procssfee.current));
+        grandtotCurrent.current=parseFloat(subtotCurrent.current)+parseFloat(procssfeeCurrent.current);
 
-        //   console.log("Registration valuechecking3",regiPricecal,value);
+       console.log("values checking",addOnCurrent.current,subtotCurrent.current,procssfeeCurrent.current,grandtotCurrent.current);
 
+        setSubmitFormData({ ...submitFormData, ['acc_per_price']: addOnCurrent.current });
+        setSubmitFormData({ ...submitFormData, ['subtot']: subtotCurrent.current });
+        setSubmitFormData({ ...submitFormData, ['procfee']: procssfeeCurrent.current });
+        setSubmitFormData({ ...submitFormData, ['grand_tot']: grandtotCurrent.current });
+
+        submitFormDataCurrent.current=submitFormData;
+
+        
        
     };
 
@@ -315,15 +358,51 @@ const OnlineRegistration = () => {
         setSubmitFormData({ ...submitFormData, ['no_of_nights']: e.target.value});
         setaccpriceCal(e.target.value);
 
-        setTimeout(() => {
-        setsubTotalPrice(parseFloat(regiPricecal) + parseFloat(accpricecal) + parseFloat(addOn));
-        const getpercentage=(Number(subtotalPrice)*5)/100;
+        accpricecalCurrent.current=e.target.value;
+
+
+        setsubTotalPrice(parseFloat(regiPricecalCurrent.current) + parseFloat(accpricecalCurrent.current) + parseFloat(addOnCurrent.current));
+     
+        subtotCurrent.current=parseFloat(regiPricecalCurrent.current) + parseFloat(accpricecalCurrent.current) + parseFloat(addOnCurrent.current);
+       
+        const getpercentage=(parseFloat(subtotCurrent.current)*5)/100;
         setProcessfee(getpercentage);
-        setTotalPrice(subtotalPrice+procssfee);
-        console.log("valuechecking1",regiPricecal,accpricecal,addOn);
-        console.log("valuechecking",subtotalPrice,procssfee,totalPrice);
-        },10)
+        procssfeeCurrent.current=getpercentage;
+       
+        setTotalPrice(parseFloat( subtotCurrent.current)+parseFloat(procssfeeCurrent.current));
+        grandtotCurrent.current=parseFloat(subtotCurrent.current)+parseFloat(procssfeeCurrent.current);
+        console.log("valuechecking1",regiPricecalCurrent.current,accpricecalCurrent.current,addOnCurrent.current);
+        console.log("valuechecking", subtotCurrent.current,procssfeeCurrent.current,totalPrice);
+
+        setSubmitFormData({ ...submitFormData, ['acc_per_price']: addOnCurrent.current });
+        setSubmitFormData({ ...submitFormData, ['subtot']: subtotCurrent.current });
+        setSubmitFormData({ ...submitFormData, ['procfee']: procssfeeCurrent.current });
+        setSubmitFormData({ ...submitFormData, ['grand_tot']: grandtotCurrent.current });
+        submitFormDataCurrent.current=submitFormData;
+       
     };
+
+    const initialOption ={
+        'client-id':'AVu9_6n12pwbZY6nay-AwpvrJh2q0UF4ckAzxf3paq7TpDuRLE0ry0Ub9w6HiqXI8PK_LmvpUPUYDFH0',
+        'currency':'USD',
+        'intent':'capture'
+    }
+    const createOrder=(data,actions)=>{
+       return actions.order.create({
+        purchase_units:[{
+           amount:{
+            currency_code:"USD",
+            value:'0.01'
+           }
+        }]
+       })
+    }
+
+    const onApprove=(data,actions)=>{
+        return actions.order.capture().then(function(details){
+            alert('Transaction completed By'+details.payer.name.given_name);
+        })
+     }
 
     return (
         <main>
@@ -753,14 +832,13 @@ const OnlineRegistration = () => {
                                 </div>
 
                                 <hr />
-                                <h5>Sub-Total : $<b className='text-primary'>{subtotalPrice || 0}</b></h5>
+                                <h5>Sub-Total : $<b className='text-primary'>{subtotCurrent.current || 0}</b></h5>
                                 <hr />
-                                <h5>Processing Fee(5%) : $<b className='text-primary'>{procssfee || 0 }</b></h5>
+                                <h5>Processing Fee(5%) : $<b className='text-primary'>{procssfeeCurrent.current || 0 }</b></h5>
                                 <hr />
-                                <h5>Grand Total : $<b className='text-primary'>{totalPrice || 0}</b></h5>
+                                <h5>Grand Total : $<b className='text-primary'>{grandtotCurrent.current || 0}</b></h5>
                             </div>
                         </div>
-
                         <div className="card my-3">
                             <div className="card-body bg-light">
                                 <div className="text-center mt-4">
@@ -771,7 +849,7 @@ const OnlineRegistration = () => {
                                         <label>Selected Price: $ (Inclusive of all taxes)</label>
                                         <div class="input-group mb-3 mx-auto my-4" style={{ width: '300px' }}>
                                             <span class="input-group-text px-3" id="basic-addon1">$</span>
-                                            <input type="text" value={totalPrice || 0} class="form-control form-control-lg bg-white text-primary font-weight-bold" readOnly />
+                                            <input type="text" value={grandtotCurrent.current || 0} class="form-control form-control-lg bg-white text-primary font-weight-bold" readOnly />
                                         </div>
                                     </div>
 
@@ -790,9 +868,19 @@ const OnlineRegistration = () => {
                                     </div>
 
                                     <button className="btn btn-outline-secondary px-3 mr-3" onClick={handleReset}>
-                                        Reset
+                                        Reset sddsa
                                     </button>
-                                    <button className="btn btn-success px-5">Pay</button>
+
+                                    {/* <button className="btn btn-success px-5"  onClick={handleSubmitForm} >Pay</button> */}
+                                    <PayPalScriptProvider options={initialOption}>
+                                        <PayPalButtons style={{layout:"horizontal"}} 
+                                        createOrder={(data,actions)=>createOrder(data,actions)}
+                                        onApprove={(data,actions)=>onApprove(data,actions)}
+                                        >
+
+                                        </PayPalButtons>
+                                    </PayPalScriptProvider>
+
                                 </div>
                             </div>
                         </div>
