@@ -7,6 +7,7 @@ import { event, get } from 'jquery';
 const SubmitAbstract = () => {
 
     const submitFormApi = process.env.REACT_APP_API_URL;
+    const TopicsApi = process.env.REACT_APP_API_URL;
 
     const location = useLocation();
 
@@ -29,12 +30,13 @@ const SubmitAbstract = () => {
     const [submitFormData, setSubmitFormData] = useState(submitForm);
     const [countries, setCountries] = useState([]);
     const [presentationType, setPresentationType] = useState([]);
+    const [topics, setTopics] = useState([])
 
     useEffect(() => {
         getCountry();
         getPresentationType();
+        getTopics();
     }, []);
-    
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -58,18 +60,18 @@ const SubmitAbstract = () => {
     const handleCaptchaChange = (event) => {
         setCaptcha(event.target.value);
     };
-    
+
 
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         setLoading(true);
-    
+
         try {
             const formData = new FormData();
             Object.keys(submitFormData).forEach((key) => {
                 formData.append(key, submitFormData[key]);
             });
-    
+
             if (file) {
                 formData.append("file", file);
             }
@@ -93,7 +95,7 @@ const SubmitAbstract = () => {
             setLoading(false);
         }
     };
-    
+
     const getCountry = async () => {
         try {
             const res = await axios.get(
@@ -156,8 +158,25 @@ const SubmitAbstract = () => {
     // }
 
 
+    const getTopics = async () => {
+        const currentEvents = location.pathname.split('/');
+        try {
+            const res = await axios.get(TopicsApi + currentEvents[1] + '/submissions/topics/');
+            setTopics(res.data);
+            console.log("topcs list", res.data)
+        } catch {
+            setError('No data found');
+        }
+    }
 
-
+    const topicsList = (id) => {
+        if (!topics || topics.length === 0) {
+            return ''; // Return an empty string if data is not yet loaded
+        }
+        console.log('213456', topics)
+        const topicsData = topics?.find((tp) => tp.id === id);
+        return topicsData ? topicsData.topic_name : "No data found";
+    };
 
 
 
@@ -366,13 +385,15 @@ const SubmitAbstract = () => {
                                 <div className="col-sm-6">
                                     <div className="form-group">
                                         <label htmlFor="Topic">Topic of interest:</label>
-                                        <select onChange={handleInputChange} name="topic_of_interest" value={submitFormData.topic_of_interest} className="form-control" id="Topic">
+                                        <select onChange={handleInputChange} name="topic_of_interest" className="form-control" id="Topic">
                                             <option>Select Topic</option>
-                                            <option value="Topic 1">Topic 1</option>
-                                            <option value="Topic 2">Topic 2</option>
-                                            <option value="Topic 3">Topic 3</option>
-                                            <option value="Topic 4">Topic 4</option>
-                                            <option value="Topic 5">Topic 5</option>
+                                            {
+                                                Array.isArray(topics) && topics.length > 0 ? (topics.map((item) => {
+                                                    return <option key={item.id} value={item.id}>
+                                                        {item.topic_name}
+                                                    </option>
+                                                })) : (<option disabled>No data found</option>)
+                                            }
                                         </select>
                                     </div>
                                 </div>
