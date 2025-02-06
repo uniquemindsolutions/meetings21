@@ -8,6 +8,8 @@ const SubmitAbstract = () => {
 
     const submitFormApi = process.env.REACT_APP_API_URL;
     const TopicsApi = process.env.REACT_APP_API_URL;
+    const presentationTypeApi = process.env.REACT_APP_API_URL;
+    const contriesApi = process.env.REACT_APP_API_URL;
 
     const location = useLocation();
 
@@ -30,7 +32,14 @@ const SubmitAbstract = () => {
     const [submitFormData, setSubmitFormData] = useState(submitForm);
     const [countries, setCountries] = useState([]);
     const [presentationType, setPresentationType] = useState([]);
-    const [topics, setTopics] = useState([])
+    const [topics, setTopics] = useState([]);
+
+    const [num1, setNum1] = useState(Math.floor(Math.random() * 10) + 1);
+    const [num2, setNum2] = useState(Math.floor(Math.random() * 10) + 1);
+    const [userInput, setUserInput] = useState("");
+    const [isValid, setIsValid] = useState(null);
+
+    const correctAnswer = num1 + num2;
 
     useEffect(() => {
         getCountry();
@@ -90,37 +99,41 @@ const SubmitAbstract = () => {
             console.log("submit_abstract_form", response.data);
         } catch (error) {
             console.error(error);
-            setError("Form submission failed");
+            setError("Submission failed. Please try again.");
+            alert('Submission failed. Please try again.')
         } finally {
             setLoading(false);
         }
+        handleSubmit();
     };
 
     const getCountry = async () => {
+        // const currentEvents = location.pathname.split('/');
         try {
-            const res = await axios.get(
-                "https://meetings21.com/Meetings21Backend/api/Country/"
-            );
+            const res = await axios.get(contriesApi + '/api/Country/');
             setCountries(res.data);
+            console.log("countries===", res.data)
+            
         } catch (err) {
             setError("No data found");
         }
     };
 
-    const countryList = (countries) => {
-        if (!countries || countries.length === 0) {
-            return <option>No country found</option>;
-        }
-        return countries.map((c) => (
-            <option key={c.id} value={c.id}>
-                {c.country_name}
-            </option>
-        ));
-    };
+    // const countryList = (countries) => {
+    //     if (!countries || countries.length === 0) {
+    //         return <option>No country found</option>;
+    //     }
+    //     return countries.map((c) => (
+    //         <option key={c.id} value={c.id}>
+    //             {c.country_name}
+    //         </option>
+    //     ));
+    // };
 
     const getPresentationType = async () => {
+        const currentEvents = location.pathname.split('/')
         try {
-            const response = await axios.get('https://meetings21.com/Meetings21Backend/Material_science/submissions/presentation_type/');
+            const response = await axios.get(presentationTypeApi + currentEvents[1] + '/submissions/presentation_type/');
             setPresentationType(response.data); // Update state with fetched data
             console.log("PresentationType ===", response.data);
         } catch (error) {
@@ -129,14 +142,14 @@ const SubmitAbstract = () => {
         }
     };
 
-    const PresentationTypeList = (id) => {
-        if (!presentationType || presentationType.length === 0) {
-            return ''; // Return an empty string if data is not yet loaded
-        }
+    // const PresentationTypeList = (id) => {
+    //     if (!presentationType || presentationType.length === 0) {
+    //         return ''; // Return an empty string if data is not yet loaded
+    //     }
 
-        const PresentTypes = presentationType.find((dis) => dis.id === id);
-        return PresentTypes ? PresentTypes.presentation_type : '';
-    };
+    //     const PresentTypes = presentationType.find((dis) => dis.id === id);
+    //     return PresentTypes ? PresentTypes.presentation_type : '';
+    // };
 
     //   const DesignationsList = async () => {
     //     setLoading(true);
@@ -169,16 +182,24 @@ const SubmitAbstract = () => {
         }
     }
 
-    const topicsList = (id) => {
-        if (!topics || topics.length === 0) {
-            return ''; // Return an empty string if data is not yet loaded
+    // const topicsList = (id) => {
+    //     if (!topics || topics.length === 0) {
+    //         return ''; // Return an empty string if data is not yet loaded
+    //     }
+    //     const topicsData = topics?.find((tp) => tp.id === id);
+    //     return topicsData ? topicsData.topic_name : "No data found";
+    // };
+
+    const handleSubmit = (e) => {
+        // e.preventDefault();
+        if (parseInt(userInput) === correctAnswer) {
+            setIsValid(true);
+            //   alert("CAPTCHA passed!");
+        } else {
+            setIsValid(false);
+            //   alert("Incorrect CAPTCHA. Try again.");
         }
-        console.log('213456', topics)
-        const topicsData = topics?.find((tp) => tp.id === id);
-        return topicsData ? topicsData.topic_name : "No data found";
     };
-
-
 
 
 
@@ -354,14 +375,18 @@ const SubmitAbstract = () => {
                                 <div className="col-sm-6">
                                     <label htmlFor="country">Country:</label>
                                     <select
-                                        onChange={handleInputChangeCountry}
+                                        onChange={handleInputChange}
                                         name="country"
                                         value={submitFormData.country || ""}
                                         className="form-control"
                                         id="country"
                                     >
-                                        <option value="">Select country</option>
-                                        {countryList(countries)}
+                                        <option value="">Select</option>
+                                        {
+                                            countries.map((cnry)=>(
+                                                <option key={cnry.id} value={cnry.id}>{cnry.country_name}</option>
+                                            ))
+                                        }
                                     </select>
                                 </div>
                             </div>
@@ -373,12 +398,12 @@ const SubmitAbstract = () => {
                                         <select onChange={handleInputChange} name="presentation_type" value={submitFormData.presentation_type} className="form-control" id="country">
 
                                             <option value="Plenary Talk">Select</option>
-                                            {PresentationTypeList(submitFormData.presentation_type)}
-                                            {/* <option value="Invited Talk">Invited Talk</option>
-                                            <option value="Oral Talk">Oral Talk</option>
-                                            <option value="Poster">Poster</option>
-                                            <option value="Workshop">Workshop</option>
-                                            <option value="Special Session">Special Session</option> */}
+                                            {
+                                                presentationType.map((item) => (
+                                                    <option key={item.id} value={item.id}>{item.presentation_name}</option>
+                                                ))
+                                            }
+                                            {/* {PresentationTypeList(submitFormData.presentation_type)} */}
                                         </select>
                                     </div>
                                 </div>
@@ -386,7 +411,7 @@ const SubmitAbstract = () => {
                                     <div className="form-group">
                                         <label htmlFor="Topic">Topic of interest:</label>
                                         <select onChange={handleInputChange} name="topic_of_interest" className="form-control" id="Topic">
-                                            <option>Select Topic</option>
+                                            <option>Select</option>
                                             {
                                                 Array.isArray(topics) && topics.length > 0 ? (topics.map((item) => {
                                                     return <option key={item.id} value={item.id}>
@@ -409,13 +434,25 @@ const SubmitAbstract = () => {
                                 </div>
 
                                 <div className="col-sm-4">
-                                    <label htmlFor="files">Captcha:</label>
-                                    <input
-                                        type="text"
-                                        onChange={handleCaptchaChange}
-                                        value={captcha}
-                                        className="form-control"
-                                    />
+                                    <label htmlFor="files" className='mb-0'>Captcha:</label>
+                                    <div>
+                                        <div className='form-group d-block bg-light text-center rounded'>
+                                            Solve: <span className='text-primary fw-bold'> {num1}</span> + <span className='text-primary fw-bold'> {num2}</span> = ?
+                                            <label>
+                                                <input
+                                                    className='form-control ms-3'
+                                                    type="number"
+                                                    value={userInput}
+                                                    onChange={(e) => setUserInput(e.target.value)}
+                                                    required
+                                                    style={{width:90}}
+                                                />
+                                            </label>
+                                            {/* <button className='btn btn-primary d-inline' type="submit">Submit</button>  */}
+                                        </div>
+
+                                        {isValid === false && <p style={{ color: "red" }}>Incorrect. Try again.</p>}
+                                    </div>
                                 </div>
                             </div>
 
@@ -430,8 +467,8 @@ const SubmitAbstract = () => {
                             <button type="submit" className="btn btn-primary">
                                 {loading ? "Submitting..." : "Submit"}
                             </button>
-                            {successMessage && <p className="text-success mt-2">{successMessage}</p>}
-                            {error && <p className="text-danger mt-2">{error}</p>}
+                            {successMessage && !error && <p className="text-success mt-2">{successMessage}</p>}
+                            {!error && <p className="text-danger mt-2">{error}</p>}
                         </div>
                     </form>
                 </div>

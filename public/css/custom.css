@@ -146,7 +146,11 @@ h6 {
     padding: 0;
     overflow: hidden;
     border-radius: 0;
-    top: 10px;
+    top: 9px;
+}
+
+.navbar-expand-lg .main-menu .navbar-nav .dropdown-menu {
+    top: 15px;
 }
 
 .dropdown-toggle::after {
@@ -1388,6 +1392,8 @@ h6 {
 
 .sponsers-companies ul li figure img {
     opacity: .6;
+    min-width: 140px;
+    height: auto;
 }
 
 /* sponsers section styling end here */
@@ -5523,9 +5529,9 @@ h5.newsCaption-title {
     height: 100%;
 }
 
-.banner-main-section .container-fluid{
+/* .banner-main-section .container-fluid{
     padding: 0 15.3% !important;
-}
+} */
 
 .about-p .about-inner-con{
     grid-template-columns: 70% 25%;

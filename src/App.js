@@ -31,6 +31,8 @@ import PoliciesEvents from './Screens/PoliciesEvents';
 import CompletedEvents from './Screens/CompletedEvents';
 import ContactsEvent from './Screens/ContactsEvent';
 import BlogDetails from './Screens/BlogDetails';
+import TermsAndConditions from './Screens/TermsAndConditions';
+import PrivacyPolicy from './Screens/PrivacyPolicy';
 
 
 function App() {
@@ -45,12 +47,15 @@ function App() {
         <Route path="/policies" element={<Policies />} />
         <Route path="/code-of-conduct" element={<CodeOfConduct />} />
         <Route path="/contact" element={<Contacts />} />
+        <Route path="/contact" element={<Contacts />} />
+        <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/:id/:name/" element={<Events />} />
         <Route path="/:name" element={<Events />} />
         <Route path="/blogs" element={<Blogs />} />
         <Route path="/blog-details/:id" element={<BlogDetails />} />
         <Route path="/:name/contact-us" element={<ContactsEvent />} />
-        <Route path="/:name/policies-event" element={<PoliciesEvents />} />
+        <Route path="/:name/conference-policies" element={<PoliciesEvents />} />
         <Route path="/:name/committee" element={<Committee />} />
         <Route path="/:name/topics" element={<Topics />} />
         <Route path="/:name/call-for-Abstracts" element={<Abstract />} />
@@ -59,8 +64,8 @@ function App() {
         <Route path="/:name/sponsors" element={<Sponsors />} />
         <Route path="/:name/venue" element={<Venue />} />
         <Route path="/:name/speakers" element={<Speakers />} />
-        <Route path="/:name/programs" element={<Programs />} />
-        <Route path="/:name/registration_form" element={<RegistrationForm />} />
+        <Route path="/:name/program" element={<Programs />} />
+        <Route path="/:name/registration-fee" element={<RegistrationForm />} />
         <Route path="/:name/presentation-guidelines" element={<PresentationGuidelines />} />
         <Route path="/:name/online-registration" element={<OnlineRegistration />} />
         <Route path="/:name/discount-form" element={<DiscountForm />} />

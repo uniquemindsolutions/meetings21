@@ -103,6 +103,7 @@
   border: solid 1px #f0f0f0;
   transition: 0.4s;
   margin-bottom: 20px;
+  background: #f8f9ee;
 }
 .event-card:hover{
   text-decoration: none;
@@ -270,5 +271,9 @@
 /* Fix Bootstrap's auto-hide issue */
 .dropdown-menu {
     margin-top: -10px;
+}
+
+.bnt-main .carousel-control-next, .bnt-main .carousel-control-prev {
+  width: 2%!important;  
 }
 

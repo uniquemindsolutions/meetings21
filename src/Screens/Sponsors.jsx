@@ -123,7 +123,7 @@ const Sponsors = () => {
                                     For Sponsorship and Exhibition opportunities download our Sponsor Prospectus. Thank you for considering sponsorship at our conference. Together, we can create an impactful experience for all attendees!
                                 </p>
                                 <p className="font-weight-bold generic-btn text-center my-5">
-                                    <a onClick={getDownloadBroch} className="btn btn-very-small btn-dark-gray">Download Brochure</a>
+                                    <a onClick={getDownloadBroch} className="btn btn-very-small btn-dark-gray text-white">Download Brochure</a>
                                 </p>
                             </div>
 

@@ -62,6 +62,7 @@
 
     .banner-inner-section {
         grid-template-columns: 55% 45%;
+        padding: 0 4%;
     }
 
     .banner-left-section .generic-btn a {
@@ -2074,7 +2075,7 @@
     }
 
     .contact-form-section {
-        padding-bottom: 335px;
+        /* padding-bottom: 335px; */
     }
 
     .footer-main-section.contact-footer-section {

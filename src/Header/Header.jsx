@@ -35,7 +35,7 @@ const Header = () => {
                             {/* <span className="navbar-toggler-icon"></span>
                     <span className="navbar-toggler-icon"></span> */}
                         </button>
-                        <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <div className="collapse navbar-collapse justify-content-end main-menu" id="navbarSupportedContent">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
                                     <Link to="/" className="nav-link p-0 active" role="button">
@@ -50,7 +50,7 @@ const Header = () => {
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         MEETINGS
                                     </a>
-                                    <div className="dropdown-menu mt-2" aria-labelledby="navbarDropdown5">
+                                    <div className="dropdown-menu" aria-labelledby="navbarDropdown5">
                                         <Link to="/upcoming-meetings" className="dropdown-item">UPCOMING</Link>
                                         <Link to="/completed-meetings" className="dropdown-item">COMPLETED</Link>
                                     </div>

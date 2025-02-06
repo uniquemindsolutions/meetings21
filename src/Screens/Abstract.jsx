@@ -45,7 +45,6 @@ const Abstract = () => {
                 <section className="sub-banner-main-section w-100 justify-content-center">
                     <div className="sub-banner-inner-con text-center">
                         <h1>Call for Abstracts</h1>
-                        <p>The Organizing Committee welcome abstract submissions on the following topics. Topics of interest for submission include, but are not limited to:</p>
                         <nav aria-label="breadcrumb">
                             <ol className="breadcrumb d-inline-block mb-0">
                                 <li className="breadcrumb-item d-inline-block"><a href="/">HOME</a></li>

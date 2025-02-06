@@ -21,7 +21,7 @@ import Services from './Home/services';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
-
+import { Tab } from "bootstrap";
 window.$ = window.jQuery = $; // Expose jQuery globally
 
 const Events = () => {
@@ -74,6 +74,11 @@ const Events = () => {
         const tabElList = document.querySelectorAll('[data-bs-toggle="tab"]');
         tabElList.forEach(tab => {
             new window.bootstrap.Tab(tab);
+        });
+
+        const tabEl = document.querySelectorAll('button[data-bs-toggle="tab"]');
+        tabEl.forEach(el => {
+            new Tab(el);
         });
     }, [location])
 
@@ -627,39 +632,40 @@ const Events = () => {
                         <div className="index3-event-tabs-con event-table">
                             <ul className="nav nav-tabs" id="myTab" role="tablist">
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link active"
+                                    <a className="nav-link active"
                                         id="home-tab"
                                         data-toggle="tab"
-                                        data-bs-target="#home"
-                                        type="button"
-                                        data-bs-toggle="tab"
+                                        href="#home"
                                         role="tab"
                                         aria-controls="home"
-                                        aria-selected="true">DAY 1</button>
+                                        aria-selected="true">
+                                        DAY 1
+                                    </a>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link"
+                                    <a className="nav-link"
                                         id="profile-tab"
                                         data-toggle="tab"
-                                        data-bs-target="#profile"
-                                        type="button"
-                                        data-bs-toggle="tab"
+                                        href="#profile"
                                         role="tab"
                                         aria-controls="profile"
-                                        aria-selected="false">DAY 2</button>
+                                        aria-selected="false">
+                                        DAY 2
+                                    </a>
                                 </li>
                                 <li className="nav-item" role="presentation">
-                                    <button className="nav-link"
+                                    <a className="nav-link"
                                         id="contact-tab"
                                         data-toggle="tab"
-                                        data-bs-target="#contact"
-                                        type="button"
-                                        data-bs-toggle="tab"
+                                        href="#contact"
                                         role="tab"
                                         aria-controls="contact"
-                                        aria-selected="false">DAY 3</button>
+                                        aria-selected="false">
+                                        DAY 3
+                                    </a>
                                 </li>
                             </ul>
+
                             <div className="tab-content" id="myTabContent">
                                 <div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                                     <div id="accordion" className="index3-faqs table-responsive">
@@ -713,7 +719,7 @@ const Events = () => {
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
+                                            <a className='text-white' onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -769,7 +775,7 @@ const Events = () => {
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
+                                            <a className='text-white' onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -824,7 +830,7 @@ const Events = () => {
                                     </div>
                                     <div className="index3-faq-btn-con text-center">
                                         <div className="generic-btn">
-                                            <a onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
+                                            <a className='text-white' onClick={getDownloadProgram} style={{ cursor: 'pointer' }}>DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i></a>
                                         </div>
                                     </div>
                                 </div>
@@ -892,11 +898,11 @@ const Events = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="index3-plan-btn text-center">
+                        {/* <div className="index3-plan-btn text-center">
                             <div className="generic-btn">
                                 <Link to={`/${currentEventName}/registration_form`}>REGISTER NOW <i className="fas fa-arrow-right"></i></Link>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </section>
                 <section className="index3-registration-section w-100 float-left">
@@ -1173,7 +1179,7 @@ const Events = () => {
                 <section className="blog-main-section index3-blog-section w-100 float-left padding-top position-relative">
                     <div className="container">
                         <div className="generic-title2 text-center">
-                            <span className="small-text">SKILLS &amp; EXPERIENCE</span>
+                            <span className="small-text">WHAT'S NEW</span>
                             <h2 className="mb-0">Recent News Articles</h2>
                         </div>
                         <div className="blogs-inner-con">
