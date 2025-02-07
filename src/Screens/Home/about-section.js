@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 
 const AboutSection = () => {
     return (
@@ -14,7 +16,7 @@ const AboutSection = () => {
                         <p data-aos="fade-up" data-aos-duration="700">We understand the importance of academic conferences in 21st century to foster collaboration, sharing knowledge, and advancing innovation. As part of our commitment to providing a platform for meaningful dialogue and the exchange of cutting-edge research, we curate conferences with a deep appreciation for the scholarly community.</p>
                         <p data-aos="fade-up" data-aos-duration="700">Each conference we organize is designed to surpass expectations by our team of experienced professionals. We handle every detail with precision, from meticulously planning the program to coordinating logistics, so you can focus on what really matters – the content and connections that make academic conferences so meaningful.</p>
                         <div className="generic-btn" data-aos="fade-up" data-aos-duration="700">
-                            <a href="/about">View More <i className="fas fa-arrow-right"></i></a>
+                            <Link to="/about">View More <i className="fas fa-arrow-right"></i></Link>
                         </div>
                     </div>
                     <div className="about-right-con">

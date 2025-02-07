@@ -1,9 +1,11 @@
 {
   "name": "website-jsx",
+  "homepage": "/meeting21",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
+    "@paypal/react-paypal-js": "^8.8.1",
     "aos": "^2.3.4",
     "axios": "^1.7.9",
     "bootstrap": "^4.0.0",

@@ -67,7 +67,7 @@ const EventHeader = () => {
                             {/* <span className="navbar-toggler-icon"></span>
                             <span className="navbar-toggler-icon"></span> */}
                         </button>
-                        <div className="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+                        <div className="collapse navbar-collapse justify-content-end eventNav" id="navbarSupportedContent">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
                                     <Link to={`/${currentEventName}/events`} className='nav-link p-0 active'>Home</Link>
@@ -82,7 +82,7 @@ const EventHeader = () => {
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown3">
                                         <Link to={`/${currentEventName}/topics`} className="dropdown-item">Topics</Link>
-                                        <Link to={`/${currentEventName}/call-for-Abstracts`} className="dropdown-item">Call for Abstract</Link>
+                                        <Link to={`/${currentEventName}/call-for-Abstracts`} className="dropdown-item">Call for Abstracts</Link>
                                         <Link to={`/${currentEventName}/submit-abstract`} className="dropdown-item">Submit Abstract</Link>
                                     </div>
                                 </li>
@@ -93,7 +93,7 @@ const EventHeader = () => {
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown3">
                                         <Link to={`/${currentEventName}/speakers`} className="dropdown-item">Speakers</Link>
-                                        <Link to={`/${currentEventName}/programs`} className="dropdown-item">Program</Link>
+                                        <Link to={`/${currentEventName}/program`} className="dropdown-item">Program</Link>
                                         <Link to={`/${currentEventName}/presentation-guidelines`} className="dropdown-item">Presentation Guidelines</Link>
                                     </div>
                                 </li>
@@ -103,9 +103,9 @@ const EventHeader = () => {
                                         Registration
                                     </a>
                                     <div className="dropdown-menu" aria-labelledby="navbarDropdown3">
-                                        <Link to={`/${currentEventName}/registration_form`} className="dropdown-item">Registration Fee</Link>
+                                        <Link to={`/${currentEventName}/registration-fee`} className="dropdown-item">Registration Fee</Link>
                                         <Link to={`/${currentEventName}/online-registration`} className="dropdown-item">Online Registration</Link>
-                                        <Link to={`/${currentEventName}/policies-event`} className="dropdown-item">Policies</Link>
+                                        <Link to={`/${currentEventName}/conference-policies`} className="dropdown-item">Policies</Link>
                                     </div>
                                 </li>
                                 <li className="nav-item">
@@ -128,7 +128,7 @@ const EventHeader = () => {
 
                             <div className="header-contact d-flex align-items-center">
                                 <div className="lets-talk-btn">
-                                    <Link to={`/${currentEventName}/registration_form`}>Registration <i className="fas fa-arrow-right"></i></Link>
+                                    <Link to={`/${currentEventName}/online-registration`}>Registration <i className="fas fa-arrow-right"></i></Link>
                                 </div>
                             </div>
                         </div>

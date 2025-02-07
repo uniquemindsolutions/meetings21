@@ -108,7 +108,7 @@ const BannerSection = () => {
     return (
         <>
             <section className="banner-main-section w-100 float-left">
-                <div className="container-fluid bnr-mob">
+                <div className="container-fluid bnt-main bnr-mob">
                     <div className="banner-outer-con">
                         {/* new banner start */}
                         <div id="demo" className="carousel slide" data-bs-ride="carousel">

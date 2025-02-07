@@ -20,12 +20,12 @@ code {
   width: 100%;
   max-width: 230px;
 }
-@media (min-width: 1600px){
-  .custom-logo img{
+@media (min-width: 1440px){
+  .custom-logo img {
     width: 100%;
-    max-width: 230px;
-    margin-left: 50px;
-  }
+    max-width: 260px;
+    margin-left: 45%;
+}
 }
 .footer-box .logo{
   width: 100%;

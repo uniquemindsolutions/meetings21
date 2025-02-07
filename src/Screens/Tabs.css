@@ -5,7 +5,7 @@
   
   .tab-headers {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     margin-bottom: 20px;
     border-bottom: 2px solid #ddd;
   }

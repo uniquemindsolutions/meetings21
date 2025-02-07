@@ -46,22 +46,28 @@ const Footer = () => {
                             <h6>Navigation</h6>
                             <ul className="list-unstyled mb-0">
                                 <li className="position-relative">
-                                    <a href="/">Home</a>
+                                    <Link to="/">Home</Link>
                                 </li>
                                 <li className="position-relative">
-                                    <a href="/about">About Us</a>
+                                    <Link to="/about">About Us</Link>
                                 </li>
                                 <li className="position-relative">
-                                    <a href="/meetings">Meetings</a>
+                                    <Link to="/upcoming-meetings">Meetings</Link>
                                 </li>
                                 <li className="position-relative">
-                                    <a href="/policies">Policies</a>
+                                    <Link to="/policies">Policies</Link>
                                 </li>
                                 <li className="position-relative">
-                                    <a href="/code-of-conduct">Code of Conduct</a>
+                                    <Link to="/code-of-conduct">Code of Conduct</Link>
                                 </li>
                                 <li className="position-relative">
-                                    <a href="/contact">Contact</a>
+                                    <Link to="/contact">Contact</Link>
+                                </li>
+                                <li className="position-relative">
+                                    <Link to="/terms-and-conditions">Terms and Conditions</Link>
+                                </li>
+                                <li className="position-relative">
+                                    <Link to="/privacy-policy">Privacy Policy</Link>
                                 </li>
                             </ul>
                         </div>
@@ -97,8 +103,9 @@ const Footer = () => {
 
             <div className="copyright w-100 float-left text-center">
                 <div className="copyright-content">
-                    <div className="container">
-                        <p className="mb-0">Copyright © 2024 Meetings21 All Rights Reserved.</p>
+                    <div className="container d-lg-flex justify-content-between">
+                        <div className="mb-0">Copyright © 2024 Meetings21 All Rights Reserved.</div>
+                        <div>Website Developed by: <a href='https://uniquemindsolutions.com/' target='_blank'>UMS</a></div>
                     </div>
                 </div>
             </div>

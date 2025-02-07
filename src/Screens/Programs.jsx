@@ -38,7 +38,7 @@ const Programs = () => {
       <EventHeader />
       <section className="sub-banner-main-section w-100 justify-content-center">
         <div className="sub-banner-inner-con text-center">
-          <h1>Program</h1>
+          <h1>Conference Program</h1>
           <nav aria-label="breadcrumb">
             <ol className="breadcrumb d-inline-block mb-0">
               <li className="breadcrumb-item d-inline-block">
@@ -61,7 +61,7 @@ const Programs = () => {
               <div className="index3-faq-btn-con text-center">
                 <div className="generic-btn">
                   <a href="contact.html">
-                    DOWNLOAD SCHEDULE <i className="fas fa-arrow-right"></i>
+                    DOWNLOAD PROGRAM <i className="fas fa-arrow-right"></i>
                   </a>
                 </div>
               </div>
@@ -73,7 +73,7 @@ const Programs = () => {
           ) : error ? (
             <div className="text-center text-danger">{error}</div>
           ) : programData.length === 0 ? (
-            <div className="text-center">No program data available.</div>
+            <div className="text-center">Coming Soon</div>
           ) : (
             <div className="tabs-container mt-5">
               {/* Tab Headers */}

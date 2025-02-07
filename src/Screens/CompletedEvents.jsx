@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import Footer from '../Footer/footer';
 
 
 const CompletedEvents = () => {
@@ -14,37 +15,37 @@ const CompletedEvents = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [completedData, setCompletedMeet] = useState('');
-  useEffect(()=>{
+  useEffect(() => {
     getComepletedmeet();
   }, [])
-  const getComepletedmeet = async ()=>{
-  try {
-      const res = await  axios.get(`${baseurl}api/EventMeetings/completed/`);
+  const getComepletedmeet = async () => {
+    try {
+      const res = await axios.get(`${baseurl}api/EventMeetings/completed/`);
       setCompletedMeet(res.data);
       console.log('completed Data ===', res.data);
-  } catch {
+    } catch {
       setError('Error loaded')
-  }
+    }
   }
   return (
     <main>
-        <Header/>
-        <section className="sub-banner-main-section w-100 justify-content-center">
-          <div className="sub-banner-inner-con text-center">
-            <h1>Completed Meetings</h1>
-            <nav aria-label="breadcrumb">
-              <ol className="breadcrumb d-inline-block mb-0">
-                <li className="breadcrumb-item d-inline-block"><Link to="/">HOME</Link></li>
-                <li className="breadcrumb-item active d-inline-block" aria-current="page">Completed Mettings</li>
-              </ol>
-            </nav>
-          </div>
-        </section>
+      <Header />
+      <section className="sub-banner-main-section w-100 justify-content-center">
+        <div className="sub-banner-inner-con text-center">
+          <h1>Completed Meetings</h1>
+          <nav aria-label="breadcrumb">
+            <ol className="breadcrumb d-inline-block mb-0">
+              <li className="breadcrumb-item d-inline-block"><Link to="/">HOME</Link></li>
+              <li className="breadcrumb-item active d-inline-block" aria-current="page">Completed Mettings</li>
+            </ol>
+          </nav>
+        </div>
+      </section>
 
-        <section className='container padding-top'>
-            {/* <h4>No Completed Meetings Yet</h4> */}
-
-            {loading ? (
+      <section className='container padding-top  padding-bottom'>
+        {/* <h4>No Completed Meetings Yet</h4> */}
+        <div className="row">
+          {loading ? (
             <p>Loading...</p>
           ) : completedData && Array.isArray(completedData) && completedData.length > 0 ? (
             completedData.map((items, index) => (
@@ -69,8 +70,10 @@ const CompletedEvents = () => {
           ) : (
             <p>Not found Events.</p>
           )}
-            
-        </section>
+        </div>
+      </section>
+
+      <Footer/>
     </main>
   )
 }

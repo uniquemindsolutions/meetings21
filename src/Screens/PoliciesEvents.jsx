@@ -11,8 +11,7 @@ const PoliciesEvents = () => {
         <EventHeader />
         <section className="sub-banner-main-section w-100 justify-content-center">
           <div className="sub-banner-inner-con text-center">
-            <h1>Policies</h1>
-            <p className='text-white'>Inspiring Talks, Meet the Best Product People Around the World, <br /> and Party Together After the Event!</p>
+            <h1>Conference Policies</h1>
             <nav aria-label="breadcrumb">
               <ol className="breadcrumb d-inline-block mb-0">
                 <li className="breadcrumb-item d-inline-block"><Link to="/">HOME</Link></li>
