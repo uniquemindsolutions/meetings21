@@ -280,6 +280,8 @@ const OnlineRegistration = () => {
       });
       // setResponse(res.data);
       console.log("transapires",res);
+      window.location.reload();
+      
     } catch (error) {
       console.error("Error submitting data", error);
     }
