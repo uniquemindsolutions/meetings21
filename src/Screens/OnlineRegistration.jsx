@@ -281,6 +281,8 @@ const OnlineRegistration = () => {
       // setResponse(res.data);
       console.log("transapires",res);
       window.location.reload();
+      handleReset();
+      
       
     } catch (error) {
       console.error("Error submitting data", error);
@@ -494,7 +496,7 @@ const OnlineRegistration = () => {
         {
           amount: {
             currency_code: "USD",
-            value: "0.01",
+            value: grandtotCurrent.current,
           },
         },
       ],
