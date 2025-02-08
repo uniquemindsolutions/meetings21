@@ -276,4 +276,18 @@
 .bnt-main .carousel-control-next, .bnt-main .carousel-control-prev {
   width: 2%!important;  
 }
+@media (min-width: 500px) {
+  .paypal-button-container {
+    min-width: 250px !important;
+    max-width: 750px;
+    width: 260px !important;
+    margin: 0 auto;
+}
+}
+@media (min-width: 300px) {
+  .paypal-button-container {
+      width: 300px;
+      max-width: 300px;
+  }
+}
 

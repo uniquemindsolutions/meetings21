@@ -113,7 +113,7 @@ const SubmitAbstract = () => {
             const res = await axios.get(contriesApi + '/api/Country/');
             setCountries(res.data);
             console.log("countries===", res.data)
-            
+
         } catch (err) {
             setError("No data found");
         }
@@ -253,6 +253,7 @@ const SubmitAbstract = () => {
                                             className="form-control"
                                             id="title"
                                         >
+                                            <option value="">Select</option>
                                             <option value="Prof.">Prof.</option>
                                             <option value="Dr.">Dr.</option>
                                             <option value="Mr.">Mr.</option>
@@ -373,21 +374,30 @@ const SubmitAbstract = () => {
                                     </div>
                                 </div>
                                 <div className="col-sm-6">
-                                    <label htmlFor="country">Country:</label>
-                                    <select
-                                        onChange={handleInputChange}
-                                        name="country"
-                                        value={submitFormData.country || ""}
-                                        className="form-control"
-                                        id="country"
-                                    >
-                                        <option value="">Select</option>
-                                        {
-                                            countries.map((cnry)=>(
-                                                <option key={cnry.id} value={cnry.id}>{cnry.country_name}</option>
-                                            ))
-                                        }
-                                    </select>
+                                    <div className="form-group">
+                                        <label htmlFor="country">Country:</label>
+                                        <div className="input-group">
+                                            <div className="input-group-prepend">
+                                                <span className="input-group-text">
+                                                    <i class="fa-solid fa-earth-asia"></i>
+                                                </span>
+                                            </div>
+                                            <select
+                                                onChange={handleInputChange}
+                                                name="country"
+                                                value={submitFormData.country || ""}
+                                                className="form-control"
+                                                id="country"
+                                            >
+                                                <option value="">Select</option>
+                                                {
+                                                    countries.map((cnry) => (
+                                                        <option key={cnry.id} value={cnry.id}>{cnry.country_name}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -445,7 +455,7 @@ const SubmitAbstract = () => {
                                                     value={userInput}
                                                     onChange={(e) => setUserInput(e.target.value)}
                                                     required
-                                                    style={{width:90}}
+                                                    style={{ width: 90 }}
                                                 />
                                             </label>
                                             {/* <button className='btn btn-primary d-inline' type="submit">Submit</button>  */}

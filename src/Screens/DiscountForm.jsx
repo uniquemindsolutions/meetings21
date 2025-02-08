@@ -400,6 +400,7 @@ const DiscountForm = () => {
                     className="form-control"
                     id="title"
                   >
+                    <option value="">Select</option>
                     <option value="Prof.">Prof.</option>
                     <option value="Dr.">Dr.</option>
                     <option value="Mr.">Mr.</option>

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react"
 import EventHeader from "../Header/EventHeader"
 import Footer from "../Footer/footer"
-import { Link,useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import axios from "axios"
 import { useLocation } from "react-router-dom"
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js"
@@ -68,6 +68,7 @@ const OnlineRegistration = () => {
   const [grandtot, setGrandTot] = useState("")
   const [paymentMethod, setPaymentMethod] = useState("")
   const [register_category, setregister_category] = useState("")
+  const [selectedOption, setSelectedOption] = useState("option"); // Default selected
 
   const regiPricecalCurrent = useRef(regiPricecal)
   const accpricecalCurrent = useRef(accpricecal)
@@ -80,7 +81,7 @@ const OnlineRegistration = () => {
   const submitFormDataCurrent = useRef(submitFormData)
 
   const [domainId, setdomainId] = useState("")
-  
+
 
   const handleChangeaddon = (event) => {
     setIsChecked(event.target.checked)
@@ -103,7 +104,7 @@ const OnlineRegistration = () => {
     grandtotCurrent.current = grandTotal
 
     setTotalPrice(grandTotal)
-    
+
 
     setSubmitFormData((prev) => ({
       ...prev,
@@ -115,10 +116,10 @@ const OnlineRegistration = () => {
 
     submitFormDataCurrent.current = submitFormData
 
-    console.log("submitformvalues",submitFormData);
+    console.log("submitformvalues", submitFormData);
   }
 
-  const masterCalulation = () => {}
+  const masterCalulation = () => { }
 
   const basedata = [
     { key: "registration_type", name: "Registration Type " },
@@ -142,11 +143,13 @@ const OnlineRegistration = () => {
   }
 
   useEffect(() => {
+    togglePaymetOption('paypal');
     getCountry()
     getregfeeData()
     getaccmData()
     getdomainid()
-    return window.scrollTo(0, 0)
+    return window.scrollTo(0, 0);
+
   }, [])
 
   const getregfeeData = async () => {
@@ -187,7 +190,7 @@ const OnlineRegistration = () => {
     }
   }
 
-  const isDateValid=(dateString)=>{
+  const isDateValid = (dateString) => {
     const date = new Date(dateString);
     const today = new Date();
     // Ensure it's a valid date
@@ -203,7 +206,7 @@ const OnlineRegistration = () => {
     setCurrentEventName(currentEvents[1])
     try {
       const res = await axios.get(`${baseurl}${currentEvents[1]}/registration/accommodations/`);
-      if(res && res.data && res.data?.length){
+      if (res && res.data && res.data?.length) {
         setAccmData(res.data)
       }
 
@@ -215,15 +218,15 @@ const OnlineRegistration = () => {
 
 
   const onChangeAccmData = (val, index) => {
-    setAccmData((prev) => 
-      prev.map((item, i) => 
-        i === index 
+    setAccmData((prev) =>
+      prev.map((item, i) =>
+        i === index
           ? { ...item, selectedPrice: val } // Update the object with the new key and value
-          : {...item, selectedPrice:0} // Keep other items unchanged
+          : { ...item, selectedPrice: 0 } // Keep other items unchanged
       )
     );
   };
-  
+
 
   // new code start
   const handleInputChange = (e) => {
@@ -243,30 +246,30 @@ const OnlineRegistration = () => {
       "formdata",
       submitFormData
     )
-    const regipayload={
-      
-        title:submitFormData.title,
-        name: submitFormData.name,
-        email: submitFormData.email,
-        telephone: submitFormData.telephone,
-        organization: submitFormData.organization,
-        city: submitFormData.city,
-        billing_address: submitFormData.billing_address,
-        postal_code: "123",
-        no_of_nights: submitFormData.no_of_nights,
-        reg_cat_val:submitFormData.reg_cat_val,
-        add_on: submitFormData.add_on,
-        reg_price: "0.00",
-        acc_price: "0.00",
-        acc_per_price: "0.00",
-        subtot: submitFormData.subtot,
-        procfee: submitFormData.procfee,
-        grand_tot: submitFormData.grand_tot,
-        domain: domainId,
-        country: submitFormData.country,
-        register_category: submitFormData.register_category,
-        accommodation: submitFormData.accommodation
-    
+    const regipayload = {
+
+      title: submitFormData.title,
+      name: submitFormData.name,
+      email: submitFormData.email,
+      telephone: submitFormData.telephone,
+      organization: submitFormData.organization,
+      city: submitFormData.city,
+      billing_address: submitFormData.billing_address,
+      postal_code: "123",
+      no_of_nights: submitFormData.no_of_nights,
+      reg_cat_val: submitFormData.reg_cat_val,
+      add_on: submitFormData.add_on,
+      reg_price: "0.00",
+      acc_price: "0.00",
+      acc_per_price: "0.00",
+      subtot: submitFormData.subtot,
+      procfee: submitFormData.procfee,
+      grand_tot: submitFormData.grand_tot,
+      domain: domainId,
+      country: submitFormData.country,
+      register_category: submitFormData.register_category,
+      accommodation: submitFormData.accommodation
+
     }
 
     const currentEvents = location.pathname.split("/")
@@ -279,11 +282,11 @@ const OnlineRegistration = () => {
         },
       });
       // setResponse(res.data);
-      console.log("transapires",res);
+      console.log("transapires", res);
       window.location.reload();
       handleReset();
-      
-      
+
+
     } catch (error) {
       console.error("Error submitting data", error);
     }
@@ -303,8 +306,8 @@ const OnlineRegistration = () => {
   const getdomainid = async () => {
     const currentEvents = location.pathname.split("/")
     setCurrentEventName(currentEvents[1]);
-    const payload={
-      domain_name:currentEvents[1]
+    const payload = {
+      domain_name: currentEvents[1]
     }
     try {
       const res = await axios.post(`${baseurl}/api/get-domain/`, payload, {
@@ -313,7 +316,7 @@ const OnlineRegistration = () => {
         },
       });
       setdomainId(res.data.id);
-      console.log("domaindetails",res);
+      console.log("domaindetails", res);
     } catch (error) {
       console.error("Error submitting data", error);
     }
@@ -367,7 +370,7 @@ const OnlineRegistration = () => {
     },
   ]
 
-  const handleCheckboxChange = (value, index,planid) => {
+  const handleCheckboxChange = (value, index, planid) => {
     const newRegiPrice = Number.parseFloat(value)
     const { subtotal, processingFee, grandTotal } = masterCalculation({
       regiPrice: newRegiPrice,
@@ -375,13 +378,13 @@ const OnlineRegistration = () => {
       addOn: Number.parseFloat(addOnCurrent.current) || 0,
     })
 
-    console.log("register_category",planid);
-  
-    setregister_category(index + 1 )
-    register_categoryCurrent.current = index+1;
-    setSubmitFormData({ ...submitFormData, register_category: planid})
-  
-    
+    console.log("register_category", planid);
+
+    setregister_category(index + 1)
+    register_categoryCurrent.current = index + 1;
+    setSubmitFormData({ ...submitFormData, register_category: planid })
+
+
     setSubmitFormData({ ...submitFormData, reg_cat_val: value })
     setregiPriceCal(newRegiPrice.toFixed(2))
     regiPricecalCurrent.current = newRegiPrice.toFixed(2)
@@ -396,7 +399,7 @@ const OnlineRegistration = () => {
 
     setSubmitFormData((prev) => ({
       ...prev,
-      register_category:planid,
+      register_category: planid,
       subtot: subtotal,
       procfee: processingFee,
       grand_tot: grandTotal,
@@ -448,12 +451,12 @@ const OnlineRegistration = () => {
     grandtotCurrent.current = 0
   }
 
-  const handleaccom = (e, index,masterdata) => {
-    
+  const handleaccom = (e, index, masterdata) => {
+
     const { name, value } = e.target
 
     const selectedName = e.target.options[e.target.selectedIndex].text;
-    console.log("nofonight",selectedName,masterdata.id);
+    console.log("nofonight", selectedName, masterdata.id);
     const newAccPrice = Number.parseFloat(value)
     const { subtotal, processingFee, grandTotal } = masterCalculation({
       regiPrice: Number.parseFloat(regiPricecalCurrent.current) || 0,
@@ -504,17 +507,17 @@ const OnlineRegistration = () => {
   }
 
   const onApprove = (data, actions) => {
-    return actions.order.capture().then(async(details) => {
+    return actions.order.capture().then(async (details) => {
       // alert("Transaction completed By" + details.payer.name.given_name)
       console.log(details, "ayment success");
-//merchant_id:details.purchase_units[0].amount.payee.merchant_id,
-      const payload={
+      //merchant_id:details.purchase_units[0].amount.payee.merchant_id,
+      const payload = {
         "create_time": details.create_time,
         "transaction_id": details.id,
         "intent": details.intent,
         "country_code": details.payer.address.country_code,
         "email_address": details.payer.email_address,
-        "name": details.payer.name.given_name+" "+details.payer.name.surname,
+        "name": details.payer.name.given_name + " " + details.payer.name.surname,
         "payer_id": details.payer.payer_id,
         "currency_code": details.purchase_units[0].amount.currency_code,
         "currency_value": details.purchase_units[0].amount.value,
@@ -529,8 +532,8 @@ const OnlineRegistration = () => {
         "domain": 2
       }
 
-      
-      
+
+
       // const res = await axios.get(`${baseurl}${currentEvents[1]}/registration/accommodations/`);
       // if(res && res.data && res.data?.length){
 
@@ -546,19 +549,19 @@ const OnlineRegistration = () => {
           },
         });
         // setResponse(res.data);
-        console.log("transapires",res);
+        console.log("transapires", res);
         handleSubmitForm();
       } catch (error) {
         console.error("Error submitting data", error);
       }
 
-   if(details.status=="COMPLETED"){
-      alert("Your Registration Got Success");
-      navigate("/"+currentEvents[1]+"/online-registration");
-   }else{
-    alert("Your Registration Got Failed Please try Again");
-    navigate("/"+currentEvents[1]+"/online-registration");
-   }
+      if (details.status == "COMPLETED") {
+        alert("Your Registration Got Success");
+        navigate("/" + currentEvents[1] + "/online-registration");
+      } else {
+        alert("Your Registration Got Failed Please try Again");
+        navigate("/" + currentEvents[1] + "/online-registration");
+      }
 
 
     })
@@ -574,11 +577,11 @@ const OnlineRegistration = () => {
   }
 
   const handleChangeCheckBox = (index) => {
-    setRegifeeData((prev) => 
-      prev.map((item, i) => 
-        i === index 
+    setRegifeeData((prev) =>
+      prev.map((item, i) =>
+        i === index
           ? { ...item, checked: true } // Update the object with the new key and value
-          : {...item, checked:false} // Keep other items unchanged
+          : { ...item, checked: false } // Keep other items unchanged
       )
     );
   }
@@ -620,6 +623,7 @@ const OnlineRegistration = () => {
                     className="form-control"
                     id="title"
                   >
+                    <option value="">Select</option>
                     <option value="Prof.">Prof.</option>
                     <option value="Dr.">Dr.</option>
                     <option value="Mr.">Mr.</option>
@@ -740,18 +744,28 @@ const OnlineRegistration = () => {
                 </div>
               </div>
               <div className="col-sm-6">
-                <label htmlFor="country">Country:</label>
-                <select
-                  onChange={handleInputChangeCountry}
-                  name="country"
-                  value={submitFormData.country || ""}
-                  className="form-control"
-                  id="country"
-                >
-                  <option value="">Select country</option>
-                  {countryList(countries)}
-                </select>
+                <div className="form-group">
+                  <label htmlFor="country">Country:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                      <i class="fa-solid fa-earth-asia"></i>
+                      </span>
+                    </div>
+                    <select
+                      onChange={handleInputChangeCountry}
+                      name="country"
+                      value={submitFormData.country || ""}
+                      className="form-control"
+                      id="country"
+                    >
+                      <option value="">Select country</option>
+                      {countryList(countries)}
+                    </select>
+                  </div>
+                </div>
               </div>
+
             </div>
 
             <div className="form-group">
@@ -773,117 +787,117 @@ const OnlineRegistration = () => {
             <div className="row">
               {Array.isArray(regiFeedata) && regiFeedata.length > 0
                 ? regiFeedata.map((plan, index) => (
-                    <div className="col-md-4" key={index}>
-                      <div className={`card text-center ${plan.highlight ? "text-dark" : " text-dark"}`}>
-                        <div className="card-header bg-dark text-white">
-                          <h5 className="card-title">{plan.registration_type}</h5>
-                          <p className="mb-0">{plan.end_date}</p>
-                          <small>Oral/ Poster/ Delegate</small>
+                  <div className="col-md-4" key={index}>
+                    <div className={`card text-center ${plan.highlight ? "text-dark" : " text-dark"}`}>
+                      <div className="card-header bg-dark text-white">
+                        <h5 className="card-title">{plan.registration_type}</h5>
+                        <p className="mb-0">{plan.end_date}</p>
+                        <small>Oral/ Poster/ Delegate</small>
 
-                          <div className="text-center">
-                            <input
-                              type="checkbox"
-                              className="form-check-input"
-                              disabled={!plan.isAllowedToSelect}
-                              checked={plan?.checked || false}
-                              style={{ height: "25px", width: "25px" }}
-                              onChange={(e)=>handleChangeCheckBox(index)}
-                            />
-                            <br />
-                          </div>
+                        <div className="text-center">
+                          <input
+                            type="checkbox"
+                            className="form-check-input"
+                            disabled={!plan.isAllowedToSelect}
+                            checked={plan?.checked || false}
+                            style={{ height: "25px", width: "25px" }}
+                            onChange={(e) => handleChangeCheckBox(index)}
+                          />
+                          <br />
                         </div>
-                        <div className="card-body">
-                          <div className="form-group">
-                            <label className="d-flex justify-content-between">
-                              <span>
-                                <input
-                                  type="radio"
-                                  name={`plan-${index}`}
-                                  className="mr-2"
-                                  value={plan.invited_presentation}
-                                  onChange={() => handleCheckboxChange(plan.invited_presentation, index,plan.id)}
-                                />
-                                Invited Presentation
-                              </span>
+                      </div>
+                      <div className="card-body">
+                        <div className="form-group">
+                          <label className="d-flex justify-content-between">
+                            <span>
+                              <input
+                                type="radio"
+                                name={`plan-${index}`}
+                                className="mr-2"
+                                value={plan.invited_presentation}
+                                onChange={() => handleCheckboxChange(plan.invited_presentation, index, plan.id)}
+                              />
+                              Invited Presentation
+                            </span>
 
-                              <span className="float-right text-danger font-weight-bold">
-                                ${plan.invited_presentation}
-                              </span>
-                            </label>
+                            <span className="float-right text-danger font-weight-bold">
+                              ${plan.invited_presentation}
+                            </span>
+                          </label>
 
-                            <label className="d-flex justify-content-between">
-                              <span>
-                                <input
-                                  type="radio"
-                                  name={`plan-${index}`}
-                                  className="mr-2"
-                                  onChange={() =>  handleCheckboxChange(plan.oral_presentation, index,plan.id)}
-                                />
-                                Oral Presentation
-                                
-                              </span>
-                              <span className="float-right text-danger font-weight-bold">
-                                ${plan.oral_presentation}
-                              </span>
-                            </label>
+                          <label className="d-flex justify-content-between">
+                            <span>
+                              <input
+                                type="radio"
+                                name={`plan-${index}`}
+                                className="mr-2"
+                                onChange={() => handleCheckboxChange(plan.oral_presentation, index, plan.id)}
+                              />
+                              Oral Presentation
 
-                            <label className="d-flex justify-content-between">
-                              <span>
-                                <input
-                                  type="radio"
-                                  name={`plan-${index}`}
-                                  onChange={() =>  handleCheckboxChange(plan.poster_presentaion, index,plan.id)}
-                                  className="mr-2"
-                                />
-                                Poster Presentation
-                              </span>
-                              <span className="float-right text-danger font-weight-bold">
-                                ${plan.poster_presentaion}
-                              </span>
-                            </label>
-                            <label className="d-flex justify-content-between">
-                              <span>
-                                <input
-                                  type="radio"
-                                  name={`plan-${index}`}
-                                  onChange={() =>  handleCheckboxChange(plan.student_delegate, index,plan.id)}
-                                  className="mr-2"
-                                />
-                                Student Delegate
-                              </span>
-                              <span className="float-right text-danger font-weight-bold">${plan.student_delegate}</span>
-                            </label>
-                            <label className="d-flex justify-content-between">
-                              <span>
-                                <input
-                                  type="radio"
-                                  name={`plan-${index}`}
-                                  onChange={() =>  handleCheckboxChange(plan.delegate, index,plan.id)}
-                                  className="mr-2"
-                                />
-                                Delegate
-                              </span>
-                              <span className="float-right text-danger font-weight-bold">${plan.delegate}</span>
-                            </label>
-                            <label className="d-flex justify-content-between">
-                              <span>
-                                <input
-                                  type="radio"
-                                  name={`plan-${index}`}
-                                  onChange={() => handleCheckboxChange(plan.virtual_presentation, index,plan.id)}
-                                  className="mr-2"
-                                />
-                                Virtual Presentation
-                              </span>
-                              <span className="float-right text-danger font-weight-bold">
-                                ${plan.virtual_presentation}
-                              </span>
-                            </label>
-                          </div>
+                            </span>
+                            <span className="float-right text-danger font-weight-bold">
+                              ${plan.oral_presentation}
+                            </span>
+                          </label>
+
+                          <label className="d-flex justify-content-between">
+                            <span>
+                              <input
+                                type="radio"
+                                name={`plan-${index}`}
+                                onChange={() => handleCheckboxChange(plan.poster_presentaion, index, plan.id)}
+                                className="mr-2"
+                              />
+                              Poster Presentation
+                            </span>
+                            <span className="float-right text-danger font-weight-bold">
+                              ${plan.poster_presentaion}
+                            </span>
+                          </label>
+                          <label className="d-flex justify-content-between">
+                            <span>
+                              <input
+                                type="radio"
+                                name={`plan-${index}`}
+                                onChange={() => handleCheckboxChange(plan.student_delegate, index, plan.id)}
+                                className="mr-2"
+                              />
+                              Student Delegate
+                            </span>
+                            <span className="float-right text-danger font-weight-bold">${plan.student_delegate}</span>
+                          </label>
+                          <label className="d-flex justify-content-between">
+                            <span>
+                              <input
+                                type="radio"
+                                name={`plan-${index}`}
+                                onChange={() => handleCheckboxChange(plan.delegate, index, plan.id)}
+                                className="mr-2"
+                              />
+                              Delegate
+                            </span>
+                            <span className="float-right text-danger font-weight-bold">${plan.delegate}</span>
+                          </label>
+                          <label className="d-flex justify-content-between">
+                            <span>
+                              <input
+                                type="radio"
+                                name={`plan-${index}`}
+                                onChange={() => handleCheckboxChange(plan.virtual_presentation, index, plan.id)}
+                                className="mr-2"
+                              />
+                              Virtual Presentation
+                            </span>
+                            <span className="float-right text-danger font-weight-bold">
+                              ${plan.virtual_presentation}
+                            </span>
+                          </label>
                         </div>
                       </div>
                     </div>
-                  ))
+                  </div>
+                ))
                 : "no data"}
             </div>
           </div>
@@ -897,40 +911,40 @@ const OnlineRegistration = () => {
               </div>
               {Array.isArray(accmData) && accmData.length > 0
                 ? accmData.map((room, index) => (
-                    <div className="col-md-4 mb-4" key={room.id}>
-                      <div className="card" style={{ minHeight: 250 }}>
-                        <div className="card-header bg-dark text-white">
-                          <h5>
-                            {room.accommodation_name}: ${room?.selectedPrice || 0}
-                          </h5>
-                          <p>Breakfast included</p>
-                        </div>
-                        <div className="card-body d-flex justify-content-between align-items-center">
-                          <div>
-                            <div className="d-flex justify-content-between">
-                              <strong>
-                                <span className="text-primary">Select No. of Nights</span>
-                              </strong>
-                              <select
-                                name="accnights"
-                                id=""
-                                onChange={(event) => handleaccom(event, index,room)}
-                                className="form-selct float-right"
-                                value={room?.selectedPrice||0}
-                                style={{ width: "50px", height: 25, fontSize: "16px", marginLeft: "10px" }}
-                              >
-                                <option value={0}>0</option>
-                                <option value={room.One_Night}>1</option>
-                                <option value={room.two_Nights}>2</option>
-                                <option value={room.three_Nights}>3</option>
-                                <option value={room.four_Nights}>4</option>
-                              </select>
-                            </div>
+                  <div className="col-md-4 mb-4" key={room.id}>
+                    <div className="card" style={{ minHeight: 250 }}>
+                      <div className="card-header bg-dark text-white">
+                        <h5>
+                          {room.accommodation_name}: ${room?.selectedPrice || 0}
+                        </h5>
+                        <p>Breakfast included</p>
+                      </div>
+                      <div className="card-body d-flex justify-content-between align-items-center">
+                        <div>
+                          <div className="d-flex justify-content-between">
+                            <strong>
+                              <span className="text-primary">Select No. of Nights</span>
+                            </strong>
+                            <select
+                              name="accnights"
+                              id=""
+                              onChange={(event) => handleaccom(event, index, room)}
+                              className="form-selct float-right"
+                              value={room?.selectedPrice || 0}
+                              style={{ width: "50px", height: 25, fontSize: "16px", marginLeft: "10px" }}
+                            >
+                              <option value={0}>0</option>
+                              <option value={room.One_Night}>1</option>
+                              <option value={room.two_Nights}>2</option>
+                              <option value={room.three_Nights}>3</option>
+                              <option value={room.four_Nights}>4</option>
+                            </select>
                           </div>
                         </div>
                       </div>
                     </div>
-                  ))
+                  </div>
+                ))
                 : "no data"}
             </div>
 
@@ -1003,19 +1017,21 @@ const OnlineRegistration = () => {
                   </div>
 
                   <div className="text-center">
-                    <label htmlFor="option1" className="mr-5">
-                      <input type="radio" onChange={()=>togglePaymetOption('cc-avenue')} name="option" id="option1" value="option2" className="mr-3" />
+
+
+                    <label htmlFor="option2" className="mr-5">
+                      <input type="radio" name="option" checked={selectedOption === "option"} onChange={() => togglePaymetOption('paypal')} id="option2" value="option2" className="mr-3" />
                       <img
-                        src={process.env.PUBLIC_URL + "/" + "images/cc-avenue_logo.png" || "/placeholder.svg"}
+                        src={process.env.PUBLIC_URL + "/" + "images/paypal-logo.png" || "/placeholder.svg"}
                         alt="logo"
                         style={{ width: 150 }}
                       />
                     </label>
 
-                    <label htmlFor="option2">
-                      <input type="radio" name="option" onChange={()=>togglePaymetOption('paypal')} id="option2" value="option2" className="mr-3" />
+                    <label htmlFor="option1">
+                      <input type="radio" onChange={() => togglePaymetOption('cc-avenue')} name="option" id="option1" value="option2" className="mr-3" />
                       <img
-                        src={process.env.PUBLIC_URL + "/" + "images/paypal-logo.png" || "/placeholder.svg"}
+                        src={process.env.PUBLIC_URL + "/" + "images/cc-avenue_logo.png" || "/placeholder.svg"}
                         alt="logo"
                         style={{ width: 150 }}
                       />
@@ -1029,26 +1045,29 @@ const OnlineRegistration = () => {
                   <button className="btn btn-outline-secondary px-3 mr-3" onClick={handleReset}>
                     Reset sddsa
                   </button> */}
+                  <div className="row mt-3">
+                    <div className="col-sm-4 offset-sm-4">
+                      {paymentMethod === 'paypal' ? (
+                        <PayPalScriptProvider options={initialOption}>
+                          <PayPalButtons style={{ layout: "horizontal", width: '250px' }}
+                            createOrder={(data, actions) => createOrder(data, actions)}
+                            onApprove={(data, actions) => onApprove(data, actions)}
+                            onError={handleError}
+                          ></PayPalButtons>
+                        </PayPalScriptProvider>
+                      ) : (
+                        <button className="btn btn-primary" style={{ backgroundColor: '#ffc439', width: '250px', borderRadius: 2 }} onClick={handleSubmitForm}>
+                          <img
+                            src={process.env.PUBLIC_URL + "/" + "images/cc-avenue_logo.png" || "/placeholder.svg"}
+                            alt="logo"
+                            style={{ width: 100 }}
+                          />
+                        </button>
+                      )}
+                    </div>
+                  </div>
 
-                  {paymentMethod==='paypal' ? (
-                    <PayPalScriptProvider options={initialOption}>
-                    <PayPalButtons
-                      style={{ layout: "horizontal" }}
-                      createOrder={(data, actions) => createOrder(data, actions)}
-                      onApprove={(data, actions) => onApprove(data, actions)}
-                      onError={handleError}
-                    ></PayPalButtons>
-                  </PayPalScriptProvider>
-                  ):(
-                    <button className="btn btn-primary" style={{backgroundColor:'#ffc439', width:'100%', borderRadius:2}} onClick={handleSubmitForm}>
-                      <img
-                        src={process.env.PUBLIC_URL + "/" + "images/cc-avenue_logo.png" || "/placeholder.svg"}
-                        alt="logo"
-                        style={{ width: 100 }}
-                      />
-                    </button>
-                  )}
-                  
+
                 </div>
               </div>
             </div>
