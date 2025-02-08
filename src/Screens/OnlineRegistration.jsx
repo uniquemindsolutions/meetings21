@@ -820,6 +820,7 @@ const OnlineRegistration = () => {
                                   onChange={() =>  handleCheckboxChange(plan.oral_presentation, index,plan.id)}
                                 />
                                 Oral Presentation
+                                
                               </span>
                               <span className="float-right text-danger font-weight-bold">
                                 ${plan.oral_presentation}
