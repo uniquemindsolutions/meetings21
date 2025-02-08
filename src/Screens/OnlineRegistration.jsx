@@ -817,7 +817,7 @@ const OnlineRegistration = () => {
                                   type="radio"
                                   name={`plan-${index}`}
                                   className="mr-2"
-                                  onChange={() =>  handleCheckboxChange(plan.invited_presentation, index,plan.id)}
+                                  onChange={() =>  handleCheckboxChange(plan.oral_presentation, index,plan.id)}
                                 />
                                 Oral Presentation
                               </span>
@@ -831,7 +831,7 @@ const OnlineRegistration = () => {
                                 <input
                                   type="radio"
                                   name={`plan-${index}`}
-                                  onChange={() =>  handleCheckboxChange(plan.invited_presentation, index,plan.id)}
+                                  onChange={() =>  handleCheckboxChange(plan.poster_presentaion, index,plan.id)}
                                   className="mr-2"
                                 />
                                 Poster Presentation
@@ -845,7 +845,7 @@ const OnlineRegistration = () => {
                                 <input
                                   type="radio"
                                   name={`plan-${index}`}
-                                  onChange={() =>  handleCheckboxChange(plan.invited_presentation, index,plan.id)}
+                                  onChange={() =>  handleCheckboxChange(plan.student_delegate, index,plan.id)}
                                   className="mr-2"
                                 />
                                 Student Delegate
@@ -857,7 +857,7 @@ const OnlineRegistration = () => {
                                 <input
                                   type="radio"
                                   name={`plan-${index}`}
-                                  onChange={() =>  handleCheckboxChange(plan.invited_presentation, index,plan.id)}
+                                  onChange={() =>  handleCheckboxChange(plan.delegate, index,plan.id)}
                                   className="mr-2"
                                 />
                                 Delegate
@@ -869,7 +869,7 @@ const OnlineRegistration = () => {
                                 <input
                                   type="radio"
                                   name={`plan-${index}`}
-                                  onChange={() => handleCheckboxChange(plan.invited_presentation, index,plan.id)}
+                                  onChange={() => handleCheckboxChange(plan.virtual_presentation, index,plan.id)}
                                   className="mr-2"
                                 />
                                 Virtual Presentation
