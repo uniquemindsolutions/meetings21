@@ -40,8 +40,8 @@ const DiscountForm = () => {
     subtot: 0,
     procfee: 0,
     grand_tot: 0,
-    write_desc:'',
-    amount:0
+    write_desc: '',
+    amount: 0
   }
 
   const [error, setError] = useState("")
@@ -84,7 +84,7 @@ const DiscountForm = () => {
 
   const [domainId, setdomainId] = useState("")
 
-  
+
 
   const masterCalulation = () => { }
 
@@ -108,7 +108,7 @@ const DiscountForm = () => {
     return date >= today.setHours(0, 0, 0, 0); // Returns true if not expired
   };
 
- 
+
 
 
 
@@ -129,7 +129,7 @@ const DiscountForm = () => {
       accPrice: 0,
       addOn: 0,
     })
-   
+
     setregiPriceCal(e.target.value)
     regiPricecalCurrent.current = e.target.value;
     setsubTotalPrice(subtotal)
@@ -139,7 +139,7 @@ const DiscountForm = () => {
     setTotalPrice(grandTotal)
     grandtotCurrent.current = grandTotal
     setSubmitFormData({ ...submitFormData, [name]: value })
-    console.log("verifychange",submitFormData);
+    console.log("verifychange", submitFormData);
   }
 
   const handleInputChangeCountry = (e) => {
@@ -178,9 +178,9 @@ const DiscountForm = () => {
       register_category: 5,
       accommodation: 1,
       write_desc: submitFormData.write_desc,
-      amount:submitFormData.amount
+      amount: submitFormData.amount
     }
-    console.log("regipayload",regipayload);
+    console.log("regipayload", regipayload);
     const currentEvents = location.pathname.split("/")
     setCurrentEventName(currentEvents[1])
 
@@ -521,17 +521,26 @@ const DiscountForm = () => {
                 </div>
               </div>
               <div className="col-sm-6">
-                <label htmlFor="country">Country:</label>
-                <select
-                  onChange={handleInputChangeCountry}
-                  name="country"
-                  value={submitFormData.country || ""}
-                  className="form-control"
-                  id="country"
-                >
-                  <option value="">Select country</option>
-                  {countryList(countries)}
-                </select>
+                <div className="form-group">
+                  <label htmlFor="country">Country:</label>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text">
+                        <i class="fa-solid fa-earth-asia"></i>
+                      </span>
+                    </div>
+                    <select
+                      onChange={handleInputChangeCountry}
+                      name="country"
+                      value={submitFormData.country || ""}
+                      className="form-control"
+                      id="country"
+                    >
+                      <option value="">Select country</option>
+                      {countryList(countries)}
+                    </select>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -566,7 +575,7 @@ const DiscountForm = () => {
                   <div className="input-group-prepend"><span className="input-group-text"><i className="fa-solid fa-dollar-sign"></i></span>
                   </div>
                   <input type="text"
-                  onChange={handleInputChangeAmount}
+                    onChange={handleInputChangeAmount}
                     className="form-control"
                     id="organization"
                     name='amount'
@@ -577,8 +586,8 @@ const DiscountForm = () => {
             </div>
           </div>
 
-         
-          
+
+
           {/* packages types end */}
 
           {/* acomidation start */}

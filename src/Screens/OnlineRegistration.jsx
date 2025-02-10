@@ -12,6 +12,7 @@ const OnlineRegistration = () => {
   const location = useLocation()
   const navigate = useNavigate();
 
+
   const submitForm = {
     title: "",
     name: "",
@@ -284,7 +285,7 @@ const OnlineRegistration = () => {
       // setResponse(res.data);
       console.log("transapires", res);
       window.location.reload();
-      handleReset();
+      // handleReset();
 
 
     } catch (error) {
@@ -434,21 +435,24 @@ const OnlineRegistration = () => {
   }
 
   const handleReset = () => {
-    setAccompanying(0)
-    setSelectedRoom("")
-    setTotalPrice(0)
-    setSubmitFormData(submitForm)
-    setregiPriceCal("")
-    setaccpriceCal("")
-    setAddOn("")
-    setProcessfee(0)
-    setIsChecked(false)
-    regiPricecalCurrent.current = ""
-    accpricecalCurrent.current = ""
-    addOnCurrent.current = ""
-    procssfeeCurrent.current = 0
-    subtotCurrent.current = ""
-    grandtotCurrent.current = 0
+    // window.history.replaceState({}, document.title, window.location.pathname);
+    // window.location.reload();
+
+    // setAccompanying(0)
+    // setSelectedRoom("")
+    // setTotalPrice(0)
+    // setSubmitFormData(submitForm)
+    // setregiPriceCal("")
+    // setaccpriceCal("")
+    // setAddOn("")
+    // setProcessfee(0)
+    // setIsChecked(false)
+    // regiPricecalCurrent.current = ""
+    // accpricecalCurrent.current = ""
+    // addOnCurrent.current = ""
+    // procssfeeCurrent.current = 0
+    // subtotCurrent.current = ""
+    // grandtotCurrent.current = 0
   }
 
   const handleaccom = (e, index, masterdata) => {
@@ -1052,7 +1056,10 @@ const OnlineRegistration = () => {
                     Reset sddsa
                   </button> */}
                   <div className="row mt-3">
-                    <div className="col-sm-4 offset-sm-4">
+                    <div className="col-sm-4 text-end">
+                      <button className="btn btn-outline-secondary py-2 px-4" onClick={handleReset}>Reset</button>
+                    </div>
+                    <div className="col-sm-4">
                       {paymentMethod === 'paypal' ? (
                         <PayPalScriptProvider options={initialOption}>
                           <PayPalButtons style={{ layout: "horizontal", width: '250px' }}
