@@ -11,6 +11,7 @@ const OnlineRegistration = () => {
   const baseurl = process.env.REACT_APP_API_URL
   const location = useLocation()
   const navigate = useNavigate();
+  const [reload, setReload] = useState(false);
 
 
   const submitForm = {
@@ -149,6 +150,7 @@ const OnlineRegistration = () => {
     getregfeeData()
     getaccmData()
     getdomainid()
+    window.history.pushState({}, "", window.location.pathname)
     return window.scrollTo(0, 0);
 
   }, [])
@@ -172,10 +174,10 @@ const OnlineRegistration = () => {
           if (!isGotValidPlan && isDateValid(el.end_date)) {
             // Mark the first valid future date as true
             isGotValidPlan = true;
-            tempList.push({ ...el, isAllowedToSelect: true });
+            tempList.push({ ...el, isAllowedToSelect: true,checkboxbool: true });
           } else {
             // All other future dates and expired dates get false
-            tempList.push({ ...el, isAllowedToSelect: false });
+            tempList.push({ ...el, isAllowedToSelect: false,checkboxbool: false });
           }
         }
 
@@ -435,6 +437,7 @@ const OnlineRegistration = () => {
   }
 
   const handleReset = () => {
+    window.history.pushState({}, "", window.location.pathname);
     // window.history.replaceState({}, document.title, window.location.pathname);
     // window.location.reload();
 
@@ -803,7 +806,7 @@ const OnlineRegistration = () => {
                             type="checkbox"
                             className="form-check-input"
                             disabled={!plan.isAllowedToSelect}
-                            checked={plan?.checked || false}
+                            checked={plan.checkboxbool || false}
                             style={{ height: "25px", width: "25px" }}
                             onChange={(e) => handleChangeCheckBox(index)}
                           />
