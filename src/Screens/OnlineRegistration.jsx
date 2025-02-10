@@ -11,6 +11,7 @@ const OnlineRegistration = () => {
   const baseurl = process.env.REACT_APP_API_URL
   const location = useLocation()
   const navigate = useNavigate();
+  const [reload, setReload] = useState(false);
 
 
   const submitForm = {
@@ -149,6 +150,7 @@ const OnlineRegistration = () => {
     getregfeeData()
     getaccmData()
     getdomainid()
+    window.history.pushState({}, "", window.location.pathname)
     return window.scrollTo(0, 0);
 
   }, [])
@@ -172,10 +174,10 @@ const OnlineRegistration = () => {
           if (!isGotValidPlan && isDateValid(el.end_date)) {
             // Mark the first valid future date as true
             isGotValidPlan = true;
-            tempList.push({ ...el, isAllowedToSelect: true });
+            tempList.push({ ...el, isAllowedToSelect: true,checkboxbool: true });
           } else {
             // All other future dates and expired dates get false
-            tempList.push({ ...el, isAllowedToSelect: false });
+            tempList.push({ ...el, isAllowedToSelect: false,checkboxbool: false });
           }
         }
 
@@ -435,6 +437,7 @@ const OnlineRegistration = () => {
   }
 
   const handleReset = () => {
+    window.history.pushState({}, "", window.location.pathname);
     // window.history.replaceState({}, document.title, window.location.pathname);
     // window.location.reload();
 
@@ -803,106 +806,106 @@ const OnlineRegistration = () => {
                             type="checkbox"
                             className="form-check-input"
                             disabled={!plan.isAllowedToSelect}
-                            checked={plan?.checked || false}
+                            checked={plan.checkboxbool || false}
                             style={{ height: "25px", width: "25px" }}
                             onChange={(e) => handleChangeCheckBox(index)}
                           />
                           <br />
                         </div>
-                      </div>
-                      <div className="card-body">
-                        <div className="form-group">
-                          <label className="d-flex justify-content-between">
-                            <span>
-                              <input
-                                type="radio"
-                                name={`plan-${index}`}
-                                className="mr-2"
-                                disabled={!plan.isAllowedToSelect}
-                                value={plan.invited_presentation}
-                                onChange={() => handleCheckboxChange(plan.invited_presentation, index, plan.id)}
-                              />
-                              Invited Presentation
-                            </span>
+                        <div className="card-body">
+                          <div className="form-group">
+                            <label className="d-flex justify-content-between">
+                              <span>
+                                <input
+                                  type="radio"
+                                  name={`plan-${index}`}
+                                  className="mr-2"
+                                  disabled={!plan.isAllowedToSelect}
+                                  value={plan.invited_presentation}
+                                  onChange={() => handleCheckboxChange(plan.invited_presentation, index,plan.id)}
+                                />
+                                Invited Presentation
+                              </span>
 
                             <span className="float-right text-danger font-weight-bold">
                               ${plan.invited_presentation}
                             </span>
                           </label>
 
-                          <label className="d-flex justify-content-between">
-                            <span>
-                              <input
-                                type="radio"
-                                name={`plan-${index}`}
-                                className="mr-2"
-                                disabled={!plan.isAllowedToSelect}
-                                onChange={() => handleCheckboxChange(plan.oral_presentation, index, plan.id)}
-                              />
-                              Oral Presentation
+                            <label className="d-flex justify-content-between">
+                              <span>
+                                <input
+                                  type="radio"
+                                  name={`plan-${index}`}
+                                  className="mr-2"
+                                  disabled={!plan.isAllowedToSelect}
+                                  onChange={() =>  handleCheckboxChange(plan.oral_presentation, index,plan.id)}
+                                />
+                                Oral Presentation
+                                
+                              </span>
+                              <span className="float-right text-danger font-weight-bold">
+                                ${plan.oral_presentation}
+                              </span>
+                            </label>
 
-                            </span>
-                            <span className="float-right text-danger font-weight-bold">
-                              ${plan.oral_presentation}
-                            </span>
-                          </label>
-
-                          <label className="d-flex justify-content-between">
-                            <span>
-                              <input
-                                type="radio"
-                                name={`plan-${index}`}
-                                disabled={!plan.isAllowedToSelect}
-                                onChange={() => handleCheckboxChange(plan.poster_presentaion, index, plan.id)}
-                                className="mr-2"
-                              />
-                              Poster Presentation
-                            </span>
-                            <span className="float-right text-danger font-weight-bold">
-                              ${plan.poster_presentaion}
-                            </span>
-                          </label>
-                          <label className="d-flex justify-content-between">
-                            <span>
-                              <input
-                                type="radio"
-                                name={`plan-${index}`}
-                                disabled={!plan.isAllowedToSelect}
-                                onChange={() => handleCheckboxChange(plan.student_delegate, index, plan.id)}
-                                className="mr-2"
-                              />
-                              Student Delegate
-                            </span>
-                            <span className="float-right text-danger font-weight-bold">${plan.student_delegate}</span>
-                          </label>
-                          <label className="d-flex justify-content-between">
-                            <span>
-                              <input
-                                type="radio"
-                                name={`plan-${index}`}
-                                disabled={!plan.isAllowedToSelect}
-                                onChange={() => handleCheckboxChange(plan.delegate, index, plan.id)}
-                                className="mr-2"
-                              />
-                              Delegate
-                            </span>
-                            <span className="float-right text-danger font-weight-bold">${plan.delegate}</span>
-                          </label>
-                          <label className="d-flex justify-content-between">
-                            <span>
-                              <input
-                                type="radio"
-                                name={`plan-${index}`}
-                                disabled={!plan.isAllowedToSelect}
-                                onChange={() => handleCheckboxChange(plan.virtual_presentation, index, plan.id)}
-                                className="mr-2"
-                              />
-                              Virtual Presentation
-                            </span>
-                            <span className="float-right text-danger font-weight-bold">
-                              ${plan.virtual_presentation}
-                            </span>
-                          </label>
+                            <label className="d-flex justify-content-between">
+                              <span>
+                                <input
+                                  type="radio"
+                                  name={`plan-${index}`}
+                                  disabled={!plan.isAllowedToSelect}
+                                  onChange={() =>  handleCheckboxChange(plan.poster_presentaion, index,plan.id)}
+                                  className="mr-2"
+                                />
+                                Poster Presentation
+                              </span>
+                              <span className="float-right text-danger font-weight-bold">
+                                ${plan.poster_presentaion}
+                              </span>
+                            </label>
+                            <label className="d-flex justify-content-between">
+                              <span>
+                                <input
+                                  type="radio"
+                                  name={`plan-${index}`}
+                                  disabled={!plan.isAllowedToSelect}
+                                  onChange={() =>  handleCheckboxChange(plan.student_delegate, index,plan.id)}
+                                  className="mr-2"
+                                />
+                                Student Delegate
+                              </span>
+                              <span className="float-right text-danger font-weight-bold">${plan.student_delegate}</span>
+                            </label>
+                            <label className="d-flex justify-content-between">
+                              <span>
+                                <input
+                                  type="radio"
+                                  name={`plan-${index}`}
+                                  disabled={!plan.isAllowedToSelect}
+                                  onChange={() =>  handleCheckboxChange(plan.delegate, index,plan.id)}
+                                  className="mr-2"
+                                />
+                                Delegate
+                              </span>
+                              <span className="float-right text-danger font-weight-bold">${plan.delegate}</span>
+                            </label>
+                            <label className="d-flex justify-content-between">
+                              <span>
+                                <input
+                                  type="radio"
+                                  name={`plan-${index}`}
+                                  disabled={!plan.isAllowedToSelect}
+                                  onChange={() => handleCheckboxChange(plan.virtual_presentation, index,plan.id)}
+                                  className="mr-2"
+                                />
+                                Virtual Presentation
+                              </span>
+                              <span className="float-right text-danger font-weight-bold">
+                                ${plan.virtual_presentation}
+                              </span>
+                            </label>
+                          </div>
                         </div>
                       </div>
                     </div>
