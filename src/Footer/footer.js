@@ -75,8 +75,9 @@ const Footer = () => {
                             <h6>Contact Us</h6>
                             <ul className="list-unstyled mb-0">
                                 <li>
-                                    <span className="d-block">Address:</span>
-                                    <p>D. No. 404, 100 Feet Road, Ayyappa Society, Madhapur, Hyderabad, Postal Code: 500081, India</p>
+                                    <span className="d-block">Office Address:</span>
+                                    <h6 className='mb-1'>Manjeera Trinity Corporate</h6>
+                                    <p>First floor, Unit: 114, JNTU - Hitech Road, KPHB Colony, Kukatpally, Beside LuLu mall, Hyderabad - 500072, Telangana.</p>
                                 </li>
                                 <li>
                                     <span className="d-block mail-span">Email:</span>

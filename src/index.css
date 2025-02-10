@@ -23,8 +23,8 @@ code {
 @media (min-width: 1440px){
   .custom-logo img {
     width: 100%;
-    max-width: 260px;
-    margin-left: 45%;
+    max-width: 280px;
+    margin-left: 40%;
 }
 }
 .footer-box .logo{
@@ -57,4 +57,36 @@ code {
   align-items: center;
   border-radius: 7px;
   font-size: 25px;
+}
+
+
+
+
+.popup {
+  min-width: 400px;
+  position: fixed;
+  top: 35%;
+  left: 48%;
+  transform: translateX(-50%);
+  padding: 15px;
+  color: white;
+  border-radius: 20px; 
+  font-weight: bold;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+  border:solid 2px white;
+  background-color: #f7f7f7fb;
+}
+
+.success {
+  background-color: green;
+}
+
+.error {
+  background-color: red;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }

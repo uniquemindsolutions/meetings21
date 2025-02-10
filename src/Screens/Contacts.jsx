@@ -8,26 +8,28 @@ const Contacts = () => {
 
     const contactApi = process.env.REACT_APP_API_URL
 
-    const cfField = {
-        name: '',
-        phone_number: 0,
-        email: '',
-        website_url: '',
-        message: ''
-    }
-    const [error, setError] = useState('');
-    const [loading, setLoading] = useState(true);
-    const [msg, setMsg] = useState('')
-    const [formData, setFormData] = useState(cfField)
-
-
-    const showMessage = () => {
-        setMsg("Form was submited successfully ");
-        setTimeout(() => {
-            setMsg(""); // Clear the message after 3 seconds
-        }, 4000);
+    const initialFormData = {
+        name: "",
+        phone_number: "",
+        email: "",
+        subject: "",
+        message: "",
     };
 
+    const cfField = {
+        name: '',
+        phone_number: '',
+        email: '',
+        subject: '',
+        message: ''
+    }
+    
+    const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [msg, setMsg] = useState('');
+    const [formData, setFormData] = useState(cfField);
+    const [popup, setPopup] = useState(false);
+    
     const handleInput = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value })
@@ -35,17 +37,37 @@ const Contacts = () => {
 
     const handlePostForm = async (e) => {
         e.preventDefault(); // Prevent form reload
+        setLoading(true);
         try {
-            const cfData = await axios.post(contactApi + 'Contact/', formData, {
+            const cfData = await axios.post(contactApi + '/api/Contact/', formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             })
-            setMsg(msg)
-        } catch {
-            setError("Error: data not posted")
+
+            setMsg("Form Submitted Successfully")
+            setPopup(true)
+
+            setFormData(initialFormData);
+
+            setTimeout(()=>{
+                setMsg("")
+                setPopup(false)
+            }, 10000)
+        } catch(error) {
+            setError("Error: Data not posted")
+            setTimeout(()=>{
+                setError("")
+                setPopup(false)
+            }, 10000)
+        } finally {
+            setLoading(false);
         }
     }
+
+    const popupClose = (() => {
+        setPopup(false)
+    })
 
     return (
         <div className='contact-p'>
@@ -141,9 +163,9 @@ const Contacts = () => {
                             </li>
                             <li>
                                 <input type="text"
-                                    value={formData.website_url}
+                                    value={formData.subject}
                                     onChange={handleInput}
-                                    name='website_url'
+                                    name='subject'
                                     placeholder="Subject" />
                             </li>
                             <li>
@@ -156,15 +178,38 @@ const Contacts = () => {
                             </li>
                         </ul>
                         <div className="submit-btn generic-btn">
-                            <button type="submit" onClick={showMessage} id="submit">SEND MESSAGE <i className="fas fa-arrow-right"></i></button>
+                            <button type="submit"> 
+                                {loading ? "Submitting..." : "SEND MESSAGE"} <i className="fas fa-arrow-right"> </i>
+                            </button>
                         </div>
+
+                        {
+                            popup && (
+                                <div className="row">
+                                    <div className="col-md-4 offset-lg-4">
+                                        <div className="shadow-sm popup">
+                                            <button className='btn text-danger ms-auto text-end d-block' onClick={popupClose}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
+                                                </svg>
+                                            </button>
+                                            <div className=" d-flex justify-content-center align-items-center" style={{ height: '100px' }}>
+                                                {msg && <p className="text-success mt-2">{msg}</p>}
+                                                {error && <p className="text-danger mt-2">{error}</p>}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        }
                     </form>
-                    <div className='text-success text-center mt-4'>
+                    {/* <div className='text-success text-center mt-4'>
                         <h5>{msg}</h5>
                     </div>
                     <div className='text-danger text-center mt-4'>
                     <h5>{error}</h5>
-                    </div>
+                    </div> */}
                         
                     
                 </div>
