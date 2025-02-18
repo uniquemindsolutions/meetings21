@@ -65,7 +65,12 @@ const Speakers = () => {
             {
               Array.isArray(speakerData) && speakerData?.length > 0 ? (
                 <>
-                  <h4 className='mb-3 text-blue'>Plenary Speakers</h4>
+                  {
+                    speakerData.some((item) => item.speakers_type === 'PlenarySpeakers') && (
+                      <h4 className='mb-3 text-blue'>Plenary Speakers</h4>
+                    )
+                  }
+
                   <div className="row">
                     {speakerData
                       .filter((item) => item.speakers_type === "PlenarySpeakers")
@@ -85,7 +90,7 @@ const Speakers = () => {
                                       <div className="text-white font-size-15px display-inline-block no-margin text-left">
                                         <div
                                           dangerouslySetInnerHTML={{
-                                            __html: item.speaker_biography,
+                                            __html: item.speaker_awards,
                                           }}
                                         />
                                       </div>
@@ -122,7 +127,7 @@ const Speakers = () => {
                   </div>
                 </>
               ) : (
-                <p>No Plenary Speakers Data</p>
+                <p>{/* No Plenary Speakers Data */}</p>
               )
             }
 
@@ -130,7 +135,12 @@ const Speakers = () => {
             {
               Array.isArray(speakerData) && speakerData.length > 0 ? (
                 <>
-                  <h4 className='mb-3 text-blue'>Keynote Speakers</h4>
+                  {
+                    speakerData.some((item) => item.speakers_type === 'KeynoteSpeakers') && (
+                      <h4 className='mb-3 text-blue'>Keynote Speakers</h4>
+                    )
+                  }
+
                   <div className="row">
                     {speakerData.filter((item) => item.speakers_type === 'KeynoteSpeakers')
                       .map((item, index) => (
@@ -149,7 +159,7 @@ const Speakers = () => {
                                       <div className="text-white font-size-15px display-inline-block no-margin text-left">
                                         <div
                                           dangerouslySetInnerHTML={{
-                                            __html: item.speaker_biography,
+                                            __html: item.speaker_awards,
                                           }}
                                         />
                                       </div>
@@ -188,65 +198,71 @@ const Speakers = () => {
                   </div>
                 </>
               ) : (
-                <p>No Keynote Speakers Data</p>
+                <p>{/* No Keynote Speakers Data */}</p>
               )
             }
 
 
             {
-              Array.isArray(speakerData) && speakerData.length > 0 ? (<>
-                <h4 className='mb-3 text-blue'>Invited Speakers</h4>
-                {speakerData.filter((hedg) => hedg.speakers_type === 'InvitedSpeakers')
-                  .map((item) => (
-                    <div className="row">
-                      <div className="col-md-3 col-sm-12 col-xs-12 team-block text-left margin-30px-bottom team-style-1 sm-margin-seven-bottom xs-margin-40px-bottom wow fadeInRight">
-                        <figure className="speakers-box">
-                          <div className="team-image xs-width-100">
-                            <img
-                              src={item.speakerphoto}
-                              alt={item.speakername}
-                              data-no-retina=""
-                            />
-                            <div className="overlay-content text-center">
-                              <div className="display-table height-100 width-100">
-                                <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
-                                  <div className="min-height-176px">
-                                    <div className="text-white font-size-15px display-inline-block no-margin text-left">
-                                      <div dangerouslySetInnerHTML={{ __html: item.speaker_biography }} />
+              Array.isArray(speakerData) && speakerData.length > 0 ? (
+                <>
+                  {
+                    speakerData.some((item) => item.speakers_type === 'InvitedSpeakers') && (
+                      <h4 className='mb-3 text-blue'>Invited Speakers</h4>
+                    )
+                  }
+
+                  {speakerData.filter((hedg) => hedg.speakers_type === 'InvitedSpeakers')
+                    .map((item) => (
+                      <div className="row">
+                        <div className="col-md-3 col-sm-12 col-xs-12 team-block text-left margin-30px-bottom team-style-1 sm-margin-seven-bottom xs-margin-40px-bottom wow fadeInRight">
+                          <figure className="speakers-box">
+                            <div className="team-image xs-width-100">
+                              <img
+                                src={item.speakerphoto}
+                                alt={item.speakername}
+                                data-no-retina=""
+                              />
+                              <div className="overlay-content text-center">
+                                <div className="display-table height-100 width-100">
+                                  <div className="vertical-align-bottom display-table-cell icon-social-small padding-twelve-all">
+                                    <div className="min-height-176px">
+                                      <div className="text-white font-size-15px display-inline-block no-margin text-left">
+                                        <div dangerouslySetInnerHTML={{ __html: item.speaker_awards }} />
+                                      </div>
                                     </div>
+                                    <a
+                                      href="#"
+                                      className="text-white font-size-24px"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        openModal(item.id);
+                                      }}
+                                    >
+                                      <button className='btn-biography'> View Biography </button>
+                                    </a>
+                                    <div className="separator-line-horrizontal-full bg-light-blue margin-eleven-tb bg-white"></div>
                                   </div>
-                                  <a
-                                    href="#"
-                                    className="text-white font-size-24px"
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      openModal(item.id);
-                                    }}
-                                  >
-                                    <button className='btn-biography'> View Biography </button>
-                                  </a>
-                                  <div className="separator-line-horrizontal-full bg-light-blue margin-eleven-tb bg-white"></div>
                                 </div>
                               </div>
+                              <div className="team-overlay bg-extra-dark-gray opacity8"></div>
                             </div>
-                            <div className="team-overlay bg-extra-dark-gray opacity8"></div>
-                          </div>
-                          <figcaption>
-                            <div className="team-member-position text-center">
-                              <div className="text-extra-large font-weight-600 text-extra-dark-gray text-uppercase font-weight-bold">
-                                {item.speakername}
+                            <figcaption>
+                              <div className="team-member-position text-center">
+                                <div className="text-extra-large font-weight-600 text-extra-dark-gray text-uppercase font-weight-bold">
+                                  {item.speakername}
+                                </div>
+                                <div className="text-medium font-weight-500 text-dark-gray font-size-15px">
+                                  {item.speaker_affiliation}
+                                </div>
                               </div>
-                              <div className="text-medium font-weight-500 text-dark-gray font-size-15px">
-                                {item.speaker_affiliation}
-                              </div>
-                            </div>
-                          </figcaption>
-                        </figure>
+                            </figcaption>
+                          </figure>
+                        </div>
                       </div>
-                    </div>
-                  ))
-                }
-              </>) : 'No Invited Speakers data'
+                    ))
+                  }
+                </>) : ''
             }
 
 
@@ -344,7 +360,7 @@ const Speakers = () => {
                     </div>
                   </div>
                 )
-            ) : "no data"
+            ) : "Will update soon"
           }
 
         </section>

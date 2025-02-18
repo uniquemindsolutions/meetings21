@@ -137,7 +137,7 @@ const BannerSection = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    ))) : "no data"
+                                    ))) : ""
                                 }
 
                                 {/* <div className="carousel-item active">

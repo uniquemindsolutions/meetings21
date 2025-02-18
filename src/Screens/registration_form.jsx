@@ -20,7 +20,7 @@ const RegistrationForm = () => {
 
     const basedata = [
         { key: "registration_type", name: 'Registration Type ' },
-        { key: "end_date", name: 'Date' },
+        { key: "end_date", name: 'Deadline' },
         { key: "invited_presentation", name: 'Invited Presentation' },
         { key: "oral_presentation", name: 'Oral Presentation' },
         { key: "poster_presentaion", name: 'Poster Presentation' },

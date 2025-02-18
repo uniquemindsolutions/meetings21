@@ -20,25 +20,39 @@ const Meetings = () => {
 
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const [currentEventName, setCurrentEventName] = useState('');
+  // const [currentEventName, setCurrentEventName] = useState('');
+  const [currentEventName, setCurrentEventName] = useState([]);
   // const [currentEventId, setCurrentEventId] = useState('');
 
 
   console.log("currentEventName === ", currentEventName)
 
   useEffect(() => {
-    dynamicEvents()
+    dynamicEvents();
+    
   }, [])
 
   const dynamicEvents = async () => {
     try {
-      const res = await axios.get(dynamicEventUrl + 'EventMeetings/')
-      setCurrentEventName(res.data);
+      const res = await axios.get(dynamicEventUrl + 'EventMeetings/');
+      // setCurrentEventName(res.data);
+
+      setCurrentEventName(Array.isArray(res.data) ? res.data : []);
       console.log('dynamicEventUrl ===', res.data)
     } catch {
       setError('Error loaded')
     }
   }
+
+  const activeEvents = currentEventName.filter(event => event.is_active);
+  const eventsByYear = activeEvents.reduce((acc, event) => {
+    const year = event.year_of_event;
+    if (!acc[year]) {
+      acc[year] = [];
+    }
+    acc[year].push(event);
+    return acc;
+  }, {});
 
   return (
     <>
@@ -62,45 +76,60 @@ const Meetings = () => {
       <div className='container padding-bottom padding-top'>
         <div className='row'>
           <div className='col-lg-12 text-center mt-5 mb-5'>
-            <h2>October, 2025</h2>
+            {/* <h2>October, 2025</h2> */}
           </div>
         </div>
 
-        <div className="row">
-         
-
-
+        <div className="container">
           {loading ? (
             <p>Loading...</p>
-          ) : currentEventName && Array.isArray(currentEventName) && currentEventName.length > 0 ? (
-            currentEventName.map((items, index) => (
-              <div key={index} className="col-md-5 offset-md-1">
-                <Link to={`/${items.domain_name}`} target='_blank' className="event-card">
-                  <div className='event-card-img'>
-                    <img src={process.env.PUBLIC_URL + '/' + "images/Dubai-event-img.jpg"} alt="" className='' />
+          ) : currentEventName && Array.isArray(currentEventName) && currentEventName.length > 0 && currentEventName.length > 0 ? (
+            Object.keys(eventsByYear)
+              .sort()
+              .map((year) => (
+                <div key={year}>
+                  <div class="index3-faq-btn-con text-center">
+                    <div class="generic-btn text-center">
+                      <a class="user-select-none my-5 fs-3" href="/material-science/speakers" data-discover="true">{year}
+                      </a>
+                    </div>
                   </div>
-                  <div className='event-card-content'>
-                    <h5 className="event-card-title">
-                      {items.domain_name}
-                    </h5>
-                    <p className='mb-0 mt-4'>
-                      <small><i className="fa fa-calendar text-secondary"></i> {items.meettings_date}</small>   </p>
-                    <p className='mb-0'>
-                      <small><i className="fa fa-map-marker text-secondary"></i> {items.meetingslocation} </small>
-                    </p>
+
+                  <div className="row">
+                    {eventsByYear[year].map((items, index) => (
+                      <div key={index} className="col-md-5 offset-md-1 mb-4">
+                        <Link to={`/${items.domain_name}`} target="_blank" className="event-card">
+                          <div className="event-card-img">
+                            <img src={items.meettings_photo} alt={items.domain_name} className="" />
+                          </div>
+                          <div className="event-card-content">
+                            <h5 className="event-card-title">{items.meetings_subject}</h5>
+                            <h5 className="">{items.meeting_prefix}</h5>
+                            <p className="mb-0 mt-4">
+                              <small>
+                                <i className="fa fa-calendar text-secondary"></i> {items.meettings_date}
+                              </small>
+                            </p>
+                            <p className="mb-0">
+                              <small>
+                                <i className="fa fa-map-marker text-secondary"></i> {items.meetingslocation}
+                              </small>
+                            </p>
+                          </div>
+                        </Link>
+                      </div>
+                    ))}
                   </div>
-                </Link>
-              </div>
-            ))
+                </div>
+              ))
           ) : (
-            <p>Not found Events.</p>
+            <p></p>
           )}
-          
         </div>
       </div>
 
-      <SubscribeSection/>
-      
+      <SubscribeSection />
+
       <Footer />
     </>
   )

@@ -33,6 +33,8 @@ import ContactsEvent from './Screens/ContactsEvent';
 import BlogDetails from './Screens/BlogDetails';
 import TermsAndConditions from './Screens/TermsAndConditions';
 import PrivacyPolicy from './Screens/PrivacyPolicy';
+import EventNewsDetails from './Screens/EventNewsDetails';
+import NotFound from './Screens/NotFound ';
 
 
 function App() {
@@ -69,6 +71,9 @@ function App() {
         <Route path="/:name/presentation-guidelines" element={<PresentationGuidelines />} />
         <Route path="/:name/online-registration" element={<OnlineRegistration />} />
         <Route path="/:name/discount-form" element={<DiscountForm />} />
+        <Route path="/:name/event-news-details/:id" element={<EventNewsDetails />} />
+        {/* <Route path="/not-found" element={<NotFound />} /> */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       
       <Outlet />

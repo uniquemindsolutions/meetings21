@@ -266,8 +266,9 @@ const DiscountForm = () => {
   }
 
 
+
   const initialOption = {
-    "client-id": "AVu9_6n12pwbZY6nay-AwpvrJh2q0UF4ckAzxf3paq7TpDuRLE0ry0Ub9w6HiqXI8PK_LmvpUPUYDFH0",
+    "client-id": "AXgZp2VwWsX453KQGsZWTtgKGk_jPzNEVvo0uviJNvPPXNNYaUigsaVNVI191QDgkxpCPcvII08uPzAD",
     currency: "USD",
     intent: "capture",
   }
@@ -654,7 +655,16 @@ const DiscountForm = () => {
                   </div>
 
                   <div className="text-center">
-                    <label htmlFor="option1" className="mr-5">
+
+                    <label htmlFor="option2" className="mr-5">
+                      <input type="radio" name="option" onChange={() => togglePaymetOption('paypal')} id="option2" value="option2" className="mr-3" />
+                      <img
+                        src={process.env.PUBLIC_URL + "/" + "images/paypal-logo.png" || "/placeholder.svg"}
+                        alt="logo"
+                        style={{ width: 150 }}
+                      />
+                    </label>
+                    <label htmlFor="option1">
                       <input type="radio" onChange={() => togglePaymetOption('cc-avenue')} name="option" id="option1" value="option2" className="mr-3" />
                       <img
                         src={process.env.PUBLIC_URL + "/" + "images/cc-avenue_logo.png" || "/placeholder.svg"}
@@ -663,14 +673,6 @@ const DiscountForm = () => {
                       />
                     </label>
 
-                    <label htmlFor="option2">
-                      <input type="radio" name="option" onChange={() => togglePaymetOption('paypal')} id="option2" value="option2" className="mr-3" />
-                      <img
-                        src={process.env.PUBLIC_URL + "/" + "images/paypal-logo.png" || "/placeholder.svg"}
-                        alt="logo"
-                        style={{ width: 150 }}
-                      />
-                    </label>
                   </div>
 
                   {/* <button className="btn btn-outline-secondary px-3 mr-3" type="button" onClick={handleSubmitForm}>
@@ -680,26 +682,38 @@ const DiscountForm = () => {
                 <button className="btn btn-outline-secondary px-3 mr-3" onClick={handleReset}>
                   Reset sddsa
                 </button> */}
-
-                  {paymentMethod === 'paypal' ? (
-                    <PayPalScriptProvider options={initialOption}>
-                      <PayPalButtons
-                        style={{ layout: "horizontal" }}
-                        createOrder={(data, actions) => createOrder(data, actions)}
-                        onApprove={(data, actions) => onApprove(data, actions)}
-                        onError={handleError}
-                      ></PayPalButtons>
-                    </PayPalScriptProvider>
-                  ) : (
-                    <button className="btn btn-primary" style={{ backgroundColor: '#ffc439', width: '100%', borderRadius: 2 }} onClick={handleSubmitForm}>
-                      <img
-                        src={process.env.PUBLIC_URL + "/" + "images/cc-avenue_logo.png" || "/placeholder.svg"}
-                        alt="logo"
-                        style={{ width: 100 }}
-                      />
-                    </button>
-                  )}
-
+                  <div className="row mt-3">
+                    <div className="col-sm-4 text-end">
+                      <button className="btn btn-outline-secondary py-2 px-4" onClick={handleReset}>Reset</button>
+                    </div>
+                    <div className="col-sm-4">
+                      {paymentMethod === 'paypal' ? (
+                        <PayPalScriptProvider options={initialOption}>
+                          <PayPalButtons
+                            style={{
+                              layout: "horizontal",
+                              color: "blue",
+                              shape: "rect",
+                              label: "pay",
+                              height: 42,
+                              width: '250px',
+                            }}
+                            createOrder={(data, actions) => createOrder(data, actions)}
+                            onApprove={(data, actions) => onApprove(data, actions)}
+                            onError={handleError}
+                          ></PayPalButtons>
+                        </PayPalScriptProvider>
+                      ) : (
+                        <button className="btn btn-primary" style={{ backgroundColor: '#ffc439', width: '100%', borderRadius: 2 }} onClick={handleSubmitForm}>
+                          <img
+                            src={process.env.PUBLIC_URL + "/" + "images/cc-avenue_logo.png" || "/placeholder.svg"}
+                            alt="logo"
+                            style={{ width: 100 }}
+                          />
+                        </button>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

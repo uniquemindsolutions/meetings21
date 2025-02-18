@@ -11,6 +11,7 @@ const Venue = () => {
   //https://meetings21.com/Meetings21Backend/Material_science/more/venues/
 
   const committeeUrl = process.env.REACT_APP_API_URL;
+  const venuImgsApi = process.env.REACT_APP_API_URL;
   const location = useLocation();
 
   const [error, setError] = useState('');
@@ -18,11 +19,13 @@ const Venue = () => {
   const [currentEventName, setCurrentEventName] = useState('');
   const [currentEventId, setCurrentEventId] = useState('');
   const [venueData, setVenuedata] = useState('');
+  const [venueImg, setVenueImg] = useState('');
+
 
 
   useEffect(() => {
     venuedata();
-
+    getVenueImgs();
   }, []);
 
   const venuedata = async () => {
@@ -35,6 +38,18 @@ const Venue = () => {
       console.log('venuedata ===', res.data);
     } catch {
       setError('Error loaded')
+    }
+  }
+
+  const getVenueImgs = async () => {
+    const currentEvents = location.pathname.split('/');
+    console.log('currentEvents venue', currentEvents)
+    try {
+      const response = await axios.get(venuImgsApi + currentEvents[1] + '/more/venue/Images/');
+      setVenueImg(response.data);
+      console.log('images venue', response.data)
+    } catch {
+      setError('Images not found')
     }
   }
   return (
@@ -70,11 +85,13 @@ const Venue = () => {
               </div>
 
               <div className="col-lg-12 mt-5">
-                <p><b>Note 1:</b> {venueData.note_1}</p>
+                <p><b>Note 1: </b> {venueData.note_1}</p>
 
                 <p>
-                  <b>Note 2:</b>
-                  {venueData.note_1}
+                  <b>Note 2: </b> {venueData.note_2}
+                </p>
+                <p>
+                  <b>Note 3: </b> {venueData.note_3}
                 </p>
 
                 <h5>About Hotel:</h5>
@@ -88,11 +105,23 @@ const Venue = () => {
 
         <section className='gallery-img container mb-5'>
           <div className="row">
-            <div className="col-md-4">
-              <figure className="mb-0">
-                <img src={venueData.venue_images} alt="img" className='img-fluid w-100' />
-              </figure>
-            </div>
+            {loading ? (
+              <p>Loading...</p>
+            ) : venueImg && Array.isArray(venueImg) && venueImg.length > 0 ? (
+              venueImg.map((img) => (
+
+                <div className="col-md-4">
+                  <figure className="mb-3">
+                    <img src={img?.venue_images} alt="img" className='img-fluid w-100' />
+                  </figure>
+                </div>
+
+              ))
+            ) : (
+              <p>No blogs found.</p>
+            )}
+
+
             {/* <div className="col-md-4">
               <figure className="mb-0">
                 <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-8.jpg"} alt="img" className='img-fluid w-100' />
@@ -110,8 +139,9 @@ const Venue = () => {
           <div className="card">
             <div className="card-header"><h5>Directions to the Venue</h5></div>
             <div className="card-body p-3">
-              {/* {venueData.location} */}
-              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3805.3797551367156!2d78.3926563!3d17.4893763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb918dab342375%3A0x180a04af0c47f594!2sManjeera%20Trinity%20Corporate!5e0!3m2!1sen!2sin!4v1735719156491!5m2!1sen!2sin" width="100%" height="450" style={{ border: 0 }} allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+              {venueData?.location && (
+                <div dangerouslySetInnerHTML={{ __html: venueData.location }} />
+              )}
             </div>
           </div>
 

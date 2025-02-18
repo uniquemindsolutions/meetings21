@@ -61,7 +61,17 @@
 @media (max-width:768px){
   .custom-logo img {
   width: 200px !important;
-}
+  margin-left: 0%;
+
+  }
+    .index3-banner-text-con {
+        padding: 50px 40px;
+        width: 100%;
+        min-height: 250px;
+        display: inline-table;
+    }
+ 
+
 .about-p .about-inner-con {
   grid-template-columns: 100%;
 }
@@ -169,7 +179,6 @@
   line-height: 25px;
   color: #212529;
   margin-bottom: 18px;
-  margin-left: 3px;
 }
 
 .event-table .schedule-table {

@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Footer from '../Footer/footer';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import EventHeader from '../Header/EventHeader';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
@@ -16,12 +16,34 @@ const ContactsEvent = () => {
     }
 
     const contactForm = process.env.REACT_APP_API_URL;
+    const eventContactApi = process.env.REACT_APP_API_URL
+
+    const location = useLocation();
 
     const [error, setError] = useState('');
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState(cfField);
     const [popup, setPopup] = useState(false);
+        const [contacts, setContacts] = useState([])
+
+        
+
+    useEffect(()=>{
+        getContacts()
+    }, [])
+
+    const getContacts = async ()=>{
+        const currentEvents = location.pathname.split('/')
+        console.log('currentEvents', currentEvents)
+        try {
+            const response = axios.get(eventContactApi + currentEvents[1] + '/more/contacts/information');
+            setContacts(response);
+            console.log('contacts details', response)
+        } catch {
+            setError('No contact details found');
+        }
+    }
 
     const handleInput = (e) => {
         const { name, value } = e.target;
@@ -96,7 +118,7 @@ const ContactsEvent = () => {
                                 <img src={process.env.PUBLIC_URL + '/' + "images/location-icon1.png"} alt="location-icon" />
                             </figure>
                             <h6>Office Address</h6>
-                            <p>1D. No. 404, 100 Feet Road, Ayyappa Society, Madhapur, Hyderabad, Postal Code: 500081, India</p>
+                            <p>{contacts.contact_description}</p>
                             {/* <a href="contact.html">Get Directions</a> */}
                         </div>
                         <div className="contact-box">
@@ -105,8 +127,7 @@ const ContactsEvent = () => {
                             </figure>
                             <h6>Phone</h6>
                             <ul className="list-unstyled">
-                                <li><a href="tel:+919848141833">(+91 9848 14 1833)</a></li>
-                                <li><a href="tel:+919848141833">(+91 9848 14 1833)</a></li>
+                            <li><a href="{contacts.contact_description}">{contacts.contact_description}</a></li>
                             </ul>
                             {/* <a href="tel:+61383766284">Call Now</a> */}
                         </div>
@@ -116,8 +137,7 @@ const ContactsEvent = () => {
                             </figure>
                             <h6>Email</h6>
                             <ul className="list-unstyled">
-                                <li><a href="mailto:contact@meetings21.com">contact@meetings21.com</a></li>
-                                <li><a href="mailto:contact@meetings21.com">contact@meetings21.com</a></li>
+                                <li> <a href="mailto:{contacts.contact_description}">{contacts.contact_description}</a></li>
                             </ul>
                             {/* <a href="mailto:contact@meetings21.com">Email Now</a> */}
                         </div>

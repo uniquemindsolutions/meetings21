@@ -49,7 +49,7 @@ const EventHeader = () => {
     // }
     return (
         <>
-            <div className="header-main-con index3-header w-100 float-left py-1 sticky-top">
+            <div className="header-main-con index3-header eventHead w-100 float-left py-3 sticky-top">
                 <div className="container-fluid">
                     <nav className="navbar navbar-expand-lg navbar-light p-0">
                         <Link to="/" className="navbar-brand">
@@ -70,7 +70,7 @@ const EventHeader = () => {
                         <div className="collapse navbar-collapse justify-content-end eventNav" id="navbarSupportedContent">
                             <ul className="navbar-nav">
                                 <li className="nav-item">
-                                    <Link to={`/${currentEventName}/events`} className='nav-link p-0 active'>Home</Link>
+                                    <Link to={`/${currentEventName}/home`} className='nav-link p-0 active'>Home</Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link to={`/${currentEventName}/committee`} className='nav-link p-0'>Committee</Link>

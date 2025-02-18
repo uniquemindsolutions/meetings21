@@ -21,7 +21,7 @@ const Blogs = () => {
     const getBlogData = async () => {
         setLoading(true)
         try {
-            const res = await axios.get(`${apiBlogUrl}Blogs/`)
+            const res = await axios.get(`${apiBlogUrl}/api/Blogs/`)
             console.log("apiBlogUrl === ", res)
             setBlogData(res.data)
             console.log("blogData === ", blogData)

@@ -20,8 +20,9 @@ import Services from './Home/services';
 // import "./ModalPopup.css"; 
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Tab } from "bootstrap";
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 window.$ = window.jQuery = $; // Expose jQuery globally
 
 const Events = () => {
@@ -38,6 +39,10 @@ const Events = () => {
     const addToCalenderApi = process.env.REACT_APP_API_URL;
     const speakersApi = process.env.REACT_APP_API_URL;
     const downloadProgramApi = process.env.REACT_APP_API_URL;
+    const metadaApi = process.env.REACT_APP_API_URL;
+
+
+    const dynamicEventsListApi = process.env.REACT_APP_API_URL;
 
 
     const [error, setError] = useState('')
@@ -54,7 +59,12 @@ const Events = () => {
     const [eventSpeakers, setEventSpeakers] = useState([])
     const [addToCalendar, setAddToCalendar] = useState([])
     const [downloadProgram, setDownloadProgram] = useState([])
+    const [validEvents, setValidEvents] = useState([]);
+    // const [eventsDynamic, setEventsDynamic] = useState([]);
+    const [metaData, setMetaData] = useState({ title: 'Meetings21' })
+    const navigate = useNavigate();
 
+ 
     const { eventName } = useParams();
 
     const addToCalendarCurrent = useRef(addToCalendar)
@@ -66,6 +76,13 @@ const Events = () => {
         }
         const currentEvents = location.pathname.split('/')
         setCurrentEventName(currentEvents[1])
+
+        // const GetDynamicEvents = () => {
+        //     const res = axios.get(dynamicEventsListApi + currentEvents[1] + '/api/EventMeetings/')
+        //     setEventsDynamic(res.data);
+        //     console.log("dynamic events list", res.data)
+        // }
+        // GetDynamicEvents()
 
         fetchingApis();
         getSpeakers();
@@ -80,15 +97,35 @@ const Events = () => {
         tabEl.forEach(el => {
             new Tab(el);
         });
-    }, [location])
+
+
+        // Fix title hover issue
+        const originalTitle = document.title;
+
+        const handleMouseOver = () => {
+            document.title = metaData.meta_names; // Show meta title on hover
+        };
+
+        const handleMouseOut = () => {
+            document.title = originalTitle; // Restore original title
+        };
+
+        window.addEventListener("mouseover", handleMouseOver);
+        window.addEventListener("mouseout", handleMouseOut);
+
+        return () => {
+            window.removeEventListener("mouseover", handleMouseOver);
+            window.removeEventListener("mouseout", handleMouseOut);
+        };
+    }, [location, metaData.meta_names, validEvents])
 
     const fetchingApis = async () => {
         setLoading(true);
-        const currentEvents = location.pathname.split('/')
+        const currentEvents = location.pathname.split('/');
         setCurrentEventName(currentEvents[1])
         try {
             const currentEvents = location.pathname.split('/');
-            const [testimonialRes, bannersRes, aboutContentRes, aboutBannerRes, expertsGalleryRes, recentNewsRes, ourPartnersRes] = await Promise.all([
+            const [testimonialRes, bannersRes, aboutContentRes, aboutBannerRes, expertsGalleryRes, recentNewsRes, ourPartnersRes, metaDataRes] = await Promise.all([
                 axios.get(testimonialApi + currentEvents[1] + '/event/testimonials/'),
                 axios.get(bannersApi + currentEvents[1] + '/event/banner/'),
                 axios.get(aboutContentApi + currentEvents[1] + '/event/about'),
@@ -96,21 +133,27 @@ const Events = () => {
                 axios.get(expertsGalleryApi + currentEvents[1] + '/event/experts/'),
                 axios.get(recentNewsApi + currentEvents[1] + '/event/news/'),
                 axios.get(ourPartnersApi + currentEvents[1] + '/event/partners/'),
+                axios.get(metadaApi + currentEvents[1] + '/metatags/'),
             ])
 
             setTestiData(testimonialRes.data);
             setBannersData(bannersRes.data);
-            setAboutContent(aboutContentRes.data)
-            setAboutBanner(aboutBannerRes.data)
-            setExpertsGallery(expertsGalleryRes.data)
-            setRecentNews(recentNewsRes.data)
-            setOurPartners(ourPartnersRes.data)
+            setAboutContent(aboutContentRes.data);
+            setAboutBanner(aboutBannerRes.data);
+            setExpertsGallery(expertsGalleryRes.data);
+            setRecentNews(recentNewsRes.data);
+            setOurPartners(ourPartnersRes.data);
+            setMetaData(metaDataRes);
+
+            console.log("metadata13", metaDataRes)
         } catch {
-            setError('Error: no data found')
+            setError('Error: no data found');
+            setMetaData({ meta_names: "Default Title", meta_description: "Default Description" });
         } finally {
             setLoading(false)
         }
     }
+
 
     const getSpeakers = async () => {
         const currentEvents = location.pathname.split('/')
@@ -258,10 +301,17 @@ const Events = () => {
 
     return (
         <div className='event-p'>
+            <HelmetProvider>
+                {metaData && (
+                    <Helmet>
+                        <title>{metaData.meta_names}</title>
+                        <meta name="description" content={metaData.meta_description} />
+                    </Helmet>
+                )}</HelmetProvider>
             <EventHeader />
             <section className='events-p'>
                 <section className="index3-banner-section w-100 float-left">
-                    <div className="container-fluid">
+                    <div className="container">
                         <div className="index3-banner-outer-con">
 
                             {/* bootstrap slider start */}
@@ -279,25 +329,34 @@ const Events = () => {
                                     {Array.isArray(bannersData) &&
                                         bannersData.length > 0 ? bannersData.map((banner) => {
                                             return <div className="carousel-item active" data-interval="false">
+
                                                 <div className="index3-banner-inner-con">
-                                                    <div className="index3-banner-img-con">
-                                                        <figure className="mb-0">
-                                                            <img src={banner.meettings_photo} className='img-fluid' alt="index3-banner-img1" />
-                                                        </figure>
-                                                    </div>
-                                                    <div className="index3-banner-text-con">
-                                                        <span className="d-block position-relative">{banner.meettings_date} <span className="position-relative" style={{ marginLeft: '15%' }}> Hybrid Event</span></span>
-                                                        <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'>{banner.meetings_subject}</small><br />{banner.meeting_prefix}</h1>
-                                                        <ul className="list-unstyled">
-                                                            <li><i className="fas fa-map-marker-alt"></i> {banner.meetingslocation}</li>
-                                                        </ul>
-                                                        <div className="generic-btn">
-                                                            <Link to={`/${currentEventName}/registration_form`}>REGISTER NOW<i className="fas fa-arrow-right"></i></Link>
+                                                    <div className="row">
+                                                        <div className="col-sm-8">
+                                                            <div className="index3-banner-img-con">
+                                                                <figure className="mb-0">
+                                                                    <img src={banner.meettings_photo} className='img-fluid' alt="index3-banner-img1" />
+                                                                </figure>
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-sm-4">
+                                                            <div className="index3-banner-text-con">
+                                                                <span className="d-block position-relative">{banner.meettings_date} <span className="position-relative" style={{ marginLeft: '15%' }}> Hybrid Event</span></span>
+                                                                <h1><small className='font-size-15px font-weight-bold text-uppercase text-white'>{banner.meetings_subject}</small><br />{banner.meeting_prefix}</h1>
+                                                                <ul className="list-unstyled">
+                                                                    <li><i className="fas fa-map-marker-alt"></i> {banner.meetingslocation}</li>
+                                                                </ul>
+                                                                <div className="generic-btn">
+                                                                    <Link to={`/${currentEventName}/online-registration`}>REGISTER NOW<i className="fas fa-arrow-right"></i></Link>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
+
+
                                                 </div>
                                             </div>
-                                        }) : "No banner found"
+                                        }) : ""
                                     }
 
                                 </div>
@@ -483,7 +542,7 @@ const Events = () => {
                                         <div className="count d-inline-block">21</div>
                                         <div className="plus-details">
                                             <div className="plus d-inline-block"><span>+</span></div>
-                                            <span className="d-block client-status">Session</span>
+                                            <span className="d-block client-status">Sessions</span>
                                         </div>
                                     </li>
                                     <li className="position-relative">
@@ -499,8 +558,7 @@ const Events = () => {
                                     </li>
                                 </ul>
                                 <div className="digital-text-con">
-                                    <h3>Join Us at the Biggest Conference
-                                        <span className="d-inline-block">October 21-23, 2025 </span> </h3>
+                                    <h3>Join Us at the Biggest Conference </h3>
                                     <div className="generic-btn">
                                         <a onClick={getAddtoCalendar} className='user-select-none'>Add to Calendar <i className="fas fa-arrow-right"></i></a>
                                     </div>
@@ -525,7 +583,7 @@ const Events = () => {
                         {
                             Array.isArray(eventSpeakers) && eventSpeakers.length > 0 ? (
                                 <>
-                                    <h4 className='mb-3 text-blue'>PlenarySpeakers</h4>
+                                    {/* <h4 className='mb-3 text-blue'>PlenarySpeakers</h4> */}
                                     <div className="row">
                                         {
                                             eventSpeakers.filter((spk) => spk.speakers_type === 'PlenarySpeakers')
@@ -545,7 +603,7 @@ const Events = () => {
                                                                                 <div className="text-white font-size-15px display-inline-block no-margin text-left">
                                                                                     <div
                                                                                         dangerouslySetInnerHTML={{
-                                                                                            __html: item.speaker_biography,
+                                                                                            __html: item.speaker_awards,
                                                                                         }}
                                                                                     />
                                                                                 </div>
@@ -582,10 +640,19 @@ const Events = () => {
                                         }
                                     </div>
                                 </>
-                            ) : <p>No data found</p>
+                            ) : <p></p>
                         }
                         {/* speakers end */}
-
+                        {/* <div className="digital-text-con">
+                        <div className="generic-btn text-center">
+                            <Link to={`/${currentEventName}/speakers`} className='user-select-none'>View All <i className="fas fa-arrow-right"></i></Link>
+                        </div>
+                        </div> */}
+                        <div className="index3-faq-btn-con text-center">
+                            <div className="generic-btn text-center">
+                                <Link to={`/${currentEventName}/speakers`} className='user-select-none'>View All <i className="fas fa-arrow-right"></i></Link>
+                            </div>
+                        </div>
                     </div>
 
 
@@ -859,7 +926,7 @@ const Events = () => {
                                     <li className="position-relative">WiFi in meeting rooms</li>
                                 </ul>
                                 <div className="generic-btn">
-                                    <Link to="/online-registration">BUY TICKET <i className="fas fa-arrow-right"></i></Link>
+                                    <Link to={`/${currentEventName}/online-registration`}>BUY TICKET <i className="fas fa-arrow-right"></i></Link>
                                 </div>
                             </div>
                             <div className="ticket-details gold-ticket-details">
@@ -875,7 +942,7 @@ const Events = () => {
                                     <li className="position-relative">WiFi in meeting rooms</li>
                                 </ul>
                                 <div className="generic-btn">
-                                    <Link to="/online-registration">BUY TICKET <i className="fas fa-arrow-right"></i></Link>
+                                    <Link to={`/${currentEventName}/online-registration`}>BUY TICKET <i className="fas fa-arrow-right"></i></Link>
                                 </div>
                                 <div className="recomended-box">
                                     RECOMMENDED
@@ -894,7 +961,7 @@ const Events = () => {
                                     <li className="position-relative">WiFi in meeting rooms</li>
                                 </ul>
                                 <div className="generic-btn">
-                                    <Link to="/online-registration">BUY TICKET <i className="fas fa-arrow-right"></i></Link>
+                                    <Link to={`/${currentEventName}/online-registration`}>BUY TICKET <i className="fas fa-arrow-right"></i></Link>
                                 </div>
                             </div>
                         </div>
@@ -914,7 +981,7 @@ const Events = () => {
                                 <p>Hear Highlights From Our Sponsors, or Get a Lite or Core Subscription
                                     to Watch the Full Main Stage Event on Demand.</p>
                                 <div className="generic-btn">
-                                    <Link to="/registration_form">REGISTER NOW <i className="fas fa-arrow-right"></i></Link>
+                                    <Link to={`/${currentEventName}/online-registration`}>REGISTER NOW <i className="fas fa-arrow-right"></i></Link>
                                 </div>
                             </div>
                             <div className="index3-registration-right-con">
@@ -925,113 +992,54 @@ const Events = () => {
                         </div>
                     </div>
                 </section>
-                <section className="index3-top-experts-section w-100 float-left padding-top padding-bottom">
-                    <div className="container-fluid">
-                        <div className="generic-title2 text-center">
-                            <span className="small-text">GALLERY</span>
-                            <h2>Previous Conference Highlights</h2>
-                        </div>
 
-                        <div className="row mb-4">
-                            {expertsGallery.map((img) => (
-                                <div className="col-md-6 col-lg-4">
-                                    <div className="index3-experts-left-con">
-                                        <div className="index3-expert index3-expert-con1 container__img-holder">
-                                            <img src={img.gallery} className='img-fluid' alt="index3-expert-img1" />
-                                            {/* <div className="search-icon-con">
+
+                {expertsGallery.length > 0 && (
+                    <section className="index3-top-experts-section w-100 float-left padding-top padding-bottom">
+                        <div className="container-fluid">
+                            <div className="generic-title2 text-center">
+                                <span className="small-text">GALLERY</span>
+                                <h2>Previous Conference Highlights</h2>
+                            </div>
+
+                            <div className="row mb-4">
+                                {expertsGallery.map((img) => (
+                                    <div className="col-md-6 col-lg-4">
+                                        <div className="index3-experts-left-con">
+                                            <div className="index3-expert index3-expert-con1 container__img-holder">
+                                                <img src={img.gallery} className='img-fluid' alt="index3-expert-img1" />
+                                                {/* <div className="search-icon-con">
                                                 <i className="fas fa-search"></i>
                                             </div> */}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            ))}
+                                ))}
 
-                        </div>
-
-                        {/* <div className="index3-top-experts-inner-section">
-                            <div className="index3-experts-left-con">
-                                <div className="index3-expert index3-expert-con1 container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-1.jpg"} alt="index3-expert-img1" />
-                                    <div className="search-icon-con">
-                                        <i className="fas fa-search"></i>
-                                    </div>
-                                </div>
-                                <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-6.jpg"} alt="index3-expert-img6" />
-                                    <div className="search-icon-con">
-                                        <i className="fas fa-search"></i>
-                                    </div>
-                                </div>
-                                <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-7.jpg"} alt="index3-expert-img7" />
-                                    <div className="search-icon-con">
-                                        <i className="fas fa-search"></i>
-                                    </div>
-                                </div>
                             </div>
+                        </div>
 
-                            <div className="index3-experts-right-con">
-                                <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-2.jpg"} alt="index3-expert-img2" />
-                                    <div className="search-icon-con">
-                                        <i className="fas fa-search"></i>
-                                    </div>
-                                </div>
-                                <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-3.jpg"} alt="index3-expert-img3" />
-                                    <div className="search-icon-con">
-                                        <i className="fas fa-search"></i>
-                                    </div>
-                                </div>
-                                <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-4.jpg"} alt="index3-expert-img4" />
-                                    <div className="search-icon-con">
-                                        <i className="fas fa-search"></i>
-                                    </div>
-                                </div>
-                                <div className="index3-expert container__img-holder">
-                                    <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-5.jpg"} alt="index3-expert-img5" />
-                                    <div className="search-icon-con">
-                                        <i className="fas fa-search"></i>
-                                    </div>
-                                </div>
-                                <div className="index3-expert-right-bottom-con">
-                                    <div className="index3-expert container__img-holder">
-                                        <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-8.jpg"} alt="index3-expert-img8" />
-                                        <div className="search-icon-con">
-                                            <i className="fas fa-search"></i>
-                                        </div>
-                                    </div>
-                                    <div className="index3-expert container__img-holder">
-                                        <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img-9.jpg"} alt="index3-expert-img9" />
-                                        <div className="search-icon-con">
-                                            <i className="fas fa-search"></i>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div className="img-popup">
+                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img9.jpg"} alt="Popup Image" />
+                            <div className="close-btn">
+                                <div className="bar"></div>
+                                <div className="bar"></div>
                             </div>
-                        </div> */}
-                    </div>
-                    <div className="img-popup">
-                        <img src={process.env.PUBLIC_URL + '/' + "images/index3-expert-img9.jpg"} alt="Popup Image" />
-                        <div className="close-btn">
-                            <div className="bar"></div>
-                            <div className="bar"></div>
                         </div>
-                    </div>
-                </section>
-                <section className="index3-testimonial-section w-100 float-left padding-top padding-bottom">
-                    <div className="container">
-                        <div className="generic-title2 text-center">
-                            <span className="small-text">TESTIMONIALS</span>
-                            <h2>Hear it From Our Clients</h2>
-                            {/* <h1>{testiData[0].testimonials_name}</h1> */}
+                    </section>
+                )
+                }
 
-                        </div>
-                        <div className="index3-testimonial-inner-con testimonialSlides">
-                            <div id="owl-carouselone" className="owl-carousel owl-theme">
-                                {Array.isArray(testiData) &&
-                                    testiData.length > 0 ? (testiData.map((item) => (
+                {testiData.length > 0 || testiData.length === 0 && (
+                    <section className="index3-testimonial-section w-100 float-left padding-top padding-bottom">
+                        <div className="container">
+                            <div className="generic-title2 text-center">
+                                <span className="small-text">TESTIMONIALS</span>
+                                <h2>Hear it From Our Clients</h2>
+                            </div>
+                            <div className="index3-testimonial-inner-con testimonialSlides">
+                                <div id="owl-carouselone" className="owl-carousel owl-theme">
+                                    {testiData.map((item) => (
                                         <div className="item">
                                             <div className="index3-testimonial-box position-relative">
                                                 <figure className="mb-0">
@@ -1047,135 +1055,13 @@ const Events = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                    ))) : "no data"
-                                }
-
-
-
-                                {/* <div className="item">
-                                    <div className="index3-testimonial-box position-relative">
-                                        <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-2.png"} alt="index3-client-img2" />
-                                        </figure>
-                                        <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
-                                        <h6>Peter Johns</h6>
-                                        <small>CEO- Company</small>
-                                        <div className="index3-quote-con">
-                                            <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
-                                            </figure>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
-                                <div className="item">
-                                    <div className="index3-testimonial-box position-relative">
-                                        <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-3.png"} alt="index3-client-img3" />
-                                        </figure>
-                                        <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
-                                        <h6>Peter Johns</h6>
-                                        <small>CEO- Company</small>
-                                        <div className="index3-quote-con">
-                                            <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="item">
-                                    <div className="index3-testimonial-box position-relative">
-                                        <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-1.png"} alt="index3-client-img1" />
-                                        </figure>
-                                        <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
-                                        <h6>Peter Johns</h6>
-                                        <small>CEO- Company</small>
-                                        <div className="index3-quote-con">
-                                            <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="item">
-                                    <div className="index3-testimonial-box position-relative">
-                                        <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-2.png"} alt="index3-client-img2" />
-                                        </figure>
-                                        <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
-                                        <h6>Peter Johns</h6>
-                                        <small>CEO- Company</small>
-                                        <div className="index3-quote-con">
-                                            <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="item">
-                                    <div className="index3-testimonial-box position-relative">
-                                        <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img-3.png"} alt="index3-client-img3" />
-                                        </figure>
-                                        <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
-                                        <h6>Peter Johns</h6>
-                                        <small>CEO- Company</small>
-                                        <div className="index3-quote-con">
-                                            <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="item">
-                                    <div className="index3-testimonial-box position-relative">
-                                        <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img1.png"} alt="index3-client-img1" />
-                                        </figure>
-                                        <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
-                                        <h6>Peter Johns</h6>
-                                        <small>CEO- Company</small>
-                                        <div className="index3-quote-con">
-                                            <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="item">
-                                    <div className="index3-testimonial-box position-relative">
-                                        <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img2.png"} alt="index3-client-img2" />
-                                        </figure>
-                                        <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
-                                        <h6>Peter Johns</h6>
-                                        <small>CEO- Company</small>
-                                        <div className="index3-quote-con">
-                                            <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="item">
-                                    <div className="index3-testimonial-box position-relative">
-                                        <figure className="mb-0">
-                                            <img src={process.env.PUBLIC_URL + '/' + "images/index3-client-img3.png"} alt="index3-client-img3" />
-                                        </figure>
-                                        <p>Lorem ipsum dolor sit amersvta consectetur adipiscing elitf sed do eiusmod tempor ia dncidfr idunt ut labour adire.</p>
-                                        <h6>Peter Johns</h6>
-                                        <small>CEO- Company</small>
-                                        <div className="index3-quote-con">
-                                            <figure className="mb-0">
-                                                <img src={process.env.PUBLIC_URL + '/' + "images/index3-quote-icon.png"} alt="index3-quote-icon" />
-                                            </figure>
-                                        </div>
-                                    </div>
-                                </div> */}
                             </div>
                         </div>
-                    </div>
-                </section>
+                    </section>
+                )}
+
                 <section className="blog-main-section index3-blog-section w-100 float-left padding-top position-relative">
                     <div className="container">
                         <div className="generic-title2 text-center">
@@ -1187,14 +1073,16 @@ const Events = () => {
                                 recentNews.map((news) => (
                                     <div className="blog-box position-relative">
                                         <div className="blog-img position-relative">
-                                            <span className="d-inline-block">{news.news_about}</span>
+                                            <span className="d-inline-block">{news.news_date}</span>
                                             <figure className="mb-0">
                                                 <img src={news.news_image} className='img-fluid' alt="blog-img1" />
                                             </figure>
                                         </div>
                                         <div className="blog-text">
-                                            <span className="d-block">{news.news_date}</span>
-                                            <h6 className="position-relative"><a href="single-blog.html">{news.news_description}</a></h6>
+                                            {/* <span className="d-block">{news.news_about}</span> */}
+                                            <h6 className="position-relative">
+                                                <Link to={`/${currentEventName}/event-news-details/${news.id}`}>{news.news_about}</Link>
+                                            </h6>
                                         </div>
                                     </div>
                                 ))

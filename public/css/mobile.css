@@ -578,7 +578,8 @@
 
     .index3-banner-text-con {
         padding: 70px 50px;
-        width: 480px;
+        width: 390px;
+        margin-top: 50px;
         min-height: 470px;
     }
 
@@ -812,6 +813,7 @@
     .index3-experts-left-con {
         grid-template-columns: 48.6% 48.6%;
         gap: 20px;
+        margin-bottom: 20px;
     }
 
     .index3-expert {
@@ -1397,7 +1399,7 @@
 
     .index3-banner-text-con {
         padding: 50px 40px;
-        width: 450px;
+        width: 390px;
         min-height: 420px;
         display: inline-table;
     }
@@ -4526,6 +4528,7 @@
     /* about page styling start here */
     .header-main-con .navbar-light .navbar-brand figure img {
         width: 95px;
+        margin-left: 0;
     }
 
     .header-main-con.index2-header .navbar-light .navbar-brand figure img {

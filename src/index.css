@@ -19,8 +19,14 @@ code {
 .custom-logo img{
   width: 100%;
   max-width: 230px;
+  margin-left: 55%;
 }
-@media (min-width: 1440px){
+.eventHead .custom-logo img{
+  width: 100%;
+  max-width: 230px;
+  margin-left: 45%;
+}
+@media (min-width: 1660px){
   .custom-logo img {
     width: 100%;
     max-width: 280px;
@@ -89,4 +95,13 @@ code {
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+.carousel-control-next, .carousel-control-prev {
+  width: 4%;
+}
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: visible!important;
 }

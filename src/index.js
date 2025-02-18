@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     // "homepage": "/meeting21",
     //  basename="/meeting21"
-    <BrowserRouter basename="/meeting21">
+    <BrowserRouter>
         <App />
     </BrowserRouter>
 

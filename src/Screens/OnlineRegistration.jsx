@@ -150,6 +150,14 @@ const OnlineRegistration = () => {
     getregfeeData()
     getaccmData()
     getdomainid()
+
+    // window.paypal.Buttons({
+    //   style: {
+    //     label: "pay", // Options: "pay", "checkout", "buynow", "subscribe"
+    //     color: "blue",
+    //     shape: "rect",
+    //   }})
+
     window.history.pushState({}, "", window.location.pathname)
     return window.scrollTo(0, 0);
 
@@ -496,7 +504,7 @@ const OnlineRegistration = () => {
   }
 
   const initialOption = {
-    "client-id": "AVu9_6n12pwbZY6nay-AwpvrJh2q0UF4ckAzxf3paq7TpDuRLE0ry0Ub9w6HiqXI8PK_LmvpUPUYDFH0",
+    "client-id": "AXgZp2VwWsX453KQGsZWTtgKGk_jPzNEVvo0uviJNvPPXNNYaUigsaVNVI191QDgkxpCPcvII08uPzAD",
     currency: "USD",
     intent: "capture",
   }
@@ -812,7 +820,9 @@ const OnlineRegistration = () => {
                           />
                           <br />
                         </div>
-                        <div className="card-body">
+                        
+                      </div>
+                      <div className="card-body">
                           <div className="form-group">
                             <label className="d-flex justify-content-between">
                               <span>
@@ -907,7 +917,6 @@ const OnlineRegistration = () => {
                             </label>
                           </div>
                         </div>
-                      </div>
                     </div>
                   </div>
                 ))
@@ -1064,13 +1073,20 @@ const OnlineRegistration = () => {
                     </div>
                     <div className="col-sm-4">
                       {paymentMethod === 'paypal' ? (
-                        <PayPalScriptProvider options={initialOption}>
-                          <PayPalButtons style={{ layout: "horizontal", width: '250px' }}
+                        <PayPalScriptProvider options={initialOption} >
+                          <PayPalButtons style={{
+                            layout: "horizontal",
+                            color: "blue",
+                            shape: "rect",
+                            label: "pay",
+                            height: 42,
+                          }}
                             createOrder={(data, actions) => createOrder(data, actions)}
                             onApprove={(data, actions) => onApprove(data, actions)}
                             onError={handleError}
                           ></PayPalButtons>
                         </PayPalScriptProvider>
+                        
                       ) : (
                         <button className="btn btn-primary" style={{ backgroundColor: '#ffc439', width: '250px', borderRadius: 2 }} onClick={handleSubmitForm}>
                           <img

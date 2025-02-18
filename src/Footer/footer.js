@@ -77,7 +77,7 @@ const Footer = () => {
                                 <li>
                                     <span className="d-block">Office Address:</span>
                                     <h6 className='mb-1'>Manjeera Trinity Corporate</h6>
-                                    <p>First floor, Unit: 114, JNTU - Hitech Road, KPHB Colony, Kukatpally, Beside LuLu mall, Hyderabad - 500072, Telangana.</p>
+                                    <p>First floor, Unit: 114, JNTU - Hitech Road, KPHB Colony, Kukatpally, Hyderabad - 500072, Telangana.</p>
                                 </li>
                                 <li>
                                     <span className="d-block mail-span">Email:</span>
@@ -105,7 +105,7 @@ const Footer = () => {
             <div className="copyright w-100 float-left text-center">
                 <div className="copyright-content">
                     <div className="container d-lg-flex justify-content-between">
-                        <div className="mb-0">Copyright © 2024 Meetings21 All Rights Reserved.</div>
+                        <div className="mb-0">Copyright © 2025 Meetings21 All Rights Reserved.</div>
                         <div>Website Developed by: <a href='https://uniquemindsolutions.com/' target='_blank'>UMS</a></div>
                     </div>
                 </div>

@@ -383,7 +383,7 @@ const OnlineRegistration = () => {
     };
 
     const initialOption ={
-        'client-id':'AVu9_6n12pwbZY6nay-AwpvrJh2q0UF4ckAzxf3paq7TpDuRLE0ry0Ub9w6HiqXI8PK_LmvpUPUYDFH0',
+        'client-id':'AWAgCaitDfR60Najycx2mKQW9cvkGljSzdQW-QuEOy3G1GsVuhvBv9zhLHx_7igrGrv5t_fmIJY1xGBJ',
         'currency':'USD',
         'intent':'capture'
     }

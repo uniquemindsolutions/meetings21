@@ -99,10 +99,10 @@ const Contacts = () => {
                             <figure>
                                 <img src={process.env.PUBLIC_URL + '/' + "images/location-icon1.png"} alt="location-icon" />
                             </figure>
-                            <h6>Office Address</h6>
-                            <p>1D. No. 404, 100 Feet Road, Ayyappa Society, Madhapur, Hyderabad, Postal Code: 500081, India</p>
-                            {/* <a href="contact.html">Get Directions</a> */}
-                        </div>
+                            <h6 className='text-dark'>Office Address</h6>
+                            <p className='mb-0'><b>Manjeera Trinity Corporate</b></p>
+                            <p>First floor, Unit: 114, JNTU - Hitech Road, KPHB Colony, Kukatpally, Hyderabad - 500072, Telangana.</p>
+                            </div>
                         <div className="contact-box">
                             <figure>
                                 <img src={process.env.PUBLIC_URL + '/' + "images/mobile-icon.png"} alt="mobile-icon" />
