@@ -12,6 +12,7 @@ const OnlineRegistration = () => {
   const location = useLocation()
   const navigate = useNavigate();
   const [reload, setReload] = useState(false);
+  const [regiId, setRegiId] = useState("");
 
 
   const submitForm = {
@@ -257,6 +258,9 @@ const OnlineRegistration = () => {
       "formdata",
       submitFormData
     )
+
+    let accpayload = submitFormData.accommodation == '0' ? "" : submitFormData.accommodation;
+   
     const regipayload = {
 
       title: submitFormData.title,
@@ -279,7 +283,7 @@ const OnlineRegistration = () => {
       domain: domainId,
       country: submitFormData.country,
       register_category: submitFormData.register_category,
-      accommodation: submitFormData.accommodation
+      accommodation: accpayload
 
     }
 
@@ -296,6 +300,7 @@ const OnlineRegistration = () => {
       console.log("transapires", res);
       window.location.reload();
       // handleReset();
+    
 
 
     } catch (error) {
@@ -446,24 +451,23 @@ const OnlineRegistration = () => {
 
   const handleReset = () => {
     window.history.pushState({}, "", window.location.pathname);
-    // window.history.replaceState({}, document.title, window.location.pathname);
-    // window.location.reload();
+  
 
-    // setAccompanying(0)
-    // setSelectedRoom("")
-    // setTotalPrice(0)
-    // setSubmitFormData(submitForm)
-    // setregiPriceCal("")
-    // setaccpriceCal("")
-    // setAddOn("")
-    // setProcessfee(0)
-    // setIsChecked(false)
-    // regiPricecalCurrent.current = ""
-    // accpricecalCurrent.current = ""
-    // addOnCurrent.current = ""
-    // procssfeeCurrent.current = 0
-    // subtotCurrent.current = ""
-    // grandtotCurrent.current = 0
+    setAccompanying(0)
+    setSelectedRoom("")
+    setTotalPrice(0)
+    setSubmitFormData(submitForm)
+    setregiPriceCal("")
+    setaccpriceCal("")
+    setAddOn("")
+    setProcessfee(0)
+    setIsChecked(false)
+    regiPricecalCurrent.current = ""
+    accpricecalCurrent.current = ""
+    addOnCurrent.current = ""
+    procssfeeCurrent.current = 0
+    subtotCurrent.current = ""
+    grandtotCurrent.current = 0
   }
 
   const handleaccom = (e, index, masterdata) => {
@@ -507,6 +511,7 @@ const OnlineRegistration = () => {
     "client-id": "AXgZp2VwWsX453KQGsZWTtgKGk_jPzNEVvo0uviJNvPPXNNYaUigsaVNVI191QDgkxpCPcvII08uPzAD",
     currency: "USD",
     intent: "capture",
+    commit: false
   }
   const createOrder = (data, actions) => {
     return actions.order.create({
@@ -518,6 +523,15 @@ const OnlineRegistration = () => {
           },
         },
       ],
+
+      application_context: {
+        brand_name: "Your Store",
+        user_action: "PAY_NOW",
+        return_url: handleReset(),
+        cancel_url: handleReset(),
+        
+      },
+      
     })
   }
 
@@ -565,14 +579,17 @@ const OnlineRegistration = () => {
         });
         // setResponse(res.data);
         console.log("transapires", res);
+        setRegiId(res.data.id);
         handleSubmitForm();
       } catch (error) {
         console.error("Error submitting data", error);
       }
 
       if (details.status == "COMPLETED") {
-        alert("Your Registration Got Success");
+        // alert("Your Registration Got Success");
+        alert("Your Registration is Successful. Your Registration ID is" + regiId)
         navigate("/" + currentEvents[1] + "/online-registration");
+        handleReset();
       } else {
         alert("Your Registration Got Failed Please try Again");
         navigate("/" + currentEvents[1] + "/online-registration");
@@ -585,6 +602,13 @@ const OnlineRegistration = () => {
     console.error("PayPal error:", err)
     alert("An error occurred with PayPal. Please try again later.")
   }
+  const handleCancel = () => {
+    const currentEvents = location.pathname.split("/")
+    setCurrentEventName(currentEvents[1])
+    alert("Payment was cancelled.");
+    navigate("/" + currentEvents[1] + "/online-registration");
+    handleReset();
+  };
 
 
   const togglePaymetOption = (type) => {
@@ -1084,6 +1108,7 @@ const OnlineRegistration = () => {
                             createOrder={(data, actions) => createOrder(data, actions)}
                             onApprove={(data, actions) => onApprove(data, actions)}
                             onError={handleError}
+                            onCancel={handleCancel}
                           ></PayPalButtons>
                         </PayPalScriptProvider>
                         
