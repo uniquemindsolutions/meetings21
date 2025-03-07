@@ -90,7 +90,7 @@ const Meetings = () => {
                 <div key={year}>
                   <div class="index3-faq-btn-con text-center">
                     <div class="generic-btn text-center">
-                      <a class="user-select-none my-5 fs-3" href="/material-science/speakers" data-discover="true">{year}
+                      <a class="user-select-none my-5 fs-3 text-white" data-discover="true">{year}
                       </a>
                     </div>
                   </div>

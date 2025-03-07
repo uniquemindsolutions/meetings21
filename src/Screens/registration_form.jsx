@@ -136,7 +136,7 @@ const RegistrationForm = () => {
                                         </tr>
                                     ) : null
 
-                                )) : "No Data"
+                                )) : " "
                             }
                         </tbody>
                     </table>

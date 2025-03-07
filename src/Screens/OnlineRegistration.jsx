@@ -6,6 +6,8 @@ import axios from "axios"
 import { useLocation } from "react-router-dom"
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js"
 import { masterCalculation } from "./../Helpers/Utils/MasterCalculation";
+import Popups from "../Helpers/Popups"
+
 
 const OnlineRegistration = () => {
   const baseurl = process.env.REACT_APP_API_URL
@@ -72,6 +74,8 @@ const OnlineRegistration = () => {
   const [paymentMethod, setPaymentMethod] = useState("")
   const [register_category, setregister_category] = useState("")
   const [selectedOption, setSelectedOption] = useState("option"); // Default selected
+
+  const [isPopupOpen, setPopupOpen] = useState(false);
 
   const regiPricecalCurrent = useRef(regiPricecal)
   const accpricecalCurrent = useRef(accpricecal)
@@ -452,7 +456,6 @@ const OnlineRegistration = () => {
   const handleReset = () => {
     window.history.pushState({}, "", window.location.pathname);
   
-
     setAccompanying(0)
     setSelectedRoom("")
     setTotalPrice(0)
@@ -508,7 +511,7 @@ const OnlineRegistration = () => {
   }
 
   const initialOption = {
-    "client-id": "AXgZp2VwWsX453KQGsZWTtgKGk_jPzNEVvo0uviJNvPPXNNYaUigsaVNVI191QDgkxpCPcvII08uPzAD",
+    "client-id": "AdsefH3rfOUY14djXJVliNbvqMivfsnOL1T2aAlcf3VaLF71_NKd_cKqQW0QZVyMtcmkPWVJpYU-FbPv",
     currency: "USD",
     intent: "capture",
     commit: false
@@ -580,22 +583,27 @@ const OnlineRegistration = () => {
         // setResponse(res.data);
         console.log("transapires", res);
         setRegiId(res.data.id);
-        handleSubmitForm();
+        // handleSubmitForm();
+        
       } catch (error) {
+        alert("Your Registration was Failed, Please try Again");
         console.error("Error submitting data", error);
       }
-
+    
       if (details.status == "COMPLETED") {
-        // alert("Your Registration Got Success");
-        alert("Your Registration is Successful. Your Registration ID is" + regiId)
+        alert("Your Registration Got Success");
+        // alert("Your Registration is Successful. Your Registration ID is" + regiId)
+        // if (window.opener) {
+        //   window.close();
+        // }
+        isPopupOpen(true);
+        setPopupOpen(true);
         navigate("/" + currentEvents[1] + "/online-registration");
         handleReset();
       } else {
         alert("Your Registration Got Failed Please try Again");
         navigate("/" + currentEvents[1] + "/online-registration");
       }
-
-
     })
   }
   const handleError = (err) => {
@@ -610,7 +618,6 @@ const OnlineRegistration = () => {
     handleReset();
   };
 
-
   const togglePaymetOption = (type) => {
     setPaymentMethod(type);
   }
@@ -624,9 +631,6 @@ const OnlineRegistration = () => {
       )
     );
   }
-
-
-
 
   return (
     <main>
@@ -1124,13 +1128,20 @@ const OnlineRegistration = () => {
                     </div>
                   </div>
 
-
                 </div>
               </div>
             </div>
           </div>
         </form>
       </div>
+      {/* <Link to={`/${currentEventName}/message`}> */}{/* </Link> */}
+      {/* <button onClick={() => setPopupOpen(true)}
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
+        Open Popup
+      </button> */}
+      
+      <Popups isOpen={isPopupOpen} RefId={regiId} onClose={() => setPopupOpen(false)}></Popups>
+
       <Footer />
     </main>
   )

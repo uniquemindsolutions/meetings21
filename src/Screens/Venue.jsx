@@ -94,7 +94,7 @@ const Venue = () => {
                   <b>Note 3: </b> {venueData.note_3}
                 </p>
 
-                <h5>About Hotel:</h5>
+                <h5>About Venue:</h5>
                 {/* {venueData.about_hotel} */}
                 <div dangerouslySetInnerHTML={{ __html: venueData.about_hotel }} />
 
@@ -118,7 +118,7 @@ const Venue = () => {
 
               ))
             ) : (
-              <p>No blogs found.</p>
+              <p></p>
             )}
 
 

@@ -64,7 +64,7 @@ const Events = () => {
     const [metaData, setMetaData] = useState({ title: 'Meetings21' })
     const navigate = useNavigate();
 
- 
+    console.log("meta title ===", metaData)
     const { eventName } = useParams();
 
     const addToCalendarCurrent = useRef(addToCalendar)
@@ -100,7 +100,12 @@ const Events = () => {
 
 
         // Fix title hover issue
+
+        document.title = metaData.meta_names || "Meetings21";
+
         const originalTitle = document.title;
+
+        console.log("originalTitle===", metaData.meta_names)
 
         const handleMouseOver = () => {
             document.title = metaData.meta_names; // Show meta title on hover
@@ -118,6 +123,7 @@ const Events = () => {
             window.removeEventListener("mouseout", handleMouseOut);
         };
     }, [location, metaData.meta_names, validEvents])
+
 
     const fetchingApis = async () => {
         setLoading(true);
@@ -143,12 +149,12 @@ const Events = () => {
             setExpertsGallery(expertsGalleryRes.data);
             setRecentNews(recentNewsRes.data);
             setOurPartners(ourPartnersRes.data);
-            setMetaData(metaDataRes);
-
-            console.log("metadata13", metaDataRes)
+            setMetaData(metaDataRes.data[0]);
+            // metaDataCurrent.current=metaDataRes.data[0];
+            console.log("metadata 123", metaDataRes.data)
         } catch {
             setError('Error: no data found');
-            setMetaData({ meta_names: "Default Title", meta_description: "Default Description" });
+            // setMetaData({ meta_names: "Default Title", meta_description: "Default Description" });
         } finally {
             setLoading(false)
         }
@@ -307,7 +313,10 @@ const Events = () => {
                         <title>{metaData.meta_names}</title>
                         <meta name="description" content={metaData.meta_description} />
                     </Helmet>
-                )}</HelmetProvider>
+                )}
+            </HelmetProvider>
+
+
             <EventHeader />
             <section className='events-p'>
                 <section className="index3-banner-section w-100 float-left">
@@ -648,11 +657,14 @@ const Events = () => {
                             <Link to={`/${currentEventName}/speakers`} className='user-select-none'>View All <i className="fas fa-arrow-right"></i></Link>
                         </div>
                         </div> */}
-                        <div className="index3-faq-btn-con text-center">
-                            <div className="generic-btn text-center">
-                                <Link to={`/${currentEventName}/speakers`} className='user-select-none'>View All <i className="fas fa-arrow-right"></i></Link>
+                        {eventSpeakers.length > 0 && (
+                            <div className="index3-faq-btn-con text-center">
+                                <div className="generic-btn text-center">
+                                    <Link to={`/${currentEventName}/speakers`} className='user-select-none'>View All <i className="fas fa-arrow-right"></i></Link>
+                                </div>
                             </div>
-                        </div>
+                        )}
+
                     </div>
 
 
@@ -682,7 +694,7 @@ const Events = () => {
                                         </div>
                                     </div>
                                 )
-                        ) : "no data"
+                        ) : ""
                     }
 
                 </section>
@@ -1030,7 +1042,7 @@ const Events = () => {
                 )
                 }
 
-                {testiData.length > 0 || testiData.length === 0 && (
+                {testiData.length > 0 && (
                     <section className="index3-testimonial-section w-100 float-left padding-top padding-bottom">
                         <div className="container">
                             <div className="generic-title2 text-center">
@@ -1062,117 +1074,63 @@ const Events = () => {
                     </section>
                 )}
 
-                <section className="blog-main-section index3-blog-section w-100 float-left padding-top position-relative">
-                    <div className="container">
-                        <div className="generic-title2 text-center">
-                            <span className="small-text">WHAT'S NEW</span>
-                            <h2 className="mb-0">Recent News Articles</h2>
-                        </div>
-                        <div className="blogs-inner-con">
-                            {
-                                recentNews.map((news) => (
-                                    <div className="blog-box position-relative">
-                                        <div className="blog-img position-relative">
-                                            <span className="d-inline-block">{news.news_date}</span>
-                                            <figure className="mb-0">
-                                                <img src={news.news_image} className='img-fluid' alt="blog-img1" />
-                                            </figure>
-                                        </div>
-                                        <div className="blog-text">
-                                            {/* <span className="d-block">{news.news_about}</span> */}
-                                            <h6 className="position-relative">
-                                                <Link to={`/${currentEventName}/event-news-details/${news.id}`}>{news.news_about}</Link>
-                                            </h6>
-                                        </div>
-                                    </div>
-                                ))
-                            }
-                            {/* <div className="blog-box position-relative">
-                                <div className="blog-img position-relative">
-                                    <span className="d-inline-block">Illustration, Art</span>
-                                    <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + '/' + "images/blog-img1-1.jpg"} alt="blog-img1" />
-                                    </figure>
-                                </div>
-                                <div className="blog-text">
-                                    <span className="d-block">Nov 11, 2020</span>
-                                    <h6 className="position-relative"><a href="single-blog.html">Lorem ipsum dolor sita consectetur adip.</a></h6>
-                                </div>
+                {recentNews.length > 0 && (
+                    <section className="blog-main-section index3-blog-section w-100 float-left padding-top position-relative">
+                        <div className="container">
+                            <div className="generic-title2 text-center">
+                                <span className="small-text">WHAT'S NEW</span>
+                                <h2 className="mb-0">Recent News Articles</h2>
                             </div>
-                            <div className="blog-box position-relative">
-                                <div className="blog-img position-relative">
-                                    <span className="d-inline-block">Vintage, Design</span>
-                                    <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + '/' + "images/blog-img-2.jpg"} alt="blog-img3" />
-                                    </figure>
-                                </div>
-                                <div className="blog-text">
-                                    <span className="d-block">Nov 18, 2020</span>
-                                    <h6 className="position-relative"><a href="single-blog.html">Dolor sit amet, consec adipiscing elit, sed.</a></h6>
-                                </div>
-                            </div>
-                            <div className="blog-box position-relative">
-                                <div className="blog-img position-relative">
-                                    <span className="d-inline-block">Questions, Answers</span>
-                                    <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + '/' + "images/blog-img-3.jpg"} alt="blog-img3" />
-                                    </figure>
-                                </div>
-                                <div className="blog-text">
-                                    <span className="d-block">Nov 25, 2020</span>
-                                    <h6 className="position-relative"><a href="single-blog.html">Sit amet, consecteturs elit, sed.</a></h6>
-                                </div>
-                            </div> */}
-                        </div>
-                    </div>
-                </section>
-                <SubscribeSection />
-                <div className="index3-sponsers-main-section sponsers-main-section w-100 float-left">
-                    <div className="container">
-                        <div className="generic-title2 text-center">
-                            {/* <span className="small-text">SKILLS &amp; EXPERIENCE</span> */}
-                            <h2 className="mb-0">Our Partners & Sponsors</h2>
-                        </div>
-                        <div className="sponsers-companies">
-                            <ul className="list-unstyled mb-0">
+                            <div className="blogs-inner-con">
                                 {
-                                    ourPartners.map((p) => (
-                                        <li>
-                                            <figure className="mb-0">
-                                                <img src={p.partners_logo} className='img-fluid' alt="sponsers-logo1" />
-                                            </figure>
-                                        </li>
+                                    recentNews.map((news) => (
+                                        <div className="blog-box position-relative">
+                                            <div className="blog-img position-relative">
+                                                <span className="d-inline-block">{news.news_date}</span>
+                                                <figure className="mb-0">
+                                                    <img src={news.news_image} className='img-fluid' alt="blog-img1" />
+                                                </figure>
+                                            </div>
+                                            <div className="blog-text">
+                                                {/* <span className="d-block">{news.news_about}</span> */}
+                                                <h6 className="position-relative">
+                                                    <Link to={`/${currentEventName}/event-news-details/${news.id}`}>{news.news_about}</Link>
+                                                </h6>
+                                            </div>
+                                        </div>
                                     ))
                                 }
-                                {/* <li>
-                                    <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo1.png"} alt="sponsers-logo1" />
-                                    </figure>
-                                </li>
-                                <li>
-                                    <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo2.png"} alt="sponsers-logo2" />
-                                    </figure>
-                                </li>
-                                <li>
-                                    <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo3.png"} alt="sponsers-logo3" />
-                                    </figure>
-                                </li>
-                                <li>
-                                    <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo4.png"} alt="sponsers-logo4" />
-                                    </figure>
-                                </li>
-                                <li>
-                                    <figure className="mb-0">
-                                        <img src={process.env.PUBLIC_URL + '/' + "images/sponsers-logo5.png"} alt="sponsers-logo5" />
-                                    </figure>
-                                </li> */}
-                            </ul>
+                            </div>
+                        </div>
+                    </section>
+                )}
+
+                <SubscribeSection />
+
+                {ourPartners.length > 0 && (
+                    <div className="index3-sponsers-main-section sponsers-main-section w-100 float-left">
+                        <div className="container">
+                            <div className="generic-title2 text-center">
+                                {/* <span className="small-text">SKILLS &amp; EXPERIENCE</span> */}
+                                <h2 className="mb-0">Our Partners & Sponsors</h2>
+                            </div>
+                            <div className="sponsers-companies">
+                                <ul className="list-unstyled mb-0">
+                                    {
+                                        ourPartners.map((p) => (
+                                            <li>
+                                                <figure className="mb-0">
+                                                    <img src={p.partners_logo} className='img-fluid' alt="sponsers-logo1" />
+                                                </figure>
+                                            </li>
+                                        ))
+                                    }
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
+                )}
+
                 <Footer />
                 <a id="button"></a>
             </section>

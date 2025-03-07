@@ -35,6 +35,7 @@ import TermsAndConditions from './Screens/TermsAndConditions';
 import PrivacyPolicy from './Screens/PrivacyPolicy';
 import EventNewsDetails from './Screens/EventNewsDetails';
 import NotFound from './Screens/NotFound ';
+import Popups from './Helpers/Popups';
 
 
 function App() {
@@ -72,7 +73,7 @@ function App() {
         <Route path="/:name/online-registration" element={<OnlineRegistration />} />
         <Route path="/:name/discount-form" element={<DiscountForm />} />
         <Route path="/:name/event-news-details/:id" element={<EventNewsDetails />} />
-        {/* <Route path="/not-found" element={<NotFound />} /> */}
+        <Route path="/:name/message" element={<Popups />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       

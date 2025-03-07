@@ -212,9 +212,9 @@ const Speakers = () => {
                     )
                   }
 
-                  {speakerData.filter((hedg) => hedg.speakers_type === 'InvitedSpeakers')
-                    .map((item) => (
-                      <div className="row">
+                  <div className="row">
+                    {speakerData.filter((hedg) => hedg.speakers_type === 'InvitedSpeakers')
+                      .map((item) => (
                         <div className="col-md-3 col-sm-12 col-xs-12 team-block text-left margin-30px-bottom team-style-1 sm-margin-seven-bottom xs-margin-40px-bottom wow fadeInRight">
                           <figure className="speakers-box">
                             <div className="team-image xs-width-100">
@@ -259,9 +259,9 @@ const Speakers = () => {
                             </figcaption>
                           </figure>
                         </div>
-                      </div>
-                    ))
-                  }
+                      ))
+                    }
+                  </div>
                 </>) : ''
             }
 
@@ -360,7 +360,7 @@ const Speakers = () => {
                     </div>
                   </div>
                 )
-            ) : "Will update soon"
+            ) : <p className='text-center text-secondary'>Will update soon</p>
           }
 
         </section>

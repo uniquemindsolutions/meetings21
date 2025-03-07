@@ -573,7 +573,7 @@
     }
 
     .index3-banner-img-con figure {
-        width: 770px;
+        width: 104%;
     }
 
     .index3-banner-text-con {
@@ -1634,6 +1634,7 @@
 
     .header-main-con .navbar-light .navbar-brand figure img {
         width: 110px;
+        margin-left: 3%;
     }
 
     .nav-btns {

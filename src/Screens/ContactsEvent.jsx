@@ -25,25 +25,36 @@ const ContactsEvent = () => {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState(cfField);
     const [popup, setPopup] = useState(false);
-        const [contacts, setContacts] = useState([])
+    const [contacts, setContacts] = useState([])
 
-        
+    const [address, setOfficeadd] = useState([])  
+    const [phone, setPhone] = useState([])
+    const [email, setEmail] = useState([])
 
-    useEffect(()=>{
+
+    useEffect(() => {
         getContacts()
     }, [])
 
-    const getContacts = async ()=>{
-        const currentEvents = location.pathname.split('/')
-        console.log('currentEvents', currentEvents)
+    const getContacts = async () => {
+        const currentEvents = location.pathname.split('/');
+        const apiUrl = `${eventContactApi}${currentEvents[1]}/more/contacts/information`;
+
+        console.log('API URL:', apiUrl);
+
         try {
-            const response = axios.get(eventContactApi + currentEvents[1] + '/more/contacts/information');
-            setContacts(response);
-            console.log('contacts details', response)
-        } catch {
+            const response = await axios.get(apiUrl);
+            // response.data[0]
+            setOfficeadd(response?.data[1]);
+            setPhone(response?.data[0]);
+            setEmail(response?.data[2])
+            console.log('contacts details===', response?.data[0], response?.data[1], response?.data[2]);
+            setContacts(response.data); // ✅ Corrected
+        } catch (err) {
             setError('No contact details found');
+            console.error(err);
         }
-    }
+    };
 
     const handleInput = (e) => {
         const { name, value } = e.target;
@@ -118,7 +129,12 @@ const ContactsEvent = () => {
                                 <img src={process.env.PUBLIC_URL + '/' + "images/location-icon1.png"} alt="location-icon" />
                             </figure>
                             <h6>Office Address</h6>
-                            <p>{contacts.contact_description}</p>
+                            <div>
+                                {/* {error && <p>{error}</p>} */}
+                                {address && address.contact_heading === "Office Address" && (
+                                    <p>{address.contact_description}</p>
+                                )}
+                            </div>
                             {/* <a href="contact.html">Get Directions</a> */}
                         </div>
                         <div className="contact-box">
@@ -127,7 +143,10 @@ const ContactsEvent = () => {
                             </figure>
                             <h6>Phone</h6>
                             <ul className="list-unstyled">
-                            <li><a href="{contacts.contact_description}">{contacts.contact_description}</a></li>
+                                <li>
+                                    {/* <a href="{contacts.contact_description}">{contacts.contact_description}</a> */}
+                                    {phone.contact_heading === "Phone" && <p>{phone.contact_description}</p>}
+                                </li>
                             </ul>
                             {/* <a href="tel:+61383766284">Call Now</a> */}
                         </div>
@@ -137,7 +156,10 @@ const ContactsEvent = () => {
                             </figure>
                             <h6>Email</h6>
                             <ul className="list-unstyled">
-                                <li> <a href="mailto:{contacts.contact_description}">{contacts.contact_description}</a></li>
+                                <li>
+                                    {email.contact_heading === "Email" && <p>{email.contact_description}</p>}
+                                    {/* <a href="mailto:{contacts.contact_description}">{contacts.contact_description}</a> */}
+                                </li>
                             </ul>
                             {/* <a href="mailto:contact@meetings21.com">Email Now</a> */}
                         </div>
@@ -194,7 +216,7 @@ const ContactsEvent = () => {
                         </ul>
                         <div className="submit-btn generic-btn">
                             <button type="submit" id="submit">
-                                {loading ? 'Submitting...':'SEND MESSAGE'} <i className="fas fa-arrow-right"></i>
+                                {loading ? 'Submitting...' : 'SEND MESSAGE'} <i className="fas fa-arrow-right"></i>
                             </button>
                         </div>
 
@@ -204,7 +226,7 @@ const ContactsEvent = () => {
                                     <div className="col-md-4 offset-lg-4">
                                         <div className="shadow-sm popup">
                                             <button className='btn text-danger ms-auto text-end d-block' onClick={popupClose}>
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" className="bi bi-x-circle" viewBox="0 0 16 16">
                                                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
                                                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708" />
                                                 </svg>
