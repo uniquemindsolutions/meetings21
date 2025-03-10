@@ -310,7 +310,7 @@ const OnlineRegistration = () => {
       });
       // setResponse(res.data);
       console.log("transapires", res);
-      window.location.reload();
+      // window.location.reload();
       // handleReset();
     
 
