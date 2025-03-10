@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom"
 import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js"
 import { masterCalculation } from "./../Helpers/Utils/MasterCalculation";
 import Popups from "../Helpers/Popups"
+import Swal from 'sweetalert2';
 
 
 const OnlineRegistration = () => {
@@ -248,6 +249,7 @@ const OnlineRegistration = () => {
   const handleInputChange = (e) => {
     const { name, value } = e.target
     setSubmitFormData({ ...submitFormData, [name]: value })
+    console.log("Formdatavalueschecking",submitFormData);
   }
 
   const handleInputChangeCountry = (e) => {
@@ -542,6 +544,7 @@ const OnlineRegistration = () => {
     return actions.order.capture().then(async (details) => {
       // alert("Transaction completed By" + details.payer.name.given_name)
       console.log(details, "ayment success");
+      console.log(submitFormData, "ayment success");
       //merchant_id:details.purchase_units[0].amount.payee.merchant_id,
       const payload = {
         "create_time": details.create_time,
@@ -580,10 +583,11 @@ const OnlineRegistration = () => {
             "Content-Type": "application/json",
           },
         });
+       
         // setResponse(res.data);
         console.log("transapires", res);
         setRegiId(res.data.id);
-        // handleSubmitForm();
+        // 
         
       } catch (error) {
         alert("Your Registration was Failed, Please try Again");
@@ -591,15 +595,22 @@ const OnlineRegistration = () => {
       }
     
       if (details.status == "COMPLETED") {
-        alert("Your Registration Got Success");
+        // alert("Your Registration Got Success");
         // alert("Your Registration is Successful. Your Registration ID is" + regiId)
         // if (window.opener) {
         //   window.close();
         // }
-        isPopupOpen(true);
-        setPopupOpen(true);
-        navigate("/" + currentEvents[1] + "/online-registration");
-        handleReset();
+        // isPopupOpen(true);
+        // setPopupOpen(true);
+        // navigate("/" + currentEvents[1] + "/online-registration");
+        // handleReset();
+        Swal.fire({
+          title: "✅ Your payment was Successful!",
+          text: "Thank you for your payment. We will be in contact with more details shortly.",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        // handleSubmitForm();
       } else {
         alert("Your Registration Got Failed Please try Again");
         navigate("/" + currentEvents[1] + "/online-registration");
@@ -608,7 +619,7 @@ const OnlineRegistration = () => {
   }
   const handleError = (err) => {
     console.error("PayPal error:", err)
-    alert("An error occurred with PayPal. Please try again later.")
+    // alert("An error occurred with PayPal. Please try again later.")
   }
   const handleCancel = () => {
     const currentEvents = location.pathname.split("/")
@@ -1135,10 +1146,10 @@ const OnlineRegistration = () => {
         </form>
       </div>
       {/* <Link to={`/${currentEventName}/message`}> */}{/* </Link> */}
-      {/* <button onClick={() => setPopupOpen(true)}
+      <button onClick={() => setPopupOpen(true)}
         className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
         Open Popup
-      </button> */}
+      </button>
       
       <Popups isOpen={isPopupOpen} RefId={regiId} onClose={() => setPopupOpen(false)}></Popups>
 
