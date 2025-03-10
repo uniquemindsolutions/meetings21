@@ -125,6 +125,7 @@ const OnlineRegistration = () => {
     submitFormDataCurrent.current = submitFormData
 
     console.log("submitformvalues", submitFormData);
+    localStorage.setItem("formDataaftersubmit", JSON.stringify(submitFormDataCurrent.current));
   }
 
   const masterCalulation = () => { }
@@ -250,6 +251,7 @@ const OnlineRegistration = () => {
     const { name, value } = e.target
     setSubmitFormData({ ...submitFormData, [name]: value })
     console.log("Formdatavalueschecking",submitFormData);
+    localStorage.setItem("formDataaftersubmit", JSON.stringify(submitFormData));
   }
 
   const handleInputChangeCountry = (e) => {
@@ -265,30 +267,34 @@ const OnlineRegistration = () => {
       submitFormData
     )
 
-    let accpayload = submitFormData.accommodation == '0' ? "" : submitFormData.accommodation;
+
+    const storedData = JSON.parse(localStorage.getItem("formDataaftersubmit"));
+    
+
+    let accpayload = storedData.accommodation == '0' ? "" : storedData.accommodation;
    
     const regipayload = {
 
-      title: submitFormData.title,
-      name: submitFormData.name,
-      email: submitFormData.email,
-      telephone: submitFormData.telephone,
-      organization: submitFormData.organization,
-      city: submitFormData.city,
-      billing_address: submitFormData.billing_address,
+      title: storedData.title,
+      name: storedData.name,
+      email: storedData.email,
+      telephone: storedData.telephone,
+      organization: storedData.organization,
+      city: storedData.city,
+      billing_address: storedData.billing_address,
       postal_code: "123",
-      no_of_nights: submitFormData.no_of_nights,
-      reg_cat_val: submitFormData.reg_cat_val,
-      add_on: submitFormData.add_on,
+      no_of_nights: storedData.no_of_nights,
+      reg_cat_val: storedData.reg_cat_val,
+      add_on: storedData.add_on,
       reg_price: "0.00",
       acc_price: "0.00",
       acc_per_price: "0.00",
-      subtot: submitFormData.subtot,
-      procfee: submitFormData.procfee,
-      grand_tot: submitFormData.grand_tot,
+      subtot: storedData.subtot,
+      procfee: storedData.procfee,
+      grand_tot: storedData.grand_tot,
       domain: domainId,
-      country: submitFormData.country,
-      register_category: submitFormData.register_category,
+      country: storedData.country,
+      register_category: storedData.register_category,
       accommodation: accpayload
 
     }
@@ -428,6 +434,9 @@ const OnlineRegistration = () => {
     }))
 
     submitFormDataCurrent.current = submitFormData
+
+
+    localStorage.setItem("formDataaftersubmit", JSON.stringify(submitFormDataCurrent.current));
   }
 
   const handleRoomSelection = (roomPrice) => {
@@ -604,13 +613,14 @@ const OnlineRegistration = () => {
         // setPopupOpen(true);
         // navigate("/" + currentEvents[1] + "/online-registration");
         // handleReset();
+        handleSubmitForm();
         Swal.fire({
           title: "✅ Your payment was Successful!",
           text: "Thank you for your payment. We will be in contact with more details shortly.",
           icon: "success",
           confirmButtonText: "OK",
         });
-        // handleSubmitForm();
+    
       } else {
         alert("Your Registration Got Failed Please try Again");
         navigate("/" + currentEvents[1] + "/online-registration");
