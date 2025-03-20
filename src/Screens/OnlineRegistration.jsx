@@ -8,6 +8,7 @@ import { PayPalButtons, PayPalScriptProvider } from "@paypal/react-paypal-js"
 import { masterCalculation } from "./../Helpers/Utils/MasterCalculation";
 import Popups from "../Helpers/Popups"
 import Swal from 'sweetalert2';
+import { event } from "jquery"
 
 
 const OnlineRegistration = () => {
@@ -16,6 +17,7 @@ const OnlineRegistration = () => {
   const navigate = useNavigate();
   const [reload, setReload] = useState(false);
   const [regiId, setRegiId] = useState("");
+  const [showPayPal, setShowPayPal] = useState(false);
 
 
   const submitForm = {
@@ -84,11 +86,19 @@ const OnlineRegistration = () => {
   const procssfeeCurrent = useRef(procssfee)
   const subtotCurrent = useRef(subtot)
   const grandtotCurrent = useRef(totalPrice)
-  const register_categoryCurrent = useRef(register_category)
+  const register_categoryCurrent = useRef(register_category);
+
+  const [isFormValid, setIsFormValid] = useState(false);
 
   const submitFormDataCurrent = useRef(submitFormData)
 
   const [domainId, setdomainId] = useState("")
+
+  const [selectedcheckValues, setSelectedcheckValues] = useState({
+    category1: "",
+    category2: "",
+    category3: "",
+  });
 
 
   const handleChangeaddon = (event) => {
@@ -264,9 +274,35 @@ const OnlineRegistration = () => {
     // e.preventDefault()
     console.log(
       "formdata",
-      submitFormData
+      submitFormData,
+      JSON.parse(localStorage.getItem("formDataaftersubmit"))
     )
 
+
+    
+
+    const { title, name, email,telephone,organization,city,country,billing_address,add_on,reg_cat_val,no_of_nights,accommodation } = submitFormData;
+
+    const missingFields = [];
+    if (title.trim() === "") missingFields.push("title");
+    if (name.trim() === "") missingFields.push("name");
+    if (email.trim() === "") missingFields.push("email");
+    if (telephone.trim() === "") missingFields.push("telephone");
+    if (organization.trim() === "") missingFields.push("organization");
+    if (city === 0) missingFields.push("city");
+    if (country === 0) missingFields.push("country");
+    if (billing_address.trim() === "") missingFields.push("billing_address");
+    if (add_on === 0) missingFields.push("add_on");
+    if (reg_cat_val === 0) missingFields.push("reg_cat_val");
+    if (no_of_nights === 0) missingFields.push("no_of_nights");
+    if (accommodation === 0) missingFields.push("accommodation");
+    
+
+    if (missingFields.length > 0) {
+      alert(`Please fill in: ${missingFields.join(", ")}`);
+      return;
+    }
+    setShowPayPal(true);
 
     const storedData = JSON.parse(localStorage.getItem("formDataaftersubmit"));
     
@@ -398,7 +434,7 @@ const OnlineRegistration = () => {
     },
   ]
 
-  const handleCheckboxChange = (value, index, planid) => {
+  const handleCheckboxChange = (event,value, index, planid) => {
     const newRegiPrice = Number.parseFloat(value)
     const { subtotal, processingFee, grandTotal } = masterCalculation({
       regiPrice: newRegiPrice,
@@ -407,6 +443,12 @@ const OnlineRegistration = () => {
     })
 
     console.log("register_category", planid);
+
+    const { name, valueorg } = event.target;
+    setSelectedcheckValues((prev) => ({
+      ...prev,
+      [name]: valueorg, // Update only the selected category
+    }));
 
     setregister_category(index + 1)
     register_categoryCurrent.current = index + 1;
@@ -425,6 +467,7 @@ const OnlineRegistration = () => {
 
 
 
+
     setSubmitFormData((prev) => ({
       ...prev,
       register_category: planid,
@@ -435,7 +478,7 @@ const OnlineRegistration = () => {
 
     submitFormDataCurrent.current = submitFormData
 
-
+console.log("current regi id0",submitFormDataCurrent.current,submitFormData);
     localStorage.setItem("formDataaftersubmit", JSON.stringify(submitFormDataCurrent.current));
   }
 
@@ -522,12 +565,42 @@ const OnlineRegistration = () => {
   }
 
   const initialOption = {
-    "client-id": "AdsefH3rfOUY14djXJVliNbvqMivfsnOL1T2aAlcf3VaLF71_NKd_cKqQW0QZVyMtcmkPWVJpYU-FbPv",
+    "client-id": "Aa02QHStx9nPrV8SSPSxnoVa4fLMzcQqY_2qiOd5EUXKo2gGzMqTz5Vri8U4LC4e11fkzCqOUmHyZFg3",
     currency: "USD",
     intent: "capture",
     commit: false
+    
   }
+
+
+  
+
+  // Show alert if form is incomplete
+  const handlePayClick = () => {
+    if (!isFormValid) {
+      alert("Please fill out all required fields before proceeding with payment.");
+    }
+  };
+
+  // Validate form before enabling PayPal button
+  const validateForm = () => {
+     //alert(`⚠️ Please fill in the following fields:\n${missingFields.join(", ")}`);
+    // const missingFields = Object.keys(submitFormData).filter((key) => submitFormData[key].trim() === "");
+
+    // if (missingFields.length > 0) {
+    //   alert(`⚠️ Please fill in the following fields:\n${missingFields.join(", ")}`);
+    //   setIsFormValid(false);
+    //   return false;
+    // }
+
+    // setIsFormValid(true);
+    // return true;
+    return true;
+  };
   const createOrder = (data, actions) => {
+
+   
+
     return actions.order.create({
       purchase_units: [
         {
@@ -549,6 +622,9 @@ const OnlineRegistration = () => {
     })
   }
 
+  const handleBlur = (event) => {
+    handleInputChange(event); // Ensures state is updated before PayPal action
+  };
   const onApprove = (data, actions) => {
     return actions.order.capture().then(async (details) => {
       // alert("Transaction completed By" + details.payer.name.given_name)
@@ -653,6 +729,14 @@ const OnlineRegistration = () => {
     );
   }
 
+  const handlePayNow = () => {
+    if (validateForm()) {
+      // Trigger PayPal button click if form is valid
+      // paypalButtonRef.current.click();
+      document.querySelector('.paypal-buttons').click();
+    }
+  };
+
   return (
     <main>
       <EventHeader />
@@ -673,6 +757,7 @@ const OnlineRegistration = () => {
       </section>
       <div className="clearfix"></div>
       <div className="container padding-top">
+      <PayPalScriptProvider options={initialOption} >
         <form className="p-4 border rounded shadow-sm mb-5">
           <div className="form-section">
             <h5>Personal Details</h5>
@@ -881,7 +966,8 @@ const OnlineRegistration = () => {
                                   className="mr-2"
                                   disabled={!plan.isAllowedToSelect}
                                   value={plan.invited_presentation}
-                                  onChange={() => handleCheckboxChange(plan.invited_presentation, index,plan.id)}
+                                  onChange={(event) => handleCheckboxChange(event,plan.invited_presentation, index,plan.id)}
+                                  onBlur={handleBlur}
                                 />
                                 Invited Presentation
                               </span>
@@ -898,7 +984,8 @@ const OnlineRegistration = () => {
                                   name={`plan-${index}`}
                                   className="mr-2"
                                   disabled={!plan.isAllowedToSelect}
-                                  onChange={() =>  handleCheckboxChange(plan.oral_presentation, index,plan.id)}
+                                  onChange={(event) =>  handleCheckboxChange(event,plan.oral_presentation, index,plan.id)}
+                                  onBlur={handleBlur}
                                 />
                                 Oral Presentation
                                 
@@ -914,7 +1001,8 @@ const OnlineRegistration = () => {
                                   type="radio"
                                   name={`plan-${index}`}
                                   disabled={!plan.isAllowedToSelect}
-                                  onChange={() =>  handleCheckboxChange(plan.poster_presentaion, index,plan.id)}
+                                  onChange={(event) =>  handleCheckboxChange(event,plan.poster_presentaion, index,plan.id)}
+                                  onBlur={handleBlur}
                                   className="mr-2"
                                 />
                                 Poster Presentation
@@ -929,7 +1017,8 @@ const OnlineRegistration = () => {
                                   type="radio"
                                   name={`plan-${index}`}
                                   disabled={!plan.isAllowedToSelect}
-                                  onChange={() =>  handleCheckboxChange(plan.student_delegate, index,plan.id)}
+                                  onChange={(event) =>  handleCheckboxChange(event,plan.student_delegate, index,plan.id)}
+                                  onBlur={handleBlur}
                                   className="mr-2"
                                 />
                                 Student Delegate
@@ -942,7 +1031,8 @@ const OnlineRegistration = () => {
                                   type="radio"
                                   name={`plan-${index}`}
                                   disabled={!plan.isAllowedToSelect}
-                                  onChange={() =>  handleCheckboxChange(plan.delegate, index,plan.id)}
+                                  onChange={(event) =>  handleCheckboxChange(event,plan.delegate, index,plan.id)}
+                                  onBlur={handleBlur}
                                   className="mr-2"
                                 />
                                 Delegate
@@ -955,7 +1045,8 @@ const OnlineRegistration = () => {
                                   type="radio"
                                   name={`plan-${index}`}
                                   disabled={!plan.isAllowedToSelect}
-                                  onChange={() => handleCheckboxChange(plan.virtual_presentation, index,plan.id)}
+                                  onChange={(event) => handleCheckboxChange(event,plan.virtual_presentation, index,plan.id)}
+                                  onBlur={handleBlur}
                                   className="mr-2"
                                 />
                                 Virtual Presentation
@@ -1087,7 +1178,7 @@ const OnlineRegistration = () => {
                     </div>
                   </div>
 
-                  <div className="text-center">
+                  {/* <div className="text-center">
 
 
                     <label htmlFor="option2" className="mr-5">
@@ -1107,7 +1198,7 @@ const OnlineRegistration = () => {
                         style={{ width: 150 }}
                       />
                     </label>
-                  </div>
+                  </div> */}
 
                   {/* <button className="btn btn-outline-secondary px-3 mr-3" type="button" onClick={handleSubmitForm}>
                     Submit
@@ -1121,9 +1212,36 @@ const OnlineRegistration = () => {
                       <button className="btn btn-outline-secondary py-2 px-4" onClick={handleReset}>Reset</button>
                     </div>
                     <div className="col-sm-4">
-                      {paymentMethod === 'paypal' ? (
-                        <PayPalScriptProvider options={initialOption} >
-                          <PayPalButtons style={{
+                      {/* {paymentMethod === 'paypal' ? (
+                   <button   type="button" onClick={handlePayNow} style={{ margin: "10px", backgroundColor: "transparent", border: "1px solid #000" }}>
+                   Proceede to pay Now
+                 </button>
+
+                 
+                          
+                  
+                        
+                      ) : (
+                        <button className="btn btn-primary" style={{ backgroundColor: '#ffc439', width: '250px', borderRadius: 2 }} onClick={handleSubmitForm}>
+                          <img
+                            src={process.env.PUBLIC_URL + "/" + "images/cc-avenue_logo.png" || "/placeholder.svg"}
+                            alt="logo"
+                            style={{ width: 100 }}
+                          />
+                        </button>
+                      )} */}
+
+                  {!showPayPal && (
+                            <button className="btn btn-outline-secondary px-3 mr-3" type="button" onClick={handleSubmitForm}>
+                            Submit
+                          </button>
+                          )}
+
+                    </div>
+                  </div>
+
+                  {showPayPal && (
+                  <PayPalButtons style={{
                             layout: "horizontal",
                             color: "blue",
                             shape: "rect",
@@ -1134,34 +1252,21 @@ const OnlineRegistration = () => {
                             onApprove={(data, actions) => onApprove(data, actions)}
                             onError={handleError}
                             onCancel={handleCancel}
+                           
+                            
                           ></PayPalButtons>
-                        </PayPalScriptProvider>
-                        
-                      ) : (
-                        <button className="btn btn-primary" style={{ backgroundColor: '#ffc439', width: '250px', borderRadius: 2 }} onClick={handleSubmitForm}>
-                          <img
-                            src={process.env.PUBLIC_URL + "/" + "images/cc-avenue_logo.png" || "/placeholder.svg"}
-                            alt="logo"
-                            style={{ width: 100 }}
-                          />
-                        </button>
-                      )}
-                    </div>
-                  </div>
+                        )}
+                         
 
                 </div>
               </div>
             </div>
           </div>
         </form>
+        </PayPalScriptProvider>
       </div>
       {/* <Link to={`/${currentEventName}/message`}> */}{/* </Link> */}
-      <button onClick={() => setPopupOpen(true)}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">
-        Open Popup
-      </button>
       
-      <Popups isOpen={isPopupOpen} RefId={regiId} onClose={() => setPopupOpen(false)}></Popups>
 
       <Footer />
     </main>
